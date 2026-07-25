@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>苏中区域 WK30 门店周维度交互分析</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+:root{--bg:#f8fafc;--card-bg:#fff;--border:#e2e8f0;--text:#1e293b;--text-muted:#64748b;--red:#dc2626;--green:#16a34a;--blue:#0284c7;--orange:#ea580c;--purple:#7c3aed}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;background:var(--bg);color:var(--text)}
+.header{background:linear-gradient(135deg,#1e293b 0%,#334155 100%);color:#fff;padding:20px 30px;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+.header h1{font-size:22px;font-weight:700}
+.header .subtitle{font-size:13px;opacity:.7;margin-top:4px}
+.store-tabs{display:flex;gap:8px;padding:12px 30px;background:#fff;border-bottom:1px solid var(--border);overflow-x:auto;position:sticky;top:64px;z-index:99}
+.store-tab{padding:8px 20px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:600;white-space:nowrap;border:2px solid var(--border);background:#fff;transition:all .2s}
+.store-tab:hover{border-color:var(--purple)}
+.store-tab.active{color:#fff;border-color:transparent}
+.store-tab[data-store="扬州万象汇"].active{background:#7c3aed}
+.store-tab[data-store="扬州京华城"].active{background:#0ea5e9}
+.store-tab[data-store="扬州江都金鹰"].active{background:#059669}
+.store-tab[data-store="泰州万象城"].active{background:#dc2626}
+.store-tab[data-store="宿迁宝龙"].active{background:#ea580c}
+.store-tab[data-store="淮安新亚"].active{background:#0891b2}
+.store-tab[data-store="淮安万象城"].active{background:#9333ea}
+.store-tab[data-store="区域对比"].active{background:#1e293b}
+.container{max-width:1400px;margin:0 auto;padding:20px 30px}
+.kpi-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-bottom:24px}
+.kpi-card{background:var(--card-bg);border-radius:12px;padding:16px;box-shadow:0 1px 3px rgba(0,0,0,.08);border:1px solid var(--border);text-align:center}
+.kpi-card .label{font-size:12px;color:var(--text-muted);margin-bottom:6px}
+.kpi-card .value{font-size:24px;font-weight:800}
+.kpi-card .sub{font-size:11px;margin-top:4px}
+.kpi-card .value.red{color:var(--red)}.kpi-card .value.green{color:var(--green)}.kpi-card .value.blue{color:var(--blue)}.kpi-card .value.orange{color:var(--orange)}.kpi-card .value.purple{color:var(--purple)}
+.chart-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px}
+.chart-grid.full{grid-template-columns:1fr}
+.chart-card{background:var(--card-bg);border-radius:12px;padding:20px;box-shadow:0 1px 3px rgba(0,0,0,.08);border:1px solid var(--border)}
+.chart-card h3{font-size:15px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:6px}
+.chart-card h3 .icon{font-size:18px}
+.chart-wrap{position:relative;height:320px}
+.chart-wrap.tall{height:380px}
+.summary-table{width:100%;border-collapse:collapse;font-size:13px}
+.summary-table th{background:#f1f5f9;padding:10px 12px;text-align:center;font-weight:700;border-bottom:2px solid var(--border)}
+.summary-table td{padding:8px 12px;text-align:center;border-bottom:1px solid var(--border)}
+.summary-table tr:hover{background:#f8fafc}
+.summary-table .store-name{text-align:left;font-weight:600}
+.summary-table .pos{color:var(--green);font-weight:700}.summary-table .neg{color:var(--red);font-weight:700}
+.badge{display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700}
+.badge.green{background:#dcfce7;color:#166534}.badge.red{background:#fee2e2;color:#991b1b}.badge.gray{background:#f1f5f9;color:#64748b}
+.conclusion{font-size:13px;color:#475569;margin-top:10px;padding:0;background:#f8fafc;border-radius:6px;border-left:3px solid var(--purple);line-height:1.5;overflow:hidden}
+.conc-title{padding:8px 12px 4px 12px;font-weight:700;color:#1e293b}
+.conc-body{padding:0 12px 8px 12px}
+.conc-opportunity{padding:6px 12px;background:#fef3c7;border-top:1px solid #f59e0b;font-size:12px;color:#92400e;line-height:1.6}
+.conc-opportunity .conc-label{font-weight:700;color:#b45309}
+.footer{text-align:center;padding:30px;color:var(--text-muted);font-size:12px}
+@media(max-width:900px){.kpi-row{grid-template-columns:repeat(3,1fr)}.chart-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="header"><div style="display:flex;align-items:center;gap:16px;">
+<a href="index.html" style="background:rgba(255,255,255,.15);color:#fff;padding:8px 16px;border-radius:8px;font-size:14px;font-weight:600;text-decoration:none;white-space:nowrap;">← 返回看板</a>
+<div><h1>📊 苏中区域 WK30 门店周维度交互分析</h1>
+<div class="subtitle">数据周期：2026年7月20日(周一) - 7月25日(周六) | 生成时间：<span id="genTime"></span></div>
+</div></div></div>
+<div class="store-tabs" id="storeTabs">
+<div class="store-tab active" data-store="区域对比" onclick="selectStore('区域对比')">📈 区域对比</div>
+<div class="store-tab" data-store="扬州万象汇" onclick="selectStore('扬州万象汇')">🏪 扬州万象汇</div>
+<div class="store-tab" data-store="扬州京华城" onclick="selectStore('扬州京华城')">🏪 扬州京华城</div>
+<div class="store-tab" data-store="扬州江都金鹰" onclick="selectStore('扬州江都金鹰')">🏪 扬州江都金鹰</div>
+<div class="store-tab" data-store="泰州万象城" onclick="selectStore('泰州万象城')">🏪 泰州万象城</div>
+<div class="store-tab" data-store="宿迁宝龙" onclick="selectStore('宿迁宝龙')">🏪 宿迁宝龙</div>
+<div class="store-tab" data-store="淮安新亚" onclick="selectStore('淮安新亚')">🏪 淮安新亚</div>
+<div class="store-tab" data-store="淮安万象城" onclick="selectStore('淮安万象城')">🏪 淮安万象城</div>
+</div>
+<div class="container" id="content"></div>
+<div class="footer">
+<p>🧱 苏中区域销售看板 - 周维度分析 | 数据口径：结算金额(含退货扣减)，排除赠品/样品/零金额</p>
+<p>WK30定义：7月20日(周一)起 | 淮安万象城为新店，无同期数据(N/A)</p>
+</div>
+<script>
+const DATA = {"扬州万象汇":{"daily":[{"date":"7/20","weekday":"周一","total":14754.0,"wos":0.0,"jl":397.0,"lt":229.0,"lt_qty":1,"tx_cnt":23,"jd":1.7,"kdj":641.48,"target":12000.0,"rate":123.0,"yoy_amt":20746.25,"yoy_pct":-28.9},{"date":"7/21","weekday":"周二","total":16553.0,"wos":1079.0,"jl":489.0,"lt":554.0,"lt_qty":2,"tx_cnt":31,"jd":1.26,"kdj":533.97,"target":12000.0,"rate":137.9,"yoy_amt":16650.0,"yoy_pct":-0.6},{"date":"7/22","weekday":"周三","total":15258.0,"wos":1058.0,"jl":493.0,"lt":1297.0,"lt_qty":3,"tx_cnt":30,"jd":1.27,"kdj":508.6,"target":13000.0,"rate":117.4,"yoy_amt":9201.0,"yoy_pct":65.8},{"date":"7/23","weekday":"周四","total":9852.0,"wos":0.0,"jl":214.0,"lt":1977.0,"lt_qty":3,"tx_cnt":19,"jd":1.21,"kdj":518.53,"target":13000.0,"rate":75.8,"yoy_amt":11063.0,"yoy_pct":-10.9},{"date":"7/24","weekday":"周五","total":13426.0,"wos":0.0,"jl":692.0,"lt":837.0,"lt_qty":4,"tx_cnt":37,"jd":1.46,"kdj":362.86,"target":18000.0,"rate":74.6,"yoy_amt":20765.0,"yoy_pct":-35.3},{"date":"7/25","weekday":"周六","total":24945.0,"wos":2345.0,"jl":1762.0,"lt":4021.0,"lt_qty":9,"tx_cnt":51,"jd":1.29,"kdj":489.12,"target":28000.0,"rate":89.1,"yoy_amt":16267.0,"yoy_pct":53.3}],"wk_amt":94788.0,"wk_wos":4482.0,"wk_jl":4047.0,"wk_lt":8915.0,"wk_total":94788.0,"month_amt":427810.0,"wk_yoy":0.1,"wk28_amt":98643.0,"wow":-3.9},"扬州京华城":{"daily":[{"date":"7/20","weekday":"周一","total":10169.0,"wos":1876.0,"jl":0.0,"lt":57.0,"lt_qty":1,"tx_cnt":25,"jd":1.28,"kdj":406.76,"target":15000.0,"rate":67.8,"yoy_amt":21019.0,"yoy_pct":-51.6},{"date":"7/21","weekday":"周二","total":17164.0,"wos":968.0,"jl":75.0,"lt":4286.0,"lt_qty":5,"tx_cnt":36,"jd":1.19,"kdj":476.78,"target":15000.0,"rate":114.4,"yoy_amt":14898.0,"yoy_pct":15.2},{"date":"7/22","weekday":"周三","total":17854.0,"wos":2834.0,"jl":179.0,"lt":498.0,"lt_qty":3,"tx_cnt":37,"jd":1.3,"kdj":482.54,"target":17000.0,"rate":105.0,"yoy_amt":14479.0,"yoy_pct":23.3},{"date":"7/23","weekday":"周四","total":17758.0,"wos":678.0,"jl":1038.0,"lt":2605.0,"lt_qty":5,"tx_cnt":31,"jd":1.06,"kdj":572.84,"target":17000.0,"rate":104.5,"yoy_amt":23995.0,"yoy_pct":-26.0},{"date":"7/24","weekday":"周五","total":19236.0,"wos":529.0,"jl":524.0,"lt":1753.0,"lt_qty":5,"tx_cnt":41,"jd":1.44,"kdj":469.17,"target":22000.0,"rate":87.4,"yoy_amt":18665.0,"yoy_pct":3.1},{"date":"7/25","weekday":"周六","total":30582.0,"wos":1057.0,"jl":2230.0,"lt":802.0,"lt_qty":4,"tx_cnt":76,"jd":1.3,"kdj":402.39,"target":35000.0,"rate":87.4,"yoy_amt":23484.0,"yoy_pct":30.2}],"wk_amt":112763.0,"wk_wos":7942.0,"wk_jl":4046.0,"wk_lt":10001.0,"wk_total":112763.0,"month_amt":526185.0,"wk_yoy":-3.2,"wk28_amt":108268.0,"wow":4.2},"扬州江都金鹰":{"daily":[{"date":"7/20","weekday":"周一","total":1643.0,"wos":0.0,"jl":0.0,"lt":869.0,"lt_qty":1,"tx_cnt":5,"jd":1.4,"kdj":328.6,"target":6000.0,"rate":27.4,"yoy_amt":10064.0,"yoy_pct":-83.7},{"date":"7/21","weekday":"周二","total":8567.0,"wos":699.0,"jl":229.0,"lt":2276.0,"lt_qty":5,"tx_cnt":19,"jd":1.26,"kdj":450.89,"target":6000.0,"rate":142.8,"yoy_amt":1618.0,"yoy_pct":429.5},{"date":"7/22","weekday":"周三","total":6354.0,"wos":0.0,"jl":0.0,"lt":389.0,"lt_qty":1,"tx_cnt":14,"jd":1.21,"kdj":453.86,"target":7000.0,"rate":90.8,"yoy_amt":9557.0,"yoy_pct":-33.5},{"date":"7/23","weekday":"周四","total":3373.0,"wos":319.0,"jl":154.0,"lt":678.0,"lt_qty":2,"tx_cnt":12,"jd":1.0,"kdj":281.08,"target":7000.0,"rate":48.2,"yoy_amt":3612.0,"yoy_pct":-6.6},{"date":"7/24","weekday":"周五","total":12024.0,"wos":0.0,"jl":635.0,"lt":2918.0,"lt_qty":4,"tx_cnt":23,"jd":1.17,"kdj":522.78,"target":9000.0,"rate":133.6,"yoy_amt":5214.0,"yoy_pct":130.6},{"date":"7/25","weekday":"周六","total":11247.0,"wos":2285.0,"jl":0.0,"lt":3762.0,"lt_qty":8,"tx_cnt":31,"jd":1.16,"kdj":362.81,"target":14000.0,"rate":80.3,"yoy_amt":7320.0,"yoy_pct":53.6}],"wk_amt":43208.0,"wk_wos":3303.0,"wk_jl":1018.0,"wk_lt":10892.0,"wk_total":43208.0,"month_amt":216854.0,"wk_yoy":15.6,"wk28_amt":50174.0,"wow":-13.9},"泰州万象城":{"daily":[{"date":"7/20","weekday":"周一","total":15520.0,"wos":0.0,"jl":0.0,"lt":618.0,"lt_qty":2,"tx_cnt":29,"jd":1.38,"kdj":535.17,"target":12000.0,"rate":129.3,"yoy_amt":31528.0,"yoy_pct":-50.8},{"date":"7/21","weekday":"周二","total":13984.0,"wos":3404.0,"jl":2101.0,"lt":1210.0,"lt_qty":3,"tx_cnt":32,"jd":1.28,"kdj":437.0,"target":12000.0,"rate":116.5,"yoy_amt":17166.0,"yoy_pct":-18.5},{"date":"7/22","weekday":"周三","total":16948.0,"wos":159.0,"jl":526.0,"lt":2017.0,"lt_qty":3,"tx_cnt":36,"jd":1.14,"kdj":470.78,"target":14000.0,"rate":121.1,"yoy_amt":11212.0,"yoy_pct":51.2},{"date":"7/23","weekday":"周四","total":14925.0,"wos":647.0,"jl":613.0,"lt":2332.0,"lt_qty":2,"tx_cnt":34,"jd":1.18,"kdj":438.97,"target":14000.0,"rate":106.6,"yoy_amt":12720.0,"yoy_pct":17.3},{"date":"7/24","weekday":"周五","total":21636.0,"wos":1679.0,"jl":847.0,"lt":2890.0,"lt_qty":7,"tx_cnt":43,"jd":1.3,"kdj":503.16,"target":19000.0,"rate":113.9,"yoy_amt":14134.0,"yoy_pct":53.1},{"date":"7/25","weekday":"周六","total":45210.0,"wos":747.0,"jl":2070.0,"lt":2953.0,"lt_qty":7,"tx_cnt":96,"jd":1.25,"kdj":470.94,"target":30000.0,"rate":150.7,"yoy_amt":23676.0,"yoy_pct":91.0}],"wk_amt":128223.0,"wk_wos":6636.0,"wk_jl":6157.0,"wk_lt":12020.0,"wk_total":128223.0,"month_amt":589453.0,"wk_yoy":16.1,"wk28_amt":131619.0,"wow":-2.6},"宿迁宝龙":{"daily":[{"date":"7/20","weekday":"周一","total":2559.0,"wos":0.0,"jl":359.0,"lt":59.0,"lt_qty":1,"tx_cnt":11,"jd":1.09,"kdj":232.64,"target":4000.0,"rate":64.0,"yoy_amt":5431.0,"yoy_pct":-52.9},{"date":"7/21","weekday":"周二","total":3407.0,"wos":0.0,"jl":624.0,"lt":229.0,"lt_qty":1,"tx_cnt":8,"jd":1.0,"kdj":425.88,"target":4000.0,"rate":85.2,"yoy_amt":2537.0,"yoy_pct":34.3},{"date":"7/22","weekday":"周三","total":3882.0,"wos":269.0,"jl":214.0,"lt":658.0,"lt_qty":2,"tx_cnt":12,"jd":1.08,"kdj":323.5,"target":5000.0,"rate":77.6,"yoy_amt":2724.25,"yoy_pct":42.5},{"date":"7/23","weekday":"周四","total":4392.0,"wos":0.0,"jl":494.0,"lt":249.0,"lt_qty":1,"tx_cnt":15,"jd":1.07,"kdj":292.8,"target":5000.0,"rate":87.8,"yoy_amt":3953.0,"yoy_pct":11.1},{"date":"7/24","weekday":"周五","total":2379.0,"wos":0.0,"jl":213.0,"lt":0.0,"lt_qty":0,"tx_cnt":10,"jd":1.6,"kdj":237.9,"target":6000.0,"rate":39.6,"yoy_amt":3590.0,"yoy_pct":-33.7},{"date":"7/25","weekday":"周六","total":5665.0,"wos":0.0,"jl":528.0,"lt":449.0,"lt_qty":1,"tx_cnt":18,"jd":1.39,"kdj":314.72,"target":10000.0,"rate":56.6,"yoy_amt":4751.0,"yoy_pct":19.2}],"wk_amt":22284.0,"wk_wos":269.0,"wk_jl":2432.0,"wk_lt":1644.0,"wk_total":22284.0,"month_amt":117368.0,"wk_yoy":-3.1,"wk28_amt":23358.0,"wow":-4.6},"淮安新亚":{"daily":[{"date":"7/20","weekday":"周一","total":2360.0,"wos":0.0,"jl":279.0,"lt":229.0,"lt_qty":1,"tx_cnt":11,"jd":1.0,"kdj":214.55,"target":5000.0,"rate":47.2,"yoy_amt":7123.0,"yoy_pct":-66.9},{"date":"7/21","weekday":"周二","total":5154.0,"wos":0.0,"jl":327.0,"lt":349.0,"lt_qty":1,"tx_cnt":11,"jd":1.45,"kdj":468.55,"target":5000.0,"rate":103.1,"yoy_amt":5754.0,"yoy_pct":-10.4},{"date":"7/22","weekday":"周三","total":6587.0,"wos":449.0,"jl":316.0,"lt":703.0,"lt_qty":3,"tx_cnt":18,"jd":1.28,"kdj":365.94,"target":5000.0,"rate":131.7,"yoy_amt":4851.0,"yoy_pct":35.8},{"date":"7/23","weekday":"周四","total":4240.0,"wos":0.0,"jl":512.0,"lt":1099.0,"lt_qty":1,"tx_cnt":11,"jd":1.27,"kdj":385.45,"target":5000.0,"rate":84.8,"yoy_amt":10191.0,"yoy_pct":-58.4},{"date":"7/24","weekday":"周五","total":6911.0,"wos":1499.0,"jl":577.0,"lt":1443.0,"lt_qty":3,"tx_cnt":16,"jd":1.25,"kdj":431.94,"target":7000.0,"rate":98.7,"yoy_amt":10145.0,"yoy_pct":-31.9},{"date":"7/25","weekday":"周六","total":8121.5,"wos":338.0,"jl":356.5,"lt":907.0,"lt_qty":2,"tx_cnt":19,"jd":1.32,"kdj":427.45,"target":11000.0,"rate":73.8,"yoy_amt":8762.0,"yoy_pct":-7.3}],"wk_amt":33373.5,"wk_wos":2286.0,"wk_jl":2367.5,"wk_lt":4730.0,"wk_total":33373.5,"month_amt":151601.5,"wk_yoy":-28.7,"wk28_amt":38947.0,"wow":-14.3},"淮安万象城":{"daily":[{"date":"7/20","weekday":"周一","total":13320.0,"wos":359.0,"jl":0.0,"lt":2036.0,"lt_qty":4,"tx_cnt":28,"jd":1.07,"kdj":475.71,"target":9000.0,"rate":148.0,"yoy_amt":0,"yoy_pct":null},{"date":"7/21","weekday":"周二","total":6747.0,"wos":0.0,"jl":0.0,"lt":249.0,"lt_qty":1,"tx_cnt":18,"jd":1.28,"kdj":374.83,"target":9000.0,"rate":75.0,"yoy_amt":0,"yoy_pct":null},{"date":"7/22","weekday":"周三","total":5666.0,"wos":0.0,"jl":249.0,"lt":499.0,"lt_qty":1,"tx_cnt":13,"jd":1.38,"kdj":435.85,"target":10000.0,"rate":56.7,"yoy_amt":0,"yoy_pct":null},{"date":"7/23","weekday":"周四","total":9135.0,"wos":807.0,"jl":0.0,"lt":897.0,"lt_qty":3,"tx_cnt":21,"jd":1.19,"kdj":435.0,"target":10000.0,"rate":91.3,"yoy_amt":0,"yoy_pct":null},{"date":"7/24","weekday":"周五","total":6399.0,"wos":0.0,"jl":599.0,"lt":0.0,"lt_qty":0,"tx_cnt":19,"jd":1.11,"kdj":336.79,"target":13000.0,"rate":49.2,"yoy_amt":0,"yoy_pct":null},{"date":"7/25","weekday":"周六","total":17267.0,"wos":0.0,"jl":124.0,"lt":797.0,"lt_qty":2,"tx_cnt":53,"jd":1.32,"kdj":325.79,"target":21000.0,"rate":82.2,"yoy_amt":0,"yoy_pct":null}],"wk_amt":58534.0,"wk_wos":1166.0,"wk_jl":972.0,"wk_lt":4478.0,"wk_total":58534.0,"month_amt":275678.0,"wk_yoy":null,"wk28_amt":60335.0,"wow":-3.0},"_region":{"day_amt":143037.5,"month_amt":2304949.5,"wk28_amt":511344.0,"day_target":149000.0,"month_target":3030000.0,"day_rate":96.0,"month_rate":76.07,"day_yoy_pct":49.26,"month_yoy_pct":-3.45,"day_jd":1.28,"day_kdj":430.6,"wk_yoy":1.3,"wk_amt":493173.5,"wow":-3.6,"daily":[{"date":"7/20","weekday":"周一","total":60325.0,"lt":4097.0,"wos":2235.0,"jl":1035.0,"tx_cnt":132,"target":63000.0,"rate":95.8,"yoy_amt":95911.25,"yoy_pct":-51.0},{"date":"7/21","weekday":"周二","total":71576.0,"lt":9153.0,"wos":6150.0,"jl":3845.0,"tx_cnt":155,"target":63000.0,"rate":113.6,"yoy_amt":58623.0,"yoy_pct":10.6},{"date":"7/22","weekday":"周三","total":72549.0,"lt":6061.0,"wos":4769.0,"jl":1977.0,"tx_cnt":160,"target":71000.0,"rate":102.2,"yoy_amt":52024.25,"yoy_pct":28.6},{"date":"7/23","weekday":"周四","total":63675.0,"lt":9837.0,"wos":2451.0,"jl":3025.0,"tx_cnt":143,"target":71000.0,"rate":89.7,"yoy_amt":65534.0,"yoy_pct":-16.8},{"date":"7/24","weekday":"周五","total":82011.0,"lt":9841.0,"wos":3707.0,"jl":4087.0,"tx_cnt":189,"target":94000.0,"rate":87.2,"yoy_amt":72513.0,"yoy_pct":4.3},{"date":"7/25","weekday":"周六","total":143037.5,"lt":13691.0,"wos":6772.0,"jl":7070.5,"tx_cnt":344,"target":149000.0,"rate":96.0,"yoy_amt":84260.0,"yoy_pct":49.3}],"wk_atv":439.16},"_guides":{"扬州万象汇":[{"name":"张荟奇","store":"扬州万象汇","title":"店员","target":160000.0,"wk_sales":32923.0,"wk_qty":77,"wk_cnt":51,"wk_atv":645.55,"wk_jd":1.51,"wk_wos":2137.0,"wk_lt":1567.0,"wk_lt_qty":3,"wk_rate":20.6,"wk28_sales":27253.0,"wow":20.8},{"name":"朱洪涛","store":"扬州万象汇","title":"店员","target":160000.0,"wk_sales":29995.0,"wk_qty":80,"wk_cnt":60,"wk_atv":499.92,"wk_jd":1.33,"wk_wos":449.0,"wk_lt":3372.0,"wk_lt_qty":8,"wk_rate":18.7,"wk28_sales":20769.0,"wow":44.4},{"name":"文雅君","store":"扬州万象汇","title":"中级陈列专家","target":160000.0,"wk_sales":20589.0,"wk_qty":63,"wk_cnt":47,"wk_atv":438.06,"wk_jd":1.34,"wk_wos":1647.0,"wk_lt":3498.0,"wk_lt_qty":9,"wk_rate":12.9,"wk28_sales":34889.0,"wow":-41.0},{"name":"李婷1","store":"扬州万象汇","title":"中级店长","target":90000.0,"wk_sales":7234.0,"wk_qty":16,"wk_cnt":12,"wk_atv":602.83,"wk_jd":1.33,"wk_wos":249.0,"wk_lt":478.0,"wk_lt_qty":2,"wk_rate":8.0,"wk28_sales":10576.0,"wow":-31.6}],"扬州京华城":[{"name":"王永群","store":"扬州京华城","title":"初级培训专家","target":160000.0,"wk_sales":31163.0,"wk_qty":79,"wk_cnt":66,"wk_atv":472.17,"wk_jd":1.2,"wk_wos":1448.0,"wk_lt":2303.0,"wk_lt_qty":5,"wk_rate":19.5,"wk28_sales":40687.0,"wow":-23.4},{"name":"王泽馨","store":"扬州京华城","title":"店员（长期兼职）","target":160000.0,"wk_sales":25249.0,"wk_qty":77,"wk_cnt":59,"wk_atv":427.95,"wk_jd":1.31,"wk_wos":1606.0,"wk_lt":3954.0,"wk_lt_qty":6,"wk_rate":15.8,"wk28_sales":18249.0,"wow":38.4},{"name":"丁茜","store":"扬州京华城","title":"储备陈列专家","target":160000.0,"wk_sales":24973.0,"wk_qty":69,"wk_cnt":52,"wk_atv":480.25,"wk_jd":1.33,"wk_wos":1797.0,"wk_lt":1354.0,"wk_lt_qty":4,"wk_rate":15.6,"wk28_sales":20949.0,"wow":19.2},{"name":"董文兵","store":"扬州京华城","title":"店员","target":160000.0,"wk_sales":20402.0,"wk_qty":60,"wk_cnt":44,"wk_atv":463.68,"wk_jd":1.36,"wk_wos":1236.0,"wk_lt":667.0,"wk_lt_qty":5,"wk_rate":12.8,"wk28_sales":20217.0,"wow":0.9},{"name":"陆文一","store":"扬州京华城","title":"初级店长","target":80000.0,"wk_sales":6043.0,"wk_qty":17,"wk_cnt":13,"wk_atv":464.85,"wk_jd":1.31,"wk_wos":968.0,"wk_lt":1723.0,"wk_lt_qty":3,"wk_rate":7.6,"wk28_sales":6347.0,"wow":-4.8}],"扬州江都金鹰":[{"name":"邰宇","store":"扬州江都金鹰","title":"店员（长期兼职）","target":80000.0,"wk_sales":14325.0,"wk_qty":35,"wk_cnt":28,"wk_atv":511.61,"wk_jd":1.25,"wk_wos":259.0,"wk_lt":4155.0,"wk_lt_qty":5,"wk_rate":17.9,"wk28_sales":11824.0,"wow":21.2},{"name":"朱奕然","store":"扬州江都金鹰","title":"店员","target":80000.0,"wk_sales":9051.0,"wk_qty":32,"wk_cnt":26,"wk_atv":348.12,"wk_jd":1.23,"wk_wos":229.0,"wk_lt":948.0,"wk_lt_qty":4,"wk_rate":11.3,"wk28_sales":14561.0,"wow":-37.8},{"name":"王伟","store":"扬州江都金鹰","title":"初级店长","target":40000.0,"wk_sales":8951.0,"wk_qty":23,"wk_cnt":20,"wk_atv":447.55,"wk_jd":1.15,"wk_wos":1348.0,"wk_lt":1867.0,"wk_lt_qty":4,"wk_rate":22.4,"wk28_sales":11907.0,"wow":-24.8},{"name":"谭欣蔚","store":"扬州江都金鹰","title":"店员","target":80000.0,"wk_sales":8396.0,"wk_qty":25,"wk_cnt":23,"wk_atv":365.04,"wk_jd":1.09,"wk_wos":0.0,"wk_lt":2774.0,"wk_lt_qty":6,"wk_rate":10.5,"wk28_sales":11697.0,"wow":-28.2}],"泰州万象城":[{"name":"王美玉","store":"泰州万象城","title":"店员","target":133333.333333333,"wk_sales":26676.0,"wk_qty":54,"wk_cnt":44,"wk_atv":606.27,"wk_jd":1.23,"wk_wos":2247.0,"wk_lt":3426.0,"wk_lt_qty":7,"wk_rate":20.0,"wk28_sales":23099.0,"wow":15.5},{"name":"于小进","store":"泰州万象城","title":"高级运营专家","target":133333.333333333,"wk_sales":26100.0,"wk_qty":70,"wk_cnt":56,"wk_atv":466.07,"wk_jd":1.25,"wk_wos":487.0,"wk_lt":3334.0,"wk_lt_qty":3,"wk_rate":19.6,"wk28_sales":24850.0,"wow":5.0},{"name":"王璐","store":"泰州万象城","title":"店员","target":133333.333333333,"wk_sales":22431.0,"wk_qty":83,"wk_cnt":57,"wk_atv":393.53,"wk_jd":1.46,"wk_wos":2007.0,"wk_lt":1339.0,"wk_lt_qty":5,"wk_rate":16.8,"wk28_sales":19982.0,"wow":12.3},{"name":"王丹","store":"泰州万象城","title":"店员","target":133333.333333333,"wk_sales":20531.0,"wk_qty":49,"wk_cnt":45,"wk_atv":456.24,"wk_jd":1.09,"wk_wos":159.0,"wk_lt":498.0,"wk_lt_qty":2,"wk_rate":15.4,"wk28_sales":21480.0,"wow":-4.4},{"name":"黄小莉1","store":"泰州万象城","title":"初级店长","target":66666.6666666667,"wk_sales":15343.0,"wk_qty":37,"wk_cnt":28,"wk_atv":547.96,"wk_jd":1.32,"wk_wos":449.0,"wk_lt":1206.0,"wk_lt_qty":4,"wk_rate":23.0,"wk28_sales":16347.0,"wow":-6.1}],"宿迁宝龙":[{"name":"卓宁","store":"宿迁宝龙","title":"店员","target":66666.6666666667,"wk_sales":11382.0,"wk_qty":48,"wk_cnt":36,"wk_atv":316.17,"wk_jd":1.33,"wk_wos":0.0,"wk_lt":717.0,"wk_lt_qty":3,"wk_rate":17.1,"wk28_sales":10165.0,"wow":12.0},{"name":"丁蒙","store":"宿迁宝龙","title":"店员","target":66666.6666666667,"wk_sales":4986.0,"wk_qty":14,"wk_cnt":13,"wk_atv":383.54,"wk_jd":1.08,"wk_wos":0.0,"wk_lt":449.0,"wk_lt_qty":1,"wk_rate":7.5,"wk28_sales":6271.0,"wow":-20.5},{"name":"靳洋","store":"宿迁宝龙","title":"高级运营专家","target":66666.6666666667,"wk_sales":3215.0,"wk_qty":15,"wk_cnt":12,"wk_atv":267.92,"wk_jd":1.25,"wk_wos":0.0,"wk_lt":478.0,"wk_lt_qty":2,"wk_rate":4.8,"wk28_sales":5451.0,"wow":-41.0}],"淮安新亚":[{"name":"王毅","store":"淮安新亚","title":"中级陈列专家","target":76666.6666666667,"wk_sales":10992.0,"wk_qty":35,"wk_cnt":27,"wk_atv":407.11,"wk_jd":1.3,"wk_wos":449.0,"wk_lt":1106.0,"wk_lt_qty":3,"wk_rate":14.3,"wk28_sales":10901.0,"wow":0.8},{"name":"钱晨","store":"淮安新亚","title":"初级培训专家","target":76666.6666666667,"wk_sales":10340.0,"wk_qty":31,"wk_cnt":24,"wk_atv":430.83,"wk_jd":1.29,"wk_wos":1499.0,"wk_lt":1153.0,"wk_lt_qty":3,"wk_rate":13.5,"wk28_sales":13395.0,"wow":-22.8},{"name":"汤绚尧","store":"淮安新亚","title":"店员（长期兼职）","target":76666.6666666667,"wk_sales":9674.0,"wk_qty":26,"wk_cnt":20,"wk_atv":483.7,"wk_jd":1.3,"wk_wos":338.0,"wk_lt":2471.0,"wk_lt_qty":4,"wk_rate":12.6,"wk28_sales":11737.0,"wow":-17.6}],"淮安万象城":[{"name":"钱晓凡","store":"淮安万象城","title":"店员","target":134375.0,"wk_sales":20541.0,"wk_qty":59,"wk_cnt":45,"wk_atv":456.47,"wk_jd":1.31,"wk_wos":738.0,"wk_lt":2086.0,"wk_lt_qty":4,"wk_rate":15.3,"wk28_sales":18208.0,"wow":12.8},{"name":"周小庆","store":"淮安万象城","title":"店员","target":134375.0,"wk_sales":15904.0,"wk_qty":57,"wk_cnt":46,"wk_atv":345.74,"wk_jd":1.24,"wk_wos":249.0,"wk_lt":1859.0,"wk_lt_qty":4,"wk_rate":11.8,"wk28_sales":18580.0,"wow":-14.4},{"name":"黄锦靓","store":"淮安万象城","title":"初级店长","target":67187.5,"wk_sales":10802.0,"wk_qty":32,"wk_cnt":26,"wk_atv":415.46,"wk_jd":1.23,"wk_wos":0.0,"wk_lt":264.0,"wk_lt_qty":1,"wk_rate":16.1,"wk28_sales":5544.0,"wow":94.8},{"name":"于思涵","store":"淮安万象城","title":"店员（长期兼职）","target":94062.5,"wk_sales":10315.0,"wk_qty":36,"wk_cnt":32,"wk_atv":322.34,"wk_jd":1.12,"wk_wos":179.0,"wk_lt":269.0,"wk_lt_qty":2,"wk_rate":11.0,"wk28_sales":15459.0,"wow":-33.3}]},"_series":{"扬州万象汇":{"TECHNIC":18511.0,"EDITIONS":8945.0,"DISNEY ANIMATION":8741.0,"NINJAGO":7279.0,"CITY":6701.0,"MINECRAFT":5446.0,"BOTANICALS":5018.0,"LEL":4158.0,"DUPLO":4155.0,"FRIENDS":4132.0,"SPEED CHAMPIONS":3702.0,"HARRY POTTER TM":3666.0,"CHINESE FESTIVALS":3182.0,"CREATOR":2026.7,"ICONS":1867.0,"SUPER HEROES":1695.3,"ART":1679.0,"STAR WARS TM":1563.0,"LEGO IDEAS":879.0,"MONKIE KID":748.0,"MINIFIGURES":338.0},"扬州京华城":{"TECHNIC":22877.0,"EDITIONS":11823.0,"CITY":11052.0,"NINJAGO":9457.0,"MINECRAFT":7954.0,"DISNEY ANIMATION":7374.0,"SPEED CHAMPIONS":7204.0,"DUPLO":5190.0,"BOTANICALS":5188.0,"ICONS":5032.0,"LEL":4320.0,"FRIENDS":3533.0,"MONKIE KID":2538.0,"ONE PIECE":2203.0,"STAR WARS TM":1209.0,"CREATOR":1111.0,"SUPER MARIO":868.0,"BLUEY":858.0,"MINIFIGURES":722.0,"ARCHITECTURE":669.0,"LEGO IDEAS":600.0,"HARRY POTTER TM":550.0},"扬州江都金鹰":{"DISNEY ANIMATION":7591.0,"NINJAGO":6885.0,"TECHNIC":5431.0,"CITY":4506.0,"FRIENDS":3685.0,"SUPER MARIO":2918.0,"ICONS":2737.0,"MINECRAFT":2144.0,"SPEED CHAMPIONS":1624.0,"DUPLO":1585.0,"EDITIONS":1436.0,"LEL":1355.0,"BOTANICALS":748.0,"CHINESE FESTIVALS":419.0,"CREATOR":109.0,"MINIFIGURES":35.0},"泰州万象城":{"TECHNIC":21622.0,"CITY":15669.0,"NINJAGO":15624.0,"EDITIONS":12871.94,"ICONS":8548.0,"MINECRAFT":7941.0,"HARRY POTTER TM":4775.0,"SPEED CHAMPIONS":4774.0,"FRIENDS":4354.0,"BOTANICALS":3856.06,"LEL":3507.0,"DISNEY ANIMATION":3363.0,"CHINESE FESTIVALS":3072.0,"DUPLO":3041.0,"ARCHITECTURE":2716.0,"JURASSIC WORLD":2432.0,"CREATOR":2002.84,"ART":1679.0,"ONE PIECE":1137.0,"SUPER MARIO":1015.0,"SUPER HEROES":1011.16,"LEGO IDEAS":849.0,"MINIFIGURES":821.0,"MONKIE KID":385.0,"STAR WARS TM":278.0,"BLUEY":139.0},"宿迁宝龙":{"CITY":4089.0,"NINJAGO":3305.0,"EDITIONS":2531.0,"DISNEY ANIMATION":1996.0,"SUPER MARIO":1449.0,"LEL":1404.0,"SPEED CHAMPIONS":1343.0,"TECHNIC":1242.0,"MINECRAFT":1039.0,"CREATOR":887.0,"BOTANICALS":637.0,"FRIENDS":616.0,"ICONS":599.0,"CHINESE FESTIVALS":429.0,"SUPER HEROES":308.0,"MINIFIGURES":211.0,"DUPLO":199.0},"淮安新亚":{"ICONS":3867.0,"ONE PIECE":3282.0,"EDITIONS":3245.0,"CITY":3100.0,"TECHNIC":2742.1,"MINECRAFT":2716.0,"FRIENDS":2517.0,"DISNEY ANIMATION":2425.0,"SPEED CHAMPIONS":2249.4,"NINJAGO":2247.0,"DUPLO":1517.0,"BOTANICALS":723.0,"MONKIE KID":649.0,"CREATOR":643.0,"LEL":438.0,"SUPER MARIO":419.0,"STAR WARS TM":278.0,"MINIFIGURES":103.0},"淮安万象城":{"NINJAGO":11959.0,"EDITIONS":9626.0,"CITY":6043.0,"MINECRAFT":5422.0,"TECHNIC":5245.0,"ICONS":3749.0,"FRIENDS":2753.0,"DISNEY ANIMATION":2697.0,"SPEED CHAMPIONS":2434.0,"DUPLO":2152.0,"LEL":2012.0,"BOTANICALS":1947.0,"ARCHITECTURE":649.0,"STAR WARS TM":521.0,"SUPER HEROES":429.0,"MINIFIGURES":271.0,"CREATOR":268.0},"_region":{"TECHNIC":77670.1,"NINJAGO":56756.0,"CITY":51160.0,"EDITIONS":50477.94,"DISNEY ANIMATION":34187.0,"MINECRAFT":32662.0,"ICONS":26399.0,"SPEED CHAMPIONS":23330.4,"FRIENDS":21590.0,"BOTANICALS":18117.06,"DUPLO":17839.0,"LEL":17194.0,"HARRY POTTER TM":8991.0,"CHINESE FESTIVALS":7102.0,"CREATOR":7047.54,"SUPER MARIO":6669.0,"ONE PIECE":6622.0,"MONKIE KID":4320.0,"ARCHITECTURE":4034.0,"STAR WARS TM":3849.0,"SUPER HEROES":3443.46,"ART":3358.0,"MINIFIGURES":2501.0,"JURASSIC WORLD":2432.0,"LEGO IDEAS":2328.0,"BLUEY":997.0}},"_products":{"扬州万象汇":{"兰博基尼 Revuelto 超级跑车":{"amt":4557.0,"qty":3},"法拉利 Daytona SP3":{"amt":3669.0,"qty":1},"FIFA世界杯™奖杯":{"amt":2988.0,"qty":2},"宝马 M4 GT3 EVO 赛车":{"amt":2725.0,"qty":5},"乐高® ǀ迪士尼乐园大街":{"amt":2699.0,"qty":1},"怀尔德菲勒的变形神龙机甲":{"amt":2304.0,"qty":3},"梅赛德斯-奔驰乌尼莫克U 5023":{"amt":2146.0,"qty":2},"霍格沃茨城堡：东翼":{"amt":2009.0,"qty":1},"15周年纪念款 X-1 忍者战车":{"amt":1975.0,"qty":3},"海岸警卫队救援船和直升机":{"amt":1928.0,"qty":2},"东坡望月楼":{"amt":1908.0,"qty":2},"克劳德·莫奈 — 睡莲池上的桥":{"amt":1679.0,"qty":1},"鲤鱼跃龙门":{"amt":1274.0,"qty":3},"帝国“兰姆达级”穿梭机":{"amt":1272.0,"qty":1},"家庭住宅":{"amt":1238.0,"qty":2},"瓦力与伊娃":{"amt":1228.0,"qty":2},"迷你迪士尼城堡":{"amt":1177.0,"qty":3},"封赏之地战车":{"amt":1129.0,"qty":1},"绿色布加迪Chiron Pur Sport超级跑车":{"amt":1101.0,"qty":2},"玩具总动员弹簧狗的书挡":{"amt":1099.0,"qty":1},"吉普牧马人 Rubicon SUV":{"amt":1082.0,"qty":2},"书架装饰：邓布利多办公室":{"amt":1079.0,"qty":1},"C罗 - 经典进球瞬间":{"amt":1075.0,"qty":4},"向日葵花束":{"amt":1058.0,"qty":2},"海岸警卫队直升机":{"amt":1058.0,"qty":2},"足球":{"amt":1049.0,"qty":1},"苦力怕":{"amt":1035.0,"qty":3},"郁金香花束":{"amt":1028.0,"qty":2},"钢琴与猫":{"amt":1005.0,"qty":3},"末影龙":{"amt":998.0,"qty":2},"Ferrari FXX K 赛车":{"amt":978.0,"qty":2},"法拉利 SF90 XX Stradale 跑车":{"amt":955.0,"qty":4},"美人鱼过山车":{"amt":919.0,"qty":1},"熔岩过山车主题乐园":{"amt":899.0,"qty":1},"蜘蛛侠英雄人偶":{"amt":899.0,"qty":1},"三眼仔 披萨星球火箭之旅":{"amt":898.0,"qty":2},"摇钱树":{"amt":879.0,"qty":4},"橙色的猫":{"amt":879.0,"qty":1},"恶魂站":{"amt":871.0,"qty":1},"太空探索望远镜":{"amt":854.0,"qty":3},"梅西 – 经典进球瞬间":{"amt":837.0,"qty":3},"唤魔者村庄袭击":{"amt":799.0,"qty":1},"警用巡逻艇大追击":{"amt":763.0,"qty":3},"法拉利 F2004 与迈克尔·舒马赫":{"amt":749.0,"qty":1},"悟空小侠迷你机甲":{"amt":748.0,"qty":2},"梦幻仙境游乐园":{"amt":704.0,"qty":2},"C罗 -足球传奇":{"amt":699.0,"qty":1},"猫儿历险记萌萌玛丽猫":{"amt":678.0,"qty":2},"FIFA世界杯2026™ 官方徽章":{"amt":677.0,"qty":3},"梅西 – 足球传奇":{"amt":669.0,"qty":1},"小猪的生日派对":{"amt":648.0,"qty":2},"驯龙高手：没牙仔":{"amt":629.0,"qty":1},"布加迪 Centodieci 超级跑车":{"amt":623.0,"qty":3},"3合1建筑工程车":{"amt":619.0,"qty":3},"钢铁侠机甲大战奥创":{"amt":617.3,"qty":5},"可爱考拉之家":{"amt":609.0,"qty":1},"3 合 1 车道竞速":{"amt":599.0,"qty":1},"现代化警察局":{"amt":569.0,"qty":1},"创意积木盒":{"amt":567.0,"qty":3},"安琪":{"amt":559.0,"qty":1},"布加迪Chiron Pur Sport超级跑车":{"amt":549.0,"qty":1},"梦幻糖果乐园":{"amt":549.0,"qty":1},"Monster Jam™ Grave Digger™ 火冰回力车":{"amt":526.0,"qty":2},"快乐盆栽":{"amt":523.0,"qty":3},"姆巴佩 – 经典进球瞬间":{"amt":516.0,"qty":2},"开花的仙人掌":{"amt":516.0,"qty":2},"阿斯顿·马丁 Valkyrie":{"amt":511.0,"qty":1},"凯的火系元素机甲":{"amt":500.0,"qty":2},"Ford Bronco® 福特烈马 SUV":{"amt":499.0,"qty":1},"玫瑰花束":{"amt":499.0,"qty":1},"奥迪F1® 车队 R26 赛车":{"amt":498.0,"qty":2},"指环王：索伦的头盔":{"amt":489.0,"qty":1},"兰花":{"amt":487.0,"qty":1},"乐高®得宝®豪华缤纷桶":{"amt":469.0,"qty":1},"迷你盆栽":{"amt":449.0,"qty":1},"霍格沃茨学院徽章":{"amt":449.0,"qty":1},"法拉利 SF-24 F1® 赛车":{"amt":446.0,"qty":2},"艾莎的冰雪城堡和雪上冒险":{"amt":439.0,"qty":1},"2026年美国足球国家队球衣":{"amt":435.0,"qty":2},"杰的忍者变形战车":{"amt":419.0,"qty":1},"米奇的妙妙屋与米奇和布鲁托":{"amt":419.0,"qty":1},"忍者飞龙阿尤战甲":{"amt":399.0,"qty":1},"狐狸":{"amt":399.0,"qty":1},"骷髅":{"amt":399.0,"qty":1},"凯文和逗逗":{"amt":389.0,"qty":1},"山地探险车":{"amt":378.0,"qty":2},"复古相机":{"amt":370.7,"qty":2},"睡莲":{"amt":361.0,"qty":1},"创意车辆集合":{"amt":346.0,"qty":2},"迈尔斯·莫拉莱斯钥匙链":{"amt":343.0,"qty":6},"独角兽咖啡馆":{"amt":341.0,"qty":1},"拖拉机与市场":{"amt":338.0,"qty":2},"系列 29":{"amt":338.0,"qty":9},"15周年纪念款 忍者道场展示台":{"amt":329.0,"qty":1},"兔八哥":{"amt":319.0,"qty":1},"草莓熊":{"amt":319.0,"qty":1},"幽灵蜘蛛钥匙扣":{"amt":284.0,"qty":5},"傲骨梅":{"amt":269.0,"qty":1},"寇的作战机甲与神龙赞":{"amt":269.0,"qty":1},"水下探险":{"amt":269.0,"qty":1},"创意花店":{"amt":261.0,"qty":1},"黄色旅行箱":{"amt":258.0,"qty":2},"Ken Block '65 福特野马 Hoonicorn V1":{"amt":249.0,"qty":1},"战机跑车速度对决":{"amt":249.0,"qty":1},"法拉利 499P 超跑":{"amt":249.0,"qty":1},"迈凯伦W1超跑":{"amt":239.0,"qty":1},"小人仔组合（BaM packaging box classic）":{"amt":237.0,"qty":3},"熊猫保护区":{"amt":235.0,"qty":1},"丰田 Supra MK4《速度与激情》同款":{"amt":229.0,"qty":1},"梅赛德斯-AMG F1® W15 赛车":{"amt":214.0,"qty":1},"冰雪奇缘创意拼搭":{"amt":189.0,"qty":1},"伦敦巴士":{"amt":179.0,"qty":1},"对战循声守卫":{"amt":179.0,"qty":1},"蜘蛛侠汽车大战毒液化金刚狼":{"amt":179.0,"qty":1},"阿林的幻影旋转术战斗机甲":{"amt":179.0,"qty":1},"齐尔瓦的猿龙猛兽":{"amt":179.0,"qty":1},"乐高城市警车":{"amt":178.0,"qty":2},"旋风车队-鸣笛消防车":{"amt":178.0,"qty":2},"史蒂夫针叶林冒险":{"amt":174.0,"qty":2},"爱丽儿的奇幻迷你迷你宫殿":{"amt":174.0,"qty":1},"冰激凌和气球摊":{"amt":172.0,"qty":2},"消防直升机":{"amt":172.0,"qty":2},"心湖城便利店":{"amt":168.0,"qty":1},"薯条餐车":{"amt":167.0,"qty":1},"F1® 威廉姆斯车队与哈斯车队赛车":{"amt":166.0,"qty":1},"凯的摩托车极速追击":{"amt":166.0,"qty":2},"警车大追击":{"amt":164.0,"qty":1},"4x4 山地越野车":{"amt":163.0,"qty":1},"云梯消防车":{"amt":163.0,"qty":1},"死亡士兵与暗夜士兵战斗包":{"amt":162.0,"qty":1},"伦敦明信片":{"amt":149.0,"qty":1},"高速列车":{"amt":149.0,"qty":1},"克隆人震击士兵™机甲":{"amt":129.0,"qty":1},"玫瑰":{"amt":129.0,"qty":1},"生日派对蛋糕":{"amt":129.0,"qty":1},"雏菊":{"amt":129.0,"qty":1},"霍格沃茨城堡：分院仪式":{"amt":129.0,"qty":1},"F1® 赛车手与迈凯伦赛车":{"amt":119.0,"qty":1},"胡萝卜吉祥物发光钥匙扣":{"amt":119.0,"qty":1},"灾厄村民沙漠巡逻队":{"amt":118.0,"qty":1},"米奇钥匙链":{"amt":118.0,"qty":2},"下界与末地传送门之旅":{"amt":116.0,"qty":1},"下界熔岩湖之战":{"amt":89.0,"qty":1},"旋风车队-建筑装载机":{"amt":89.0,"qty":1},"旋风车队-警用卡车":{"amt":89.0,"qty":1},"独角兽蛋糕送货车":{"amt":89.0,"qty":1},"警用摩托车大追击":{"amt":89.0,"qty":1},"黄色摩托车":{"amt":89.0,"qty":1},"寻找美西螈的探险船":{"amt":85.0,"qty":1},"可爱的仓鼠":{"amt":84.0,"qty":1},"劳埃德的神龙战斗机甲":{"amt":80.0,"qty":1},"大型挖掘装载车":{"amt":79.0,"qty":1},"旋风车队-霹雳游侠":{"amt":69.0,"qty":1},"酷帅蝙蝠侠钥匙链":{"amt":59.0,"qty":1},"黛丝鸭钥匙链":{"amt":59.0,"qty":1},"蜘蛛侠钥匙扣":{"amt":56.0,"qty":1}},"扬州京华城":{"Ferrari FXX K 赛车":{"amt":7050.0,"qty":14},"法拉利 Daytona SP3":{"amt":3679.0,"qty":1},"怀尔德菲勒的变形神龙机甲":{"amt":3129.0,"qty":4},"足球":{"amt":3107.0,"qty":3},"FIFA世界杯™奖杯":{"amt":3018.0,"qty":2},"安琪":{"amt":2698.0,"qty":5},"齐天大圣终极变形机甲":{"amt":2538.0,"qty":2},"法拉利车队HP夏尔·勒克莱尔头盔":{"amt":2508.0,"qty":3},"忍者双生泰坦机甲":{"amt":2263.0,"qty":2},"前进梅利号海贼船":{"amt":2203.0,"qty":2},"Mercedes-AMG G 63 与 Mercedes-AMG SL 63":{"amt":2120.0,"qty":5},"末影龙":{"amt":1994.0,"qty":4},"迈凯伦 MCL39 F1® 赛车":{"amt":1983.0,"qty":1},"街机弹珠机":{"amt":1749.0,"qty":1},"宝马 M4 GT3 EVO 赛车":{"amt":1657.0,"qty":3},"梅西的庆祝时刻":{"amt":1599.0,"qty":1},"法拉利 F2004 与迈克尔·舒马赫":{"amt":1598.0,"qty":2},"NASA Artemis 太空发射系统":{"amt":1552.0,"qty":3},"兰博基尼 Revuelto 超级跑车":{"amt":1499.0,"qty":1},"道奇 Charger R/T（速度与激情同款）赛车":{"amt":1399.0,"qty":1},"C罗 -足球传奇":{"amt":1363.0,"qty":2},"法拉利 SF-24 F1® 赛车":{"amt":1348.0,"qty":6},"兰博基尼 Revuelto 与 Huracán STO":{"amt":1322.0,"qty":3},"迷你盆栽":{"amt":1250.0,"qty":3},"欢聚友谊树屋":{"amt":1228.0,"qty":2},"帝国“兰姆达级”穿梭机":{"amt":1209.0,"qty":1},"驯龙高手：没牙仔":{"amt":1196.0,"qty":2},"豪华智能探险火车":{"amt":1149.0,"qty":1},"绿色布加迪Chiron Pur Sport超级跑车":{"amt":1128.0,"qty":2},"小熊维尼":{"amt":1099.0,"qty":1},"玩具总动员弹簧狗的书挡":{"amt":1099.0,"qty":1},"凯的火系元素机甲":{"amt":1036.0,"qty":4},"下界与末地传送门之旅":{"amt":1021.0,"qty":8},"苦力怕":{"amt":1009.0,"qty":3},"海岸警卫队救援船和直升机":{"amt":962.0,"qty":1},"法拉利 499P 超跑":{"amt":954.0,"qty":4},"乐高®得宝®豪华缤纷桶":{"amt":918.0,"qty":2},"15周年纪念款 四武器铁匠铺":{"amt":879.0,"qty":1},"客运飞机":{"amt":879.0,"qty":1},"长发公主的城堡":{"amt":869.0,"qty":1},"马力欧卡丁车™ - 乐高®马力欧和标准型卡丁车":{"amt":868.0,"qty":2},"恶魂站":{"amt":849.0,"qty":1},"黄色挖掘装载车":{"amt":837.0,"qty":3},"乐高®运输面包车":{"amt":787.0,"qty":3},"警用巡逻艇大追击":{"amt":781.0,"qty":3},"凯和寇的组合式战车":{"amt":776.0,"qty":3},"迷你迪士尼城堡":{"amt":738.0,"qty":2},"奥迪F1® 车队 R26 赛车":{"amt":737.0,"qty":3},"礼盒庆典":{"amt":736.0,"qty":4},"系列 29":{"amt":722.0,"qty":19},"Nike Air Max 95 x 乐高®套装":{"amt":699.0,"qty":1},"齐尔瓦的猿龙猛兽":{"amt":693.0,"qty":4},"猫儿历险记萌萌玛丽猫":{"amt":675.0,"qty":2},"巴黎 - 爱之城":{"amt":669.0,"qty":1},"积木拼搭的布鲁伊一家":{"amt":629.0,"qty":1},"3 合 1 车道竞速":{"amt":619.0,"qty":1},"3合1建筑工程车":{"amt":617.0,"qty":3},"海滩观光火车":{"amt":614.0,"qty":1},"迪士尼皮克斯小台灯":{"amt":600.0,"qty":1},"1966 福特 GT40 MKII 赛车":{"amt":599.0,"qty":1},"丽安的温馨小屋":{"amt":599.0,"qty":1},"三菱日蚀赛车（速度与激情同款）":{"amt":579.0,"qty":1},"布加迪Chiron Pur Sport超级跑车":{"amt":579.0,"qty":1},"史迪奇":{"amt":576.0,"qty":1},"自由的小精灵多比":{"amt":550.0,"qty":2},"创意积木盒":{"amt":547.0,"qty":3},"喷气式客运飞机":{"amt":543.0,"qty":2},"摇滚盆栽":{"amt":541.0,"qty":3},"宠物水上乐园":{"amt":539.0,"qty":2},"典雅兰":{"amt":538.0,"qty":2},"开花的仙人掌":{"amt":538.0,"qty":2},"招财猫":{"amt":538.0,"qty":2},"乐高城市警车":{"amt":537.0,"qty":6},"凋灵之战":{"amt":529.0,"qty":1},"山地探险车":{"amt":519.0,"qty":3},"薯条餐车":{"amt":519.0,"qty":3},"史蒂夫针叶林冒险":{"amt":518.0,"qty":6},"放大版蓝色宇航员小人仔":{"amt":509.0,"qty":1},"Ford Bronco® 福特烈马 SUV":{"amt":499.0,"qty":1},"向日葵花束":{"amt":499.0,"qty":1},"水下探险":{"amt":499.0,"qty":2},"直升机、消防车与潜艇组合套装":{"amt":499.0,"qty":1},"高速列车":{"amt":496.0,"qty":3},"指环王：索伦的头盔":{"amt":489.0,"qty":1},"郁金香花束":{"amt":479.0,"qty":1},"F1学院赛车":{"amt":474.0,"qty":2},"粉玫瑰花束":{"amt":469.0,"qty":1},"自动洗车店":{"amt":469.0,"qty":1},"披萨外卖工厂":{"amt":461.0,"qty":1},"经典矿镐":{"amt":449.0,"qty":1},"航空医疗救援飞机":{"amt":449.0,"qty":1},"海岸度假小屋":{"amt":434.0,"qty":1},"杰的忍者变形战车":{"amt":429.0,"qty":1},"米奇的妙妙屋与米奇和布鲁托":{"amt":405.0,"qty":1},"F1® 运输卡车与奥迪F1® 赛车":{"amt":399.0,"qty":1},"数字火车——学习数数":{"amt":398.0,"qty":2},"灾厄村民沙漠巡逻队":{"amt":387.0,"qty":3},"忍者飞龙阿尤战甲":{"amt":359.0,"qty":1},"创意车辆集合":{"amt":358.0,"qty":2},"睡莲":{"amt":353.0,"qty":1},"15周年纪念款 忍者道场展示台":{"amt":349.0,"qty":1},"大型挖掘装载车":{"amt":342.0,"qty":4},"雪宝和布鲁尼的野餐":{"amt":339.0,"qty":1},"旋风车队-建筑装载机":{"amt":332.0,"qty":4},"兔八哥":{"amt":329.0,"qty":1},"钢琴与猫":{"amt":325.0,"qty":1},"猪宝宝房屋":{"amt":322.0,"qty":2},"垃圾回收车":{"amt":319.0,"qty":1},"草莓熊":{"amt":319.0,"qty":1},"凶猛的鲨鱼":{"amt":299.0,"qty":1},"C罗 - 经典进球瞬间":{"amt":279.0,"qty":1},"梅西 – 经典进球瞬间":{"amt":279.0,"qty":1},"假日探险野营车":{"amt":269.0,"qty":1},"猫咪生日派对与树屋":{"amt":269.0,"qty":1},"阳光缤纷花束":{"amt":269.0,"qty":1},"鲜花装饰香水瓶":{"amt":269.0,"qty":1},"披萨小车":{"amt":258.0,"qty":2},"波斯菊":{"amt":252.0,"qty":2},"《回到未来》时光机":{"amt":249.0,"qty":1},"法拉利 F1® 赛车维修站":{"amt":249.0,"qty":1},"熊猫保护区":{"amt":249.0,"qty":1},"财神爷":{"amt":249.0,"qty":1},"Monster Jam™ Grave Digger™ 火冰回力车":{"amt":243.0,"qty":1},"森林下午茶":{"amt":234.0,"qty":3},"布鲁伊的日常生活":{"amt":229.0,"qty":1},"法拉利 SF90 XX Stradale 跑车":{"amt":225.0,"qty":1},"心湖城兔子酒店":{"amt":219.0,"qty":1},"梅赛德斯-AMG F1® W15 赛车":{"amt":219.0,"qty":1},"红牛车队 RB20 F1® 赛车":{"amt":219.0,"qty":1},"神奇独角兽":{"amt":218.0,"qty":2},"摇钱树":{"amt":207.0,"qty":1},"多功能除雪车":{"amt":202.0,"qty":1},"小鸡农场":{"amt":179.0,"qty":1},"拖拉机与市场":{"amt":179.0,"qty":1},"爱丽儿的奇幻迷你迷你宫殿":{"amt":179.0,"qty":1},"警察大追捕运囚车":{"amt":179.0,"qty":1},"独角兽蛋糕送货车":{"amt":170.0,"qty":2},"对战循声守卫":{"amt":168.0,"qty":1},"苍白之园":{"amt":159.0,"qty":1},"凯的神龙战斗机甲":{"amt":156.0,"qty":2},"仙人掌发光钥匙扣":{"amt":119.0,"qty":1},"霸王龙装备迷发光钥匙扣":{"amt":119.0,"qty":1},"鲨鱼发光钥匙扣":{"amt":119.0,"qty":1},"小飞象钥匙链":{"amt":116.0,"qty":2},"莉萝和史迪奇 安琪":{"amt":116.0,"qty":1},"凯的摩托车极速追击":{"amt":89.0,"qty":1},"劳埃德对战土系怪兽幻影旋转机":{"amt":89.0,"qty":1},"劳埃德的神龙战斗机甲":{"amt":89.0,"qty":1},"旋风车队-霹雳游侠":{"amt":89.0,"qty":1},"高速改装赛车":{"amt":89.0,"qty":1},"黄色摩托车":{"amt":89.0,"qty":1},"冰激凌和气球摊":{"amt":82.0,"qty":1},"小人仔组合（BaM packaging box classic）":{"amt":74.0,"qty":1},"旋风车队-警用卡车":{"amt":69.0,"qty":1},"蜘蛛侠钥匙扣":{"amt":59.0,"qty":1},"迈尔斯·莫拉莱斯钥匙链":{"amt":59.0,"qty":1},"酷帅蝙蝠侠钥匙链":{"amt":59.0,"qty":1},"刺猬索尼克钥匙链":{"amt":56.0,"qty":1},"金色小人仔钥匙扣":{"amt":53.0,"qty":1}},"扬州江都金鹰":{"三眼仔 披萨星球火箭之旅":{"amt":2245.0,"qty":5},"宝马 M4 GT3 EVO 赛车":{"amt":2212.0,"qty":4},"终极战斗神龙":{"amt":1609.0,"qty":1},"法拉利 F2004 与迈克尔·舒马赫":{"amt":1538.0,"qty":2},"马力欧卡丁车™：路易吉 ＆ G力量":{"amt":1499.0,"qty":1},"马力欧卡丁车™：马力欧 ＆ 标准型卡丁车":{"amt":1419.0,"qty":1},"心湖城度假大酒店":{"amt":1379.0,"qty":1},"草莓熊":{"amt":1278.0,"qty":4},"忍者双生泰坦机甲":{"amt":1219.0,"qty":1},"金毛幼犬":{"amt":1199.0,"qty":1},"玩具总动员弹簧狗的书挡":{"amt":1099.0,"qty":1},"Ferrari FXX K 赛车":{"amt":1008.0,"qty":2},"Ford Bronco® 福特烈马 SUV":{"amt":948.0,"qty":2},"恶魂站":{"amt":899.0,"qty":1},"15周年纪念款 四武器铁匠铺":{"amt":869.0,"qty":1},"赞的高科技组合式机甲":{"amt":869.0,"qty":1},"心湖城好朋友俱乐部":{"amt":799.0,"qty":1},"怀尔德菲勒的变形神龙机甲":{"amt":799.0,"qty":1},"警用巡逻艇大追击":{"amt":787.0,"qty":3},"Nike Air Max 95 x 乐高®套装":{"amt":699.0,"qty":1},"3 合 1 车道竞速":{"amt":649.0,"qty":1},"小猪的生日派对":{"amt":638.0,"qty":2},"丽安的温馨小屋":{"amt":609.0,"qty":1},"瓦力与伊娃":{"amt":585.0,"qty":1},"史迪奇":{"amt":569.0,"qty":1},"三菱日蚀赛车（速度与激情同款）":{"amt":549.0,"qty":1},"安琪":{"amt":549.0,"qty":1},"山地探险车":{"amt":543.0,"qty":3},"绿色布加迪Chiron Pur Sport超级跑车":{"amt":529.0,"qty":1},"黄色挖掘装载车":{"amt":527.0,"qty":2},"凯的火系元素机甲":{"amt":516.0,"qty":2},"向日葵花束":{"amt":499.0,"qty":1},"动物创意拼搭":{"amt":479.0,"qty":1},"海岸警卫队直升机":{"amt":479.0,"qty":1},"FIFA世界杯2026™ 官方徽章":{"amt":458.0,"qty":2},"丛林飞机":{"amt":452.0,"qty":2},"摇钱树":{"amt":449.0,"qty":2},"海岸度假小屋":{"amt":449.0,"qty":1},"Mercedes-AMG G 63 与 Mercedes-AMG SL 63":{"amt":419.0,"qty":1},"定制警车车库":{"amt":419.0,"qty":1},"杰的忍者变形战车":{"amt":419.0,"qty":1},"鲤鱼跃龙门":{"amt":419.0,"qty":1},"凯文和逗逗":{"amt":389.0,"qty":1},"狐狸":{"amt":369.0,"qty":1},"迷你迪士尼城堡":{"amt":369.0,"qty":1},"猫儿历险记萌萌玛丽猫":{"amt":349.0,"qty":1},"雪宝和布鲁尼的野餐":{"amt":339.0,"qty":1},"苦力怕":{"amt":319.0,"qty":1},"喷气式客运飞机":{"amt":279.0,"qty":1},"维尼修斯 – 经典进球瞬间":{"amt":279.0,"qty":1},"Monster Jam™ Grave Digger™ 火冰回力车":{"amt":269.0,"qty":1},"乐高®运输面包车":{"amt":269.0,"qty":1},"创意花店":{"amt":269.0,"qty":1},"可爱狗狗零食店":{"amt":269.0,"qty":1},"宠物水上乐园":{"amt":269.0,"qty":1},"水下探险":{"amt":269.0,"qty":1},"熊猫保护区":{"amt":269.0,"qty":1},"生日派对蛋糕":{"amt":254.0,"qty":2},"TNT 丛林房屋":{"amt":249.0,"qty":1},"典雅兰":{"amt":249.0,"qty":1},"法拉利 499P 超跑":{"amt":249.0,"qty":1},"法拉利 F1® 赛车维修站":{"amt":249.0,"qty":1},"法拉利 SF90 XX Stradale 跑车":{"amt":249.0,"qty":1},"法拉利 SF-24 F1® 赛车":{"amt":239.0,"qty":1},"迈凯伦 F1® 车队 MCL38 赛车":{"amt":239.0,"qty":1},"F1®大电影同款APXGP赛车":{"amt":229.0,"qty":1},"3合1建筑工程车":{"amt":219.0,"qty":1},"冰雪奇缘创意拼搭":{"amt":189.0,"qty":1},"对战循声守卫":{"amt":179.0,"qty":1},"拖拉机与市场":{"amt":179.0,"qty":1},"摩托车运输车":{"amt":179.0,"qty":1},"齐尔瓦的猿龙猛兽":{"amt":179.0,"qty":1},"劳埃德对战土系怪兽幻影旋转机":{"amt":172.0,"qty":2},"高速列车":{"amt":169.0,"qty":1},"云梯消防车":{"amt":164.0,"qty":1},"4x4 山地越野车":{"amt":162.0,"qty":1},"黄色摩托车":{"amt":162.0,"qty":2},"阿林的幻影旋转术战斗机甲":{"amt":154.0,"qty":1},"灾厄村民沙漠巡逻队":{"amt":129.0,"qty":1},"夏特钥匙扣":{"amt":113.0,"qty":2},"神奇独角兽":{"amt":109.0,"qty":1},"乐高城市警车":{"amt":99.0,"qty":1},"冰激凌和气球摊":{"amt":89.0,"qty":1},"大型挖掘装载车":{"amt":89.0,"qty":1},"旋风车队-警用卡车":{"amt":89.0,"qty":1},"警用摩托车":{"amt":89.0,"qty":1},"警用摩托车大追击":{"amt":89.0,"qty":1},"高速改装赛车":{"amt":89.0,"qty":1},"旋风车队-建筑装载机":{"amt":83.0,"qty":1},"森林下午茶":{"amt":83.0,"qty":1},"凯的神龙战斗机甲":{"amt":80.0,"qty":1},"小飞象钥匙链":{"amt":59.0,"qty":1},"热狗小贩钥匙扣":{"amt":59.0,"qty":1},"米奇钥匙链":{"amt":56.0,"qty":1},"米妮钥匙链":{"amt":56.0,"qty":1},"系列 29":{"amt":35.0,"qty":1}},"泰州万象城":{"Ferrari FXX K 赛车":{"amt":5721.0,"qty":12},"泰坦尼克号":{"amt":5399.0,"qty":1},"兰博基尼 Revuelto 超级跑车":{"amt":4557.0,"qty":3},"科尼赛克 Sadair Spear 超跑":{"amt":3899.0,"qty":1},"忍者双生泰坦机甲":{"amt":3667.0,"qty":3},"海岸警卫队救援船和直升机":{"amt":2912.0,"qty":3},"巴黎 - 爱之城":{"amt":2716.0,"qty":4},"足球":{"amt":2098.0,"qty":2},"15周年纪念款 X-1 忍者战车":{"amt":2037.0,"qty":3},"梅西 – 足球传奇":{"amt":2037.0,"qty":3},"阿斯顿·马丁沙特阿美车队 F1® AMR25赛车":{"amt":1972.0,"qty":1},"法拉利 SF-24 F1 赛车":{"amt":1909.0,"qty":1},"霍格沃茨城堡：东翼":{"amt":1819.0,"qty":1},"街机弹珠机":{"amt":1781.0,"qty":1},"东坡望月楼":{"amt":1778.0,"qty":2},"克劳德·莫奈 — 睡莲池上的桥":{"amt":1679.0,"qty":1},"侏罗纪公园 Jeep® Wrangler 吉普":{"amt":1563.0,"qty":1},"FIFA世界杯™奖杯":{"amt":1549.0,"qty":1},"警用巡逻艇大追击":{"amt":1547.0,"qty":6},"怀尔德菲勒的变形神龙机甲":{"amt":1518.0,"qty":2},"霍格沃茨™城堡和庭院":{"amt":1399.0,"qty":1},"C罗 -足球传奇":{"amt":1364.94,"qty":2},"C罗 - 经典进球瞬间":{"amt":1355.0,"qty":5},"三眼仔 披萨星球火箭之旅":{"amt":1347.0,"qty":3},"15周年纪念款 忍者道场展示台":{"amt":1323.0,"qty":4},"鲤鱼跃龙门":{"amt":1294.0,"qty":3},"苦力怕":{"amt":1286.0,"qty":4},"艾莎的冰雪城堡和雪上冒险":{"amt":1248.0,"qty":3},"机场消防车":{"amt":1203.0,"qty":2},"前进梅利号海贼船":{"amt":1137.0,"qty":1},"布加迪Chiron Pur Sport超级跑车":{"amt":1128.0,"qty":2},"姆巴佩 – 经典进球瞬间":{"amt":1064.0,"qty":4},"Ford Bronco® 福特烈马 SUV":{"amt":1030.0,"qty":2},"末影龙":{"amt":1018.0,"qty":2},"Game Boy™积木游戏机":{"amt":1015.0,"qty":2},"NASA Artemis 太空发射系统":{"amt":998.0,"qty":2},"黄色装载车与自卸卡车":{"amt":974.0,"qty":1},"秋日枫林小屋":{"amt":949.0,"qty":1},"美人鱼过山车":{"amt":949.0,"qty":1},"霍格沃茨草药课植物":{"amt":949.0,"qty":1},"摇滚盆栽":{"amt":925.0,"qty":5},"粉玫瑰花束":{"amt":922.06,"qty":2},"恶魂站":{"amt":899.0,"qty":1},"熔岩过山车主题乐园":{"amt":879.0,"qty":1},"15周年纪念款 四武器铁匠铺":{"amt":869.0,"qty":1},"恐龙化石：三角龙":{"amt":869.0,"qty":1},"生命源龙":{"amt":869.0,"qty":1},"杰的忍者变形战车":{"amt":851.0,"qty":2},"太空探索望远镜":{"amt":850.0,"qty":3},"橙色的猫":{"amt":849.0,"qty":1},"航空医疗救援飞机":{"amt":838.0,"qty":2},"迈凯伦万事达卡 F1® 车队兰多·诺里斯头盔":{"amt":822.0,"qty":1},"系列 29":{"amt":821.0,"qty":22},"法拉利车队HP刘易斯·汉密尔顿头盔":{"amt":819.0,"qty":1},"梅西 – 经典进球瞬间":{"amt":817.0,"qty":3},"唤魔者村庄袭击":{"amt":784.0,"qty":1},"乐高®运输面包车":{"amt":775.0,"qty":3},"3合1忙碌的建筑工地":{"amt":769.0,"qty":1},"决战龙之刃":{"amt":769.0,"qty":1},"法拉利 F2004 与迈克尔·舒马赫":{"amt":769.0,"qty":1},"TNT 丛林房屋":{"amt":745.0,"qty":3},"迷你迪士尼城堡":{"amt":738.0,"qty":2},"摩天轮":{"amt":735.0,"qty":1},"布加迪 Vision GT 超级跑车":{"amt":729.0,"qty":3},"Mercedes-AMG G 63 与 Mercedes-AMG SL 63":{"amt":721.0,"qty":2},"奥迪F1® 车队 R26 赛车":{"amt":714.0,"qty":3},"智能探险火车":{"amt":699.0,"qty":1},"FIFA世界杯2026™ 官方徽章":{"amt":667.0,"qty":3},"可爱考拉之家":{"amt":629.0,"qty":1},"飞机，工程车和悬浮船组合套装":{"amt":604.0,"qty":1},"钢铁侠机甲大战奥创":{"amt":600.16,"qty":5},"驯龙高手：没牙仔":{"amt":599.0,"qty":1},"爱丽儿的皇家婚礼船":{"amt":579.0,"qty":1},"三菱日蚀赛车（速度与激情同款）":{"amt":549.0,"qty":1},"喷气式客运飞机":{"amt":540.0,"qty":2},"凯的火系元素机甲":{"amt":538.0,"qty":2},"法拉利 F1® 赛车维修站":{"amt":538.0,"qty":2},"齐尔瓦的猿龙猛兽":{"amt":537.0,"qty":3},"寇的作战机甲与神龙赞":{"amt":530.0,"qty":2},"绿色布加迪Chiron Pur Sport超级跑车":{"amt":529.0,"qty":1},"郁金香花束":{"amt":529.0,"qty":1},"拖拉机":{"amt":525.0,"qty":3},"快乐盆栽":{"amt":520.0,"qty":3},"僵尸地牢":{"amt":513.0,"qty":2},"劳埃德的绿色森林飞龙":{"amt":504.0,"qty":3},"自动洗车店":{"amt":499.0,"qty":1},"警察大追捕运囚车":{"amt":497.0,"qty":3},"乐高城市警车":{"amt":495.0,"qty":5},"对战循声守卫":{"amt":485.0,"qty":3},"法拉利 SF90 XX Stradale 跑车":{"amt":483.0,"qty":2},"直升机、消防车与潜艇组合套装":{"amt":482.0,"qty":1},"咬人的《妖怪们的妖怪书》":{"amt":479.0,"qty":1},"法拉利 499P 超跑":{"amt":478.0,"qty":2},"玫瑰花束":{"amt":466.0,"qty":1},"定制警车车库":{"amt":449.0,"qty":1},"摇钱树":{"amt":438.0,"qty":2},"披萨外卖工厂":{"amt":436.0,"qty":1},"3合1建筑工程车":{"amt":404.0,"qty":2},"忍者飞龙阿尤战甲":{"amt":394.0,"qty":1},"悟空小侠变身机甲":{"amt":385.0,"qty":2},"骷髅":{"amt":373.0,"qty":1},"数字火车——学习数数":{"amt":363.0,"qty":2},"梦幻仙境游乐园":{"amt":361.0,"qty":1},"下界熔岩湖之战":{"amt":349.0,"qty":4},"史蒂夫针叶林冒险":{"amt":336.0,"qty":4},"兔八哥":{"amt":329.0,"qty":1},"独角兽咖啡馆":{"amt":329.0,"qty":1},"《玩具总动员》":{"amt":319.0,"qty":1},"创意花店":{"amt":279.0,"qty":1},"维尼修斯 – 经典进球瞬间":{"amt":279.0,"qty":1},"黄色挖掘装载车":{"amt":279.0,"qty":1},"Monster Jam™ Grave Digger™ 火冰回力车":{"amt":269.0,"qty":1},"水下探险":{"amt":269.0,"qty":1},"鲜花装饰香水瓶":{"amt":269.0,"qty":1},"招财猫":{"amt":258.0,"qty":1},"寻找美西螈的探险船":{"amt":255.0,"qty":3},"宠物水上乐园":{"amt":253.0,"qty":1},"迈尔斯·莫拉莱斯机甲大战蜘蛛侠 2099":{"amt":252.0,"qty":2},"犰狳矿洞探险":{"amt":251.0,"qty":1},"F1学院赛车":{"amt":249.0,"qty":1},"Ken Block '65 福特野马 Hoonicorn V1":{"amt":249.0,"qty":1},"凯和寇的组合式战车":{"amt":249.0,"qty":1},"复古电话":{"amt":249.0,"qty":1},"消防车":{"amt":249.0,"qty":1},"迈凯伦W1超跑":{"amt":249.0,"qty":1},"旋风车队-警用卡车":{"amt":247.0,"qty":3},"首夜防卫战":{"amt":246.0,"qty":1},"黄金菊":{"amt":246.0,"qty":1},"布加迪 Centodieci 超级跑车":{"amt":239.0,"qty":1},"大黄蜂女孩发光明匙扣":{"amt":238.0,"qty":2},"红龙裝男孩发光钥匙扣":{"amt":238.0,"qty":2},"劳埃德的神龙战斗机甲":{"amt":233.0,"qty":3},"灾厄村民沙漠巡逻队":{"amt":228.0,"qty":2},"保时捷 911 GT3 RS 超级跑车":{"amt":225.0,"qty":1},"小人仔组合（BaM packaging box classic）":{"amt":224.0,"qty":3},"梅赛德斯-AMG F1® W15 赛车":{"amt":219.0,"qty":1},"红牛车队 RB20 F1® 赛车":{"amt":219.0,"qty":1},"心湖城兔子酒店":{"amt":199.0,"qty":1},"神奇独角兽":{"amt":198.84,"qty":2},"消防直升机":{"amt":198.0,"qty":2},"冰雪奇缘创意拼搭":{"amt":189.0,"qty":1},"创意积木盒":{"amt":189.0,"qty":1},"莉萝和史迪奇的海滩之旅":{"amt":189.0,"qty":1},"云梯消防车":{"amt":179.0,"qty":1},"拖拉机与市场":{"amt":179.0,"qty":1},"爱的英文字母":{"amt":179.0,"qty":1},"旋风车队-建筑装载机":{"amt":178.0,"qty":2},"山地探险车":{"amt":174.0,"qty":1},"伊娃与瓦力":{"amt":172.0,"qty":1},"凯的摩托车极速追击":{"amt":169.0,"qty":2},"礼盒庆典":{"amt":169.0,"qty":1},"赞的战斗机甲":{"amt":169.0,"qty":2},"高速列车":{"amt":169.0,"qty":1},"曼达洛围攻战战斗套装":{"amt":159.0,"qty":1},"苍白之园":{"amt":159.0,"qty":1},"薯条餐车":{"amt":159.0,"qty":1},"蜘蛛侠汽车大战毒液化金刚狼":{"amt":159.0,"qty":1},"阿林的幻影旋转术战斗机甲":{"amt":159.0,"qty":1},"森林下午茶":{"amt":151.0,"qty":2},"伦敦明信片":{"amt":149.0,"qty":1},"宾果和布鲁伊的装扮游戏":{"amt":139.0,"qty":1},"波斯菊":{"amt":139.0,"qty":1},"福特安格利亚飞车":{"amt":129.0,"qty":1},"乐高香蕉人发光钥匙扣":{"amt":119.0,"qty":1},"克隆人震击士兵™机甲":{"amt":119.0,"qty":1},"心形饰品":{"amt":119.0,"qty":1},"金色小人仔钥匙扣":{"amt":114.0,"qty":2},"雏菊":{"amt":109.0,"qty":1},"凯的神龙战斗机甲":{"amt":89.0,"qty":1},"黄色摩托车":{"amt":89.0,"qty":1},"警用摩托车大追击":{"amt":82.0,"qty":1},"妮雅对战突变怪兽幻影旋转机":{"amt":81.0,"qty":1},"劳埃德对战土系怪兽幻影旋转机":{"amt":69.0,"qty":1},"电动超跑":{"amt":69.0,"qty":1},"小飞象钥匙链":{"amt":59.0,"qty":1},"蘑菇女孩钥匙扣":{"amt":59.0,"qty":1},"蜘蛛侠钥匙扣":{"amt":59.0,"qty":1},"风暴骑兵钥匙链":{"amt":59.0,"qty":1},"鲨鱼人钥匙扣":{"amt":59.0,"qty":1},"黛丝鸭钥匙链":{"amt":59.0,"qty":1}},"宿迁宝龙":{"FIFA世界杯™奖杯":{"amt":1459.0,"qty":1},"马力欧卡丁车™：马力欧 ＆ 标准型卡丁车":{"amt":1449.0,"qty":1},"忍者双生泰坦机甲":{"amt":1219.0,"qty":1},"安琪":{"amt":1098.0,"qty":2},"三眼仔 披萨星球火箭之旅":{"amt":898.0,"qty":2},"怀尔德菲勒的变形神龙机甲":{"amt":769.0,"qty":1},"机场消防车":{"amt":624.0,"qty":1},"驯龙高手：没牙仔":{"amt":599.0,"qty":1},"C罗 - 经典进球瞬间":{"amt":536.0,"qty":2},"梅西 – 经典进球瞬间":{"amt":536.0,"qty":2},"布加迪Chiron Pur Sport超级跑车":{"amt":529.0,"qty":1},"Ferrari FXX K 赛车":{"amt":499.0,"qty":1},"警用巡逻艇大追击":{"amt":496.0,"qty":2},"凯的火系元素机甲":{"amt":493.0,"qty":2},"自动洗车店":{"amt":469.0,"qty":1},"披萨外卖工厂":{"amt":449.0,"qty":1},"摇钱树":{"amt":438.0,"qty":2},"鲤鱼跃龙门":{"amt":429.0,"qty":1},"定制警车车库":{"amt":419.0,"qty":1},"骷髅":{"amt":369.0,"qty":1},"垃圾回收车":{"amt":349.0,"qty":1},"钢琴与猫":{"amt":349.0,"qty":1},"宠物水上乐园":{"amt":279.0,"qty":1},"黄色挖掘装载车":{"amt":274.0,"qty":1},"傲骨梅":{"amt":269.0,"qty":1},"太空探索望远镜":{"amt":269.0,"qty":1},"鲜花装饰香水瓶":{"amt":269.0,"qty":1},"旋风车队-警用卡车":{"amt":267.0,"qty":3},"消防直升机":{"amt":261.0,"qty":3},"创意花店":{"amt":253.0,"qty":1},"F1学院赛车":{"amt":249.0,"qty":1},"TNT 丛林房屋":{"amt":243.0,"qty":1},"凯和寇的组合式战车":{"amt":243.0,"qty":1},"凯的神龙战斗机甲":{"amt":240.0,"qty":3},"法拉利 499P 超跑":{"amt":236.0,"qty":1},"丰田 Supra MK4《速度与激情》同款":{"amt":229.0,"qty":1},"法拉利 SF90 XX Stradale 跑车":{"amt":227.0,"qty":1},"梅赛德斯-AMG F1® W15 赛车":{"amt":219.0,"qty":1},"丛林飞机":{"amt":214.0,"qty":1},"系列 29":{"amt":211.0,"qty":6},"3合1建筑工程车":{"amt":199.0,"qty":1},"摇滚盆栽":{"amt":189.0,"qty":1},"法拉利 SF-24 F1® 赛车":{"amt":183.0,"qty":1},"伦敦巴士":{"amt":179.0,"qty":1},"对战循声守卫":{"amt":179.0,"qty":1},"快乐盆栽":{"amt":179.0,"qty":1},"蜘蛛侠汽车大战毒液化金刚狼":{"amt":179.0,"qty":1},"高速列车":{"amt":169.0,"qty":1},"劳埃德对战土系怪兽幻影旋转机":{"amt":168.0,"qty":2},"劳埃德的神龙战斗机甲":{"amt":168.0,"qty":2},"鲨鱼人钥匙扣":{"amt":165.0,"qty":3},"苍白之园":{"amt":159.0,"qty":1},"生日派对蛋糕":{"amt":129.0,"qty":1},"钢铁侠机甲大战奥创":{"amt":129.0,"qty":1},"黄色出租车":{"amt":129.0,"qty":1},"下界熔岩湖之战":{"amt":89.0,"qty":1},"旋风车队-建筑装载机":{"amt":89.0,"qty":1},"旋风车队-霹雳游侠":{"amt":89.0,"qty":1},"电动超跑":{"amt":89.0,"qty":1},"赞的战斗机甲":{"amt":89.0,"qty":1},"乐高城市警车":{"amt":85.0,"qty":1},"独角兽蛋糕送货车":{"amt":84.0,"qty":1},"C-3PO 钥匙扣":{"amt":59.0,"qty":1},"夏特钥匙扣":{"amt":59.0,"qty":1},"刺猬索尼克钥匙链":{"amt":54.0,"qty":1},"幽灵蜘蛛钥匙扣":{"amt":54.0,"qty":1},"达斯·维德钥匙链":{"amt":49.0,"qty":1},"风暴骑兵钥匙链":{"amt":49.0,"qty":1}},"淮安新亚":{"前进梅利号海贼船":{"amt":3282.0,"qty":3},"街机弹珠机":{"amt":3098.0,"qty":2},"三眼仔 披萨星球火箭之旅":{"amt":1427.0,"qty":3},"小熊维尼":{"amt":1099.0,"qty":1},"Ferrari FXX K 赛车":{"amt":998.0,"qty":2},"恶魂站":{"amt":858.0,"qty":1},"法拉利车队HP夏尔·勒克莱尔头盔":{"amt":799.0,"qty":1},"法拉利 F2004 与迈克尔·舒马赫":{"amt":769.0,"qty":1},"警用巡逻艇大追击":{"amt":768.0,"qty":3},"法拉利 SF90 XX Stradale 跑车":{"amt":718.9,"qty":3},"梅西 – 足球传奇":{"amt":687.0,"qty":1},"忍者战车树屋对决":{"amt":669.0,"qty":1},"二郎天神机甲":{"amt":649.0,"qty":1},"1966 福特 GT40 MKII 赛车":{"amt":599.0,"qty":1},"丽安的温馨小屋":{"amt":579.0,"qty":1},"欢聚友谊树屋":{"amt":579.0,"qty":1},"现代化警察局":{"amt":571.0,"qty":1},"C罗 - 经典进球瞬间":{"amt":534.0,"qty":2},"山地探险车":{"amt":533.0,"qty":3},"绿色布加迪Chiron Pur Sport超级跑车":{"amt":530.0,"qty":1},"宝马 M4 GT3 EVO 赛车":{"amt":529.0,"qty":1},"创意花店":{"amt":523.0,"qty":2},"梅西 – 经典进球瞬间":{"amt":513.0,"qty":2},"迷你生物群系":{"amt":503.0,"qty":1},"消防车":{"amt":500.0,"qty":2},"凯的火系元素机甲":{"amt":498.0,"qty":2},"水下探险":{"amt":498.0,"qty":2},"郁金香花束":{"amt":479.0,"qty":1},"乐高®得宝®豪华缤纷桶":{"amt":467.0,"qty":1},"迈凯伦W1超跑":{"amt":458.0,"qty":2},"奥迪F1® 车队 R26 赛车":{"amt":454.0,"qty":2},"雪宝和布鲁尼的野餐":{"amt":428.0,"qty":1},"马力欧卡丁车™ - 乐高®马力欧和标准型卡丁车":{"amt":419.0,"qty":1},"复古相机":{"amt":378.0,"qty":2},"法拉利 SF-24 F1® 赛车":{"amt":371.0,"qty":2},"梦幻仙境游乐园":{"amt":349.0,"qty":1},"对战循声守卫":{"amt":338.0,"qty":2},"警察大追捕运囚车":{"amt":338.0,"qty":2},"高速列车":{"amt":338.0,"qty":2},"齐尔瓦的猿龙猛兽":{"amt":328.0,"qty":2},"喷气式客运飞机":{"amt":279.0,"qty":1},"战机跑车速度对决":{"amt":265.0,"qty":1},"鲜花装饰香水瓶":{"amt":265.0,"qty":1},"TNT 丛林房屋":{"amt":256.0,"qty":1},"凯和寇的组合式战车":{"amt":254.0,"qty":1},"维尼修斯 – 经典进球瞬间":{"amt":254.0,"qty":1},"姆巴佩 – 经典进球瞬间":{"amt":252.0,"qty":1},"寇的作战机甲与神龙赞":{"amt":249.0,"qty":1},"法拉利 499P 超跑":{"amt":249.0,"qty":1},"熊猫保护区":{"amt":249.0,"qty":1},"凯的神龙战斗机甲":{"amt":245.0,"qty":3},"阳光缤纷花束":{"amt":244.0,"qty":1},"猫咪生日派对与树屋":{"amt":238.0,"qty":1},"小人仔组合（BaM packaging box classic）":{"amt":213.0,"qty":3},"FIFA世界杯2026™ 官方徽章":{"amt":206.0,"qty":1},"3合1建筑工程车":{"amt":199.0,"qty":1},"布加迪 Centodieci 超级跑车":{"amt":185.0,"qty":1},"数字火车——学习数数":{"amt":182.0,"qty":1},"心湖城便利店":{"amt":179.0,"qty":1},"4x4 山地越野车":{"amt":173.0,"qty":1},"乐高城市警车":{"amt":173.0,"qty":2},"冰雪奇缘创意拼搭":{"amt":169.0,"qty":1},"曼达洛围攻战战斗套装":{"amt":169.0,"qty":1},"史蒂夫针叶林冒险":{"amt":144.0,"qty":2},"系列 29":{"amt":142.0,"qty":4},"下界与末地传送门之旅":{"amt":109.0,"qty":1},"克隆人震击士兵™机甲":{"amt":109.0,"qty":1},"酷帅蝙蝠侠钥匙链":{"amt":100.0,"qty":2},"劳埃德对战土系怪兽幻影旋转机":{"amt":89.0,"qty":1},"John Deere 1470H 轮式森林收割机":{"amt":86.1,"qty":1},"劳埃德的神龙战斗机甲":{"amt":86.0,"qty":1},"下界熔岩湖之战":{"amt":85.0,"qty":1},"赞的战斗机甲":{"amt":78.0,"qty":1}},"淮安万象城":{"FIFA世界杯™奖杯":{"amt":7575.0,"qty":5},"15周年纪念款 X-1 忍者战车":{"amt":2077.0,"qty":3},"安琪":{"amt":1714.0,"qty":3},"街机弹珠机":{"amt":1709.0,"qty":1},"怀尔德菲勒的变形神龙机甲":{"amt":1538.0,"qty":2},"Ferrari FXX K 赛车":{"amt":1527.0,"qty":3},"C罗 - 经典进球瞬间":{"amt":1360.0,"qty":5},"15周年纪念款 忍者道场展示台":{"amt":1346.0,"qty":4},"驯龙高手：没牙仔":{"amt":1258.0,"qty":2},"忍者双生泰坦机甲":{"amt":1249.0,"qty":1},"法拉利 SF90 XX Stradale 跑车":{"amt":1221.0,"qty":5},"封赏之地战车":{"amt":1149.0,"qty":1},"末影龙":{"amt":1058.0,"qty":2},"Ford Bronco® 福特烈马 SUV":{"amt":978.0,"qty":2},"苦力怕":{"amt":975.0,"qty":3},"自动洗车店":{"amt":968.0,"qty":2},"生命源龙":{"amt":873.0,"qty":1},"15周年纪念款 四武器铁匠铺":{"amt":849.0,"qty":1},"骷髅":{"amt":798.0,"qty":2},"法拉利 F2004 与迈克尔·舒马赫":{"amt":782.0,"qty":1},"唤魔者村庄袭击":{"amt":779.0,"qty":1},"3合1忙碌的建筑工地":{"amt":777.0,"qty":1},"凯和寇的组合式战车":{"amt":747.0,"qty":3},"丛林飞机":{"amt":686.0,"qty":3},"梅西 – 足球传奇":{"amt":669.0,"qty":1},"巴黎 - 爱之城":{"amt":649.0,"qty":1},"机场消防车":{"amt":616.0,"qty":1},"爱丽儿的皇家婚礼船":{"amt":614.0,"qty":1},"飞机，工程车和悬浮船组合套装":{"amt":614.0,"qty":1},"可爱考拉之家":{"amt":599.0,"qty":1},"智能探险火车":{"amt":599.0,"qty":1},"凋灵之战":{"amt":579.0,"qty":1},"绿色布加迪Chiron Pur Sport超级跑车":{"amt":579.0,"qty":1},"史迪奇和小金":{"amt":569.0,"qty":1},"创意花店":{"amt":543.0,"qty":2},"梅西 – 经典进球瞬间":{"amt":540.0,"qty":2},"姆巴佩 – 经典进球瞬间":{"amt":538.0,"qty":2},"宠物水上乐园":{"amt":532.0,"qty":2},"宝马 M4 GT3 EVO 赛车":{"amt":529.0,"qty":1},"凯的火系元素机甲":{"amt":523.0,"qty":2},"郁金香花束":{"amt":499.0,"qty":1},"阿斯顿·马丁 Valkyrie":{"amt":499.0,"qty":1},"奥迪F1® 车队 R26 赛车":{"amt":498.0,"qty":2},"布加迪 Vision GT 超级跑车":{"amt":498.0,"qty":2},"直升机、消防车与潜艇组合套装":{"amt":479.0,"qty":1},"玫瑰花束":{"amt":469.0,"qty":1},"海岸度假小屋":{"amt":426.0,"qty":1},"定制警车车库":{"amt":419.0,"qty":1},"F1® 运输卡车与奥迪F1® 赛车":{"amt":379.0,"qty":1},"与猪爷爷一起乘坐火车":{"amt":379.0,"qty":1},"布雷兹的马场":{"amt":379.0,"qty":1},"梦幻仙境游乐园":{"amt":359.0,"qty":1},"齐尔瓦的猿龙猛兽":{"amt":358.0,"qty":2},"警察大追捕运囚车":{"amt":351.0,"qty":2},"曼达洛围攻战战斗套装":{"amt":345.0,"qty":2},"对战循声守卫":{"amt":338.0,"qty":2},"赞的寒冰神龙之战":{"amt":319.0,"qty":1},"高速列车":{"amt":318.0,"qty":2},"水泥搅拌车":{"amt":317.0,"qty":1},"披萨小车":{"amt":271.0,"qty":2},"系列 29":{"amt":271.0,"qty":7},"Monster Jam™ Grave Digger™ 火冰回力车":{"amt":269.0,"qty":1},"乐高®运输面包车":{"amt":269.0,"qty":1},"僵尸地牢":{"amt":269.0,"qty":1},"开花的仙人掌":{"amt":269.0,"qty":1},"招财猫":{"amt":269.0,"qty":1},"赞的战斗机甲":{"amt":267.0,"qty":3},"维尼修斯 – 经典进球瞬间":{"amt":264.0,"qty":1},"黄色旅行箱":{"amt":258.0,"qty":2},"钢铁侠机甲大战奥创":{"amt":250.0,"qty":2},"水下探险":{"amt":249.0,"qty":1},"警用巡逻艇大追击":{"amt":249.0,"qty":1},"法拉利 SF-24 F1® 赛车":{"amt":239.0,"qty":1},"红龙裝男孩发光钥匙扣":{"amt":238.0,"qty":2},"FIFA世界杯2026™ 官方徽章":{"amt":229.0,"qty":1},"摇钱树":{"amt":229.0,"qty":1},"闪电麦坤":{"amt":227.0,"qty":1},"3合1建筑工程车":{"amt":219.0,"qty":1},"劳埃德的威猛回力赛车":{"amt":219.0,"qty":1},"多功能除雪车":{"amt":219.0,"qty":1},"山地探险车":{"amt":189.0,"qty":1},"摇滚盆栽":{"amt":189.0,"qty":1},"4x4 山地越野车":{"amt":179.0,"qty":1},"云梯消防车":{"amt":179.0,"qty":1},"复古相机":{"amt":179.0,"qty":1},"小鸡农场":{"amt":179.0,"qty":1},"心湖城冰淇淋车":{"amt":179.0,"qty":1},"摩托车运输车":{"amt":179.0,"qty":1},"蜘蛛侠汽车大战毒液化金刚狼":{"amt":179.0,"qty":1},"John Deere 1470H 轮式森林收割机":{"amt":178.0,"qty":2},"凯的摩托车极速追击":{"amt":178.0,"qty":2},"警用摩托车":{"amt":178.0,"qty":2},"警用摩托车大追击":{"amt":178.0,"qty":2},"曼达洛人与古古的飞行摩托™":{"amt":176.0,"qty":2},"礼盒庆典":{"amt":171.0,"qty":1},"电动超跑":{"amt":170.0,"qty":2},"波斯菊":{"amt":139.0,"qty":1},"下界与末地传送门之旅":{"amt":129.0,"qty":1},"德国明信片":{"amt":129.0,"qty":1},"樱花":{"amt":129.0,"qty":1},"雏菊":{"amt":129.0,"qty":1},"玫瑰":{"amt":124.0,"qty":1},"乐高香蕉人发光钥匙扣":{"amt":119.0,"qty":1},"米妮钥匙链":{"amt":118.0,"qty":2},"蘑菇女孩钥匙扣":{"amt":118.0,"qty":2},"金色小人仔钥匙扣":{"amt":112.0,"qty":2},"冰激凌和气球摊":{"amt":89.0,"qty":1},"劳埃德对战土系怪兽幻影旋转机":{"amt":89.0,"qty":1},"劳埃德的神龙战斗机甲":{"amt":89.0,"qty":1},"可爱的仓鼠":{"amt":89.0,"qty":1},"妮雅对战突变怪兽幻影旋转机":{"amt":89.0,"qty":1},"寻找美西螈的探险船":{"amt":89.0,"qty":1},"旋风车队-警用卡车":{"amt":89.0,"qty":1},"独角兽蛋糕送货车":{"amt":89.0,"qty":1},"森林下午茶":{"amt":84.0,"qty":1},"史蒂夫针叶林冒险":{"amt":69.0,"qty":1},"幽灵蜘蛛钥匙扣":{"amt":59.0,"qty":1},"达斯·维德钥匙链":{"amt":59.0,"qty":1},"银色小人仔钥匙扣":{"amt":59.0,"qty":1},"鲨鱼人钥匙扣":{"amt":59.0,"qty":1},"迈尔斯·莫拉莱斯钥匙链":{"amt":54.0,"qty":1}},"_region":{"Ferrari FXX K 赛车":{"amt":17781.0,"qty":36},"FIFA世界杯™奖杯":{"amt":16589.0,"qty":11},"兰博基尼 Revuelto 超级跑车":{"amt":10613.0,"qty":7},"怀尔德菲勒的变形神龙机甲":{"amt":10057.0,"qty":13},"忍者双生泰坦机甲":{"amt":9617.0,"qty":8},"街机弹珠机":{"amt":8337.0,"qty":5},"宝马 M4 GT3 EVO 赛车":{"amt":7652.0,"qty":14},"法拉利 Daytona SP3":{"amt":7348.0,"qty":2},"三眼仔 披萨星球火箭之旅":{"amt":6815.0,"qty":15},"前进梅利号海贼船":{"amt":6622.0,"qty":6},"安琪":{"amt":6618.0,"qty":12},"足球":{"amt":6254.0,"qty":6},"法拉利 F2004 与迈克尔·舒马赫":{"amt":6205.0,"qty":8},"15周年纪念款 X-1 忍者战车":{"amt":6089.0,"qty":9},"海岸警卫队救援船和直升机":{"amt":5802.0,"qty":6},"泰坦尼克号":{"amt":5399.0,"qty":1},"警用巡逻艇大追击":{"amt":5391.0,"qty":21},"C罗 - 经典进球瞬间":{"amt":5139.0,"qty":19},"末影龙":{"amt":5068.0,"qty":10},"苦力怕":{"amt":4624.0,"qty":14},"绿色布加迪Chiron Pur Sport超级跑车":{"amt":4396.0,"qty":8},"恶魂站":{"amt":4376.0,"qty":5},"驯龙高手：没牙仔":{"amt":4281.0,"qty":7},"凯的火系元素机甲":{"amt":4104.0,"qty":16},"法拉利 SF90 XX Stradale 跑车":{"amt":4078.9,"qty":17},"梅西 – 足球传奇":{"amt":4062.0,"qty":6},"巴黎 - 爱之城":{"amt":4034.0,"qty":6},"Ford Bronco® 福特烈马 SUV":{"amt":3954.0,"qty":8},"科尼赛克 Sadair Spear 超跑":{"amt":3899.0,"qty":1},"霍格沃茨城堡：东翼":{"amt":3828.0,"qty":2},"东坡望月楼":{"amt":3686.0,"qty":4},"梅西 – 经典进球瞬间":{"amt":3522.0,"qty":13},"15周年纪念款 四武器铁匠铺":{"amt":3466.0,"qty":4},"C罗 -足球传奇":{"amt":3426.94,"qty":5},"鲤鱼跃龙门":{"amt":3416.0,"qty":8},"克劳德·莫奈 — 睡莲池上的桥":{"amt":3358.0,"qty":2},"15周年纪念款 忍者道场展示台":{"amt":3347.0,"qty":10},"法拉利车队HP夏尔·勒克莱尔头盔":{"amt":3307.0,"qty":4},"玩具总动员弹簧狗的书挡":{"amt":3297.0,"qty":3},"Mercedes-AMG G 63 与 Mercedes-AMG SL 63":{"amt":3260.0,"qty":8},"迷你迪士尼城堡":{"amt":3022.0,"qty":8},"郁金香花束":{"amt":3014.0,"qty":6},"奥迪F1® 车队 R26 赛车":{"amt":2901.0,"qty":12},"马力欧卡丁车™：马力欧 ＆ 标准型卡丁车":{"amt":2868.0,"qty":2},"法拉利 SF-24 F1® 赛车":{"amt":2826.0,"qty":13},"布加迪Chiron Pur Sport超级跑车":{"amt":2785.0,"qty":5},"乐高® ǀ迪士尼乐园大街":{"amt":2699.0,"qty":1},"摇钱树":{"amt":2640.0,"qty":12},"NASA Artemis 太空发射系统":{"amt":2550.0,"qty":5},"系列 29":{"amt":2540.0,"qty":68},"齐天大圣终极变形机甲":{"amt":2538.0,"qty":2},"帝国“兰姆达级”穿梭机":{"amt":2481.0,"qty":2},"3合1建筑工程车":{"amt":2476.0,"qty":12},"机场消防车":{"amt":2443.0,"qty":4},"法拉利 499P 超跑":{"amt":2415.0,"qty":10},"自动洗车店":{"amt":2405.0,"qty":5},"姆巴佩 – 经典进球瞬间":{"amt":2370.0,"qty":9},"唤魔者村庄袭击":{"amt":2362.0,"qty":3},"山地探险车":{"amt":2336.0,"qty":13},"封赏之地战车":{"amt":2278.0,"qty":2},"齐尔瓦的猿龙猛兽":{"amt":2274.0,"qty":13},"凯和寇的组合式战车":{"amt":2269.0,"qty":9},"FIFA世界杯2026™ 官方徽章":{"amt":2237.0,"qty":10},"小熊维尼":{"amt":2198.0,"qty":2},"梅赛德斯-奔驰乌尼莫克U 5023":{"amt":2146.0,"qty":2},"创意花店":{"amt":2128.0,"qty":8},"杰的忍者变形战车":{"amt":2118.0,"qty":5},"乐高®运输面包车":{"amt":2100.0,"qty":8},"向日葵花束":{"amt":2056.0,"qty":4},"水下探险":{"amt":2053.0,"qty":8},"迈凯伦 MCL39 F1® 赛车":{"amt":1983.0,"qty":1},"太空探索望远镜":{"amt":1973.0,"qty":7},"阿斯顿·马丁沙特阿美车队 F1® AMR25赛车":{"amt":1972.0,"qty":1},"骷髅":{"amt":1939.0,"qty":5},"黄色挖掘装载车":{"amt":1917.0,"qty":7},"草莓熊":{"amt":1916.0,"qty":6},"法拉利 SF-24 F1 赛车":{"amt":1909.0,"qty":1},"宠物水上乐园":{"amt":1872.0,"qty":7},"美人鱼过山车":{"amt":1868.0,"qty":2},"3 合 1 车道竞速":{"amt":1867.0,"qty":3},"对战循声守卫":{"amt":1866.0,"qty":11},"乐高®得宝®豪华缤纷桶":{"amt":1854.0,"qty":4},"摇滚盆栽":{"amt":1844.0,"qty":10},"可爱考拉之家":{"amt":1837.0,"qty":3},"瓦力与伊娃":{"amt":1813.0,"qty":3},"高速列车":{"amt":1808.0,"qty":11},"欢聚友谊树屋":{"amt":1807.0,"qty":3},"丽安的温馨小屋":{"amt":1787.0,"qty":3},"熔岩过山车主题乐园":{"amt":1778.0,"qty":2},"梦幻仙境游乐园":{"amt":1773.0,"qty":5},"生命源龙":{"amt":1742.0,"qty":2},"橙色的猫":{"amt":1728.0,"qty":2},"定制警车车库":{"amt":1706.0,"qty":4},"猫儿历险记萌萌玛丽猫":{"amt":1702.0,"qty":5},"迷你盆栽":{"amt":1699.0,"qty":4},"艾莎的冰雪城堡和雪上冒险":{"amt":1687.0,"qty":4},"钢琴与猫":{"amt":1679.0,"qty":5},"三菱日蚀赛车（速度与激情同款）":{"amt":1677.0,"qty":3},"喷气式客运飞机":{"amt":1641.0,"qty":6},"终极战斗神龙":{"amt":1609.0,"qty":1},"梅西的庆祝时刻":{"amt":1599.0,"qty":1},"钢铁侠机甲大战奥创":{"amt":1596.46,"qty":13},"Monster Jam™ Grave Digger™ 火冰回力车":{"amt":1576.0,"qty":6},"乐高城市警车":{"amt":1567.0,"qty":17},"侏罗纪公园 Jeep® Wrangler 吉普":{"amt":1563.0,"qty":1},"3合1忙碌的建筑工地":{"amt":1546.0,"qty":2},"海岸警卫队直升机":{"amt":1537.0,"qty":3},"马力欧卡丁车™：路易吉 ＆ G力量":{"amt":1499.0,"qty":1},"TNT 丛林房屋":{"amt":1493.0,"qty":6},"直升机、消防车与潜艇组合套装":{"amt":1460.0,"qty":3},"玫瑰花束":{"amt":1434.0,"qty":3},"道奇 Charger R/T（速度与激情同款）赛车":{"amt":1399.0,"qty":1},"霍格沃茨™城堡和庭院":{"amt":1399.0,"qty":1},"Nike Air Max 95 x 乐高®套装":{"amt":1398.0,"qty":2},"粉玫瑰花束":{"amt":1391.06,"qty":3},"心湖城度假大酒店":{"amt":1379.0,"qty":1},"下界与末地传送门之旅":{"amt":1375.0,"qty":11},"警察大追捕运囚车":{"amt":1365.0,"qty":8},"丛林飞机":{"amt":1352.0,"qty":6},"披萨外卖工厂":{"amt":1346.0,"qty":3},"开花的仙人掌":{"amt":1323.0,"qty":5},"兰博基尼 Revuelto 与 Huracán STO":{"amt":1322.0,"qty":3},"海岸度假小屋":{"amt":1309.0,"qty":3},"创意积木盒":{"amt":1303.0,"qty":7},"智能探险火车":{"amt":1298.0,"qty":2},"航空医疗救援飞机":{"amt":1287.0,"qty":3},"马力欧卡丁车™ - 乐高®马力欧和标准型卡丁车":{"amt":1287.0,"qty":3},"小猪的生日派对":{"amt":1286.0,"qty":4},"史蒂夫针叶林冒险":{"amt":1241.0,"qty":15},"家庭住宅":{"amt":1238.0,"qty":2},"布加迪 Vision GT 超级跑车":{"amt":1227.0,"qty":5},"快乐盆栽":{"amt":1222.0,"qty":7},"飞机，工程车和悬浮船组合套装":{"amt":1218.0,"qty":2},"金毛幼犬":{"amt":1199.0,"qty":1},"1966 福特 GT40 MKII 赛车":{"amt":1198.0,"qty":2},"爱丽儿的皇家婚礼船":{"amt":1193.0,"qty":2},"忍者飞龙阿尤战甲":{"amt":1152.0,"qty":3},"豪华智能探险火车":{"amt":1149.0,"qty":1},"史迪奇":{"amt":1145.0,"qty":2},"现代化警察局":{"amt":1140.0,"qty":2},"凋灵之战":{"amt":1108.0,"qty":2},"雪宝和布鲁尼的野餐":{"amt":1106.0,"qty":3},"吉普牧马人 Rubicon SUV":{"amt":1082.0,"qty":2},"书架装饰：邓布利多办公室":{"amt":1079.0,"qty":1},"礼盒庆典":{"amt":1076.0,"qty":6},"维尼修斯 – 经典进球瞬间":{"amt":1076.0,"qty":4},"鲜花装饰香水瓶":{"amt":1072.0,"qty":4},"招财猫":{"amt":1065.0,"qty":4},"寇的作战机甲与神龙赞":{"amt":1048.0,"qty":4},"布加迪 Centodieci 超级跑车":{"amt":1047.0,"qty":5},"法拉利 F1® 赛车维修站":{"amt":1036.0,"qty":4},"Game Boy™积木游戏机":{"amt":1015.0,"qty":2},"阿斯顿·马丁 Valkyrie":{"amt":1010.0,"qty":2},"熊猫保护区":{"amt":1002.0,"qty":4},"指环王：索伦的头盔":{"amt":978.0,"qty":2},"兔八哥":{"amt":977.0,"qty":3},"黄色装载车与自卸卡车":{"amt":974.0,"qty":1},"F1学院赛车":{"amt":972.0,"qty":4},"秋日枫林小屋":{"amt":949.0,"qty":1},"霍格沃茨草药课植物":{"amt":949.0,"qty":1},"迈凯伦W1超跑":{"amt":946.0,"qty":4},"数字火车——学习数数":{"amt":943.0,"qty":5},"复古相机":{"amt":927.7,"qty":5},"蜘蛛侠英雄人偶":{"amt":899.0,"qty":1},"客运飞机":{"amt":879.0,"qty":1},"拖拉机与市场":{"amt":875.0,"qty":5},"梅赛德斯-AMG F1® W15 赛车":{"amt":871.0,"qty":4},"恐龙化石：三角龙":{"amt":869.0,"qty":1},"赞的高科技组合式机甲":{"amt":869.0,"qty":1},"长发公主的城堡":{"amt":869.0,"qty":1},"灾厄村民沙漠巡逻队":{"amt":862.0,"qty":7},"旋风车队-警用卡车":{"amt":850.0,"qty":10},"薯条餐车":{"amt":845.0,"qty":5},"米奇的妙妙屋与米奇和布鲁托":{"amt":824.0,"qty":2},"迈凯伦万事达卡 F1® 车队兰多·诺里斯头盔":{"amt":822.0,"qty":1},"法拉利车队HP刘易斯·汉密尔顿头盔":{"amt":819.0,"qty":1},"凯的神龙战斗机甲":{"amt":810.0,"qty":10},"心湖城好朋友俱乐部":{"amt":799.0,"qty":1},"典雅兰":{"amt":787.0,"qty":3},"僵尸地牢":{"amt":782.0,"qty":3},"F1® 运输卡车与奥迪F1® 赛车":{"amt":778.0,"qty":2},"凯文和逗逗":{"amt":778.0,"qty":2},"旋风车队-建筑装载机":{"amt":771.0,"qty":9},"决战龙之刃":{"amt":769.0,"qty":1},"狐狸":{"amt":768.0,"qty":2},"消防车":{"amt":749.0,"qty":3},"小人仔组合（BaM packaging box classic）":{"amt":748.0,"qty":10},"悟空小侠迷你机甲":{"amt":748.0,"qty":2},"劳埃德的神龙战斗机甲":{"amt":745.0,"qty":9},"冰雪奇缘创意拼搭":{"amt":736.0,"qty":4},"摩天轮":{"amt":735.0,"qty":1},"睡莲":{"amt":714.0,"qty":2},"创意车辆集合":{"amt":704.0,"qty":4},"蜘蛛侠汽车大战毒液化金刚狼":{"amt":696.0,"qty":4},"云梯消防车":{"amt":685.0,"qty":4},"4x4 山地越野车":{"amt":677.0,"qty":4},"劳埃德对战土系怪兽幻影旋转机":{"amt":676.0,"qty":8},"曼达洛围攻战战斗套装":{"amt":673.0,"qty":4},"独角兽咖啡馆":{"amt":670.0,"qty":2},"忍者战车树屋对决":{"amt":669.0,"qty":1},"垃圾回收车":{"amt":668.0,"qty":2},"二郎天神机甲":{"amt":649.0,"qty":1},"消防直升机":{"amt":631.0,"qty":7},"积木拼搭的布鲁伊一家":{"amt":629.0,"qty":1},"海滩观光火车":{"amt":614.0,"qty":1},"下界熔岩湖之战":{"amt":612.0,"qty":7},"赞的战斗机甲":{"amt":603.0,"qty":7},"凯的摩托车极速追击":{"amt":602.0,"qty":7},"迪士尼皮克斯小台灯":{"amt":600.0,"qty":1},"史迪奇和小金":{"amt":569.0,"qty":1},"森林下午茶":{"amt":552.0,"qty":7},"自由的小精灵多比":{"amt":550.0,"qty":2},"梦幻糖果乐园":{"amt":549.0,"qty":1},"傲骨梅":{"amt":538.0,"qty":2},"波斯菊":{"amt":530.0,"qty":4},"披萨小车":{"amt":529.0,"qty":4},"神奇独角兽":{"amt":525.84,"qty":5},"拖拉机":{"amt":525.0,"qty":3},"黄色旅行箱":{"amt":516.0,"qty":4},"战机跑车速度对决":{"amt":514.0,"qty":2},"阳光缤纷花束":{"amt":513.0,"qty":2},"生日派对蛋糕":{"amt":512.0,"qty":4},"大型挖掘装载车":{"amt":510.0,"qty":6},"放大版蓝色宇航员小人仔":{"amt":509.0,"qty":1},"猫咪生日派对与树屋":{"amt":507.0,"qty":2},"劳埃德的绿色森林飞龙":{"amt":504.0,"qty":3},"迷你生物群系":{"amt":503.0,"qty":1},"Ken Block '65 福特野马 Hoonicorn V1":{"amt":498.0,"qty":2},"阿林的幻影旋转术战斗机甲":{"amt":492.0,"qty":3},"兰花":{"amt":487.0,"qty":1},"动物创意拼搭":{"amt":479.0,"qty":1},"咬人的《妖怪们的妖怪书》":{"amt":479.0,"qty":1},"苍白之园":{"amt":477.0,"qty":3},"红龙裝男孩发光钥匙扣":{"amt":476.0,"qty":4},"丰田 Supra MK4《速度与激情》同款":{"amt":458.0,"qty":2},"迈尔斯·莫拉莱斯钥匙链":{"amt":456.0,"qty":8},"经典矿镐":{"amt":449.0,"qty":1},"霍格沃茨学院徽章":{"amt":449.0,"qty":1},"红牛车队 RB20 F1® 赛车":{"amt":438.0,"qty":2},"警用摩托车大追击":{"amt":438.0,"qty":5},"2026年美国足球国家队球衣":{"amt":435.0,"qty":2},"冰激凌和气球摊":{"amt":432.0,"qty":5},"独角兽蛋糕送货车":{"amt":432.0,"qty":5},"寻找美西螈的探险船":{"amt":429.0,"qty":5},"黄色摩托车":{"amt":429.0,"qty":5},"多功能除雪车":{"amt":421.0,"qty":2},"心湖城兔子酒店":{"amt":418.0,"qty":2},"幽灵蜘蛛钥匙扣":{"amt":397.0,"qty":7},"悟空小侠变身机甲":{"amt":385.0,"qty":2},"与猪爷爷一起乘坐火车":{"amt":379.0,"qty":1},"布雷兹的马场":{"amt":379.0,"qty":1},"雏菊":{"amt":367.0,"qty":3},"伦敦巴士":{"amt":358.0,"qty":2},"小鸡农场":{"amt":358.0,"qty":2},"摩托车运输车":{"amt":358.0,"qty":2},"克隆人震击士兵™机甲":{"amt":357.0,"qty":3},"爱丽儿的奇幻迷你迷你宫殿":{"amt":353.0,"qty":2},"心湖城便利店":{"amt":347.0,"qty":2},"电动超跑":{"amt":328.0,"qty":4},"猪宝宝房屋":{"amt":322.0,"qty":2},"《玩具总动员》":{"amt":319.0,"qty":1},"赞的寒冰神龙之战":{"amt":319.0,"qty":1},"水泥搅拌车":{"amt":317.0,"qty":1},"凶猛的鲨鱼":{"amt":299.0,"qty":1},"伦敦明信片":{"amt":298.0,"qty":2},"鲨鱼人钥匙扣":{"amt":283.0,"qty":5},"金色小人仔钥匙扣":{"amt":279.0,"qty":5},"假日探险野营车":{"amt":269.0,"qty":1},"可爱狗狗零食店":{"amt":269.0,"qty":1},"警用摩托车":{"amt":267.0,"qty":3},"John Deere 1470H 轮式森林收割机":{"amt":264.1,"qty":3},"玫瑰":{"amt":253.0,"qty":2},"迈尔斯·莫拉莱斯机甲大战蜘蛛侠 2099":{"amt":252.0,"qty":2},"犰狳矿洞探险":{"amt":251.0,"qty":1},"《回到未来》时光机":{"amt":249.0,"qty":1},"复古电话":{"amt":249.0,"qty":1},"财神爷":{"amt":249.0,"qty":1},"旋风车队-霹雳游侠":{"amt":247.0,"qty":3},"首夜防卫战":{"amt":246.0,"qty":1},"黄金菊":{"amt":246.0,"qty":1},"迈凯伦 F1® 车队 MCL38 赛车":{"amt":239.0,"qty":1},"乐高香蕉人发光钥匙扣":{"amt":238.0,"qty":2},"大黄蜂女孩发光明匙扣":{"amt":238.0,"qty":2},"小飞象钥匙链":{"amt":234.0,"qty":4},"F1®大电影同款APXGP赛车":{"amt":229.0,"qty":1},"布鲁伊的日常生活":{"amt":229.0,"qty":1},"闪电麦坤":{"amt":227.0,"qty":1},"保时捷 911 GT3 RS 超级跑车":{"amt":225.0,"qty":1},"劳埃德的威猛回力赛车":{"amt":219.0,"qty":1},"酷帅蝙蝠侠钥匙链":{"amt":218.0,"qty":4},"莉萝和史迪奇的海滩之旅":{"amt":189.0,"qty":1},"心湖城冰淇淋车":{"amt":179.0,"qty":1},"爱的英文字母":{"amt":179.0,"qty":1},"旋风车队-鸣笛消防车":{"amt":178.0,"qty":2},"高速改装赛车":{"amt":178.0,"qty":2},"蘑菇女孩钥匙扣":{"amt":177.0,"qty":3},"曼达洛人与古古的飞行摩托™":{"amt":176.0,"qty":2},"米奇钥匙链":{"amt":174.0,"qty":3},"米妮钥匙链":{"amt":174.0,"qty":3},"蜘蛛侠钥匙扣":{"amt":174.0,"qty":3},"可爱的仓鼠":{"amt":173.0,"qty":2},"伊娃与瓦力":{"amt":172.0,"qty":1},"夏特钥匙扣":{"amt":172.0,"qty":3},"妮雅对战突变怪兽幻影旋转机":{"amt":170.0,"qty":2},"F1® 威廉姆斯车队与哈斯车队赛车":{"amt":166.0,"qty":1},"警车大追击":{"amt":164.0,"qty":1},"死亡士兵与暗夜士兵战斗包":{"amt":162.0,"qty":1},"宾果和布鲁伊的装扮游戏":{"amt":139.0,"qty":1},"德国明信片":{"amt":129.0,"qty":1},"樱花":{"amt":129.0,"qty":1},"福特安格利亚飞车":{"amt":129.0,"qty":1},"霍格沃茨城堡：分院仪式":{"amt":129.0,"qty":1},"黄色出租车":{"amt":129.0,"qty":1},"F1® 赛车手与迈凯伦赛车":{"amt":119.0,"qty":1},"仙人掌发光钥匙扣":{"amt":119.0,"qty":1},"心形饰品":{"amt":119.0,"qty":1},"胡萝卜吉祥物发光钥匙扣":{"amt":119.0,"qty":1},"霸王龙装备迷发光钥匙扣":{"amt":119.0,"qty":1},"鲨鱼发光钥匙扣":{"amt":119.0,"qty":1},"黛丝鸭钥匙链":{"amt":118.0,"qty":2},"莉萝和史迪奇 安琪":{"amt":116.0,"qty":1},"刺猬索尼克钥匙链":{"amt":110.0,"qty":2},"达斯·维德钥匙链":{"amt":108.0,"qty":2},"风暴骑兵钥匙链":{"amt":108.0,"qty":2},"C-3PO 钥匙扣":{"amt":59.0,"qty":1},"热狗小贩钥匙扣":{"amt":59.0,"qty":1},"银色小人仔钥匙扣":{"amt":59.0,"qty":1}}},"_sample":{"扬州万象汇":{"wk_qty":2,"wk_retail":1048.0,"wk_amt":420.0,"month_qty":12,"month_retail":6398.0,"month_amt":2118.0},"扬州京华城":{"wk_qty":20,"wk_retail":10000.0,"wk_amt":3493.0,"month_qty":24,"month_retail":12076.0,"month_amt":4117.0},"扬州江都金鹰":{"wk_qty":0,"wk_retail":0,"wk_amt":0.0,"month_qty":15,"month_retail":11485.0,"month_amt":4074.0},"泰州万象城":{"wk_qty":2,"wk_retail":468.0,"wk_amt":141.0,"month_qty":15,"month_retail":12755.0,"month_amt":3938.0},"宿迁宝龙":{"wk_qty":0,"wk_retail":0,"wk_amt":0.0,"month_qty":18,"month_retail":13922.0,"month_amt":3604.0},"淮安新亚":{"wk_qty":0,"wk_retail":0,"wk_amt":0.0,"month_qty":19,"month_retail":12781.0,"month_amt":3175.0},"淮安万象城":{"wk_qty":3,"wk_retail":587.0,"wk_amt":-62.0,"month_qty":15,"month_retail":5665.0,"month_amt":1288.0}},"_sample_region":{"wk_qty":27,"wk_retail":12103.0,"wk_amt":3992.0,"month_qty":118,"month_retail":75082.0,"month_amt":22314.0},"_new_products":["玩具总动员弹簧狗的书挡","三眼仔 披萨星球火箭之旅","梅西的庆祝时刻","法拉利车队HP刘易斯·汉密尔顿头盔","侏罗纪公园 Jeep® Wrangler 吉普","布雷兹的马场","神盾局天空母舰","曼达洛人N-1型星际战斗机","迈凯伦万事达卡 F1® 车队兰多·诺里斯头盔","维尼修斯 – 经典进球瞬间","可爱考拉之家","梦幻仙境游乐园","霍格沃茨草药课植物","翻倒巷魔法店","《爱丽丝梦游仙境》","2026年美国足球国家队球衣","钢铁侠大战奥创机器人"],"_conversion":{"扬州万象汇":{"flow":0,"cnt":860,"rate":0},"扬州京华城":{"flow":0,"cnt":1008,"rate":0},"扬州江都金鹰":{"flow":0,"cnt":499,"rate":0},"泰州万象城":{"flow":0,"cnt":1244,"rate":0},"宿迁宝龙":{"flow":0,"cnt":331,"rate":0},"淮安新亚":{"flow":0,"cnt":364,"rate":0},"淮安万象城":{"flow":0,"cnt":781,"rate":0},"_region":{"flow":0,"cnt":5087,"rate":0}},"_weekly_conversion":{"扬州万象汇":{"flow":0,"cnt":211,"rate":0},"扬州京华城":{"flow":0,"cnt":197,"rate":0},"扬州江都金鹰":{"flow":0,"cnt":125,"rate":0},"泰州万象城":{"flow":0,"cnt":264,"rate":0},"宿迁宝龙":{"flow":0,"cnt":63,"rate":0},"淮安新亚":{"flow":0,"cnt":91,"rate":0},"淮安万象城":{"flow":0,"cnt":164,"rate":0},"_region":{"flow":0,"cnt":1115,"rate":0}}};
+
+const STORE_ORDER=['扬州万象汇','扬州京华城','扬州江都金鹰','泰州万象城','宿迁宝龙','淮安新亚','淮安万象城'];
+const WEEKDAYS=['7/20(周一)','7/21(周二)','7/22(周三)','7/23(周四)','7/24(周五)','7/25(周六)'];
+const STORE_COLORS={'扬州万象汇':'#7c3aed','扬州京华城':'#0ea5e9','扬州江都金鹰':'#059669','泰州万象城':'#dc2626','宿迁宝龙':'#ea580c','淮安新亚':'#0891b2','淮安万象城':'#9333ea'};
+const SC=['#7c3aed','#0ea5e9','#059669','#dc2626','#ea580c','#0891b2','#9333ea','#d97706','#65a30d','#4f46e5','#e11d48','#0d9488','#c026d3','#7c2d12','#1e40af','#831843','#365314','#854d0e','#3730a3','#9f1239'];
+let charts={};
+let currentStore='区域对比';
+
+function fmtAmt(v){if(v===null||v===undefined)return 'N/A';return '¥'+Math.round(v).toLocaleString()}
+function fmtPct(v){if(v===null||v===undefined)return 'N/A';return v.toFixed(1)+'%'}
+function colorPct(v){if(v===null||v===undefined)return '';return v>=0?'green':'red'}
+function isNA(v){return v===null||v===undefined}
+function getWeeklyCnt(s){if(typeof s==='string')s=DATA[s];return s.daily.reduce((a,x)=>a+x.tx_cnt,0)}
+function getWeeklyATV(s){if(typeof s==='string')s=DATA[s];const c=getWeeklyCnt(s);return c>0?s.wk_amt/c:0}
+function getWeeklyJD(s){if(typeof s==='string')s=DATA[s];const c=getWeeklyCnt(s);if(c===0)return 0;return s.daily.reduce((a,x)=>a+x.jd*x.tx_cnt,0)/c}
+function getRegWkATV(){const t=STORE_ORDER.reduce((a,s)=>a+DATA[s].wk_amt,0);const c=STORE_ORDER.reduce((a,s)=>a+getWeeklyCnt(s),0);return c>0?t/c:0}
+function getRegWkJD(){const c=STORE_ORDER.reduce((a,s)=>a+getWeeklyCnt(s),0);if(c===0)return 0;return STORE_ORDER.reduce((a,s)=>a+getWeeklyJD(s)*getWeeklyCnt(s),0)/c}
+function regVal(fn){return STORE_ORDER.reduce((a,s)=>a+fn(DATA[s]),0)}
+function conc(c,o){if(!o)return '<div class="conclusion"><div class="conc-title">📋 结论</div><div class="conc-body">'+c+'</div></div>';return '<div class="conclusion"><div class="conc-title">📋 结论</div><div class="conc-body">'+c+'</div><div class="conc-opportunity"><span class="conc-label">💡 需关注的机会点</span><br>'+o+'</div></div>'}
+
+function concKPI(s){
+  const d=DATA[s],r=DATA['_region'];
+  const atv=getWeeklyATV(s),jd=getWeeklyJD(s),ratv=getRegWkATV(),rjd=getRegWkJD();
+  const wpct=d.wk_amt>0?d.wk_wos/d.wk_amt*100:0,rwpct=regVal(x=>x.wk_wos)/(regVal(x=>x.wk_amt)||1)*100;
+  const lpct=d.wk_amt>0?d.wk_lt/d.wk_amt*100:0,rlpct=regVal(x=>x.wk_lt)/(regVal(x=>x.wk_amt)||1)*100;
+  const wt=d.daily.reduce((a,x)=>a+(x.target||0),0),rate=wt>0?d.wk_amt/wt*100:0;
+  const rwt=regVal(x=>x.daily.reduce((a,day)=>a+(day.target||0),0)),rrate=rwt>0?regVal(x=>x.wk_amt)/rwt*100:0;
+  const below=[];
+  if(rate<rrate)below.push('周完成率'+rate.toFixed(1)+'%（区域'+rrate.toFixed(1)+'%，差'+(rrate-rate).toFixed(1)+'pct）');
+  if(!isNA(d.wk_yoy)&&!isNA(r.wk_yoy)&&d.wk_yoy<r.wk_yoy)below.push('周同比'+d.wk_yoy.toFixed(1)+'%（区域'+r.wk_yoy.toFixed(1)+'%）');
+  if(!isNA(d.wow)&&!isNA(r.wow)&&d.wow<r.wow)below.push('周环比'+d.wow.toFixed(1)+'%（区域'+r.wow.toFixed(1)+'%）');
+  if(atv<ratv)below.push('客单价¥'+Math.round(atv)+'（区域¥'+Math.round(ratv)+'，差¥'+Math.round(ratv-atv)+'）');
+  if(jd<rjd)below.push('连带率'+jd.toFixed(2)+'（区域'+rjd.toFixed(2)+'，差'+(rjd-jd).toFixed(2)+'）');
+  if(wpct<rwpct)below.push('WOS占比'+wpct.toFixed(1)+'%（区域'+rwpct.toFixed(1)+'%）');
+  if(lpct<rlpct)below.push('长尾款占比'+lpct.toFixed(1)+'%（区域'+rlpct.toFixed(1)+'%）');
+  const c=s+'KPI汇总：周销售'+fmtAmt(d.wk_amt)+'，完成率'+rate.toFixed(1)+'%，连带率'+jd.toFixed(2)+'，客单价¥'+Math.round(atv)+'。';
+  let o='';
+  if(below.length>0)o='低于区域整体的KPI：'+below.join('；')+'。需逐项分析差距原因，制定提升计划。';
+  else o='各项KPI均达到或优于区域整体水平，保持当前运营策略。';
+  return conc(c,o);
+}
+
+function concSeries(s){
+  const d=DATA[s];const sd=(DATA['_series']||{})[s]||{};
+  const ents=Object.entries(sd).sort((a,b)=>b[1]-a[1]);
+  if(ents.length===0)return conc('暂无系列数据。');
+  const total=d.wk_amt||1;
+  const top3=ents.slice(0,3);
+  const pct=top3.reduce((a,[k,v])=>a+v,0)/total*100;
+  // 每个系列的销售占比
+  const topPcts=ents.slice(0,10).map(([k,v])=>k+'('+fmtAmt(v)+',占比'+(v/total*100).toFixed(1)+'%)');
+  const c='TOP10系列：'+topPcts.join('、')+'；TOP3合计占比'+pct.toFixed(1)+'%。';
+  let o='';
+  if(pct>70)o='TOP3系列过于集中，建议丰富中长尾系列推荐，降低单一系列依赖风险。';else if(pct<35)o='系列分布较散，建议打造1-2个主推核心系列进行重点陈列。';else o='系列结构良好，保持均衡推荐同时打造核心系列。';
+  // 关注重点系列排名：CITY/TECHNIC/NINJAGO 是否在TOP3，MINECRAFT 是否在TOP5
+  const focusTop3=['CITY','TECHNIC','NINJAGO'];
+  const missingTop3=focusTop3.filter(n=>!top3.some(([k])=>k.toUpperCase().includes(n)));
+  if(missingTop3.length>0)o+='重点系列'+missingTop3.join('、')+'未进TOP3（排名需提升），建议加强陈列和推荐。';
+  const inTop3=focusTop3.filter(n=>top3.some(([k])=>k.toUpperCase().includes(n)));
+  if(inTop3.length>0)o+='重点系列'+inTop3.join('、')+'在TOP3表现良好。';
+  const top5=ents.slice(0,5);
+  const minecraftInTop5=top5.some(([k])=>k.toUpperCase().includes('MINECRAFT'));
+  if(!minecraftInTop5)o+='MINECRAFT未进TOP5，需关注沙盒游戏IP粉丝群体引流和推荐。';
+  // BOTANICALS植物系列销售占比
+  const botanicalAmt=ents.reduce((a,[k,v])=>k.toUpperCase().includes('BOTANICAL')?a+v:a,0);
+  const botanicalPct=botanicalAmt/total*100;
+  const botanicalStr=botanicalAmt>0?'BOTANICALS植物系列占比'+botanicalPct.toFixed(1)+'%。':'BOTANICALS植物系列本周无销售。';
+  // 结论中加入BOTANICALS占比
+  const c2=c+botanicalStr;
+  if(botanicalAmt>0){
+    o+='BOTANICALS植物系列销售占比'+botanicalPct.toFixed(1)+'%（指标4.1%）';
+    if(botanicalPct<4.1)o+='，低于指标，需加强植物系列陈列和推荐，抓住礼品/家居装饰客群。';
+    else o+='，达到指标。';
+  }else{
+    o+='BOTANICALS植物系列本周无销售，低于指标4.1%，建议关注植物系列铺货和推荐。';
+  }
+  return conc(c2,o);
+}
+function concRadar(s){
+  const d=DATA[s];const atv=getWeeklyATV(s),jd=getWeeklyJD(s),cnt=getWeeklyCnt(s);
+  const ratv=getRegWkATV(),rjd=getRegWkJD(),rcnt=regVal(getWeeklyCnt)/7;
+  const wpct=d.wk_amt>0?d.wk_wos/d.wk_amt*100:0,lpct=d.wk_amt>0?d.wk_lt/d.wk_amt*100:0;
+  const rwpct=regVal(x=>x.wk_wos)/(regVal(x=>x.wk_amt)||1)*100,rlpct=regVal(x=>x.wk_lt)/(regVal(x=>x.wk_amt)||1)*100;
+  const items=[['客单价',atv>ratv],['连带率',jd>rjd],['笔数',cnt>rcnt],['WOS占比',wpct>rwpct],['长尾款占比',lpct>rlpct]];
+  const lead=items.filter(x=>x[1]).map(x=>x[0]),weak=items.filter(x=>!x[1]).map(x=>x[0]);
+  const c=s+'在'+(lead.length>0?lead.join('、'):'无')+'维度领先区域'+(weak.length>0?'，'+weak.join('、')+'维度低于区域需提升':'，各维度均优于区域，综合能力突出')+'。';
+  let o='';
+  if(weak.length>0){
+    const gaps=[];
+    if(weak.includes('客单价'))gaps.push('客单价差¥'+Math.round(ratv-atv)+'（¥'+Math.round(atv)+' vs ¥'+Math.round(ratv)+'）');
+    if(weak.includes('连带率'))gaps.push('连带率差'+(rjd-jd).toFixed(2)+'（'+jd.toFixed(2)+' vs '+rjd.toFixed(2)+'）');
+    if(weak.includes('笔数'))gaps.push('周笔数差'+(rcnt-cnt).toFixed(0)+'（'+cnt+' vs '+rcnt.toFixed(0)+'）');
+    if(weak.includes('WOS占比'))gaps.push('WOS占比差'+(rwpct-wpct).toFixed(1)+'%（'+wpct.toFixed(1)+'% vs '+rwpct.toFixed(1)+'%）');
+    if(weak.includes('长尾款占比'))gaps.push('长尾款占比差'+(rlpct-lpct).toFixed(1)+'%（'+lpct.toFixed(1)+'% vs '+rlpct.toFixed(1)+'%）');
+    o='低于区域均值的维度：'+gaps.join('；')+'。';
+  }
+  if(!o)o='各维度均优于区域水平，多渠道运营体系成熟，保持综合策略。';
+  return conc(c,o);
+}
+function concLongTail(s){
+  const d=DATA[s];const lpct=d.wk_amt>0?d.wk_lt/d.wk_amt*100:0;
+  const rl=regVal(x=>x.wk_lt)/(regVal(x=>x.wk_amt)||1)*100;
+  const rlt=regVal(x=>x.wk_lt)/7;
+  const c=s+'本周长尾款'+fmtAmt(d.wk_lt)+'，占比'+lpct.toFixed(1)+'%；区域长尾款占比'+rl.toFixed(1)+'%。';
+  let o='';if(lpct<rl-2)o='长尾款占比低于区域均值'+(rl-lpct).toFixed(1)+'个百分点，建议加强79款SKU推荐话术培训，在票据台显眼位置陈列长尾小件。';else if(lpct>rl+2)o='长尾款占比高于区域均值'+(lpct-rl).toFixed(1)+'个百分点，继续保持关联推荐策略。';else o='长尾款与区域持平，关注件单价提升和连带搭配。';
+  if(d.wk_lt<rlt*0.7)o+='长尾款金额低于区域门店均值（¥'+Math.round(rlt)+'），需重点跟进长尾款推荐。';
+  return conc(c,o);
+}
+function concWow(s){
+  const d=DATA[s],r=DATA['_region'];
+  const c=s+'WK30环比'+(isNA(d.wow)?'N/A':(d.wow>=0?'+':'')+d.wow.toFixed(1)+'%')+'，'+(isNA(r.wow)?'区域N/A':'区域'+(r.wow>=0?'+':'')+r.wow.toFixed(1)+'%')+'。';
+  let o='';if(!isNA(d.wow)){if(d.wow<-8)o='环比下滑明显，需复盘本周客流和转化率下降原因，排查天气/活动影响。';else if(d.wow<-3)o='环比小幅下滑，关注下周恢复节奏和竞品动态。';else if(d.wow<3)o='环比基本持平，需寻找增长突破点。';else o='环比增长良好，总结本周成功经验复制到下周。';}else o='新店需建立基准周数据后再分析环比趋势。';
+  return conc(c,o);
+}
+function concTop(s){
+  const d=DATA[s];const pd=(DATA['_products']||{})[s]||{};
+  const ents=Object.entries(pd).map(([k,v])=>[k,v.amt||v,v.qty||0]).sort((a,b)=>b[1]-a[1]);
+  if(ents.length===0)return conc('暂无产品数据。');
+  const [n,a,q]=ents[0];const pct=d.wk_amt>0?a/d.wk_amt*100:0;
+  const c='TOP1产品「'+n+'」销售'+fmtAmt(a)+'（'+q+'件），占周销售'+pct.toFixed(1)+'%。';
+  let o='';if(pct>25)o='TOP1单品依赖度过高（>25%），警惕库存不足和缺货风险，建议培养第二梯队爆款。';
+  // check 当月新品是否进入TOP10
+  const newProds=DATA['_new_products']||[];
+  if(newProds.length>0){
+    const top10Names=ents.slice(0,10).map(([k])=>k);
+    const newInTop=newProds.filter(np=>top10Names.some(tn=>tn.includes(np)||np.includes(tn)));
+    if(newInTop.length>0)o+='当月新品「'+newInTop.join('、')+'」进入TOP10，表现突出，建议加大陈列和推荐力度。';
+    else o+='当月新品无一款进入TOP10，需关注新品陈列位置和推荐话术，加强新品首周曝光。';
+  }
+  // check 区域TOP10产品门店是否也在TOP10
+  const rpd=(DATA['_products']||{})['_region']||{};
+  const rEnts=Object.entries(rpd).map(([k,v])=>[k,v.amt||v,v.qty||0]).sort((a,b)=>b[1]-a[1]).slice(0,10);
+  const storeTop10=new Set(ents.slice(0,10).map(([k])=>k));
+  const rInStore=rEnts.filter(([k])=>storeTop10.has(k));
+  const rNotInStore=rEnts.filter(([k])=>!storeTop10.has(k));
+  if(rInStore.length>0)o+='区域TOP10中'+rInStore.length+'款门店也有在TOP10（'+rInStore.map(([k])=>k).join('、')+'）';
+  if(rNotInStore.length>0)o+=(rInStore.length>0?'，':'')+'区域TOP10中'+rNotInStore.length+'款门店未进入TOP10（'+rNotInStore.map(([k])=>k).join('、')+'），建议对齐区域爆款推荐策略。';
+  else if(rInStore.length===10)o+='门店TOP10与区域完全重合，产品结构高度一致。';
+  return conc(c,o);
+}
+function concGuideSales(s){
+  const gs=(DATA['_guides']||{})[s]||[];if(gs.length===0)return conc('暂无导购数据。');
+  const top=gs.reduce((a,b)=>b.wk_sales>a.wk_sales?b:a);
+  const tot=gs.reduce((a,g)=>a+g.wk_sales,0);
+  const c='TOP1导购'+top.name+'周销售'+fmtAmt(top.wk_sales)+'（完成率'+top.wk_rate.toFixed(1)+'%），门店导购合计'+fmtAmt(tot)+'。';
+  let o='';const stAvg=gs.length>0?tot/gs.length:0;
+  const allRegGuides=[];STORE_ORDER.forEach(t=>{(DATA['_guides']||{})[t]?.forEach(g=>allRegGuides.push(g));});
+  const regAvg=allRegGuides.length>0?allRegGuides.reduce((a,g)=>a+g.wk_sales,0)/allRegGuides.length:0;
+  const topPct=tot>0?top.wk_sales/tot*100:0;if(topPct>50)o='TOP导购销售占门店'+topPct.toFixed(0)+'%，建议头部经验分享复制，缩小导购间差距。';
+  const belowSt=gs.filter(g=>g.wk_sales>0&&g.wk_sales<stAvg*0.7);
+  if(belowSt.length>0)o+=belowSt.map(g=>g.name+'('+fmtAmt(g.wk_sales)+')').join('、')+'低于门店均值'+fmtAmt(stAvg)+'，需重点跟进销售技巧辅导。';
+  const belowReg=gs.filter(g=>g.wk_sales>0&&g.wk_sales<regAvg*0.7);
+  if(belowReg.length>0)o+=belowReg.map(g=>g.name).join('、')+'低于区域导购均值'+fmtAmt(regAvg)+'，建议安排导师带教和排班优化。';
+  const low=gs.filter(g=>g.wk_rate<30&&g.wk_sales>0);if(low.length>0)o+=low.length+'位导购完成率不足30%，需一对一辅导。';
+  if(!o)o='导购团队整体表现均衡（门店人均'+fmtAmt(stAvg)+'，区域人均'+fmtAmt(regAvg)+'），继续保持团队协作氛围。';
+  return conc(c,o);
+}
+function concGuideJdKdj(s){
+  const atv=getWeeklyATV(s),jd=getWeeklyJD(s),ratv=getRegWkATV(),rjd=getRegWkJD();
+  const c=s+'周连带率'+jd.toFixed(2)+'，客单价¥'+Math.round(atv)+'；区域连带率'+rjd.toFixed(2)+'，客单价¥'+Math.round(ratv)+'。';
+  let o='';if(jd<rjd-0.1)o='连带率低于区域均值'+(rjd-jd).toFixed(2)+'（'+jd.toFixed(2)+' vs '+rjd.toFixed(2)+'），建议强化跨品类搭配推荐话术培训。';else if(jd<rjd)o='连带率略低于区域（差'+(rjd-jd).toFixed(2)+'），关注搭配推荐微调。';else o='连带率表现良好（高于区域'+(jd-rjd).toFixed(2)+'），关注高端产品推荐提升客单价。';
+  if(atv<ratv*0.85)o+='客单价低于区域¥'+Math.round(ratv-atv)+'（¥'+Math.round(atv)+' vs ¥'+Math.round(ratv)+'），建议引导客户关注高价套装和限定款。';
+  else if(atv<ratv)o+='客单价略低于区域¥'+Math.round(ratv-atv)+'，适度推荐高单价产品。';
+  return conc(c,o);
+}
+function concGuideLt(s){
+  const gs=(DATA['_guides']||{})[s]||[];if(gs.length===0)return conc('暂无导购数据。');
+  const top=gs.reduce((a,b)=>b.wk_lt>a.wk_lt?b:a);
+  const tot=gs.reduce((a,g)=>a+g.wk_lt,0),tq=gs.reduce((a,g)=>a+g.wk_lt_qty,0);
+  const c='长尾款TOP导购'+top.name+'：'+fmtAmt(top.wk_lt)+'（'+top.wk_lt_qty+'件）；门店导购长尾款合计'+fmtAmt(tot)+'（'+tq+'件）。';
+  let o='';const ltAvg=gs.length>0?tot/gs.length:0;
+  const lowLt=gs.filter(g=>g.wk_lt===0||(g.wk_sales>0&&g.wk_lt/g.wk_sales<0.03));
+  if(lowLt.length>0)o+=lowLt.map(g=>g.name+'(¥'+(g.wk_lt||0).toFixed(0)+')').join('、')+'长尾款占比偏低（门店均值¥'+Math.round(ltAvg)+'），建议专项培训79款SKU知识和搭配推荐。';
+  const zeroLt=gs.filter(g=>g.wk_lt===0&&g.wk_sales>0);
+  if(zeroLt.length>0)o+=zeroLt.map(g=>g.name).join('、')+'本周零长尾款销售，需重点跟进79款SKU推荐。';
+  if(!o)o='导购长尾推荐整体较好（门店人均¥'+Math.round(ltAvg)+'），保持79款SKU的日常陈列和推荐习惯。';
+  return conc(c,o);
+}
+
+function renderStore(store){
+  const d=DATA[store],region=DATA['_region'],color=STORE_COLORS[store],daily=d.daily;
+  const wcvo=(DATA['_weekly_conversion']||{});
+  const cvoRate=(wcvo[store]?wcvo[store].rate:0);
+  const cvoRegionRate=(wcvo._region?wcvo._region.rate:0);
+  let html='<div class="kpi-row">'+
+    '<div class="kpi-card"><div class="label">WK30周累计</div><div class="value" style="color:'+color+'">'+fmtAmt(d.wk_amt)+'</div><div class="sub">周完成率 '+(function(){const wt=daily.reduce((a,x)=>a+(x.target||0),0);const r=wt>0?d.wk_amt/wt*100:0;return '<span style="color:'+(r>=50?'#16a34a':'#dc2626')+';font-weight:700">'+r.toFixed(1)+'%</span>';})()+'</div></div>'+
+    '<div class="kpi-card"><div class="label">周环比</div><div class="value '+(isNA(d.wow)?'':colorPct(d.wow))+'">'+(isNA(d.wow)?'N/A':(d.wow>=0?'+':'')+d.wow.toFixed(1)+'%')+'</div><div class="sub">'+(isNA(d.wow)?'新店无上周':'vs WK29 '+fmtAmt(d.wk28_amt))+'</div></div>'+
+    '<div class="kpi-card"><div class="label">周同比</div><div class="value '+(isNA(d.wk_yoy)?'':colorPct(d.wk_yoy))+'">'+(isNA(d.wk_yoy)?'N/A':fmtPct(d.wk_yoy))+'</div><div class="sub">'+(isNA(d.wk_yoy)?'新店无同期':'vs去年同期')+'</div></div>'+
+    '<div class="kpi-card"><div class="label">周连带率</div><div class="value blue">'+getWeeklyJD(store).toFixed(2)+'</div><div class="sub">区域'+getRegWkJD().toFixed(2)+'</div></div>'+
+    '<div class="kpi-card"><div class="label">周客单价</div><div class="value blue">¥'+Math.round(getWeeklyATV(store))+'</div><div class="sub">区域¥'+Math.round(region.wk_atv||getRegWkATV())+'</div></div>'+
+    '<div class="kpi-card"><div class="label">WOS周累计</div><div class="value orange">'+fmtAmt(d.wk_wos)+'</div><div class="sub">占比'+(d.wk_amt>0?(d.wk_wos/d.wk_amt*100).toFixed(1):0)+'%</div></div>'+
+    '<div class="kpi-card"><div class="label">长尾款周累计</div><div class="value purple">'+fmtAmt(d.wk_lt)+'</div><div class="sub">占比'+(d.wk_amt>0?(d.wk_lt/d.wk_amt*100).toFixed(1):0)+'%</div></div>'+
+    '<div class="kpi-card"><div class="label">WK29周成交率</div><div class="value '+(cvoRate>=cvoRegionRate?'green':'red')+'">'+cvoRate.toFixed(2)+'%</div><div class="sub">区域'+(cvoRegionRate?cvoRegionRate.toFixed(2):'N/A')+'% | '+(wcvo[store]?wcvo[store].cnt:'0')+'笔 / '+(wcvo[store]?wcvo[store].flow:'0')+'客流</div></div>'+
+    '</div>';
+
+  html+=concKPI(store);
+
+  html+='<div class="chart-grid">'+
+    '<div class="chart-card"><h3><span class="icon">📊</span> 产品系列结构（WK30）</h3><div class="chart-wrap"><canvas id="chartSeriesPie"></canvas></div>'+concSeries(store)+'</div>'+
+    '<div class="chart-card"><h3><span class="icon">🎯</span> 门店周维度能力雷达图（vs区域均值）</h3><div class="chart-wrap"><canvas id="chartRadar"></canvas></div>'+concRadar(store)+'</div></div>';
+
+  html+='<div class="chart-grid">'+
+    '<div class="chart-card"><h3><span class="icon">📊</span> WK29 vs WK30 周销售环比</h3><div class="chart-wrap"><canvas id="chartWoW"></canvas></div>'+concWow(store)+'</div>'+
+    '<div class="chart-card"><h3><span class="icon">🏆</span> TOP10产品周销排名（含件数）</h3><div class="chart-wrap"><canvas id="chartTopProducts"></canvas></div>'+concTop(store)+'</div></div>';
+
+  const totWos=daily.reduce((a,x)=>a+x.wos,0),totJl=daily.reduce((a,x)=>a+x.jl,0);
+  const wosPct=d.wk_amt>0?(totWos/d.wk_amt*100):0,jlPct=d.wk_amt>0?(totJl/d.wk_amt*100):0,bothPct=d.wk_amt>0?((totWos+totJl)/d.wk_amt*100):0;
+  const rTotWos=regVal(x=>x.wk_wos),rTotJl=regVal(x=>x.wk_jl),rTot=regVal(x=>x.wk_amt);
+  const rBothPct=rTot>0?((rTotWos+rTotJl)/rTot*100):0;
+  html+='<div class="chart-grid full"><div class="chart-card"><h3><span class="icon">⚡</span> WOS & 即时零售 周累计对比（vs区域）</h3><div class="chart-wrap"><canvas id="chartWosJl"></canvas></div>'+
+    conc(store+'本周WOS '+fmtAmt(totWos)+'（占比'+wosPct.toFixed(1)+'%），即时零售 '+fmtAmt(totJl)+'（占比'+jlPct.toFixed(1)+'%），两渠道合计占比'+bothPct.toFixed(1)+'%。',bothPct<rBothPct?'WOS+即时零售合计占比低于区域（'+rBothPct.toFixed(1)+'%），建议加大线上渠道活动投放，强化美团/饿了么专属优惠引流。':bothPct>rBothPct+3?'线上渠道占比高于区域，多渠道运营成熟，建议保持投放策略并关注转化效率。':'线上渠道占比与区域持平，适度增加即时零售平台曝光。')+'</div></div>';
+
+  html+='<div class="chart-grid">'+
+    '<div class="chart-card"><h3><span class="icon">👩</span> 导购周销售+WOS+周环比</h3><div class="chart-wrap tall" style="height:400px;"><canvas id="chartGuideSales"></canvas></div>'+concGuideSales(store)+'</div>'+
+    '<div class="chart-card"><h3><span class="icon">🔄</span> 导购连带率+客单价</h3><div class="chart-wrap tall" style="height:400px;"><canvas id="chartGuideJdKdj"></canvas></div>'+concGuideJdKdj(store)+'</div></div>';
+
+  html+='<div class="chart-grid full"><div class="chart-card"><h3><span class="icon">📦</span> 导购长尾款分析（金额/件数）</h3><div class="chart-wrap tall" style="height:400px;"><canvas id="chartGuideLt"></canvas></div>'+concGuideLt(store)+'</div></div>';
+  html+='<div class="chart-grid full"><div class="chart-card"><h3><span class="icon">📋</span> 导购周维度明细</h3><table class="summary-table" id="guideTable"></table></div></div>';
+
+  document.getElementById('content').innerHTML=html;
+  Object.values(charts).forEach(c=>c&&c.destroy());charts={};
+
+  // Chart: Series Pie
+  const sd=(DATA['_series']||{})[store]||{};
+  const se=Object.entries(sd).sort((a,b)=>b[1]-a[1]);
+  const top10=se.slice(0,10),oth=se.slice(10).reduce((a,[k,v])=>a+v,0);
+  charts.seriesPie=new Chart(document.getElementById('chartSeriesPie'),{
+    type:'doughnut',
+    data:{labels:top10.map(([k])=>k).concat(oth>0?['其他']:[]),datasets:[{data:top10.map(([k,v])=>v).concat(oth>0?[oth]:[]),backgroundColor:SC.slice(0,top10.length+(oth>0?1:0)),borderWidth:2,borderColor:'#fff'}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{font:{size:11},padding:6}},tooltip:{callbacks:{label:ctx=>{const pct=d.wk_amt>0?(ctx.raw/d.wk_amt*100).toFixed(1):0;return ctx.label+': '+fmtAmt(ctx.raw)+' ('+pct+'%)'}}}},cutout:'55%'}
+  });
+
+  // Chart 3: Radar
+  const atv=getWeeklyATV(store),jd=getWeeklyJD(store),cnt=getWeeklyCnt(store);
+  const wpct=d.wk_amt>0?d.wk_wos/d.wk_amt*100:0,lpct=d.wk_amt>0?d.wk_lt/d.wk_amt*100:0;
+  const ratv=getRegWkATV(),rjd=getRegWkJD(),rcnt=regVal(getWeeklyCnt)/7;
+  const rwpct=regVal(x=>x.wk_wos)/(regVal(x=>x.wk_amt)||1)*100,rlpct=regVal(x=>x.wk_lt)/(regVal(x=>x.wk_amt)||1)*100;
+  const rIdx=(sv,rv)=>rv>0?sv/rv*100:0;
+  const rYoyIdx=(sy,ry)=>{if(sy===null)return 0;if(ry===null)return 100;return 100+(sy-ry)*3};
+  const rL=['周同比','周客单价','周连带率','周笔数','WOS占比','长尾款占比'];
+  const rRS=[d.wk_yoy,atv,jd,cnt,wpct,lpct],rRR=[region.wk_yoy,ratv,rjd,rcnt,rwpct,rlpct];
+  const rF=['%','¥','','笔','%','%'];
+  const sR=[rYoyIdx(d.wk_yoy,region.wk_yoy),rIdx(atv,ratv),rIdx(jd,rjd),rIdx(cnt,rcnt),rIdx(wpct,rwpct),rIdx(lpct,rlpct)];
+  charts.radar=new Chart(document.getElementById('chartRadar'),{
+    type:'radar',
+    data:{labels:rL,datasets:[
+      {label:store,data:sR,borderColor:color,backgroundColor:color+'30',borderWidth:2,pointRadius:4},
+      {label:'区域均值(=100)',data:[100,100,100,100,100,100],borderColor:'#64748b',backgroundColor:'#64748b15',borderWidth:2,pointRadius:3,borderDash:[4,4]}
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{position:'top'},tooltip:{callbacks:{label:ctx=>{const i=ctx.dataIndex,u=rF[i],sv=rRS[i],rv=rRR[i];const sStr=sv===null?'N/A':(u==='¥'?'¥'+Math.round(sv):(u==='%'?sv.toFixed(1)+'%':(u==='笔'?sv+'笔':sv.toFixed(2))));const rStr=rv===null?'N/A':(u==='¥'?'¥'+Math.round(rv):(u==='%'?rv.toFixed(1)+'%':(u==='笔'?Math.round(rv)+'笔':rv.toFixed(2))));return ctx.dataset.label+': 指数'+ctx.raw.toFixed(0)+' | 门店'+sStr+' | 区域'+rStr;}}}},
+      scales:{r:{beginAtZero:true,suggestedMin:0,suggestedMax:200,ticks:{stepSize:50}}}}
+  });
+
+  // Chart 5: WoW comparison
+  const wk28=d.wk28_amt||0,wk29=d.wk_amt||0;
+  charts.wow=new Chart(document.getElementById('chartWoW'),{
+    type:'bar',
+    data:{labels:['WK29(上周)','WK30(本周)'],datasets:[{label:'周销售',data:[wk28,wk29],backgroundColor:[wk28>=wk29?'#16a34a80':'#94a3b880',wk29>=wk28?color+'cc':'#dc262680'],borderColor:['#64748b',color],borderWidth:2,borderRadius:8,barPercentage:.5}]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>'周销售: '+fmtAmt(ctx.raw),afterLabel:ctx=>{if(ctx.dataIndex===1&&wk28>0){const diff=((wk29-wk28)/wk28*100);return '环比: '+(diff>=0?'+':'')+diff.toFixed(1)+'%'}return ''}}}},
+      scales:{y:{ticks:{callback:v=>fmtAmt(v)}}}}
+  });
+
+  // Chart 6: TOP10 Products (with qty)
+  const pd=(DATA['_products']||{})[store]||{};
+  const pEnts=Object.entries(pd).map(([k,v])=>[k,v.amt||v,v.qty||0]).sort((a,b)=>b[1]-a[1]).slice(0,10);
+  charts.topProducts=new Chart(document.getElementById('chartTopProducts'),{
+    type:'bar',
+    data:{labels:pEnts.map(([k])=>k),datasets:[{label:'周销售',data:pEnts.map(([k,a,q])=>a),backgroundColor:SC.slice(0,pEnts.length).map(c=>c+'cc'),borderColor:SC.slice(0,pEnts.length),borderWidth:1,borderRadius:4}]},
+    options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>{const idx=ctx.dataIndex;const [n,a,q]=pEnts[idx];const pct=d.wk_amt>0?(a/d.wk_amt*100).toFixed(1):0;return n+': '+fmtAmt(a)+' ('+pct+'%, '+q+'件)'}}}},
+      scales:{x:{ticks:{callback:v=>fmtAmt(v)}}}}
+  });
+
+  // Chart: WOS & 即时零售 weekly comparison (store vs region)
+  charts.wosJl=new Chart(document.getElementById('chartWosJl'),{
+    type:'bar',
+    data:{labels:['WOS','即时零售'],datasets:[
+      {label:store,data:[totWos,totJl],backgroundColor:[color+'cc',color+'cc'],borderColor:[color,color],borderWidth:1,borderRadius:6},
+      {label:'区域均值',data:[rTotWos/7,rTotJl/7],backgroundColor:['#94a3b8cc','#94a3b8cc'],borderColor:['#64748b','#64748b'],borderWidth:1,borderRadius:6}
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{position:'top'},tooltip:{callbacks:{label:ctx=>ctx.dataset.label+': '+fmtAmt(ctx.raw)}}},
+      scales:{y:{ticks:{callback:v=>fmtAmt(v)}}}}
+  });
+
+  // Guide charts
+  const guides=(DATA['_guides']||{})[store]||[];
+  if(guides.length>0){
+    const gLabels=guides.map(g=>g.name);
+
+    // Chart 7: Guide sales + WOS + WoW (merged)
+    charts.guideSales=new Chart(document.getElementById('chartGuideSales'),{
+      data:{labels:gLabels,datasets:[
+        {type:'bar',label:'周销售',data:guides.map(g=>g.wk_sales),backgroundColor:guides.map(g=>g.wk_sales>0?color+'cc':'#e2e8f0'),borderColor:color,borderWidth:1,borderRadius:4,xAxisID:'x',order:3},
+        {type:'bar',label:'WOS',data:guides.map(g=>g.wk_wos),backgroundColor:'#0284c7cc',borderColor:'#0284c7',borderWidth:1,borderRadius:4,xAxisID:'x',order:2},
+        {type:'line',label:'周环比(%)',data:guides.map(g=>g.wow),borderColor:'#dc2626',backgroundColor:'transparent',borderWidth:2,pointRadius:5,pointBackgroundColor:'#dc2626',pointBorderColor:'#fff',pointBorderWidth:2,tension:.2,xAxisID:'x1',order:1}
+      ]},
+      options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',
+        plugins:{legend:{position:'top',labels:{font:{size:12}}},tooltip:{callbacks:{label:ctx=>{if(ctx.dataset.label==='周销售')return '周销售: '+fmtAmt(ctx.raw);if(ctx.dataset.label==='WOS')return 'WOS: '+fmtAmt(ctx.raw);return '周环比: '+(isNA(ctx.raw)?'N/A':(ctx.raw>=0?'+':'')+ctx.raw.toFixed(1)+'%')}}}},
+        scales:{x:{position:'bottom',title:{display:true,text:'金额(¥)'},ticks:{callback:v=>fmtAmt(v)}},x1:{position:'top',title:{display:true,text:'周环比(%)'},ticks:{callback:v=>v+'%'},grid:{drawOnChartArea:false}},y:{ticks:{font:{size:13,weight:'600'}}}}}
+    });
+
+    // Chart 8: Guide JD + ATV (merged)
+    charts.guideJdKdj=new Chart(document.getElementById('chartGuideJdKdj'),{
+      data:{labels:gLabels,datasets:[
+        {type:'bar',label:'连带率',data:guides.map(g=>g.wk_jd),backgroundColor:'#059669cc',borderColor:'#059669',borderWidth:1,borderRadius:4,xAxisID:'x',order:2},
+        {type:'line',label:'客单价(¥)',data:guides.map(g=>g.wk_atv),borderColor:'#dc2626',backgroundColor:'transparent',borderWidth:2,pointRadius:6,pointBackgroundColor:'#dc2626',pointBorderColor:'#fff',pointBorderWidth:2,tension:.2,xAxisID:'x1',order:1}
+      ]},
+      options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',
+        plugins:{legend:{position:'top',labels:{font:{size:12}}},tooltip:{callbacks:{label:ctx=>{if(ctx.dataset.label==='连带率')return '连带率: '+ctx.raw.toFixed(2);return '客单价: ¥'+Math.round(ctx.raw)}}}},
+        scales:{x:{position:'bottom',title:{display:true,text:'连带率'},ticks:{callback:v=>v.toFixed(1)}},x1:{position:'top',title:{display:true,text:'客单价(¥)'},ticks:{callback:v=>'¥'+v},grid:{drawOnChartArea:false}},y:{ticks:{font:{size:13,weight:'600'}}}}}
+    });
+
+    // Chart 9: Guide long-tail (amount + qty)
+    charts.guideLt=new Chart(document.getElementById('chartGuideLt'),{
+      data:{labels:gLabels,datasets:[
+        {type:'bar',label:'长尾款金额',data:guides.map(g=>g.wk_lt),backgroundColor:'#7c3aedcc',borderColor:'#7c3aed',borderWidth:1,borderRadius:4,xAxisID:'x',order:2},
+        {type:'line',label:'长尾款件数',data:guides.map(g=>g.wk_lt_qty),borderColor:'#ea580c',backgroundColor:'transparent',borderWidth:2,pointRadius:6,pointBackgroundColor:'#ea580c',pointBorderColor:'#fff',pointBorderWidth:2,tension:.2,xAxisID:'x1',order:1}
+      ]},
+      options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',
+        plugins:{legend:{position:'top',labels:{font:{size:12}}},tooltip:{callbacks:{label:ctx=>{if(ctx.dataset.label.includes('金额'))return '长尾款: '+fmtAmt(ctx.raw);return '件数: '+ctx.raw+'件'}}}},
+        scales:{x:{position:'bottom',title:{display:true,text:'金额(¥)'},ticks:{callback:v=>fmtAmt(v)}},x1:{position:'top',title:{display:true,text:'件数'},ticks:{callback:v=>v+'件'},grid:{drawOnChartArea:false}},y:{ticks:{font:{size:13,weight:'600'}}}}}
+    });
+
+    // Guide table
+    const _wkJdArr=guides.filter(g=>g.wk_cnt>0).map(g=>g.wk_jd);
+    const wkJdAvg=_wkJdArr.length?_wkJdArr.reduce((a,b)=>a+b,0)/_wkJdArr.length:null;
+    let gHtml='<thead><tr><th>导购</th><th>职务</th><th>周销售</th><th>周环比</th><th>笔数</th><th>件数</th><th>客单价</th><th>连带率</th><th>WOS</th><th>长尾款</th><th>长尾件数</th></tr></thead><tbody>';
+    guides.forEach(g=>{
+      const wb=isNA(g.wow)?'<span class="badge gray">N/A</span>':(g.wow>=0?'<span class="badge green">+'+g.wow.toFixed(1)+'%</span>':'<span class="badge red">'+g.wow.toFixed(1)+'%</span>');
+      gHtml+='<tr><td class="store-name" style="color:'+color+'">'+g.name+'</td><td style="font-size:11px;color:#64748b">'+g.title+'</td><td style="font-weight:700">'+fmtAmt(g.wk_sales)+'</td><td>'+wb+'</td><td>'+g.wk_cnt+'</td><td>'+g.wk_qty+'件</td><td>¥'+Math.round(g.wk_atv)+'</td><td'+(wkJdAvg!==null&&g.wk_cnt>0&&g.wk_jd<wkJdAvg?' style="color:#dc2626;font-weight:700"':'')+'>'+g.wk_jd.toFixed(2)+'</td><td>'+(g.wk_wos>0?fmtAmt(g.wk_wos):'<span style="color:#94a3b8">-</span>')+'</td><td>'+(g.wk_lt>0?fmtAmt(g.wk_lt):'<span style="color:#94a3b8">-</span>')+'</td><td>'+g.wk_lt_qty+'件</td></tr>';
+    });
+    const tS=guides.reduce((a,g)=>a+g.wk_sales,0),tC=guides.reduce((a,g)=>a+g.wk_cnt,0),tQ=guides.reduce((a,g)=>a+g.wk_qty,0),tW=guides.reduce((a,g)=>a+g.wk_wos,0),tL=guides.reduce((a,g)=>a+g.wk_lt,0),tLQ=guides.reduce((a,g)=>a+g.wk_lt_qty,0);
+    const tW28=guides.reduce((a,g)=>a+(g.wk28_sales||0),0);
+    const tWow=tW28>0?((tS-tW28)/tW28*100):null;
+    const tWb=isNA(tWow)?'<span class="badge gray">N/A</span>':(tWow>=0?'<span class="badge green">+'+tWow.toFixed(1)+'%</span>':'<span class="badge red">'+tWow.toFixed(1)+'%</span>');
+    gHtml+='<tr style="background:#05966915;font-weight:700"><td class="store-name">合计</td><td>-</td><td>'+fmtAmt(tS)+'</td><td>'+tWb+'</td><td>'+tC+'</td><td>'+tQ+'件</td><td>¥'+Math.round(tS/Math.max(tC,1))+'</td><td>'+(tQ/Math.max(tC,1)).toFixed(2)+'</td><td>'+(tW>0?fmtAmt(tW):'-')+'</td><td>'+(tL>0?fmtAmt(tL):'-')+'</td><td>'+tLQ+'件</td></tr>';
+    gHtml+='</tbody>';
+    document.getElementById('guideTable').innerHTML=gHtml;
+    if(wkJdAvg!==null){const _note=document.createElement('div');_note.style.cssText='font-size:11px;color:#dc2626;margin-top:4px';_note.textContent='🔴 本周连带率低于本店导购均值（'+wkJdAvg.toFixed(2)+'）已标红';document.getElementById('guideTable').parentNode.appendChild(_note);}
+  }
+}
+
+function renderComparison(){
+  const r=DATA['_region'];
+  const cvo=(DATA['_conversion']||{});
+  // Region KPI cards
+  const totAmt=regVal(x=>x.wk_amt);
+  const totW28=regVal(x=>x.wk28_amt||0);
+  const totWow=totW28>0?(totAmt-totW28)/totW28*100:null;
+  const totCnt=regVal(getWeeklyCnt);
+  const totWos=regVal(x=>x.wk_wos);
+  const totLt=regVal(x=>x.wk_lt);
+  const totLtQty=STORE_ORDER.reduce((sum,s)=>sum+DATA[s].daily.reduce((a,x)=>a+(x.lt_qty||0),0),0);
+  const sReg=DATA['_sample_region']||{wk_amt:0,wk_qty:0};
+  const regYoy=r.wk_yoy;
+  const regWkTarget=STORE_ORDER.reduce((sum,s)=>sum+DATA[s].daily.reduce((a,x)=>a+(x.target||0),0),0);
+  const regWkRate=regWkTarget>0?totAmt/regWkTarget*100:0;
+  let html='<div class="kpi-row">'+
+    '<div class="kpi-card"><div class="label">区域WK30周累计</div><div class="value" style="color:#1e293b">'+fmtAmt(totAmt)+'</div><div class="sub">周目标'+fmtAmt(regWkTarget)+' | <span style="color:'+(regWkRate>=50?'#16a34a':'#dc2626')+';font-weight:700">完成率'+regWkRate.toFixed(1)+'%</span></div></div>'+
+    '<div class="kpi-card"><div class="label">区域周环比</div><div class="value '+(isNA(r.wow)?'':colorPct(r.wow))+'">'+(isNA(r.wow)?'N/A':(r.wow>=0?'+':'')+r.wow.toFixed(1)+'%')+'</div><div class="sub">vs WK29</div></div>'+
+    '<div class="kpi-card"><div class="label">区域周同比</div><div class="value '+(isNA(regYoy)?'':colorPct(regYoy))+'">'+(isNA(regYoy)?'N/A':fmtPct(regYoy))+'</div><div class="sub">vs去年同期</div></div>'+
+    '<div class="kpi-card"><div class="label">区域周连带率</div><div class="value blue">'+getRegWkJD().toFixed(2)+'</div><div class="sub">'+totCnt+'笔</div></div>'+
+    '<div class="kpi-card"><div class="label">区域周客单价</div><div class="value blue">\u00a5'+Math.round(getRegWkATV())+'</div><div class="sub">7家门店</div></div>'+
+    '<div class="kpi-card"><div class="label">区域WOS周累计</div><div class="value orange">'+fmtAmt(totWos)+'</div><div class="sub">占比'+(totAmt>0?(totWos/totAmt*100).toFixed(1):0)+'%</div></div>'+
+    '<div class="kpi-card"><div class="label">区域长尾款周累计</div><div class="value purple">'+fmtAmt(totLt)+'</div><div class="sub">'+totLtQty+'件 | 占比'+(totAmt>0?(totLt/totAmt*100).toFixed(1):0)+'%</div></div>'+
+    '<div class="kpi-card"><div class="label">区域样品周累计</div><div class="value" style="color:#9333ea">'+fmtAmt(sReg.wk_amt||0)+'</div><div class="sub">'+(sReg.wk_qty||0)+'件 | 占比'+(totAmt>0?((sReg.wk_amt||0)/totAmt*100).toFixed(1):0)+'%</div></div>'+
+    '</div>';
+
+  // Pre-compute ltSampleData for use in conc() and chart
+  const ltSampleData=STORE_ORDER.map(s=>{
+    const d=DATA[s];
+    const ltQty=d.daily.reduce((a,x)=>a+(x.lt_qty||0),0);
+    const sampD=(DATA['_sample']||{})[s]||{};
+    return{s,ltAmt:d.wk_lt||0,ltQty,ltPct:d.wk_amt>0?(d.wk_lt||0)/d.wk_amt*100:0,sampAmt:sampD.wk_amt||0,sampQty:sampD.wk_qty||0};
+  }).sort((a,b)=>(b.ltAmt+b.sampAmt)-(a.ltAmt+a.sampAmt));
+
+  // Chart 1: Weekly amount comparison (bar)
+  html+='<div class="chart-grid">'+
+    '<div class="chart-card"><h3><span class="icon">\ud83d\udcc8</span> \u5404\u95e8\u5e97WK30\u5468\u7d2f\u8ba1\u9500\u552e&\u5b8c\u6210\u7387\u5bf9\u6bd4</h3><div class="chart-wrap"><canvas id="cmpAmt"></canvas></div>'+
+    conc(function(){const sr=STORE_ORDER.map(s=>{const d=DATA[s];const wt=d.daily.reduce((a,x)=>a+(x.target||0),0);return{s,amt:d.wk_amt,wt,rate:wt>0?d.wk_amt/wt*100:0};}).sort((a,b)=>b.rate-a.rate);return '完成率排名：'+sr.map(x=>x.s+' '+x.rate.toFixed(1)+'%').join('、')+'。';}(),function(){const sr=STORE_ORDER.map(s=>{const d=DATA[s];const wt=d.daily.reduce((a,x)=>a+(x.target||0),0);return{s,amt:d.wk_amt,wt,rate:wt>0?d.wk_amt/wt*100:0};}).sort((a,b)=>b.rate-a.rate);const avgRate=sr.reduce((a,x)=>a+x.rate,0)/sr.length;const below=sr.filter(x=>x.rate<avgRate);const above=sr.filter(x=>x.rate>=avgRate);let o='';if(below.length>0)o+='低于区域均值（'+avgRate.toFixed(1)+'%）的门店：'+below.map(x=>x.s+'('+x.rate.toFixed(1)+'%,差'+(avgRate-x.rate).toFixed(1)+'pct)').join('、')+'，需重点跟进目标达成。';if(above.length>0)o+=above.map(x=>x.s+'('+x.rate.toFixed(1)+'%)').join('、')+'完成率领先，可提炼经验推广。';return o||'各门店完成率较为均衡。';}())+'</div>'+
+    '<div class="chart-card"><h3><span class="icon">\ud83d\udcca</span> \u5404\u95e8\u5e97\u5468\u540c\u6bd4\u5bf9\u6bd4</h3><div class="chart-wrap"><canvas id="cmpYoy"></canvas></div>'+
+    conc('\u5468\u540c\u6bd4\u6700\u9ad8'+STORE_ORDER.map(s=>({s:s,v:DATA[s].wk_yoy})).filter(x=>!isNA(x.v)).sort((a,b)=>b.v-a.v)[0]?.s+'('+fmtPct(STORE_ORDER.map(s=>({s:s,v:DATA[s].wk_yoy})).filter(x=>!isNA(x.v)).sort((a,b)=>b.v-a.v)[0]?.v)+')\uff0c\u533a\u57df'+fmtPct(regYoy)+'\u3002',function(){const sy=STORE_ORDER.map(s=>({s,v:DATA[s].wk_yoy})).filter(x=>!isNA(x.v));const neg=sy.filter(x=>x.v<0);if(neg.length>0)return neg.map(x=>x.s+'('+fmtPct(x.v)+')').join('、')+'同比下滑，需重点关注其品类结构调整和竞品分流影响。';if(regYoy<0)return '区域整体同比下滑，需检视去年同期爆款是否缺货，调整品类结构。';return '区域同比表现良好，保持品类结构和渠道策略。';}())+'</div></div>';
+
+  // Chart 3: ATV & JD comparison
+  html+='<div class="chart-grid">'+
+    '<div class="chart-card"><h3><span class="icon">\ud83d\udd29</span> \u5404\u95e8\u5e97\u5ba2\u5355\u4ef7&\u8fde\u5e26\u7387\u5bf9\u6bd4</h3><div class="chart-wrap"><canvas id="cmpAtvJd"></canvas></div>'+
+    conc('\u5ba2\u5355\u4ef7\u6700\u9ad8'+STORE_ORDER.map(s=>({s:s,v:getWeeklyATV(s)})).sort((a,b)=>b.v-a.v)[0]?.s+'(\u00a5'+Math.round(STORE_ORDER.map(s=>({s:s,v:getWeeklyATV(s)})).sort((a,b)=>b.v-a.v)[0]?.v)+')\uff0c\u8fde\u5e26\u7387\u6700\u9ad8'+STORE_ORDER.map(s=>({s:s,v:getWeeklyJD(s)})).sort((a,b)=>b.v-a.v)[0]?.s+'('+STORE_ORDER.map(s=>({s:s,v:getWeeklyJD(s)})).sort((a,b)=>b.v-a.v)[0]?.v.toFixed(2)+')\u3002',function(){const atvV=STORE_ORDER.map(s=>({s,v:getWeeklyATV(s)})).sort((a,b)=>b.v-a.v);const jdV=STORE_ORDER.map(s=>({s,v:getWeeklyJD(s)})).sort((a,b)=>b.v-a.v);const ratv=getRegWkATV(),rjd=getRegWkJD();const atvBelow=atvV.filter(x=>x.v<ratv);const jdBelow=jdV.filter(x=>x.v<rjd);let t='';if(atvBelow.length>0)t+=atvBelow.map(x=>x.s+'(\u00a5'+Math.round(x.v)+',差\u00a5'+Math.round(ratv-x.v)+')').join('\u3001')+'\u5ba2\u5355\u4ef7\u4f4e\u4e8e\u533a\u57df\u5747\u503c\u00a5'+Math.round(ratv)+'\uff0c\u5efa\u8bae\u5f15\u5bfc\u9ad8\u4ef7\u5957\u88c5\u548c\u9650\u5b9a\u6b3e\u63a8\u8d2d\u3002';if(jdBelow.length>0)t+=jdBelow.map(x=>x.s+'('+x.v.toFixed(2)+',差'+(rjd-x.v).toFixed(2)+')').join('\u3001')+'\u8fde\u5e26\u7387\u4f4e\u4e8e\u533a\u57df\u5747\u503c'+rjd.toFixed(2)+'\uff0c\u5efa\u8bae\u5f3a\u5316\u8d44\u5bd3\u63a8\u8d2d\u8bdd\u672f\u3002';return t||'\u5404\u95e8\u5e97\u5ba2\u5355\u4ef7\u548c\u8fde\u5e26\u7387\u5747\u8fbe\u533a\u57df\u5747\u503c\uff0c\u4fdd\u6301\u63a8\u8d2d\u7b56\u7565\u3002';}())+'</div>'+
+    '<div class="chart-card"><h3><span class="icon">\ud83d\udcc9</span> \u5404\u95e8\u5e97WK29 vs WK30\u5468\u73af\u6bd4</h3><div class="chart-wrap"><canvas id="cmpWow"></canvas></div>'+
+    conc('\u5468\u73af\u6bd4\u6700\u4f73'+STORE_ORDER.map(s=>({s:s,v:DATA[s].wow})).filter(x=>!isNA(x.v)).sort((a,b)=>b.v-a.v)[0]?.s+'('+(STORE_ORDER.map(s=>({s:s,v:DATA[s].wow})).filter(x=>!isNA(x.v)).sort((a,b)=>b.v-a.v)[0]?.v>=0?'+':'')+STORE_ORDER.map(s=>({s:s,v:DATA[s].wow})).filter(x=>!isNA(x.v)).sort((a,b)=>b.v-a.v)[0]?.v.toFixed(1)+'%)\uff0c\u533a\u57df'+(isNA(r.wow)?'N/A':(r.wow>=0?'+':'')+r.wow.toFixed(1)+'%')+'\u3002',function(){const wv=STORE_ORDER.map(s=>({s,v:DATA[s].wow})).filter(x=>!isNA(x.v));const reWow=isNA(r.wow)?0:r.wow;const below=wv.filter(x=>x.v<reWow);const neg=wv.filter(x=>x.v<-5);let o='';if(below.length>0&&!isNA(r.wow))o+='低于区域周环比（'+fmtPct(r.wow)+'）的门店：'+below.map(x=>x.s+'('+fmtPct(x.v)+')').join('\u3001')+'\uff0c\u9700\u590d\u76d8\u5ba2\u6d41\u8f6c\u5316\u53d8\u5316\u3002';if(neg.length>0)o+=neg.map(x=>x.s+'('+x.v.toFixed(1)+'%)').join('\u3001')+'\u73af\u6bd4\u4e0b\u6ed1\u8f83\u5927\uff0c\u91cd\u70b9\u5173\u6ce8\u7ade\u54c1\u548c\u4fc3\u9500\u5f71\u54cd\u3002';return o||'\u5404\u95e8\u5e97\u73af\u6bd4\u57fa\u672c\u5e73\u7a33\uff0c\u5173\u6ce8\u5468\u672b\u9ad8\u5cf0\u51b2\u91cf\u3002';}())+'</div></div>';
+
+
+  // 门店WK30周成交率 & 长尾款 对比（半宽并排，第三排）
+  const wcvo=(DATA['_weekly_conversion']||{});
+  const convData=STORE_ORDER.map(s=>({s,v:wcvo[s]?wcvo[s].rate:0,flow:wcvo[s]?wcvo[s].flow:0,cnt:wcvo[s]?wcvo[s].cnt:0})).sort((a,b)=>b.v-a.v);
+  const rConv=wcvo._region||{};
+  html+='<div class="chart-grid">'+
+    '<div class="chart-card"><h3><span class="icon">📦</span> 各门店长尾款 & 样品销售周累计对比（标注占比）</h3><div class="chart-wrap"><canvas id="cmpLtSample"></canvas></div>'+
+    conc('区域长尾款周累计'+fmtAmt(totLt)+'（'+totLtQty+'件，占比'+(totAmt>0?(totLt/totAmt*100).toFixed(1):0)+'%）。各门店长尾款占比：'+ltSampleData.filter(x=>x.ltAmt>0).map(x=>x.s+x.ltPct.toFixed(1)+'%').join('、')+'。样品周累计'+fmtAmt(sReg.wk_amt||0)+'（'+(sReg.wk_qty||0)+'件）。',function(){const lpct=totAmt>0?totLt/totAmt*100:0;if(lpct<8)return '区域长尾款占比偏低（'+lpct.toFixed(1)+'%），建议统一部署79款SKU推荐话术培训和收银台陈列优化。';if(lpct>15)return '区域长尾款占比优秀（'+lpct.toFixed(1)+'%），保持当前关联推荐策略。';return '长尾款占比适中，关注各门店间均衡性。';}())+
+    '</div>'+
+    '<div class="chart-card"><h3><span class="icon">🎯</span> 各门店WK29周成交率对比（WK29笔数/客流量）</h3><div class="chart-wrap"><canvas id="cmpConv"></canvas></div>'+
+    conc('区域WK29周成交率'+(rConv.rate?rConv.rate.toFixed(2):'N/A')+'%（WK29成交'+(rConv.cnt||0)+'笔 ÷ WK29客流'+(rConv.flow||0)+'人次）。各店：'+convData.map(x=>x.s+x.v.toFixed(2)+'%').join('、')+'。',function(){const avg=convData.reduce((a,x)=>a+x.v,0)/convData.length;const below=convData.filter(x=>x.v<avg);let o='';if(below.length>0)o+='低于区域均值（'+avg.toFixed(2)+'%）的门店：'+below.map(x=>x.s+'('+x.v.toFixed(2)+'%,差'+(avg-x.v).toFixed(2)+'pct)').join('、')+'，客流未有效转化为笔数，需提升进店转化（橱窗陈列/试玩体验/导购拦截话术）。';else o+='各门店成交率较为均衡。';const best=convData[0],worst=convData[convData.length-1];o+='最高'+best.s+'('+best.v.toFixed(2)+'%)与最低'+worst.s+'('+worst.v.toFixed(2)+'%)相差'+(best.v-worst.v).toFixed(2)+'pct，差距明显可对标提升。';return o;}())+
+    '</div></div>';
+
+  // WOS & JL comparison + Series proportion
+  const totJl=regVal(x=>x.wk_jl);
+  html+='<div class="chart-grid">'+
+    '<div class="chart-card"><h3><span class="icon">\u26a1</span> \u5404\u95e8\u5e97WOS & \u5373\u65f6\u96f6\u552e\u5468\u7d2f\u8ba1\u5bf9\u6bd4</h3><div class="chart-wrap"><canvas id="cmpWosJl"></canvas></div>'+
+    conc('WOS\u5468\u7d2f\u8ba1'+fmtAmt(totWos)+'\uff08\u5360\u6bd4'+(totAmt>0?(totWos/totAmt*100).toFixed(1):0)+'%\uff09\uff0c\u5373\u65f6\u96f6\u552e'+fmtAmt(totJl)+'\uff08\u5360\u6bd4'+(totAmt>0?(totJl/totAmt*100).toFixed(1):0)+'%\uff09\u3002',function(){const wpct=totAmt>0?totWos/totAmt*100:0,jpct=totAmt>0?totJl/totAmt*100:0;const lowW=STORE_ORDER.filter(s=>DATA[s].wk_amt>0&&DATA[s].wk_wos/DATA[s].wk_amt*100<3);let t='';if(wpct+jpct<10)t='WOS+即时零售合计占比不足10%，建议加大线上渠道投放力度，特别是美团/饿了么专属活动。';else if(wpct+jpct>20)t='线上渠道占比超过20%，多渠道运营成熟，保持投放节奏。';else t='线上渠道占比中等，建议适度增加即时零售平台曝光和WOS直播频次。';if(lowW.length>0)t+=' '+lowW.join('、')+'WOS占比偏低，需重点提升线上运营能力。';return t;}())+'</div>'+
+    '<div class="chart-card"><h3><span class="icon">\ud83d\udcca</span> \u533a\u57df\u4ea7\u54c1\u7cfb\u5217\u7ed3\u6784\uff08WK30\uff09</h3><div class="chart-wrap"><canvas id="cmpRegSeries"></canvas></div>'+
+    conc(function(){const rs=(DATA['_series']||{})['_region']||{};const ents=Object.entries(rs).sort((a,b)=>b[1]-a[1]);if(ents.length===0)return '\u6682\u65e0\u7cfb\u5217\u6570\u636e\u3002';const top10=ents.slice(0,10);const t3pct=totAmt>0?ents.slice(0,3).reduce((a,[,v])=>a+v,0)/totAmt*100:0;const botAmt=ents.reduce((a,[k,v])=>k.toUpperCase().includes('BOTANICAL')?a+v:a,0);const botPct=totAmt>0?botAmt/totAmt*100:0;return '\u533a\u57dfTOP10\u7cfb\u5217\uff1a'+top10.map(([k,v])=>k+'('+fmtAmt(v)+',\u5360\u6bd4'+(totAmt>0?(v/totAmt*100).toFixed(1):0)+'%)').join('\u3001')+'\uff1bTOP3\u5408\u8ba1\u5360\u6bd4'+t3pct.toFixed(1)+'%\u3002BOTANICALS\u690d\u7269\u7cfb\u5217\u5360\u6bd4'+botPct.toFixed(1)+'%\uff08\u6307\u68074.1%\uff09\u3002';}(),function(){const rs=(DATA['_series']||{})['_region']||{};const ents=Object.entries(rs).sort((a,b)=>b[1]-a[1]);if(ents.length===0)return '';const top3=ents.slice(0,3);const top5=ents.slice(0,5);const t3pct=totAmt>0?top3.reduce((a,[,v])=>a+v,0)/totAmt*100:0;let o='';if(t3pct>65)o+='区域TOP3系列占比过高（'+t3pct.toFixed(1)+'%），建议丰富中长尾系列陈列和推荐。';else if(t3pct<30)o+='系列分布过于分散，建议集中打造1-2个主推系列。';else o+='系列结构均衡，保持当前推荐策略。';const focusTop3=['CITY','TECHNIC','NINJAGO'];const missingTop3=focusTop3.filter(n=>!top3.some(([k])=>k.toUpperCase().includes(n)));if(missingTop3.length>0)o+='重点系列'+missingTop3.join('、')+'未进TOP3，建议加强陈列和推荐。';const inTop3=focusTop3.filter(n=>top3.some(([k])=>k.toUpperCase().includes(n)));if(inTop3.length>0)o+='重点系列'+inTop3.join('、')+'在TOP3表现良好。';if(!top5.some(([k])=>k.toUpperCase().includes('MINECRAFT')))o+='MINECRAFT未进TOP5，需关注沙盒游戏IP粉丝群体引流。';const botAmt=ents.reduce((a,[k,v])=>k.toUpperCase().includes('BOTANICAL')?a+v:a,0);const botPct=totAmt>0?botAmt/totAmt*100:0;if(botAmt>0){o+='BOTANICALS植物系列占比'+botPct.toFixed(1)+'%（指标4.1%）';if(botPct<4.1)o+='，低于指标，需加强植物系列陈列和推荐。';else o+='，达到指标。';}else{o+='BOTANICALS植物系列无销售，低于指标4.1%，建议关注植物系列铺货和推荐。';}return o;}())+'</div></div>';
+
+
+
+  // Regional TOP10 products
+  html+='<div class="chart-grid full"><div class="chart-card"><h3><span class="icon">\ud83c\udfc6</span> \u533a\u57dfTOP10\u4ea7\u54c1\u5468\u9500\u6392\u540d\uff08\u542b\u4ef6\u6570\uff09</h3><div class="chart-wrap"><canvas id="cmpRegProducts"></canvas></div>'+
+    conc(function(){const rp=(DATA['_products']||{})['_region']||{};const ents=Object.entries(rp).map(([k,v])=>[k,v.amt||v,v.qty||0]).sort((a,b)=>b[1]-a[1]).slice(0,3);if(ents.length===0)return '\u6682\u65e0\u4ea7\u54c1\u6570\u636e\u3002';return '\u533a\u57dfTOP3\u4ea7\u54c1\uff1a'+ents.map(([n,a,q])=>n+'('+fmtAmt(a)+','+q+'\u4ef6)').join('\u3001')+'\u3002';}(),function(){const rp=(DATA['_products']||{})['_region']||{};const ents=Object.entries(rp).map(([k,v])=>[k,v.amt||v,v.qty||0]).sort((a,b)=>b[1]-a[1]);if(ents.length===0)return '';const t1=ents[0];const t1pct=totAmt>0?t1[1]/totAmt*100:0;let o='';if(t1pct>20)o+='TOP1产品占比'+t1pct.toFixed(1)+'%，依赖度高，需关注库存和缺货风险。';else o+='区域产品结构多元，无过度依赖单品的风险。';const newProds=DATA['_new_products']||[];if(newProds.length>0){const top10Names=ents.slice(0,10).map(([k])=>k);const newInTop=newProds.filter(np=>top10Names.some(tn=>tn.includes(np)||np.includes(tn)));if(newInTop.length>0)o+='当月新品「'+newInTop.join('、')+'」进入区域TOP10，表现突出，建议加大陈列推荐。';else o+='当月新品无进入区域TOP10，需关注新品陈列位置和推荐话术。';}return o;}())+'</div></div>';
+
+  // Summary table
+  html+='<div class="chart-grid full"><div class="chart-card"><h3><span class="icon">\ud83d\udccb</span> \u533a\u57df\u5468\u7ef4\u5ea6\u6c47\u603b\u8868</h3><table class="summary-table" id="cmpTable"></table></div></div>';
+
+  // All guides ranking
+  html+='<div class="chart-grid full"><div class="chart-card"><h3><span class="icon">\ud83d\udc69</span> \u5168\u533a\u57df\u5bfc\u8d2d\u5468\u9500\u552e\u6392\u540d\uff08\u5468\u73af\u6bd4\uff09</h3><div class="chart-wrap tall" style="height:500px;"><canvas id="cmpGuides"></canvas></div>'+
+    conc(function(){const all=[];STORE_ORDER.forEach(s=>{(DATA['_guides']||{})[s]?.forEach(g=>all.push(g));});all.sort((a,b)=>b.wk_sales-a.wk_sales);if(all.length===0)return '\u6682\u65e0\u5bfc\u8d2d\u6570\u636e\u3002';const t=all[0];return '\u5468\u9500\u552e\u6392\u540d\u7b2c\u4e00'+t.name+'('+t.store+')'+fmtAmt(t.wk_sales)+'\uff0c\u5468\u73af\u6bd4'+(isNA(t.wow)?'N/A':(t.wow>=0?'+':'')+t.wow.toFixed(1)+'%')+'\u3002';}(),function(){const all=[];STORE_ORDER.forEach(s=>{(DATA['_guides']||{})[s]?.forEach(g=>all.push(g));});all.sort((a,b)=>b.wk_sales-a.wk_sales);if(all.length===0)return '';const regAvg=all.filter(g=>g.wk_sales>0).reduce((a,g)=>a+g.wk_sales,0)/all.filter(g=>g.wk_sales>0).length;const below=all.filter(g=>g.wk_sales>0&&g.wk_sales<regAvg*0.7);const neg=all.filter(g=>!isNA(g.wow)&&g.wow<-8);let o='';if(below.length>0)o+='⚠️ 低于区域均值¥'+Math.round(regAvg)+'的导购：'+below.map(g=>g.name+'('+g.store+',¥'+Math.round(g.wk_sales)+')').join('\u3001')+'\uff0c\u9700\u91cd\u70b9\u8fdb\u884c\u9500\u552e\u8f85\u5bfc\u548c\u590d\u76d8\u3002';if(neg.length>0)o+=neg.map(g=>g.name+'('+g.store+', '+g.wow.toFixed(1)+'%)').join('\u3001')+'\u73af\u6bd4\u660e\u663e\u4e0b\u6ed1\uff0c\u9700\u590d\u76d8\u5ba2\u6d41\u53d8\u5316\u548c\u63a8\u8d2d\u8f6c\u5316\u3002';const top1=all[0];const topPct=all.reduce((a,g)=>a+g.wk_sales,0)>0?top1.wk_sales/all.reduce((a,g)=>a+g.wk_sales,0)*100:0;if(topPct>40)o+='TOP1\u5bfc\u8d2d\u5360\u533a\u57df'+topPct.toFixed(1)+'%\uff0c\u5efa\u8bae\u5934\u90e8\u7ecf\u9a8c\u5206\u4eab\u590d\u5236\u3002';return o||'\u5bfc\u8d2d\u56e2\u961f\u6574\u4f53\u5e73\u7a33\uff08\u533a\u57df\u4eba\u5747¥'+Math.round(regAvg)+'\uff09\uff0c\u7ee7\u7eed\u5173\u6ce8\u5468\u672b\u9ad8\u5cf0\u51b2\u91cf\u3002';}())+'</div></div>';
+
+  document.getElementById('content').innerHTML=html;
+  Object.values(charts).forEach(c=>c&&c.destroy());charts={};
+
+  // Chart 1: Weekly amount + completion rate (sorted by rate)
+  const storeRates=STORE_ORDER.map(s=>{const d=DATA[s];const wt=d.daily.reduce((a,x)=>a+(x.target||0),0);return{s,v:d.wk_amt,target:wt,rate:wt>0?d.wk_amt/wt*100:0};}).sort((a,b)=>b.rate-a.rate);
+  charts.cmpAmt=new Chart(document.getElementById('cmpAmt'),{
+    data:{labels:storeRates.map(x=>x.s+'\n'+x.rate.toFixed(1)+'%'),datasets:[
+      {type:'bar',label:'\u5468\u7d2f\u8ba1',data:storeRates.map(x=>x.v),backgroundColor:storeRates.map(x=>STORE_COLORS[x.s]+'cc'),borderColor:storeRates.map(x=>STORE_COLORS[x.s]),borderWidth:1,borderRadius:6,yAxisID:'y'},
+      {type:'line',label:'\u5b8c\u6210\u7387',data:storeRates.map(x=>x.rate),borderColor:'#dc2626',backgroundColor:'transparent',borderWidth:2,pointRadius:5,pointBackgroundColor:'#dc2626',tension:.3,yAxisID:'y1'}
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{position:'top'},tooltip:{callbacks:{label:ctx=>{const x=storeRates[ctx.dataIndex];if(ctx.dataset.type==='line')return '\u5b8c\u6210\u7387: '+x.rate.toFixed(1)+'%';return '\u5468\u9500\u552e: '+fmtAmt(x.v)+' | \u5468\u6307\u6807: '+fmtAmt(x.target)+' | \u5b8c\u6210\u7387: '+x.rate.toFixed(1)+'%';}}}},
+      scales:{y:{position:'left',title:{display:true,text:'\u5468\u7d2f\u8ba1(\u00a5)'},ticks:{callback:v=>fmtAmt(v)}},y1:{position:'right',title:{display:true,text:'\u5b8c\u6210\u7387(%)'},grid:{drawOnChartArea:false},ticks:{callback:v=>v+'%'}}}}
+  });
+
+  // Chart 2: YoY
+  const yoyData=STORE_ORDER.map(s=>({s,v:DATA[s].wk_yoy}));
+  charts.cmpYoy=new Chart(document.getElementById('cmpYoy'),{
+    type:'bar',
+    data:{labels:yoyData.map(x=>x.s),datasets:[{label:'\u5468\u540c\u6bd4',data:yoyData.map(x=>x.v),backgroundColor:yoyData.map(x=>isNA(x.v)?'#e2e8f0':(x.v>=0?'#16a34acc':'#dc2626cc')),borderColor:yoyData.map(x=>isNA(x.v)?'#94a3b8':(x.v>=0?'#16a34a':'#dc2626')),borderWidth:1,borderRadius:6}]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>isNA(ctx.raw)?'N/A':'\u5468\u540c\u6bd4: '+(ctx.raw>=0?'+':'')+ctx.raw.toFixed(1)+'%'}}},
+      scales:{y:{ticks:{callback:v=>v+'%'}}}}
+  });
+
+  // Chart 3: ATV & JD (dual axis)
+  charts.cmpAtvJd=new Chart(document.getElementById('cmpAtvJd'),{
+    data:{labels:STORE_ORDER,datasets:[
+      {type:'bar',label:'\u5ba2\u5355\u4ef7',data:STORE_ORDER.map(s=>getWeeklyATV(s)),backgroundColor:'#0ea5e9cc',borderColor:'#0ea5e9',borderWidth:1,borderRadius:4,yAxisID:'y'},
+      {type:'line',label:'\u8fde\u5e26\u7387',data:STORE_ORDER.map(s=>getWeeklyJD(s)),borderColor:'#dc2626',backgroundColor:'transparent',borderWidth:2,pointRadius:6,pointBackgroundColor:'#dc2626',tension:.3,yAxisID:'y1'}
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{position:'top'},tooltip:{callbacks:{label:ctx=>{if(ctx.dataset.label.includes('\u5ba2\u5355'))return '\u5ba2\u5355\u4ef7: \u00a5'+Math.round(ctx.raw);return '\u8fde\u5e26\u7387: '+ctx.raw.toFixed(2)}}}},
+      scales:{y:{position:'left',title:{display:true,text:'\u5ba2\u5355\u4ef7(\u00a5)'},ticks:{callback:v=>'\u00a5'+v}},y1:{position:'right',title:{display:true,text:'\u8fde\u5e26\u7387'},grid:{drawOnChartArea:false},ticks:{callback:v=>v.toFixed(1)}}}}
+  });
+
+  // Chart 4: WoW
+  const wowData=STORE_ORDER.map(s=>({s,v:DATA[s].wow}));
+  charts.cmpWow=new Chart(document.getElementById('cmpWow'),{
+    type:'bar',
+    data:{labels:wowData.map(x=>x.s),datasets:[
+      {label:'WK29',data:wowData.map(x=>DATA[x.s].wk28_amt||0),backgroundColor:'#94a3b880',borderColor:'#64748b',borderWidth:1,borderRadius:4},
+      {label:'WK30',data:wowData.map(x=>DATA[x.s].wk_amt||0),backgroundColor:wowData.map(x=>STORE_COLORS[x.s]+'cc'),borderColor:wowData.map(x=>STORE_COLORS[x.s]),borderWidth:1,borderRadius:4}
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{position:'top'},tooltip:{callbacks:{label:ctx=>ctx.dataset.label+': '+fmtAmt(ctx.raw)}}},
+      scales:{y:{ticks:{callback:v=>fmtAmt(v)}}}}
+  });
+
+  // Chart 5: WOS & JL comparison
+  charts.cmpWosJl=new Chart(document.getElementById('cmpWosJl'),{
+    type:'bar',
+    data:{labels:STORE_ORDER,datasets:[
+      {label:'WOS',data:STORE_ORDER.map(s=>DATA[s].wk_wos),backgroundColor:'#0284c7cc',borderColor:'#0284c7',borderWidth:1,borderRadius:4},
+      {label:'\u5373\u65f6\u96f6\u552e',data:STORE_ORDER.map(s=>DATA[s].wk_jl),backgroundColor:'#ea580ccc',borderColor:'#ea580c',borderWidth:1,borderRadius:4}
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{position:'top'},tooltip:{callbacks:{label:ctx=>ctx.dataset.label+': '+fmtAmt(ctx.raw)}}},
+      scales:{y:{ticks:{callback:v=>fmtAmt(v)}}}}
+  });
+
+  // Chart: Combined long-tail & sample comparison
+  charts.cmpLtSample=new Chart(document.getElementById('cmpLtSample'),{
+    type:'bar',
+    data:{labels:ltSampleData.map(x=>x.s),datasets:[
+      {label:'\u957f\u5c3e\u6b3e',data:ltSampleData.map(x=>x.ltAmt),backgroundColor:'#ea580ccc',borderColor:'#ea580c',borderWidth:1,borderRadius:4},
+      {label:'\u6837\u54c1',data:ltSampleData.map(x=>x.sampAmt),backgroundColor:'#9333eacc',borderColor:'#9333ea',borderWidth:1,borderRadius:4}
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{position:'top'},tooltip:{callbacks:{label:ctx=>{const x=ltSampleData[ctx.dataIndex];if(ctx.datasetIndex===0)return '\u957f\u5c3e\u6b3e: '+fmtAmt(x.ltAmt)+' ('+x.ltQty+'\u4ef6, \u5360\u6bd4'+x.ltPct.toFixed(1)+'%)';return '\u6837\u54c1: '+fmtAmt(x.sampAmt)+' ('+x.sampQty+'\u4ef6)';}}}},
+      scales:{y:{ticks:{callback:v=>fmtAmt(v)}}}}
+  });
+
+  // Chart 6: Regional series doughnut
+  const rs=(DATA['_series']||{})['_region']||{};
+  const rse=Object.entries(rs).sort((a,b)=>b[1]-a[1]);
+  const rtop10=rse.slice(0,10),roth=rse.slice(10).reduce((a,[,v])=>a+v,0);
+  charts.cmpRegSeries=new Chart(document.getElementById('cmpRegSeries'),{
+    type:'doughnut',
+    data:{labels:rtop10.map(([k])=>k).concat(roth>0?['\u5176\u4ed6']:[]),datasets:[{data:rtop10.map(([,v])=>v).concat(roth>0?[roth]:[]),backgroundColor:SC.slice(0,rtop10.length+(roth>0?1:0)),borderWidth:2,borderColor:'#fff'}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{font:{size:11},padding:6}},tooltip:{callbacks:{label:ctx=>{const pct=totAmt>0?(ctx.raw/totAmt*100).toFixed(1):0;return ctx.label+': '+fmtAmt(ctx.raw)+' ('+pct+'%)'}}}},cutout:'55%'}
+  });
+
+  // Chart 7: Regional TOP10 products
+  const rp=(DATA['_products']||{})['_region']||{};
+  const rpEnts=Object.entries(rp).map(([k,v])=>[k,v.amt||v,v.qty||0]).sort((a,b)=>b[1]-a[1]).slice(0,10);
+  charts.cmpRegProducts=new Chart(document.getElementById('cmpRegProducts'),{
+    type:'bar',
+    data:{labels:rpEnts.map(([k])=>k),datasets:[{label:'\u5468\u9500\u552e',data:rpEnts.map(([k,a,q])=>a),backgroundColor:SC.slice(0,rpEnts.length).map(c=>c+'cc'),borderColor:SC.slice(0,rpEnts.length),borderWidth:1,borderRadius:4}]},
+    options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>{const idx=ctx.dataIndex;const [n,a,q]=rpEnts[idx];const pct=totAmt>0?(a/totAmt*100).toFixed(1):0;return n+': '+fmtAmt(a)+' ('+pct+'%, '+q+'\u4ef6)'}}}},
+      scales:{x:{ticks:{callback:v=>fmtAmt(v)}}}}
+  });
+
+  // Chart: 门店WK30周成交率
+  charts.cmpConv=new Chart(document.getElementById('cmpConv'),{
+    type:'bar',
+    data:{labels:convData.map(x=>x.s),datasets:[{label:'周成交率',data:convData.map(x=>x.v),backgroundColor:convData.map(x=>STORE_COLORS[x.s]+'cc'),borderColor:convData.map(x=>STORE_COLORS[x.s]),borderWidth:1,borderRadius:6}]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>{const x=convData[ctx.dataIndex];return '周成交率: '+x.v.toFixed(2)+'% | 笔数'+x.cnt+' / 客流'+x.flow;}}}},
+      scales:{y:{ticks:{callback:v=>v+'%'}}}}
+  });
+
+  // Summary table
+  let tHtml='<thead><tr><th>\u95e8\u5e97</th><th>\u5468\u7d2f\u8ba1</th><th>\u5468\u73af\u6bd4</th><th>\u5468\u540c\u6bd4</th><th>\u7b14\u6570</th><th>\u5ba2\u5355\u4ef7</th><th>\u8fde\u5e26\u7387</th><th>周成交率</th><th>WOS</th><th>\u5373\u65f6\u96f6\u552e</th><th>\u957f\u5c3e\u6b3e</th><th>\u957f\u5c3e\u4ef6\u6570</th><th>\u6837\u54c1</th><th>\u6837\u54c1\u4ef6\u6570</th><th>\u957f\u5c3e\u5360\u6bd4</th></tr></thead><tbody>';
+  // 区域均值（区域汇总表低于均值标红）
+  const regWkAmtAvg=totAmt/STORE_ORDER.length;
+  const regWkCntAvg=totCnt/STORE_ORDER.length;
+  const regWkATV=getRegWkATV();
+  const regWkJD=getRegWkJD();
+  const regWkLtPctAvg=STORE_ORDER.reduce((a,s)=>a+(DATA[s].wk_amt>0?(DATA[s].wk_lt/DATA[s].wk_amt*100):0),0)/STORE_ORDER.length;
+  STORE_ORDER.forEach(s=>{
+    const d=DATA[s];const atv=getWeeklyATV(s),jd=getWeeklyJD(s),cnt=getWeeklyCnt(s);
+    const lpct=d.wk_amt>0?(d.wk_lt/d.wk_amt*100):0;
+    const ltQ=d.daily.reduce((a,x)=>a+(x.lt_qty||0),0);
+    const sampD=(DATA['_sample']||{})[s]||{};
+    const wb=isNA(d.wow)?'<span class="badge gray">N/A</span>':(d.wow>=0?'<span class="badge green">+'+d.wow.toFixed(1)+'%</span>':'<span class="badge red">'+d.wow.toFixed(1)+'%</span>');
+    const yb=isNA(d.wk_yoy)?'<span class="badge gray">N/A</span>':(d.wk_yoy>=0?'<span class="badge green">+'+d.wk_yoy.toFixed(1)+'%</span>':'<span class="badge red">'+d.wk_yoy.toFixed(1)+'%</span>');
+    tHtml+='<tr><td class="store-name" style="color:'+STORE_COLORS[s]+'">'+s+'</td><td style="font-weight:700'+(d.wk_amt<regWkAmtAvg?';color:#dc2626':'')+'">'+fmtAmt(d.wk_amt)+'</td><td>'+wb+'</td><td>'+yb+'</td><td'+(cnt<regWkCntAvg?' style="color:#dc2626;font-weight:700"':'')+'>'+cnt+'</td><td'+(atv<regWkATV?' style="color:#dc2626;font-weight:700"':'')+'>¥'+Math.round(atv)+'</td><td'+(jd<regWkJD?' style="color:#dc2626;font-weight:700"':'')+'>'+jd.toFixed(2)+'</td><td style="color:'+((wcvo[s]&&wcvo[s].rate>=rConv.rate)?'#16a34a':'#dc2626')+';font-weight:700">'+((wcvo[s]&&wcvo[s].rate)?wcvo[s].rate.toFixed(2):'N/A')+'%</td><td>'+fmtAmt(d.wk_wos)+'</td><td>'+fmtAmt(d.wk_jl)+'</td><td>'+fmtAmt(d.wk_lt)+'</td><td>'+ltQ+'\u4ef6</td><td>'+fmtAmt(sampD.wk_amt||0)+'</td><td>'+(sampD.wk_qty||0)+'\u4ef6</td><td style="color:'+(lpct<regWkLtPctAvg?'#dc2626':'#16a34a')+';font-weight:700">'+lpct.toFixed(1)+'%</td></tr>';
+  });
+  // Totals row
+  tHtml+='<tr style="background:#7c3aed10;font-weight:700"><td class="store-name">\u533a\u57df\u5408\u8ba1</td><td>'+fmtAmt(totAmt)+'</td><td>'+(isNA(r.wow)?'<span class="badge gray">N/A</span>':(r.wow>=0?'<span class="badge green">+'+r.wow.toFixed(1)+'%</span>':'<span class="badge red">'+r.wow.toFixed(1)+'%</span>'))+'</td><td>'+(isNA(regYoy)?'<span class="badge gray">N/A</span>':(regYoy>=0?'<span class="badge green">+'+regYoy.toFixed(1)+'%</span>':'<span class="badge red">'+regYoy.toFixed(1)+'%</span>'))+'</td><td>'+totCnt+'</td><td>\u00a5'+Math.round(getRegWkATV())+'</td><td>'+getRegWkJD().toFixed(2)+'</td><td style="color:#16a34a;font-weight:700">'+(rConv.rate?rConv.rate.toFixed(2):'N/A')+'%</td><td>'+fmtAmt(totWos)+'</td><td>'+fmtAmt(totJl)+'</td><td>'+fmtAmt(totLt)+'</td><td>'+totLtQty+'\u4ef6</td><td>'+fmtAmt(sReg.wk_amt||0)+'</td><td>'+(sReg.wk_qty||0)+'\u4ef6</td><td style="color:'+(totAmt>0&&(totLt/totAmt*100)>=10?'#16a34a':'#dc2626')+'">'+(totAmt>0?(totLt/totAmt*100).toFixed(1):0)+'%</td></tr>';
+  tHtml+='</tbody>';
+  document.getElementById('cmpTable').innerHTML=tHtml;
+  // 区域均值标红说明
+  let cmpNote=document.getElementById('cmpTableNote');
+  if(cmpNote) cmpNote.remove();
+  cmpNote=document.createElement('div');
+  cmpNote.id='cmpTableNote';
+  cmpNote.style='margin-top:10px;padding:8px 12px;background:#fef2f2;border:1px solid #fecaca;border-radius:8px;font-size:13px;color:#dc2626;font-weight:700';
+  cmpNote.textContent='🔴 周累计/笔数/客单价/连带率/长尾占比 低于区域均值已标红（周累计¥'+Math.round(regWkAmtAvg)+'、笔数'+Math.round(regWkCntAvg)+'、客单价¥'+Math.round(regWkATV)+'、连带率'+regWkJD.toFixed(2)+'、长尾占比'+regWkLtPctAvg.toFixed(1)+'%）';
+  document.getElementById('cmpTable').parentNode.appendChild(cmpNote);
+
+  // All guides ranking chart (bar=周销售 + line=周环比)
+  const allGuides=[];
+  STORE_ORDER.forEach(s=>{((DATA['_guides']||{})[s]||[]).forEach(g=>allGuides.push(g));});
+  allGuides.sort((a,b)=>b.wk_sales-a.wk_sales);
+  if(allGuides.length>0){
+    charts.cmpGuides=new Chart(document.getElementById('cmpGuides'),{
+      data:{labels:allGuides.map(g=>g.name+'('+g.store+')'),datasets:[
+        {type:'bar',label:'\u5468\u9500\u552e',data:allGuides.map(g=>g.wk_sales),backgroundColor:allGuides.map(g=>STORE_COLORS[g.store]+'cc'),borderColor:allGuides.map(g=>STORE_COLORS[g.store]),borderWidth:1,borderRadius:4,xAxisID:'x'},
+        {type:'line',label:'\u5468\u73af\u6bd4',data:allGuides.map(g=>isNA(g.wow)?null:g.wow),borderColor:'#dc2626',backgroundColor:'transparent',borderWidth:2,pointRadius:5,pointBackgroundColor:allGuides.map(g=>isNA(g.wow)?'#94a3b8':(g.wow>=0?'#16a34a':'#dc2626')),tension:.3,xAxisID:'x1'}
+      ]},
+      options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',
+        plugins:{legend:{position:'top'},tooltip:{callbacks:{label:ctx=>{const g=allGuides[ctx.dataIndex];if(ctx.dataset.label.includes('\u5468\u9500'))return '\u5468\u9500\u552e: '+fmtAmt(g.wk_sales);return '\u5468\u73af\u6bd4: '+(isNA(g.wow)?'N/A':(g.wow>=0?'+':'')+g.wow.toFixed(1)+'%');}}}},
+        scales:{x:{position:'bottom',title:{display:true,text:'\u5468\u9500\u552e(\u00a5)'},ticks:{callback:v=>fmtAmt(v)}},x1:{position:'top',title:{display:true,text:'\u5468\u73af\u6bd4(%)'},grid:{drawOnChartArea:false},ticks:{callback:v=>v+'%'}}}}
+    });
+  }
+}
+
+function selectStore(store){
+  currentStore=store;
+  document.querySelectorAll('.store-tab').forEach(t=>t.classList.toggle('active',t.dataset.store===store));
+  if(store==='\u533a\u57df\u5bf9\u6bd4'){renderComparison();}
+  else{renderStore(store);}
+}
+
+document.addEventListener('DOMContentLoaded',()=>{
+  document.getElementById('genTime').textContent=new Date().toLocaleString('zh-CN');
+  selectStore(currentStore);
+});
+</script>
+</body>
+</html>
