@@ -414,6 +414,14 @@ function renderStore(store){
     gHtml+='</tbody>';
     document.getElementById('guideTable').innerHTML=gHtml;
     if(mJdAvg!==null){const _note=document.createElement('div');_note.style.cssText='font-size:11px;color:#dc2626;margin-top:4px';_note.textContent='🔴 本月连带率低于本店导购均值（'+mJdAvg.toFixed(2)+'）已标红';document.getElementById('guideTable').parentNode.appendChild(_note);}
+    const _gAvg=tS/(guides.length||1);
+    const _gBelow=guides.filter(g=>g.m_sales>0 && g.m_sales<_gAvg*0.7);
+    const _gLow=guides.filter(g=>g.m_rate<30 && g.m_sales>0);
+    const _gTop=guides.slice().sort((a,b)=>b.m_sales-a.m_sales)[0];
+    let _gConcNote=document.createElement('div');
+    _gConcNote.style.cssText='margin-top:10px';
+    _gConcNote.innerHTML=conc('本店'+guides.length+'名导购，月销售合计'+fmtAmt(tS)+'；TOP导购'+(_gTop?_gTop.name+'（'+fmtAmt(_gTop.m_sales)+'）':'-')+'领先。'+(mJdAvg!==null?('其中'+guides.filter(g=>g.m_cnt>0&&g.m_jd<mJdAvg).length+'人连带率低于店均'+mJdAvg.toFixed(2)+'，已标红。'):''),(_gBelow.length>0?('低于店均月销售（¥'+Math.round(_gAvg)+'）的导购：'+_gBelow.map(g=>g.name+'（¥'+Math.round(g.m_sales)+'）').join('、')+'，需加强一对一销售辅导。'):'')+(_gLow.length>0?(_gLow.map(g=>g.name).join('、')+'月完成率不足30%，需重点帮扶。'):'导购团队月销售分布均衡，保持当前带教节奏。'));
+    document.getElementById('guideTable').parentNode.appendChild(_gConcNote);
   }
 }
 
@@ -437,6 +445,8 @@ function renderComparison(){
     '<div class="kpi-card"><div class="label">区域长尾款月累计</div><div class="value purple">'+fmtAmt(totLt)+'</div><div class="sub">'+totLtQty+'件 | 占比'+(totAmt>0?(totLt/totAmt*100).toFixed(1):0)+'%</div></div>'+
     '<div class="kpi-card"><div class="label">区域样品月累计</div><div class="value" style="color:#9333ea">'+fmtAmt(sReg.month_amt||0)+'</div><div class="sub">'+(sReg.month_qty||0)+'件 | 占比'+(totAmt>0?((sReg.month_amt||0)/totAmt*100).toFixed(1):0)+'%</div></div>'+
     '</div>';
+
+  html+=conc('区域本月月累计'+fmtAmt(totAmt)+'，月目标'+fmtAmt(totTarget)+'，完成率'+totRate.toFixed(1)+'%；月同比'+fmtPct(r.yoy)+'，月环比'+(isNA(r.mom)?'N/A':(r.mom>=0?'+':'')+r.mom.toFixed(1)+'%。'),function(){const rates=STORE_ORDER.map(s=>({s,rate:DATA[s].month_rate}));const avg=rates.reduce((a,x)=>a+x.rate,0)/rates.length;const below=rates.filter(x=>x.rate<avg).sort((a,b)=>a.rate-b.rate);const wy=STORE_ORDER.map(s=>({s,v:DATA[s].yoy})).filter(x=>!isNA(x.v)).sort((a,b)=>a.v-b.v)[0];let o='';if(below.length>0)o+='完成率低于区域均值（'+avg.toFixed(1)+'%）的门店：'+below.map(x=>x.s+'('+x.rate.toFixed(1)+'%)').join('、')+'，是区域达标主要短板，建议城市经理驻店帮扶并复盘目标拆解。';if(wy)o+=' '+wy.s+'月同比最低（'+fmtPct(wy.v)+'），需重点排查品类缺货与竞品分流。';return o||'各门店完成率均衡，区域整体达标进度健康。';}());
 
   // Pre-compute ltSampleData for use in conc() and chart
   const ltSampleData=STORE_ORDER.map(s=>{const d=DATA[s];const sampD=(DATA['_sample']||{})[s]||{};return{s,ltAmt:d.month_lt||0,ltQty:d.month_lt_qty||0,ltPct:d.month_amt>0?(d.month_lt||0)/d.month_amt*100:0,sampAmt:sampD.month_amt||0,sampQty:sampD.month_qty||0};}).sort((a,b)=>(b.ltAmt+b.sampAmt)-(a.ltAmt+a.sampAmt));
@@ -614,6 +624,13 @@ function renderComparison(){
   cmpNote.style='margin-top:10px;padding:8px 12px;background:#fef2f2;border:1px solid #fecaca;border-radius:8px;font-size:13px;color:#dc2626;font-weight:700';
   cmpNote.textContent='🔴 月累计/笔数/客单价/连带率/长尾占比 低于区域均值已标红（月累计¥'+Math.round(regMonthAmtAvg)+'、笔数'+Math.round(regMonthCntAvg)+'、客单价¥'+Math.round(regMonthATV)+'、连带率'+regMonthJD.toFixed(2)+'、长尾占比'+regMonthLtPctAvg.toFixed(1)+'%）';
   document.getElementById('cmpTable').parentNode.appendChild(cmpNote);
+  let _cmpConc=document.createElement('div');
+  _cmpConc.style.cssText='margin-top:10px';
+  const _below=STORE_ORDER.filter(s=>DATA[s].month_amt<regMonthAmtAvg);
+  const _dual=STORE_ORDER.filter(s=>!isNA(DATA[s].yoy)&&DATA[s].yoy<0&&!isNA(DATA[s].mom)&&DATA[s].mom<0);
+  const _topRate=STORE_ORDER.map(s=>({s,rate:DATA[s].month_rate})).sort((a,b)=>b.rate-a.rate)[0];
+  _cmpConc.innerHTML=conc('区域7店中'+_below.length+'家月累计低于区域均值（¥'+Math.round(regMonthAmtAvg)+'）：'+(_below.length?_below.map(s=>s).join('、')+'。':'均超均值。')+_topRate.s+'完成率领先（'+_topRate.rate.toFixed(1)+'%）。',(_dual.length>0?(_dual.map(s=>s).join('、')+'同环比双降，是区域主要拖累，建议集中资源帮扶并复盘品类与客流。'):(_below.length===0?'各门店月累计与同环比表现均衡，区域整体健康。':'')));
+  document.getElementById('cmpTable').parentNode.appendChild(_cmpConc);
 
   // All guides ranking chart — sorted by completion rate
   const allGuides=[];
