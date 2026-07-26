@@ -420,6 +420,13 @@ function renderStore(store){
     gHtml+='</tbody>';
     document.getElementById('guideTable').innerHTML=gHtml;
     if(wkJdAvg!==null){const _note=document.createElement('div');_note.style.cssText='font-size:11px;color:#dc2626;margin-top:4px';_note.textContent='🔴 本周连带率低于本店导购均值（'+wkJdAvg.toFixed(2)+'）已标红';document.getElementById('guideTable').parentNode.appendChild(_note);}
+    const _gAvg=tS/(guides.length||1);
+    const _gBelow=guides.filter(g=>g.wk_sales>0 && g.wk_sales<_gAvg*0.7);
+    const _gTop=guides.slice().sort((a,b)=>b.wk_sales-a.wk_sales)[0];
+    let _gConcNote=document.createElement('div');
+    _gConcNote.style.cssText='margin-top:10px';
+    _gConcNote.innerHTML=conc('本店'+guides.length+'名导购，周销售合计'+fmtAmt(tS)+'；TOP导购'+(_gTop?_gTop.name+'（'+fmtAmt(_gTop.wk_sales)+'）':'-')+'领先。'+(wkJdAvg!==null?('其中'+guides.filter(g=>g.wk_cnt>0&&g.wk_jd<wkJdAvg).length+'人连带率低于店均'+wkJdAvg.toFixed(2)+'，已标红。'):''),_gBelow.length>0?('低于店均周销售（¥'+Math.round(_gAvg)+'）的导购：'+_gBelow.map(g=>g.name+'（¥'+Math.round(g.wk_sales)+'）').join('、')+'，需加强一对一销售辅导与排班优化。'):'导购团队周销售分布均衡，保持当前带教节奏。');
+    document.getElementById('guideTable').parentNode.appendChild(_gConcNote);
   }
 }
 
@@ -448,6 +455,8 @@ function renderComparison(){
     '<div class="kpi-card"><div class="label">区域长尾款周累计</div><div class="value purple">'+fmtAmt(totLt)+'</div><div class="sub">'+totLtQty+'件 | 占比'+(totAmt>0?(totLt/totAmt*100).toFixed(1):0)+'%</div></div>'+
     '<div class="kpi-card"><div class="label">区域样品周累计</div><div class="value" style="color:#9333ea">'+fmtAmt(sReg.wk_amt||0)+'</div><div class="sub">'+(sReg.wk_qty||0)+'件 | 占比'+(totAmt>0?((sReg.wk_amt||0)/totAmt*100).toFixed(1):0)+'%</div></div>'+
     '</div>';
+
+  html+=conc('区域本周周累计'+fmtAmt(totAmt)+'，周目标'+fmtAmt(regWkTarget)+'，完成率'+regWkRate.toFixed(1)+'%；周同比'+fmtPct(regYoy)+'，周环比'+(isNA(r.wow)?'N/A':(r.wow>=0?'+':'')+r.wow.toFixed(1)+'%。'),function(){const rates=STORE_ORDER.map(s=>{const d=DATA[s];const wt=d.daily.reduce((a,x)=>a+(x.target||0),0);return{s,rate:wt>0?d.wk_amt/wt*100:0};});const avg=rates.reduce((a,x)=>a+x.rate,0)/rates.length;const below=rates.filter(x=>x.rate<avg).sort((a,b)=>a.rate-b.rate);const wy=STORE_ORDER.map(s=>({s,v:DATA[s].wk_yoy})).filter(x=>!isNA(x.v)).sort((a,b)=>a.v-b.v)[0];let o='';if(below.length>0)o+='完成率低于区域均值（'+avg.toFixed(1)+'%）的门店：'+below.map(x=>x.s+'('+x.rate.toFixed(1)+'%)').join('、')+'，是区域达标主要短板，建议城市经理驻店帮扶并复盘目标拆解。';if(wy)o+=' '+wy.s+'周同比最低（'+fmtPct(wy.v)+'），需重点排查品类缺货与竞品分流。';return o||'各门店完成率均衡，区域整体达标进度健康。';}());
 
   // Pre-compute ltSampleData for use in conc() and chart
   const ltSampleData=STORE_ORDER.map(s=>{
@@ -637,6 +646,13 @@ function renderComparison(){
   cmpNote.style='margin-top:10px;padding:8px 12px;background:#fef2f2;border:1px solid #fecaca;border-radius:8px;font-size:13px;color:#dc2626;font-weight:700';
   cmpNote.textContent='🔴 周累计/笔数/客单价/连带率/长尾占比 低于区域均值已标红（周累计¥'+Math.round(regWkAmtAvg)+'、笔数'+Math.round(regWkCntAvg)+'、客单价¥'+Math.round(regWkATV)+'、连带率'+regWkJD.toFixed(2)+'、长尾占比'+regWkLtPctAvg.toFixed(1)+'%）';
   document.getElementById('cmpTable').parentNode.appendChild(cmpNote);
+  let _cmpConc=document.createElement('div');
+  _cmpConc.style.cssText='margin-top:10px';
+  const _below=STORE_ORDER.filter(s=>DATA[s].wk_amt<regWkAmtAvg);
+  const _dual=STORE_ORDER.filter(s=>!isNA(DATA[s].wk_yoy)&&DATA[s].wk_yoy<0&&!isNA(DATA[s].wow)&&DATA[s].wow<0);
+  const _topRate=STORE_ORDER.map(s=>{const d=DATA[s];const wt=d.daily.reduce((a,x)=>a+(x.target||0),0);return{s,rate:wt>0?d.wk_amt/wt*100:0};}).sort((a,b)=>b.rate-a.rate)[0];
+  _cmpConc.innerHTML=conc('区域7店中'+_below.length+'家周累计低于区域均值（¥'+Math.round(regWkAmtAvg)+'）：'+(_below.length?_below.map(s=>s).join('、')+'。':'均超均值。')+_topRate.s+'完成率领先（'+_topRate.rate.toFixed(1)+'%）。',(_dual.length>0?(_dual.map(s=>s).join('、')+'同环比双降，是区域主要拖累，建议集中资源帮扶并复盘品类与客流。'):(_below.length===0?'各门店周累计与同环比表现均衡，区域整体健康。':'')));
+  document.getElementById('cmpTable').parentNode.appendChild(_cmpConc);
 
   // All guides ranking chart (bar=周销售 + line=周环比)
   const allGuides=[];
