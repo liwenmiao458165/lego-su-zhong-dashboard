@@ -7164,12 +7164,12 @@
       "month_amt": 4284.0
     },
     "泰州万象城": {
-      "wk_qty": 2,
-      "wk_retail": 468.0,
-      "wk_amt": 141.0,
-      "month_qty": 15,
-      "month_retail": 12755.0,
-      "month_amt": 3938.0
+      "wk_qty": 8,
+      "wk_retail": 4972.0,
+      "wk_amt": 1882.0,
+      "month_qty": 21,
+      "month_retail": 17259.0,
+      "month_amt": 5679.0
     },
     "宿迁宝龙": {
       "wk_qty": 0,
@@ -7197,12 +7197,12 @@
     }
   },
   "_sample_region": {
-    "wk_qty": 31,
-    "wk_retail": 13949.0,
-    "wk_amt": 4572.0,
-    "month_qty": 123,
-    "month_retail": 78477.0,
-    "month_amt": 23514.0
+    "wk_qty": 37,
+    "wk_retail": 18453.0,
+    "wk_amt": 6313.0,
+    "month_qty": 129,
+    "month_retail": 82981.0,
+    "month_amt": 25255.0
   },
   "_new_products": [
     "玩具总动员弹簧狗的书挡",
@@ -7268,43 +7268,43 @@
   "_weekly_conversion": {
     "扬州万象汇": {
       "flow": 2397,
-      "cnt": 191,
-      "rate": 7.97
+      "cnt": 236,
+      "rate": 9.85
     },
     "扬州京华城": {
       "flow": 3742,
-      "cnt": 247,
-      "rate": 6.6
+      "cnt": 319,
+      "rate": 8.52
     },
     "扬州江都金鹰": {
       "flow": 1480,
-      "cnt": 104,
-      "rate": 7.03
+      "cnt": 142,
+      "rate": 9.59
     },
     "泰州万象城": {
       "flow": 4357,
-      "cnt": 270,
-      "rate": 6.2
+      "cnt": 367,
+      "rate": 8.42
     },
     "宿迁宝龙": {
       "flow": 1097,
-      "cnt": 74,
-      "rate": 6.75
+      "cnt": 93,
+      "rate": 8.48
     },
     "淮安新亚": {
       "flow": 772,
-      "cnt": 86,
-      "rate": 11.14
+      "cnt": 114,
+      "rate": 14.77
     },
     "淮安万象城": {
       "flow": 1287,
-      "cnt": 153,
-      "rate": 11.89
+      "cnt": 194,
+      "rate": 15.07
     },
     "_region": {
       "flow": 15132,
-      "cnt": 1125,
-      "rate": 7.43
+      "cnt": 1465,
+      "rate": 9.68
     }
   }
 }
