@@ -13089,9 +13089,9 @@
       "month_amt": 4284.0
     },
     "泰州万象城": {
-      "month_qty": 15,
-      "month_retail": 12755.0,
-      "month_amt": 3938.0
+      "month_qty": 21,
+      "month_retail": 17259.0,
+      "month_amt": 5679.0
     },
     "宿迁宝龙": {
       "month_qty": 18,
@@ -13110,9 +13110,9 @@
     }
   },
   "_sample_region": {
-    "month_qty": 123,
-    "month_retail": 78477.0,
-    "month_amt": 23514.0
+    "month_qty": 129,
+    "month_retail": 82981.0,
+    "month_amt": 25255.0
   },
   "_new_products": [
     "玩具总动员弹簧狗的书挡",
