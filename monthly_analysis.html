@@ -484,14 +484,14 @@ function renderComparison(){
     '<div class="kpi-card"><div class="label">区域月连带率</div><div class="value blue">'+r.month_jd.toFixed(2)+'</div><div class="sub">'+totCnt+'笔</div></div>'+
     '<div class="kpi-card"><div class="label">区域月客单价</div><div class="value blue">¥'+Math.round(r.month_atv)+'</div><div class="sub">7家门店</div></div>'+
     '<div class="kpi-card"><div class="label">区域长尾款月累计</div><div class="value purple">'+fmtAmt(totLt)+'</div><div class="sub">'+totLtQty+'件 | 占比'+(totAmt>0?(totLt/totAmt*100).toFixed(1):0)+'%</div></div>'+
-    '<div class="kpi-card"><div class="label">区域样品月累计</div><div class="value" style="color:#9333ea">'+fmtAmt(sReg.month_amt||0)+'</div><div class="sub">'+(sReg.month_qty||0)+'件 | 占比'+(totAmt>0?((sReg.month_amt||0)/totAmt*100).toFixed(1):0)+'%</div></div>'+
+    '<div class="kpi-card"><div class="label">区域样品月累计</div><div class="value" style="color:#9333ea">'+fmtAmt(sReg.month_amt||0)+'</div><div class="sub">'+(sReg.month_qty||0)+'件（独立口径，不计入门店销售额）</div></div>'+
     '<div class="kpi-card"><div class="label">区域新品月累计</div><div class="value" style="color:#db2777">'+fmtAmt(r.new_amt||0)+'</div><div class="sub">'+(r.new_qty||0)+'件 | 占比'+(r.new_rate||0).toFixed(1)+'%</div></div>'+
     '</div>';
 
   html+=conc('区域本月月累计'+fmtAmt(totAmt)+'，月目标'+fmtAmt(totTarget)+'，完成率'+totRate.toFixed(1)+'%；月同比'+fmtPct(r.yoy)+'，月环比'+(isNA(r.mom)?'N/A':(r.mom>=0?'+':'')+r.mom.toFixed(1)+'%。'),function(){const rates=STORE_ORDER.map(s=>({s,rate:DATA[s].month_rate}));const avg=rates.reduce((a,x)=>a+x.rate,0)/rates.length;const below=rates.filter(x=>x.rate<avg).sort((a,b)=>a.rate-b.rate);const wy=STORE_ORDER.map(s=>({s,v:DATA[s].yoy})).filter(x=>!isNA(x.v)).sort((a,b)=>a.v-b.v)[0];let o='';if(below.length>0)o+='完成率低于区域均值（'+avg.toFixed(1)+'%）的门店：'+below.map(x=>x.s+'('+x.rate.toFixed(1)+'%)').join('、')+'，是区域达标主要短板，建议城市经理驻店帮扶并复盘目标拆解。';if(wy)o+=' '+wy.s+'月同比最低（'+fmtPct(wy.v)+'），需重点排查品类缺货与竞品分流。';return o||'各门店完成率均衡，区域整体达标进度健康。';}());
 
   // Pre-compute ltSampleData for use in conc() and chart
-  const ltSampleData=STORE_ORDER.map(s=>{const d=DATA[s];const sampD=(DATA['_sample']||{})[s]||{};return{s,ltAmt:d.month_lt||0,ltQty:d.month_lt_qty||0,ltPct:d.month_amt>0?(d.month_lt||0)/d.month_amt*100:0,sampAmt:sampD.month_amt||0,sampQty:sampD.month_qty||0};}).sort((a,b)=>(b.ltAmt+b.sampAmt)-(a.ltAmt+a.sampAmt));
+  const ltSampleData=STORE_ORDER.map(s=>{const d=DATA[s];const sampD=(DATA['_sample']||{})[s]||{};return{s,ltAmt:d.month_lt||0,ltQty:d.month_lt_qty||0,ltPct:d.month_amt>0?(d.month_lt||0)/d.month_amt*100:0,sampAmt:sampD.month_amt||0,sampQty:sampD.month_qty||0};}).sort((a,b)=>b.ltAmt-a.ltAmt);
 
   html+='<div class="chart-grid">'+
     '<div class="chart-card"><h3><span class="icon">📈</span> 各门店月累计销售&完成率对比</h3><div class="chart-wrap"><canvas id="cmpAmt"></canvas></div>'+
