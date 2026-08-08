@@ -274,7 +274,7 @@ function renderStore(store){
     '<div class="kpi-card"><div class="label">WOS周累计</div><div class="value orange">'+fmtAmt(d.wk_wos)+'</div><div class="sub">占比'+(d.wk_amt>0?(d.wk_wos/d.wk_amt*100).toFixed(1):0)+'%</div></div>'+
     '<div class="kpi-card"><div class="label">长尾款周累计</div><div class="value purple">'+fmtAmt(d.wk_lt)+'</div><div class="sub">占比'+(d.wk_amt>0?(d.wk_lt/d.wk_amt*100).toFixed(1):0)+'%</div></div>'+
     '<div class="kpi-card"><div class="label">WK32周成交率</div><div class="value '+(cvoRate===null?'gray':(cvoRate>=cvoRegionRate?'green':'red'))+'">'+(cvoRate===null?'缺客流':cvoRate.toFixed(2)+'%')+'</div><div class="sub">区域'+(cvoRegionRate===null?'N/A':cvoRegionRate.toFixed(2)+'%')+'% | '+(wcvo[store]?wcvo[store].cnt:'0')+'笔 / '+(wcvo[store]?wcvo[store].flow:'0')+'客流</div></div>'+
-    '<div class="kpi-card"><div class="label">样品周累计</div><div class="value" style="color:'+(sampAmt>0?'#9333ea':'#dc2626')+'">'+fmtAmt(sampAmt)+'</div><div class="sub">'+(sampQty||0)+'件 | 占周销'+(d.wk_amt>0?sampAmt/d.wk_amt*100:0).toFixed(1)+'%'+(sampAmt>0?'':'｜未开单')+'</div></div>'+
+    '<div class="kpi-card"><div class="label">样品周累计</div><div class="value" style="color:'+(sampAmt>0?'#9333ea':'#dc2626')+'">'+fmtAmt(sampAmt)+'</div><div class="sub">'+(sampQty||0)+'件'+(sampAmt>0?'（独立口径，不计入门店销售额）':'｜未开单')+'</div></div>'+
     '<div class="kpi-card"><div class="label">新品周累计</div><div class="value" style="color:'+(d.wk_amt>0&&npPct<20?'#dc2626':'#db2777')+'">'+fmtAmt(npAmt)+'</div><div class="sub">新品占比'+(d.wk_amt>0?npPct:0).toFixed(1)+'%'+(d.wk_amt>0&&npPct<20?'｜偏低':'')+'</div></div>'+
     '</div>';
 
@@ -459,7 +459,7 @@ function renderComparison(){
     '<div class="kpi-card"><div class="label">区域周客单价</div><div class="value blue">\u00a5'+Math.round(getRegWkATV())+'</div><div class="sub">7家门店</div></div>'+
     '<div class="kpi-card"><div class="label">区域WOS周累计</div><div class="value orange">'+fmtAmt(totWos)+'</div><div class="sub">占比'+(totAmt>0?(totWos/totAmt*100).toFixed(1):0)+'%</div></div>'+
     '<div class="kpi-card"><div class="label">区域长尾款周累计</div><div class="value purple">'+fmtAmt(totLt)+'</div><div class="sub">'+totLtQty+'件 | 占比'+(totAmt>0?(totLt/totAmt*100).toFixed(1):0)+'%</div></div>'+
-    '<div class="kpi-card"><div class="label">区域样品周累计</div><div class="value" style="color:#9333ea">'+fmtAmt(sReg.wk_amt||0)+'</div><div class="sub">'+(sReg.wk_qty||0)+'件 | 占比'+(totAmt>0?((sReg.wk_amt||0)/totAmt*100).toFixed(1):0)+'%</div></div>'+
+    '<div class="kpi-card"><div class="label">区域样品周累计</div><div class="value" style="color:#9333ea">'+fmtAmt(sReg.wk_amt||0)+'</div><div class="sub">'+(sReg.wk_qty||0)+'件（独立口径，不计入门店销售额）</div></div>'+
     '<div class="kpi-card"><div class="label">区域新品周累计</div><div class="value" style="color:#db2777">'+fmtAmt(npRegAmt)+'</div><div class="sub">占比'+(totAmt>0?(npRegAmt/totAmt*100).toFixed(1):0)+'%</div></div>'+
     '</div>';
 
@@ -471,7 +471,7 @@ function renderComparison(){
     const ltQty=d.daily.reduce((a,x)=>a+(x.lt_qty||0),0);
     const sampD=(DATA['_sample']||{})[s]||{};
     return{s,ltAmt:d.wk_lt||0,ltQty,ltPct:d.wk_amt>0?(d.wk_lt||0)/d.wk_amt*100:0,sampAmt:sampD.wk_amt||0,sampQty:sampD.wk_qty||0};
-  }).sort((a,b)=>(b.ltAmt+b.sampAmt)-(a.ltAmt+a.sampAmt));
+  }).sort((a,b)=>b.ltAmt-a.ltAmt);
 
   // Chart 1: Weekly amount comparison (bar)
   html+='<div class="chart-grid">'+
