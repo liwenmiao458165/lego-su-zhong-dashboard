@@ -275,8 +275,8 @@ function concGuideLt(s){
 function renderStore(store){
   const d=DATA[store],region=DATA['_region'],color=STORE_COLORS[store],daily=d.daily;
   const cvo=(DATA['_conversion']||{});
-  const cvoRate=(cvo[store]?cvo[store].rate:0);
-  const cvoRegionRate=(cvo._region?cvo._region.rate:0);
+  const cvoRate=(cvo[store]?cvo[store].rate:null);
+  const cvoRegionRate=(cvo._region?cvo._region.rate:null);
   let html='<div class="kpi-row">'+
     '<div class="kpi-card"><div class="label">月累计销售</div><div class="value" style="color:'+color+'">'+fmtAmt(d.month_amt)+'</div><div class="sub">月目标'+fmtAmt(d.target)+' | 完成率'+d.month_rate.toFixed(1)+'%</div></div>'+
     '<div class="kpi-card"><div class="label">月完成率</div><div class="value '+(d.month_rate>=50?'green':'red')+'">'+d.month_rate.toFixed(1)+'%</div><div class="sub">区域'+region.month_rate.toFixed(1)+'%</div></div>'+
@@ -284,7 +284,7 @@ function renderStore(store){
     '<div class="kpi-card"><div class="label">月同比</div><div class="value '+(isNA(d.yoy)?'':colorPct(d.yoy))+'">'+(isNA(d.yoy)?'N/A':fmtPct(d.yoy))+'</div><div class="sub">'+(isNA(d.yoy)?'新店无同期':'vs去年同期')+'</div></div>'+
     '<div class="kpi-card"><div class="label">月连带率</div><div class="value blue">'+d.month_jd.toFixed(2)+'</div><div class="sub">区域'+region.month_jd.toFixed(2)+'</div></div>'+
     '<div class="kpi-card"><div class="label">月客单价</div><div class="value blue">¥'+Math.round(d.month_atv)+'</div><div class="sub">区域¥'+Math.round(region.month_atv)+'</div></div>'+
-    '<div class="kpi-card"><div class="label">月成交率</div><div class="value '+(cvoRate>=cvoRegionRate?'green':'red')+'">'+cvoRate.toFixed(2)+'%</div><div class="sub">区域'+(cvoRegionRate?cvoRegionRate.toFixed(2):'N/A')+'% | '+(cvo[store]?cvo[store].cnt:'0')+'笔/'+ (cvo[store]?cvo[store].flow:'0') +'客流</div></div>'+
+    '<div class="kpi-card"><div class="label">月成交率</div><div class="value '+(cvoRate===null?'gray':(cvoRate>=cvoRegionRate?'green':'red'))+'">'+(cvoRate===null?'缺客流':cvoRate.toFixed(2)+'%')+'</div><div class="sub">区域'+(cvoRegionRate===null?'N/A':cvoRegionRate.toFixed(2))+'% | '+(cvo[store]?cvo[store].cnt:'0')+'笔/'+ (cvo[store]?cvo[store].flow:'0') +'客流</div></div>'+
     '<div class="kpi-card"><div class="label">长尾款月累计</div><div class="value purple">'+fmtAmt(d.month_lt)+'</div><div class="sub">'+d.month_lt_qty+'件 | 占比'+(d.month_amt>0?(d.month_lt/d.month_amt*100).toFixed(1):0)+'%</div></div>'+
     '<div class="kpi-card"><div class="label">新品月累计</div><div class="value" style="color:#db2777">'+fmtAmt(d.new_amt||0)+'</div><div class="sub">'+(d.new_qty||0)+'件 | 占比'+(d.new_rate||0).toFixed(1)+'%</div></div>'+
     '</div>';
