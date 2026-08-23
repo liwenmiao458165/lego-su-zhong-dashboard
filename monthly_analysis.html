@@ -42,9 +42,12 @@ body{font-family:-apple-system,'Segoe UI','PingFang SC','Microsoft YaHei',sans-s
 .summary-table th{background:#f1f5f9;padding:10px 12px;text-align:center;font-weight:700;border-bottom:2px solid var(--border)}
 .summary-table td{padding:8px 12px;text-align:center;border-bottom:1px solid var(--border)}
 .summary-table tr:hover{background:#f8fafc}
-.summary-table .store-name{text-align:left;font-weight:600}
-#cmpTable.summary-table{table-layout:fixed}
-#cmpTable.summary-table .store-name{width:80px;min-width:80px;white-space:normal}
+#cmpTable.summary-table{table-layout:fixed;width:100%;font-size:12px}
+#cmpTable.summary-table th,
+#cmpTable.summary-table td{padding:6px 4px;white-space:normal}
+#cmpTable.summary-table th:first-child,
+#cmpTable.summary-table .store-name{width:100px;min-width:100px;padding:6px 6px;text-align:left;font-weight:600;white-space:normal}
+#cmpTable.summary-table th{width:56px;min-width:56px}
 .badge{display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700}
 .badge.green{background:#dcfce7;color:#166534}.badge.red{background:#fee2e2;color:#991b1b}.badge.gray{background:#f1f5f9;color:#64748b}
 .conclusion{font-size:13px;color:#475569;margin-top:10px;padding:0;background:#f8fafc;border-radius:6px;border-left:3px solid var(--purple);line-height:1.5;overflow:hidden}
