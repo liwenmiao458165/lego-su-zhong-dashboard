@@ -6,13 +6,17 @@
 <title>苏中日销售看板</title>
 <style>
   :root {
-    --bg: #f5f6fa; --card: #ffffff; --border: #e8eaed; --text: #1a1a2e; --text-sub: #6b7280;
-    --red: #d62839; --green: #2d9d5a; --blue: #3b82f6; --yellow: #f59e0b; --purple: #8b5cf6;
-    --accent: #1e40af; --red-bg: #fde8e8; --green-bg: #e6f7ed; --blue-bg: #eff6ff;
+    /* 蓝灰色调 — 主色统一冷灰蓝，功能色（红/绿/黄）保留行业约定 */
+    --bg: #eef2f7; --card: #ffffff; --border: #d8dee8; --text: #1f2937; --text-sub: #64748b;
+    --red: #d62839; --green: #2d9d5a; --blue: #5b7c99; --yellow: #b45309; --purple: #6b7d92;
+    --accent: #334e68; --red-bg: #fde8e8; --green-bg: #e6f7ed; --blue-bg: #e8eef5;
+    --slate-100: #f1f5f9; --slate-200: #e2e8f0; --slate-300: #cbd5e1;
+    --slate-400: #94a3b8; --slate-500: #64748b; --slate-600: #475569;
+    --slate-700: #334155; --slate-800: #1e293b;
   }
   * { margin:0; padding:0; box-sizing:border-box; }
   body { background:var(--bg); font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif; color:var(--text); padding:20px; font-size:15px; }
-  .header { background:linear-gradient(135deg,#1e40af,#3b82f6); color:#fff; padding:24px 32px; border-radius:12px; margin-bottom:24px; display:flex; justify-content:space-between; align-items:center; }
+  .header { background:linear-gradient(135deg,#334e68,#627d98); color:#fff; padding:24px 32px; border-radius:12px; margin-bottom:24px; display:flex; justify-content:space-between; align-items:center; }
   .header h1 { font-size:26px; font-weight:700; }
   .header .region-label { font-size:18px; }
   .kpi-row { display:grid; grid-template-columns:repeat(6,1fr); gap:12px; margin-bottom:24px; }
@@ -24,29 +28,29 @@
   .kpi-card .tag { position:absolute; top:10px; right:10px; font-size:11px; padding:2px 8px; border-radius:4px; font-weight:600; }
   .tag-up { background:var(--green-bg); color:var(--green); }
   .tag-down { background:var(--red-bg); color:var(--red); }
-  .rate-bar-mini { height:5px; background:#e8eaed; border-radius:2px; margin-top:5px; overflow:hidden; }
+  .rate-bar-mini { height:5px; background:#e2e8f0; border-radius:2px; margin-top:5px; overflow:hidden; }
   .rate-bar-mini .fill { height:100%; border-radius:2px; }
   .fill-rate-red { background:var(--red); }
   .fill-rate-green { background:var(--green); }
   .section { margin-bottom:28px; }
   .section-title { font-size:18px; font-weight:700; padding:16px 0 10px; border-bottom:2px solid; margin-bottom:16px; display:flex; align-items:center; gap:10px; }
   .section-icon { font-size:20px; line-height:1; }
-  .section-title-store { color:#7c3aed; border-color:#8b5cf6; }
-  .section-title-longtail { color:#ea580c; border-color:#f97316; }
-  .section-title-newproduct { color:#db2777; border-color:#ec4899; }
-  .section-title-newskutrack { color:#c026d3; border-color:#d946ef; }
+  .section-title-store { color:#334e68; border-color:#334e68; }
+  .section-title-longtail { color:#475569; border-color:#94a3b8; }
+  .section-title-newproduct { color:#334e68; border-color:#5b7c99; }
+  .section-title-newskutrack { color:#1e293b; border-color:#475569; }
   .sku-name { text-align:left; font-weight:600; color:var(--text); min-width:130px; font-size:13px; }
-  .sku-id { font-size:10px; color:#94a3b8; font-weight:400; }
-  .sku-sub { font-size:10px; color:#94a3b8; font-weight:400; }
-  .section-title-guide { color:#059669; border-color:#10b981; }
-  .section-title-channel { color:#0284c7; border-color:#0ea5e9; }
-  .section-title-sample { color:#9333ea; border-color:#a855f7; }
+  .sku-id { font-size:10px; color:#64748b; font-weight:400; }
+  .sku-sub { font-size:10px; color:#64748b; font-weight:400; }
+  .section-title-guide { color:#1e293b; border-color:#475569; }
+  .section-title-channel { color:#334e68; border-color:#5b7c99; }
+  .section-title-sample { color:#475569; border-color:#94a3b8; }
   .table-wrap { background:var(--card); border-radius:10px; border:1px solid var(--border); overflow-x:auto; -webkit-overflow-scrolling:touch; }
   table { width:100%; border-collapse:collapse; font-size:14px; }
-  thead { background:#f0f2f5; }
+  thead { background:#f1f5f9; }
   th { padding:12px 14px; text-align:center; font-weight:600; font-size:13px; color:var(--text-sub); white-space:nowrap; }
   td { padding:12px 14px; text-align:center; border-top:1px solid var(--border); white-space:nowrap; }
-  tbody tr:nth-child(even) { background:rgba(128,128,128,0.12); }
+  tbody tr:nth-child(even) { background:rgba(148,163,184,0.10); }
   .store-name { text-align:left; font-weight:600; color:var(--text); min-width:90px; }
   .num { font-weight:600; }
   .yoy-up { color:var(--green); font-weight:600; }
@@ -54,15 +58,15 @@
   .yoy-na { color:var(--text-sub); }
   .rate-bar-cell { min-width:85px; text-align:center; }
   .guide-group { margin-bottom:16px; }
-  .guide-group-title { font-size:16px; font-weight:700; padding:10px 0 6px; color:var(--accent); display:flex; align-items:center; gap:8px; }
+  .guide-group-title { font-size:16px; font-weight:700; padding:10px 0 6px; color:#334e68; border-bottom:1px solid #cbd5e1; display:flex; align-items:center; gap:8px; }
   .guide-table-wrap { background:var(--card); border-radius:10px; border:1px solid var(--border); overflow-x:auto; -webkit-overflow-scrolling:touch; }
   .page { display:none; }
   .page.active { display:block; }
   .nav-btn { display:inline-flex; align-items:center; gap:8px; padding:10px 20px; border-radius:8px; font-size:14px; font-weight:600; cursor:pointer; text-decoration:none; transition:background 0.2s; }
-  .nav-btn-guide { background:#059669; color:#fff; }
-  .nav-btn-guide:hover { background:#047857; }
-  .nav-btn-back { background:var(--card); color:#059669; border:1px solid #059669; }
-  .nav-btn-back:hover { background:#e6f7ed; }
+  .nav-btn-guide { background:#334e68; color:#fff; }
+  .nav-btn-guide:hover { background:#1e293b; }
+  .nav-btn-back { background:var(--card); color:#334e68; border:1px solid #334e68; }
+  .nav-btn-back:hover { background:#e8eef5; }
   @media(max-width:768px) {
     body { padding:10px; font-size:14px; }
     .header { padding:16px 18px; border-radius:8px; }
