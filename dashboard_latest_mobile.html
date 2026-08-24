@@ -36,15 +36,15 @@
   .section-title { font-size:18px; font-weight:700; padding:16px 0 10px; border-bottom:2px solid; margin-bottom:16px; display:flex; align-items:center; gap:10px; }
   .section-icon { font-size:20px; line-height:1; }
   .section-title-store { color:#334e68; border-color:#334e68; }
-  .section-title-longtail { color:#475569; border-color:#94a3b8; }
-  .section-title-newproduct { color:#334e68; border-color:#5b7c99; }
-  .section-title-newskutrack { color:#1e293b; border-color:#475569; }
+  .section-title-longtail { color:#ea580c; border-color:#f97316; }
+  .section-title-newproduct { color:#db2777; border-color:#ec4899; }
+  .section-title-newskutrack { color:#c026d3; border-color:#d946ef; }
   .sku-name { text-align:left; font-weight:600; color:var(--text); min-width:130px; font-size:13px; }
   .sku-id { font-size:10px; color:#64748b; font-weight:400; }
   .sku-sub { font-size:10px; color:#64748b; font-weight:400; }
   .section-title-guide { color:#1e293b; border-color:#475569; }
   .section-title-channel { color:#334e68; border-color:#5b7c99; }
-  .section-title-sample { color:#475569; border-color:#94a3b8; }
+  .section-title-sample { color:#9333ea; border-color:#a855f7; }
   .table-wrap { background:var(--card); border-radius:10px; border:1px solid var(--border); overflow-x:auto; -webkit-overflow-scrolling:touch; }
   table { width:100%; border-collapse:collapse; font-size:14px; }
   thead { background:#f1f5f9; }
@@ -58,7 +58,7 @@
   .yoy-na { color:var(--text-sub); }
   .rate-bar-cell { min-width:85px; text-align:center; }
   .guide-group { margin-bottom:16px; }
-  .guide-group-title { font-size:16px; font-weight:700; padding:10px 0 6px; color:#334e68; border-bottom:1px solid #cbd5e1; display:flex; align-items:center; gap:8px; }
+  .guide-group-title { font-size:16px; font-weight:700; padding:10px 0 6px; color:#334e68; display:flex; align-items:center; gap:8px; }
   .guide-table-wrap { background:var(--card); border-radius:10px; border:1px solid var(--border); overflow-x:auto; -webkit-overflow-scrolling:touch; }
   .page { display:none; }
   .page.active { display:block; }
@@ -73,7 +73,7 @@
     .header h1 { font-size:20px; }
     .header .region-label { font-size:16px; }
     .kpi-row { grid-template-columns:repeat(2,1fr); gap:10px; }
-    .kpi-card { padding:14px 16px; border-radius:8px; border-top:2px solid #5b7c99; }
+    .kpi-card { padding:14px 16px; border-radius:8px; }
     .kpi-card .value { font-size:24px; }
     .kpi-card .tag { position:static; display:inline-block; margin-top:4px; }
     .section-title { font-size:16px; }
@@ -85,6 +85,15 @@
     .nav-btn { padding:8px 14px; font-size:13px; }
   }
 
+
+  /* KPI卡顶边按 section 区分品类色 */
+  .section-title-store ~ * .kpi-card,
+  .section > .kpi-row .kpi-card,
+  .kpi-row .kpi-card { border-top:2px solid #5b7c99; }
+  .section-title-longtail ~ * .kpi-card { border-top-color:#ea580c; }
+  .section-title-newproduct ~ * .kpi-card { border-top-color:#db2777; }
+  .section-title-sample ~ * .kpi-card { border-top-color:#9333ea; }
+  .section-title-newskutrack ~ * .kpi-card { border-top-color:#c026d3; }
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 </head>
@@ -131,13 +140,13 @@
     <div class="sub" style="color:#c2410c">月指标 ¥41.6万 | 完成率 <span style="font-weight:700;color:var(--red)">43.9%</span> | 439件</div>
     <div class="rate-bar-mini" style="width:100%;margin-top:4px"><div class="fill fill-rate-red" style="width:43.9%"></div></div>
   </div>
-  <div class="kpi-card" style="background:#e8eef5;border-color:#cbd5e1">
-    <div class="label" style="color:#475569">🆕 新品 日销售</div>
-    <div class="value" style="color:#475569">¥82</div>
-    <div class="sub" style="color:#475569">8件 | 占日销 <span style="font-weight:700">0.2%</span></div>
+  <div class="kpi-card" style="background:#fdf2f8;border-color:#f9a8d4">
+    <div class="label" style="color:#db2777">🆕 新品 日销售</div>
+    <div class="value" style="color:#db2777">¥82</div>
+    <div class="sub" style="color:#db2777">8件 | 占日销 <span style="font-weight:700">0.2%</span></div>
   </div>
-  <div class="kpi-card" style="background:#e8eef5;border-color:#cbd5e1">
-    <div class="label" style="color:#475569">🆕 新品 月累计</div>
+  <div class="kpi-card" style="background:#fdf2f8;border-color:#f9a8d4">
+    <div class="label" style="color:#db2777">🆕 新品 月累计</div>
     <div class="value" style="color:#475569">¥318,559</div>
     <div class="sub" style="color:#475569">1121件 | 占月销 <span style="font-weight:700">14.8%</span></div>
   </div>
@@ -149,7 +158,7 @@
   <div class="section-title section-title-store"><span class="section-icon">🏪</span>门店 KPI 详情</div>
   <div class="table-wrap">
   <table>
-    <thead style="background:#334e6825;">
+    <thead style="background:#db277725;">
       <tr>
         <th style="text-align:left;color:#334e68;">门店</th>
         <th style="color:#334e68;">日销售</th>
@@ -258,7 +267,7 @@
         <td>¥261</td>
       </tr>
 
-      <tr style="background:#334e6835;font-weight:700">
+      <tr style="background:#db277735;font-weight:700">
         <td class="store-name">苏中区域</td>
         <td class="num">¥45,017</td>
         <td>¥6.7万</td>
@@ -361,7 +370,7 @@
   <div class="section-title section-title-newproduct"><span class="section-icon">🆕</span>新品 销售详情 <span style="font-size:12px;font-weight:400;color:var(--text-sub);">（上市日期 2026年8月）</span></div>
   <div class="table-wrap">
   <table>
-    <thead style="background:#334e6825;">
+    <thead style="background:#db277725;">
       <tr>
         <th style="text-align:left;color:#475569;">门店</th>
         <th style="color:#475569;">日销售</th>
@@ -422,7 +431,7 @@
         <td style="color:#16a34a;font-weight:700;">14.7%</td>
       </tr>
 
-      <tr style="background:#334e6835;font-weight:700">
+      <tr style="background:#db277735;font-weight:700">
         <td class="store-name">苏中区域</td>
         <td class="num">¥82/8件</td>
         <td style="color:#dc2626;font-weight:700;">0.2%</td>
