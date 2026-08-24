@@ -6,47 +6,51 @@
 <title>苏中日销售看板</title>
 <style>
   :root {
-    --bg: #f5f6fa; --card: #ffffff; --border: #e8eaed; --text: #1a1a2e; --text-sub: #6b7280;
-    --red: #d62839; --green: #2d9d5a; --blue: #3b82f6; --yellow: #f59e0b; --purple: #8b5cf6;
-    --accent: #1e40af; --red-bg: #fde8e8; --green-bg: #e6f7ed; --blue-bg: #eff6ff;
+    /* 蓝灰色调 — 主色统一冷灰蓝，功能色（红/绿/黄）保留行业约定 */
+    --bg: #eef2f7; --card: #ffffff; --border: #d8dee8; --text: #1f2937; --text-sub: #64748b;
+    --red: #d62839; --green: #2d9d5a; --blue: #5b7c99; --yellow: #b45309; --purple: #6b7d92;
+    --accent: #334e68; --red-bg: #fde8e8; --green-bg: #e6f7ed; --blue-bg: #e8eef5;
+    --slate-100: #f1f5f9; --slate-200: #e2e8f0; --slate-300: #cbd5e1;
+    --slate-400: #94a3b8; --slate-500: #64748b; --slate-600: #475569;
+    --slate-700: #334155; --slate-800: #1e293b;
   }
   * { margin:0; padding:0; box-sizing:border-box; }
   body { background:var(--bg); font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif; color:var(--text); padding:20px; font-size:15px; }
-  .header { background:linear-gradient(135deg,#1e40af,#3b82f6); color:#fff; padding:24px 32px; border-radius:12px; margin-bottom:24px; display:flex; justify-content:space-between; align-items:center; }
+  .header { background:linear-gradient(135deg,#334e68,#627d98); color:#fff; padding:24px 32px; border-radius:12px; margin-bottom:24px; display:flex; justify-content:space-between; align-items:center; }
   .header h1 { font-size:26px; font-weight:700; }
   .header .region-label { font-size:18px; }
   .kpi-row { display:grid; grid-template-columns:repeat(6,1fr); gap:12px; margin-bottom:24px; }
-  .kpi-card { background:var(--card); border-radius:10px; padding:14px 12px; border:1px solid var(--border); position:relative; min-width:0; }
-  .kpi-card .label { font-size:12px; margin-bottom:6px; font-weight:500; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-  .kpi-card .value { font-size:22px; font-weight:800; line-height:1.2; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .kpi-card { background:var(--card); border-radius:10px; padding:14px 12px; border:1px solid #d8dee8; border-top:2px solid #5b7c99; position:relative; min-width:0; box-shadow:0 1px 2px rgba(51,78,104,0.04); }
+  .kpi-card .label { font-size:12px; margin-bottom:6px; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; color:#475569; letter-spacing:0.3px; }
+  .kpi-card .value { font-size:22px; font-weight:800; line-height:1.2; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; color:#1e293b; }
   .kpi-card .sub { font-size:11px; color:var(--text-sub); margin-top:6px; line-height:1.35; }
   .kpi-card .sub span { font-weight:600; }
   .kpi-card .tag { position:absolute; top:10px; right:10px; font-size:11px; padding:2px 8px; border-radius:4px; font-weight:600; }
   .tag-up { background:var(--green-bg); color:var(--green); }
   .tag-down { background:var(--red-bg); color:var(--red); }
-  .rate-bar-mini { height:5px; background:#e8eaed; border-radius:2px; margin-top:5px; overflow:hidden; }
+  .rate-bar-mini { height:5px; background:#e2e8f0; border-radius:2px; margin-top:5px; overflow:hidden; }
   .rate-bar-mini .fill { height:100%; border-radius:2px; }
   .fill-rate-red { background:var(--red); }
   .fill-rate-green { background:var(--green); }
   .section { margin-bottom:28px; }
   .section-title { font-size:18px; font-weight:700; padding:16px 0 10px; border-bottom:2px solid; margin-bottom:16px; display:flex; align-items:center; gap:10px; }
   .section-icon { font-size:20px; line-height:1; }
-  .section-title-store { color:#7c3aed; border-color:#8b5cf6; }
-  .section-title-longtail { color:#ea580c; border-color:#f97316; }
-  .section-title-newproduct { color:#db2777; border-color:#ec4899; }
-  .section-title-newskutrack { color:#c026d3; border-color:#d946ef; }
+  .section-title-store { color:#334e68; border-color:#334e68; }
+  .section-title-longtail { color:#475569; border-color:#94a3b8; }
+  .section-title-newproduct { color:#334e68; border-color:#5b7c99; }
+  .section-title-newskutrack { color:#1e293b; border-color:#475569; }
   .sku-name { text-align:left; font-weight:600; color:var(--text); min-width:130px; font-size:13px; }
-  .sku-id { font-size:10px; color:#94a3b8; font-weight:400; }
-  .sku-sub { font-size:10px; color:#94a3b8; font-weight:400; }
-  .section-title-guide { color:#059669; border-color:#10b981; }
-  .section-title-channel { color:#0284c7; border-color:#0ea5e9; }
-  .section-title-sample { color:#9333ea; border-color:#a855f7; }
+  .sku-id { font-size:10px; color:#64748b; font-weight:400; }
+  .sku-sub { font-size:10px; color:#64748b; font-weight:400; }
+  .section-title-guide { color:#1e293b; border-color:#475569; }
+  .section-title-channel { color:#334e68; border-color:#5b7c99; }
+  .section-title-sample { color:#475569; border-color:#94a3b8; }
   .table-wrap { background:var(--card); border-radius:10px; border:1px solid var(--border); overflow-x:auto; -webkit-overflow-scrolling:touch; }
   table { width:100%; border-collapse:collapse; font-size:14px; }
-  thead { background:#f0f2f5; }
+  thead { background:#f1f5f9; }
   th { padding:12px 14px; text-align:center; font-weight:600; font-size:13px; color:var(--text-sub); white-space:nowrap; }
   td { padding:12px 14px; text-align:center; border-top:1px solid var(--border); white-space:nowrap; }
-  tbody tr:nth-child(even) { background:rgba(128,128,128,0.12); }
+  tbody tr:nth-child(even) { background:rgba(148,163,184,0.10); }
   .store-name { text-align:left; font-weight:600; color:var(--text); min-width:90px; }
   .num { font-weight:600; }
   .yoy-up { color:var(--green); font-weight:600; }
@@ -54,22 +58,22 @@
   .yoy-na { color:var(--text-sub); }
   .rate-bar-cell { min-width:85px; text-align:center; }
   .guide-group { margin-bottom:16px; }
-  .guide-group-title { font-size:16px; font-weight:700; padding:10px 0 6px; color:var(--accent); display:flex; align-items:center; gap:8px; }
+  .guide-group-title { font-size:16px; font-weight:700; padding:10px 0 6px; color:#334e68; border-bottom:1px solid #cbd5e1; display:flex; align-items:center; gap:8px; }
   .guide-table-wrap { background:var(--card); border-radius:10px; border:1px solid var(--border); overflow-x:auto; -webkit-overflow-scrolling:touch; }
   .page { display:none; }
   .page.active { display:block; }
   .nav-btn { display:inline-flex; align-items:center; gap:8px; padding:10px 20px; border-radius:8px; font-size:14px; font-weight:600; cursor:pointer; text-decoration:none; transition:background 0.2s; }
-  .nav-btn-guide { background:#059669; color:#fff; }
-  .nav-btn-guide:hover { background:#047857; }
-  .nav-btn-back { background:var(--card); color:#059669; border:1px solid #059669; }
-  .nav-btn-back:hover { background:#e6f7ed; }
+  .nav-btn-guide { background:#334e68; color:#fff; }
+  .nav-btn-guide:hover { background:#1e293b; }
+  .nav-btn-back { background:var(--card); color:#334e68; border:1px solid #334e68; }
+  .nav-btn-back:hover { background:#e8eef5; }
   @media(max-width:768px) {
     body { padding:10px; font-size:14px; }
     .header { padding:16px 18px; border-radius:8px; }
     .header h1 { font-size:20px; }
     .header .region-label { font-size:16px; }
     .kpi-row { grid-template-columns:repeat(2,1fr); gap:10px; }
-    .kpi-card { padding:14px 16px; border-radius:8px; }
+    .kpi-card { padding:14px 16px; border-radius:8px; border-top:2px solid #5b7c99; }
     .kpi-card .value { font-size:24px; }
     .kpi-card .tag { position:static; display:inline-block; margin-top:4px; }
     .section-title { font-size:16px; }
@@ -108,10 +112,10 @@
     <div class="rate-bar-mini" style="width:100%;margin-top:4px"><div class="fill fill-rate-green" style="width:67.7%"></div></div>
     <div class="tag tag-down">日同比 -68.6%</div>
   </div>
-  <div class="kpi-card" style="background:#eff6ff;border-color:#bfdbfe">
-    <div class="label" style="color:#1e40af">月累计销售</div>
-    <div class="value" style="color:#1e40af">¥2,147,493</div>
-    <div class="sub" style="color:#1e40af">月指标 ¥333.0万 | 完成率 <span style="font-weight:700;color:var(--green)">64.5%</span></div>
+  <div class="kpi-card" style="background:#e8eef5;border-color:#cbd5e1">
+    <div class="label" style="color:#1e293b">月累计销售</div>
+    <div class="value" style="color:#1e293b">¥2,147,493</div>
+    <div class="sub" style="color:#1e293b">月指标 ¥333.0万 | 完成率 <span style="font-weight:700;color:var(--green)">64.5%</span></div>
     <div class="rate-bar-mini" style="width:100%;margin-top:4px"><div class="fill fill-rate-green" style="width:64.5%"></div></div>
     <div class="tag tag-down">月同比 -11.6%</div>
   </div>
@@ -127,15 +131,15 @@
     <div class="sub" style="color:#c2410c">月指标 ¥41.6万 | 完成率 <span style="font-weight:700;color:var(--red)">43.9%</span> | 439件</div>
     <div class="rate-bar-mini" style="width:100%;margin-top:4px"><div class="fill fill-rate-red" style="width:43.9%"></div></div>
   </div>
-  <div class="kpi-card" style="background:#fdf2f8;border-color:#f9a8d4">
-    <div class="label" style="color:#db2777">🆕 新品 日销售</div>
-    <div class="value" style="color:#db2777">¥82</div>
-    <div class="sub" style="color:#db2777">8件 | 占日销 <span style="font-weight:700">0.2%</span></div>
+  <div class="kpi-card" style="background:#e8eef5;border-color:#cbd5e1">
+    <div class="label" style="color:#475569">🆕 新品 日销售</div>
+    <div class="value" style="color:#475569">¥82</div>
+    <div class="sub" style="color:#475569">8件 | 占日销 <span style="font-weight:700">0.2%</span></div>
   </div>
-  <div class="kpi-card" style="background:#fdf2f8;border-color:#f9a8d4">
-    <div class="label" style="color:#db2777">🆕 新品 月累计</div>
-    <div class="value" style="color:#db2777">¥318,559</div>
-    <div class="sub" style="color:#db2777">1121件 | 占月销 <span style="font-weight:700">14.8%</span></div>
+  <div class="kpi-card" style="background:#e8eef5;border-color:#cbd5e1">
+    <div class="label" style="color:#475569">🆕 新品 月累计</div>
+    <div class="value" style="color:#475569">¥318,559</div>
+    <div class="sub" style="color:#475569">1121件 | 占月销 <span style="font-weight:700">14.8%</span></div>
   </div>
 </div>
 
@@ -145,19 +149,19 @@
   <div class="section-title section-title-store"><span class="section-icon">🏪</span>门店 KPI 详情</div>
   <div class="table-wrap">
   <table>
-    <thead style="background:#7c3aed25;">
+    <thead style="background:#334e6825;">
       <tr>
-        <th style="text-align:left;color:#7c3aed;">门店</th>
-        <th style="color:#7c3aed;">日销售</th>
-        <th style="color:#7c3aed;">日指标</th>
-        <th style="color:#7c3aed;">日完成率</th>
-        <th style="color:#7c3aed;">日同比</th>
-        <th style="color:#7c3aed;">月累计</th>
-        <th style="color:#7c3aed;">月指标</th>
-        <th style="color:#7c3aed;">月完成率</th>
-        <th style="color:#7c3aed;">月同比</th>
-        <th style="color:#7c3aed;">连带率(日)</th>
-        <th style="color:#7c3aed;">客单价(日)</th>
+        <th style="text-align:left;color:#334e68;">门店</th>
+        <th style="color:#334e68;">日销售</th>
+        <th style="color:#334e68;">日指标</th>
+        <th style="color:#334e68;">日完成率</th>
+        <th style="color:#334e68;">日同比</th>
+        <th style="color:#334e68;">月累计</th>
+        <th style="color:#334e68;">月指标</th>
+        <th style="color:#334e68;">月完成率</th>
+        <th style="color:#334e68;">月同比</th>
+        <th style="color:#334e68;">连带率(日)</th>
+        <th style="color:#334e68;">客单价(日)</th>
       </tr>
     </thead>
     <tbody>
@@ -254,7 +258,7 @@
         <td>¥261</td>
       </tr>
 
-      <tr style="background:#7c3aed35;font-weight:700">
+      <tr style="background:#334e6835;font-weight:700">
         <td class="store-name">苏中区域</td>
         <td class="num">¥45,017</td>
         <td>¥6.7万</td>
@@ -357,13 +361,13 @@
   <div class="section-title section-title-newproduct"><span class="section-icon">🆕</span>新品 销售详情 <span style="font-size:12px;font-weight:400;color:var(--text-sub);">（上市日期 2026年8月）</span></div>
   <div class="table-wrap">
   <table>
-    <thead style="background:#db277725;">
+    <thead style="background:#334e6825;">
       <tr>
-        <th style="text-align:left;color:#db2777;">门店</th>
-        <th style="color:#db2777;">日销售</th>
-        <th style="color:#db2777;">日销售占比</th>
-        <th style="color:#db2777;">月累计</th>
-        <th style="color:#db2777;">月度销售占比</th>
+        <th style="text-align:left;color:#475569;">门店</th>
+        <th style="color:#475569;">日销售</th>
+        <th style="color:#475569;">日销售占比</th>
+        <th style="color:#475569;">月累计</th>
+        <th style="color:#475569;">月度销售占比</th>
       </tr>
     </thead>
     <tbody>
@@ -418,7 +422,7 @@
         <td style="color:#16a34a;font-weight:700;">14.7%</td>
       </tr>
 
-      <tr style="background:#db277735;font-weight:700">
+      <tr style="background:#334e6835;font-weight:700">
         <td class="store-name">苏中区域</td>
         <td class="num">¥82/8件</td>
         <td style="color:#dc2626;font-weight:700;">0.2%</td>
