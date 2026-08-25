@@ -7,12 +7,12 @@
 <meta property="og:description" content="乐高苏中区域7家门店每日销售数据看板">
 <title>苏中日销售看板</title>
 <style>:root {
-  /* ===== 苏中销售看板 Design Tokens (蓝灰商务版)：深海蓝灰 + 商务金点缀 ===== */
-  --bg-page:#F8FAFC; --bg-card:#FFFFFF; --bg-card-dark:#0F1F38; --bg-section:#EEF2F7; --bg-hover:#E2E8F0;
-  --text-primary:#0F1F38; --text-secondary:#475569; --text-tertiary:#94A3B8; --text-inverse:#FFFFFF; --text-on-gold:#1E293B;
-  --border-soft:rgba(15,31,56,0.08); --border-mid:rgba(15,31,56,0.18); --border-strong:#1E3A5F;
-  --brand-navy:#1E3A5F; --brand-deep:#0F1F38; --brand-slate:#475569; --brand-mute:#94A3B8;
-  --accent-gold:#C9A86A; --accent-blue:#3B82F6; --accent-cyan:#0891B2;
+  /* ===== 苏中销售看板 Design Tokens (明亮蓝渐变版)：明亮蓝渐变顶栏 + 商务金点缀 ===== */
+  --bg-page:#FFFFFF; --bg-card:#FFFFFF; --bg-card-dark:#3B6EA5; --bg-section:#F1F5F9; --bg-hover:#E2E8F0;
+  --text-primary:#1E3A5F; --text-secondary:#475569; --text-tertiary:#94A3B8; --text-inverse:#FFFFFF; --text-on-gold:#1E293B;
+  --border-soft:rgba(30,58,95,0.08); --border-mid:rgba(30,58,95,0.14); --border-strong:#1E3A5F;
+  --brand-navy:#3B6EA5; --brand-deep:#1E3A5F; --brand-slate:#475569; --brand-mute:#94A3B8;
+  --accent-gold:#C9A86A; --accent-blue:#4F88C9; --accent-cyan:#0891B2;
   --status-good:#0F6E56; --status-warn:#BA7517; --status-bad:#A32D2D; --status-info:#1E3A5F;
   --data-1:#1E3A5F; --data-2:#3B82F6; --data-3:#C9A86A; --data-4:#475569; --data-5:#0891B2; --data-6:#6366F1; --data-7:#6B7280;
   --mod-sales:#1E3A5F; --mod-sales-light:#B5D4F4; --mod-sales-soft:rgba(30,58,95,0.10);
@@ -31,11 +31,11 @@
   --mod-sku:#639922; --mod-sku-light:#C0DD97; --mod-sku-soft:rgba(99,153,34,0.10);
   --radius-sm:6px; --radius-md:10px; --radius-lg:14px;
   /* ===== legacy 别名（body 现有 HTML 仍用 --bg/--text/--red 等，必须保留） ===== */
-  --bg:#F8FAFC; --card:#FFFFFF; --border:rgba(15,31,56,0.08); --text:#0F1F38; --text-sub:#475569;
+  --bg:#FFFFFF; --card:#FFFFFF; --border:rgba(30,58,95,0.08); --text:#1E3A5F; --text-sub:#475569;
   --red:#A32D2D; --green:#0F6E56; --blue:#3B82F6; --yellow:#BA7517; --purple:#6366F1;
   --accent:#1E3A5F; --gold:#C9A86A;
   --red-bg:rgba(163,45,45,0.12); --green-bg:rgba(15,110,86,0.12); --blue-bg:rgba(59,130,246,0.10);
-  --slate-100:#F8FAFC; --slate-200:#EEF2F7; --slate-300:#E2E8F0; --slate-400:#94A3B8; --slate-500:#475569; --slate-600:#334155; --slate-700:#1E3A5F; --slate-800:#0F1F38;
+  --slate-100:#FFFFFF; --slate-200:#F1F5F9; --slate-300:#E2E8F0; --slate-400:#94A3B8; --slate-500:#475569; --slate-600:#334155; --slate-700:#1E3A5F; --slate-800:#1E3A5F;
   /* ===== 固定每日销售看板配色 (FIXED DASHBOARD PALETTE) — body/规则统一引用，勿在 :root 外散写 hex ===== */
   --dash-store:#1E3A5F;
   --dash-store-soft:rgba(30,58,95,0.08);
@@ -117,13 +117,13 @@ body { background: var(--bg-page); color: var(--text-primary); }
   
   * { margin:0; padding:0; box-sizing:border-box; }
   body { background:var(--bg); font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif; color:var(--text); padding:20px; font-size:15px; }
-  .header { background:linear-gradient(135deg,#0F1F38,var(--dash-store)); color:#fff; padding:24px 32px; border-radius:12px; margin-bottom:24px; display:flex; justify-content:space-between; align-items:center; }
+  .header { background:linear-gradient(135deg,#3B6EA5,var(--dash-store)); color:#fff; padding:24px 32px; border-radius:12px; margin-bottom:24px; display:flex; justify-content:space-between; align-items:center; }
   .header h1 { font-size:26px; font-weight:700; }
   .header .region-label { font-size:18px; color:var(--gold); font-weight:600; }
   .kpi-row { display:grid; grid-template-columns:repeat(6,1fr); gap:12px; margin-bottom:24px; }
-  .kpi-card { background:var(--card); border-radius:10px; padding:14px 12px; border:1px solid var(--border); border-top:3px solid var(--dash-store); position:relative; min-width:0; box-shadow:0 1px 3px rgba(15,31,56,0.06); }
+  .kpi-card { background:var(--card); border-radius:10px; padding:14px 12px; border:1px solid var(--border); border-top:3px solid var(--dash-store); position:relative; min-width:0; box-shadow:0 1px 3px rgba(30,58,95,0.05); }
   .kpi-card .label { font-size:12px; margin-bottom:6px; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; color:#475569; letter-spacing:0.3px; }
-  .kpi-card .value { font-size:22px; font-weight:700; line-height:1.2; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; color:#0F1F38; }
+  .kpi-card .value { font-size:22px; font-weight:700; line-height:1.2; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; color:#1E3A5F; }
   .kpi-card .sub { font-size:11px; color:var(--text-sub); margin-top:6px; line-height:1.35; }
   .kpi-card .sub span { font-weight:600; }
   .kpi-card .tag { position:absolute; top:10px; right:10px; font-size:11px; padding:2px 8px; border-radius:4px; font-weight:600; }
@@ -151,7 +151,7 @@ body { background: var(--bg-page); color: var(--text-primary); }
   thead { background:#EEF2F7; }
   th { padding:12px 14px; text-align:center; font-weight:600; font-size:13px; color:var(--text-sub); white-space:nowrap; }
   td { padding:12px 14px; text-align:center; border-top:1px solid var(--border); white-space:nowrap; }
-  tbody tr:nth-child(even) { background:rgba(15,31,56,0.04); }
+  tbody tr:nth-child(even) { background:rgba(30,58,95,0.04); }
   .store-name { text-align:left; font-weight:600; color:var(--text); min-width:90px; }
   .num { font-weight:600; }
   .yoy-up { color:var(--green); font-weight:600; }
@@ -165,7 +165,7 @@ body { background: var(--bg-page); color: var(--text-primary); }
   .page.active { display:block; }
   .nav-btn { display:inline-flex; align-items:center; gap:8px; padding:10px 20px; border-radius:8px; font-size:14px; font-weight:600; cursor:pointer; text-decoration:none; transition:background 0.2s; }
   .nav-btn-guide { background:var(--dash-store); color:#fff; }
-  .nav-btn-guide:hover { background:#0F1F38; }
+  .nav-btn-guide:hover { background:#1E3A5F; }
   .nav-btn-back { background:var(--card); color:var(--dash-store); border:1px solid var(--dash-store); }
   .nav-btn-back:hover { background:#EEF2F7; }
   @media(max-width:768px) {
@@ -203,7 +203,7 @@ body { background: var(--bg-page); color: var(--text-primary); }
 <div class="header">
   <div>
     <div class="region-label">🧱 苏中区域</div>
-    <h1>日销售看板<span style="font-size:14px;font-weight:400;color:var(--text-sub);margin-left:8px;">8月25日</span><span style="font-size:12px;font-weight:400;color:var(--text-sub);margin-left:6px;opacity:0.7;">更新于 8月25日</span><span style="font-size:11px;font-weight:400;color:var(--text-sub);margin-left:6px;opacity:0.5;">（数据截止 12:06）</span></h1>
+    <h1>日销售看板<span style="font-size:14px;font-weight:400;color:var(--text-sub);margin-left:8px;">8月25日</span><span style="font-size:12px;font-weight:400;color:var(--text-sub);margin-left:6px;opacity:0.7;">更新于 8月25日</span><span style="font-size:11px;font-weight:400;color:var(--text-sub);margin-left:6px;opacity:0.5;">（数据截止 12:14）</span></h1>
   </div>
   <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end;">
     <a class="nav-btn nav-btn-guide" onclick="showPage('page2')">👩 导购详情</a>
