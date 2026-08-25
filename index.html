@@ -5,58 +5,58 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>苏中日销售看板</title>
 <style>:root {
-  /* ===== 苏中销售看板 Design Tokens (明亮蓝渐变版)：明亮蓝渐变顶栏 + 商务金点缀 ===== */
-  --bg-page:#FFFFFF; --bg-card:#FFFFFF; --bg-card-dark:#3B6EA5; --bg-section:#F1F5F9; --bg-hover:#E2E8F0;
-  --text-primary:#1E3A5F; --text-secondary:#475569; --text-tertiary:#94A3B8; --text-inverse:#FFFFFF; --text-on-gold:#1E293B;
-  --border-soft:rgba(30,58,95,0.08); --border-mid:rgba(30,58,95,0.14); --border-strong:#1E3A5F;
-  --brand-navy:#3B6EA5; --brand-deep:#1E3A5F; --brand-slate:#475569; --brand-mute:#94A3B8;
-  --accent-gold:#C9A86A; --accent-blue:#4F88C9; --accent-cyan:#0891B2;
-  --status-good:#0F6E56; --status-warn:#BA7517; --status-bad:#A32D2D; --status-info:#1E3A5F;
-  --data-1:#1E3A5F; --data-2:#3B82F6; --data-3:#C9A86A; --data-4:#475569; --data-5:#0891B2; --data-6:#6366F1; --data-7:#6B7280;
-  --mod-sales:#1E3A5F; --mod-sales-light:#B5D4F4; --mod-sales-soft:rgba(30,58,95,0.10);
-  --mod-traffic:#6366F1; --mod-traffic-light:#CECBF6; --mod-traffic-soft:rgba(99,102,241,0.10);
-  --mod-conversion:#0891B2; --mod-conversion-light:#9FE1CB; --mod-conversion-soft:rgba(8,145,178,0.10);
-  --mod-ticket:#3B82F6; --mod-ticket-light:#B5D4F4; --mod-ticket-soft:rgba(59,130,246,0.10);
-  --mod-bundle:#06B6D4; --mod-bundle-light:#9FE1CB; --mod-bundle-soft:rgba(6,182,212,0.10);
-  --mod-discount:#D85A30; --mod-discount-light:#F5C4B3; --mod-discount-soft:rgba(216,90,48,0.10);
-  --mod-inventory:#BA7517; --mod-inventory-light:#FAC775; --mod-inventory-soft:rgba(186,117,23,0.10);
-  --mod-member:#993C1D; --mod-member-light:#F0997B; --mod-member-soft:rgba(153,60,29,0.10);
-  --mod-repurchase:#D4537E; --mod-repurchase-light:#F4C0D1; --mod-repurchase-soft:rgba(212,83,126,0.10);
-  --mod-margin:#3B6D11; --mod-margin-light:#C0DD97; --mod-margin-soft:rgba(59,109,17,0.10);
-  --mod-time:#475569; --mod-time-light:#D3D1C7; --mod-time-soft:rgba(71,85,105,0.10);
-  --mod-geo:#185FA5; --mod-geo-light:#85B7EB; --mod-geo-soft:rgba(24,95,165,0.10);
-  --mod-yoy:#534AB7; --mod-yoy-light:#CECBF6; --mod-yoy-soft:rgba(83,74,183,0.10);
-  --mod-sku:#639922; --mod-sku-light:#C0DD97; --mod-sku-soft:rgba(99,153,34,0.10);
+  /* ===== 苏中销售看板 Design Tokens (明亮清爽版 v2)：底色留白、主蓝提亮、模块色降饱和 ===== */
+  --bg-page:#FFFFFF; --bg-card:#FFFFFF; --bg-card-dark:#4F88C9; --bg-section:#F1F5F9; --bg-hover:#E2E8F0;
+  --text-primary:#0F2C56; --text-secondary:#475569; --text-tertiary:#94A3B8; --text-inverse:#FFFFFF; --text-on-gold:#1E293B;
+  --border-soft:rgba(79,136,201,0.10); --border-mid:rgba(79,136,201,0.18); --border-strong:#4F88C9;
+  --brand-navy:#4F88C9; --brand-deep:#0F2C56; --brand-slate:#64748B; --brand-mute:#94A3B8;
+  --accent-gold:#D4B27A; --accent-blue:#4F88C9; --accent-cyan:#0EA5BC;
+  --status-good:#10B981; --status-warn:#F59E0B; --status-bad:#EF4444; --status-info:#4F88C9;
+  --data-1:#0F2C56; --data-2:#4F88C9; --data-3:#D4B27A; --data-4:#64748B; --data-5:#0EA5BC; --data-6:#7C8FE8; --data-7:#94A3B8;
+  --mod-sales:#4F88C9; --mod-sales-light:#B5D4F4; --mod-sales-soft:rgba(79,136,201,0.10);
+  --mod-traffic:#7C8FE8; --mod-traffic-light:#D5D8F8; --mod-traffic-soft:rgba(124,143,232,0.10);
+  --mod-conversion:#0EA5BC; --mod-conversion-light:#B2E6EE; --mod-conversion-soft:rgba(14,165,188,0.10);
+  --mod-ticket:#4F88C9; --mod-ticket-light:#B5D4F4; --mod-ticket-soft:rgba(79,136,201,0.10);
+  --mod-bundle:#22B8CF; --mod-bundle-light:#B2E6EE; --mod-bundle-soft:rgba(34,184,207,0.10);
+  --mod-discount:#E07A4F; --mod-discount-light:#F5D4C3; --mod-discount-soft:rgba(224,122,79,0.10);
+  --mod-inventory:#D49A3A; --mod-inventory-light:#F8DBA7; --mod-inventory-soft:rgba(212,154,58,0.10);
+  --mod-member:#C46650; --mod-member-light:#F2C9BC; --mod-member-soft:rgba(196,102,80,0.10);
+  --mod-repurchase:#E07A9F; --mod-repurchase-light:#F7D2DE; --mod-repurchase-soft:rgba(224,122,159,0.10);
+  --mod-margin:#7DA85A; --mod-margin-light:#D8EBC1; --mod-margin-soft:rgba(125,168,90,0.10);
+  --mod-time:#64748B; --mod-time-light:#D8DCE3; --mod-time-soft:rgba(100,116,139,0.10);
+  --mod-geo:#3B82C9; --mod-geo-light:#B5D4F4; --mod-geo-soft:rgba(59,130,201,0.10);
+  --mod-yoy:#7C70C0; --mod-yoy-light:#D8D4F0; --mod-yoy-soft:rgba(124,112,192,0.10);
+  --mod-sku:#86B050; --mod-sku-light:#D8EBC1; --mod-sku-soft:rgba(134,176,80,0.10);
   --radius-sm:6px; --radius-md:10px; --radius-lg:14px;
   /* ===== legacy 别名（body 现有 HTML 仍用 --bg/--text/--red 等，必须保留） ===== */
-  --bg:#FFFFFF; --card:#FFFFFF; --border:rgba(30,58,95,0.08); --text:#1E3A5F; --text-sub:#475569;
-  --red:#A32D2D; --green:#0F6E56; --blue:#3B82F6; --yellow:#BA7517; --purple:#6366F1;
-  --accent:#1E3A5F; --gold:#C9A86A;
-  --red-bg:rgba(163,45,45,0.12); --green-bg:rgba(15,110,86,0.12); --blue-bg:rgba(59,130,246,0.10);
-  --slate-100:#FFFFFF; --slate-200:#F1F5F9; --slate-300:#E2E8F0; --slate-400:#94A3B8; --slate-500:#475569; --slate-600:#334155; --slate-700:#1E3A5F; --slate-800:#1E3A5F;
+  --bg:#FFFFFF; --card:#FFFFFF; --border:rgba(79,136,201,0.10); --text:#0F2C56; --text-sub:#475569;
+  --red:#EF4444; --green:#10B981; --blue:#4F88C9; --yellow:#F59E0B; --purple:#7C8FE8;
+  --accent:#0F2C56; --gold:#D4B27A;
+  --red-bg:rgba(239,68,68,0.10); --green-bg:rgba(16,185,129,0.10); --blue-bg:rgba(79,136,201,0.10);
+  --slate-100:#FFFFFF; --slate-200:#F1F5F9; --slate-300:#E2E8F0; --slate-400:#94A3B8; --slate-500:#475569; --slate-600:#64748B; --slate-700:#0F2C56; --slate-800:#0F2C56;
   /* ===== 固定每日销售看板配色 (FIXED DASHBOARD PALETTE) — body/规则统一引用，勿在 :root 外散写 hex ===== */
-  --dash-store:#1E3A5F;
-  --dash-store-soft:rgba(30,58,95,0.08);
-  --dash-store-edge:rgba(30,58,95,0.22);
-  --dash-gold:#C9A86A;
-  --dash-gold-soft:rgba(201,168,106,0.12);
-  --dash-gold-edge:rgba(201,168,106,0.30);
-  --dash-longtail:#185FA5;
-  --dash-longtail-tint:rgba(24,95,165,0.08);
-  --dash-longtail-edge:rgba(24,95,165,0.22);
-  --dash-longtail-soft:rgba(24,95,165,0.15);
-  --dash-longtail-row:rgba(24,95,165,0.21);
-  --dash-longtail-line:rgba(24,95,165,0.125);
-  --dash-newproduct:#0891B2;
-  --dash-newproduct-tint:rgba(8,145,178,0.08);
-  --dash-newproduct-edge:rgba(8,145,178,0.22);
-  --dash-newproduct-soft:rgba(8,145,178,0.15);
-  --dash-newproduct-row:rgba(8,145,178,0.21);
-  --dash-newsku:#1E40AF;
-  --dash-newsku-soft:rgba(30,64,175,0.15);
-  --dash-newsku-row:rgba(30,64,175,0.21);
-  --dash-channel:#3B82F6;
-  --dash-sample:#9333ea;
+  --dash-store:#4F88C9;
+  --dash-store-soft:rgba(79,136,201,0.08);
+  --dash-store-edge:rgba(79,136,201,0.22);
+  --dash-gold:#D4B27A;
+  --dash-gold-soft:rgba(212,178,122,0.12);
+  --dash-gold-edge:rgba(212,178,122,0.30);
+  --dash-longtail:#3B82C9;
+  --dash-longtail-tint:rgba(59,130,201,0.08);
+  --dash-longtail-edge:rgba(59,130,201,0.22);
+  --dash-longtail-soft:rgba(59,130,201,0.15);
+  --dash-longtail-row:rgba(59,130,201,0.21);
+  --dash-longtail-line:rgba(59,130,201,0.125);
+  --dash-newproduct:#0EA5BC;
+  --dash-newproduct-tint:rgba(14,165,188,0.08);
+  --dash-newproduct-edge:rgba(14,165,188,0.22);
+  --dash-newproduct-soft:rgba(14,165,188,0.15);
+  --dash-newproduct-row:rgba(14,165,188,0.21);
+  --dash-newsku:#5B7CD9;
+  --dash-newsku-soft:rgba(91,124,217,0.15);
+  --dash-newsku-row:rgba(91,124,217,0.21);
+  --dash-channel:#4F88C9;
+  --dash-sample:#A06BD9;
 }
 
 /* 元素级应用规则 */
@@ -115,13 +115,13 @@ body { background: var(--bg-page); color: var(--text-primary); }
   
   * { margin:0; padding:0; box-sizing:border-box; }
   body { background:var(--bg); font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif; color:var(--text); padding:20px; font-size:15px; }
-  .header { background:linear-gradient(135deg,#3B6EA5,var(--dash-store)); color:#fff; padding:24px 32px; border-radius:12px; margin-bottom:24px; display:flex; justify-content:space-between; align-items:center; }
+  .header { background:linear-gradient(135deg,#5B8DC9,#4F88C9); color:#fff; padding:24px 32px; border-radius:12px; margin-bottom:24px; display:flex; justify-content:space-between; align-items:center; }
   .header h1 { font-size:26px; font-weight:700; }
   .header .region-label { font-size:18px; color:var(--gold); font-weight:600; }
   .kpi-row { display:grid; grid-template-columns:repeat(6,1fr); gap:12px; margin-bottom:24px; }
   .kpi-card { background:var(--card); border-radius:10px; padding:14px 12px; border:1px solid var(--border); border-top:3px solid var(--dash-store); position:relative; min-width:0; box-shadow:0 1px 3px rgba(30,58,95,0.05); }
-  .kpi-card .label { font-size:12px; margin-bottom:6px; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; color:#475569; letter-spacing:0.3px; }
-  .kpi-card .value { font-size:22px; font-weight:700; line-height:1.2; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; color:#1E3A5F; }
+  .kpi-card .label { font-size:12px; margin-bottom:6px; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; color:#64748B; letter-spacing:0.3px; }
+  .kpi-card .value { font-size:22px; font-weight:700; line-height:1.2; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; color:#0F2C56; }
   .kpi-card .sub { font-size:11px; color:var(--text-sub); margin-top:6px; line-height:1.35; }
   .kpi-card .sub span { font-weight:600; }
   .kpi-card .tag { position:absolute; top:10px; right:10px; font-size:11px; padding:2px 8px; border-radius:4px; font-weight:600; }
@@ -141,7 +141,7 @@ body { background: var(--bg-page); color: var(--text-primary); }
   .sku-name { text-align:left; font-weight:600; color:var(--text); min-width:130px; font-size:13px; }
   .sku-id { font-size:10px; color:#94A3B8; font-weight:400; }
   .sku-sub { font-size:10px; color:#94A3B8; font-weight:400; }
-  .section-title-guide { color:var(--dash-store); border-color:#475569; }
+  .section-title-guide { color:var(--dash-store); border-color:#64748B; }
   .section-title-channel { color:var(--dash-channel); border-color:var(--dash-channel); }
   .section-title-sample { color:var(--dash-sample); border-color:var(--dash-sample); }
   .table-wrap { background:var(--card); border-radius:10px; border:1px solid var(--border); overflow-x:auto; -webkit-overflow-scrolling:touch; }
@@ -163,7 +163,7 @@ body { background: var(--bg-page); color: var(--text-primary); }
   .page.active { display:block; }
   .nav-btn { display:inline-flex; align-items:center; gap:8px; padding:10px 20px; border-radius:8px; font-size:14px; font-weight:600; cursor:pointer; text-decoration:none; transition:background 0.2s; }
   .nav-btn-guide { background:var(--dash-store); color:#fff; }
-  .nav-btn-guide:hover { background:#1E3A5F; }
+  .nav-btn-guide:hover { background:#4F88C9; }
   .nav-btn-back { background:var(--card); color:var(--dash-store); border:1px solid var(--dash-store); }
   .nav-btn-back:hover { background:#EEF2F7; }
   @media(max-width:768px) {
@@ -201,7 +201,7 @@ body { background: var(--bg-page); color: var(--text-primary); }
 <div class="header">
   <div>
     <div class="region-label">🧱 苏中区域</div>
-    <h1>日销售看板<span style="font-size:14px;font-weight:400;color:var(--text-sub);margin-left:8px;">8月25日</span><span style="font-size:12px;font-weight:400;color:var(--text-sub);margin-left:6px;opacity:0.7;">更新于 8月25日</span><span style="font-size:11px;font-weight:400;color:var(--text-sub);margin-left:6px;opacity:0.5;">（数据截止 13:21）</span></h1>
+    <h1>日销售看板<span style="font-size:14px;font-weight:400;color:var(--text-sub);margin-left:8px;">8月25日</span><span style="font-size:12px;font-weight:400;color:var(--text-sub);margin-left:6px;opacity:0.7;">更新于 8月25日</span><span style="font-size:11px;font-weight:400;color:var(--text-sub);margin-left:6px;opacity:0.5;">（数据截止 14:18）</span></h1>
   </div>
   <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end;">
     <a class="nav-btn nav-btn-guide" onclick="showPage('page2')">👩 导购详情</a>
@@ -802,7 +802,7 @@ body { background: var(--bg-page); color: var(--text-primary); }
         <th style="text-align:left;background:var(--dash-sample)25;color:var(--dash-sample);" rowspan="2">门店</th>
         <th style="background:var(--dash-longtail-line);color:var(--dash-longtail);" colspan="3">日</th>
         <th style="background:var(--dash-channel)20;color:var(--dash-channel);" colspan="3">WK35周累计</th>
-        <th style="background:#0F6E5620;color:#0F6E56;" colspan="3">月累计</th>
+        <th style="background:#10B98120;color:#10B981;" colspan="3">月累计</th>
       </tr>
       <tr>
         <th style="background:var(--dash-longtail-line);color:var(--dash-longtail);">件数</th>
@@ -811,9 +811,9 @@ body { background: var(--bg-page); color: var(--text-primary); }
         <th style="background:var(--dash-channel)20;color:var(--dash-channel);">件数</th>
         <th style="background:var(--dash-channel)20;color:var(--dash-channel);">零售价</th>
         <th style="background:var(--dash-channel)20;color:var(--dash-channel);">结算金额</th>
-        <th style="background:#0F6E5620;color:#0F6E56;">件数</th>
-        <th style="background:#0F6E5620;color:#0F6E56;">零售价</th>
-        <th style="background:#0F6E5620;color:#0F6E56;">结算金额</th>
+        <th style="background:#10B98120;color:#10B981;">件数</th>
+        <th style="background:#10B98120;color:#10B981;">零售价</th>
+        <th style="background:#10B98120;color:#10B981;">结算金额</th>
       </tr>
     </thead>
     <tbody>
@@ -927,7 +927,7 @@ body { background: var(--bg-page); color: var(--text-primary); }
 
 <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
   <a class="nav-btn nav-btn-back" onclick="showPage('page1')">← 返回看板</a>
-  <div style="font-size:18px;font-weight:700;color:#0F6E56;">👩 导购销售详情</div>
+  <div style="font-size:18px;font-weight:700;color:#10B981;">👩 导购销售详情</div>
 </div>
 
 
@@ -939,7 +939,7 @@ body { background: var(--bg-page); color: var(--text-primary); }
     <div class="guide-group-title">📍 扬州万象汇</div>
     <div class="guide-table-wrap">
     <table>
-      <thead style="background:#0F6E5625;">
+      <thead style="background:#10B98125;">
         <tr>
           <th style="text-align:left">导购</th>
           <th>职务</th>
@@ -962,7 +962,7 @@ body { background: var(--bg-page); color: var(--text-primary); }
           <td class="store-name">朱洪涛</td>
           <td style="font-size:11px;color:var(--text-sub)">店员</td>
           <td class="num">¥2,555</td>
-          <td class="num" style="color:#0F6E56;font-weight:600">¥269</td>
+          <td class="num" style="color:#10B981;font-weight:600">¥269</td>
           <td class="num">10</td>
           <td class="num">15</td>
           <td class="num">1.50</td>
@@ -1018,7 +1018,7 @@ body { background: var(--bg-page); color: var(--text-primary); }
           <td>¥17.7万</td>
           <td class="rate-bar-cell"><span style="color:var(--green)">59.8%</span><div class="rate-bar-mini"><div class="fill fill-rate-green" style="width:59.8%"></div></div></td>
         </tr>
-        <tr style="background:#0F6E5615;font-weight:700">
+        <tr style="background:#10B98115;font-weight:700">
           <td class="store-name">合计</td>
           <td>-</td>
           <td class="num">¥2,555</td>
@@ -1041,7 +1041,7 @@ body { background: var(--bg-page); color: var(--text-primary); }
     <div class="guide-group-title">📍 扬州京华城</div>
     <div class="guide-table-wrap">
     <table>
-      <thead style="background:#0F6E5625;">
+      <thead style="background:#10B98125;">
         <tr>
           <th style="text-align:left">导购</th>
           <th>职务</th>
@@ -1064,7 +1064,7 @@ body { background: var(--bg-page); color: var(--text-primary); }
           <td class="store-name">丁茜</td>
           <td style="font-size:11px;color:var(--text-sub)">储备陈列专家</td>
           <td class="num">¥4,165</td>
-          <td class="num" style="color:#0F6E56;font-weight:600">¥685</td>
+          <td class="num" style="color:#10B981;font-weight:600">¥685</td>
           <td class="num">8</td>
           <td class="num">15</td>
           <td class="num">1.88</td>
@@ -1135,7 +1135,7 @@ body { background: var(--bg-page); color: var(--text-primary); }
           <td>¥16.9万</td>
           <td class="rate-bar-cell"><span style="color:var(--green)">55.4%</span><div class="rate-bar-mini"><div class="fill fill-rate-green" style="width:55.4%"></div></div></td>
         </tr>
-        <tr style="background:#0F6E5615;font-weight:700">
+        <tr style="background:#10B98115;font-weight:700">
           <td class="store-name">合计</td>
           <td>-</td>
           <td class="num">¥4,165</td>
@@ -1158,7 +1158,7 @@ body { background: var(--bg-page); color: var(--text-primary); }
     <div class="guide-group-title">📍 扬州江都金鹰</div>
     <div class="guide-table-wrap">
     <table>
-      <thead style="background:#0F6E5625;">
+      <thead style="background:#10B98125;">
         <tr>
           <th style="text-align:left">导购</th>
           <th>职务</th>
@@ -1237,7 +1237,7 @@ body { background: var(--bg-page); color: var(--text-primary); }
           <td>¥9.7万</td>
           <td class="rate-bar-cell"><span style="color:var(--green)">59.3%</span><div class="rate-bar-mini"><div class="fill fill-rate-green" style="width:59.3%"></div></div></td>
         </tr>
-        <tr style="background:#0F6E5615;font-weight:700">
+        <tr style="background:#10B98115;font-weight:700">
           <td class="store-name">合计</td>
           <td>-</td>
           <td class="num">¥688</td>
@@ -1260,7 +1260,7 @@ body { background: var(--bg-page); color: var(--text-primary); }
     <div class="guide-group-title">📍 泰州万象城</div>
     <div class="guide-table-wrap">
     <table>
-      <thead style="background:#0F6E5625;">
+      <thead style="background:#10B98125;">
         <tr>
           <th style="text-align:left">导购</th>
           <th>职务</th>
@@ -1369,7 +1369,7 @@ body { background: var(--bg-page); color: var(--text-primary); }
           <td>¥0</td>
           <td style="color:#94a3b8;font-size:11px">无指标</td>
         </tr>
-        <tr style="background:#0F6E5615;font-weight:700">
+        <tr style="background:#10B98115;font-weight:700">
           <td class="store-name">合计</td>
           <td>-</td>
           <td class="num">¥3,213</td>
@@ -1392,7 +1392,7 @@ body { background: var(--bg-page); color: var(--text-primary); }
     <div class="guide-group-title">📍 宿迁宝龙</div>
     <div class="guide-table-wrap">
     <table>
-      <thead style="background:#0F6E5625;">
+      <thead style="background:#10B98125;">
         <tr>
           <th style="text-align:left">导购</th>
           <th>职务</th>
@@ -1456,7 +1456,7 @@ body { background: var(--bg-page); color: var(--text-primary); }
           <td>¥6.7万</td>
           <td class="rate-bar-cell"><span style="color:var(--green)">52.4%</span><div class="rate-bar-mini"><div class="fill fill-rate-green" style="width:52.4%"></div></div></td>
         </tr>
-        <tr style="background:#0F6E5615;font-weight:700">
+        <tr style="background:#10B98115;font-weight:700">
           <td class="store-name">合计</td>
           <td>-</td>
           <td class="num">¥1,066</td>
@@ -1479,7 +1479,7 @@ body { background: var(--bg-page); color: var(--text-primary); }
     <div class="guide-group-title">📍 淮安新亚</div>
     <div class="guide-table-wrap">
     <table>
-      <thead style="background:#0F6E5625;">
+      <thead style="background:#10B98125;">
         <tr>
           <th style="text-align:left">导购</th>
           <th>职务</th>
@@ -1543,7 +1543,7 @@ body { background: var(--bg-page); color: var(--text-primary); }
           <td>¥6.7万</td>
           <td class="rate-bar-cell"><span style="color:var(--green)">62.2%</span><div class="rate-bar-mini"><div class="fill fill-rate-green" style="width:62.2%"></div></div></td>
         </tr>
-        <tr style="background:#0F6E5615;font-weight:700">
+        <tr style="background:#10B98115;font-weight:700">
           <td class="store-name">合计</td>
           <td>-</td>
           <td class="num">¥419</td>
@@ -1566,7 +1566,7 @@ body { background: var(--bg-page); color: var(--text-primary); }
     <div class="guide-group-title">📍 淮安万象城</div>
     <div class="guide-table-wrap">
     <table>
-      <thead style="background:#0F6E5625;">
+      <thead style="background:#10B98125;">
         <tr>
           <th style="text-align:left">导购</th>
           <th>职务</th>
@@ -1645,7 +1645,7 @@ body { background: var(--bg-page); color: var(--text-primary); }
           <td>¥9.4万</td>
           <td class="rate-bar-cell"><span style="color:var(--green)">63.5%</span><div class="rate-bar-mini"><div class="fill fill-rate-green" style="width:63.5%"></div></div></td>
         </tr>
-        <tr style="background:#0F6E5615;font-weight:700">
+        <tr style="background:#10B98115;font-weight:700">
           <td class="store-name">合计</td>
           <td>-</td>
           <td class="num">¥2,009</td>
