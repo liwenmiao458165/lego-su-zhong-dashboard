@@ -176,9 +176,11 @@ body { background: var(--bg-page); color: var(--text-primary); }
     .header { padding:16px 18px; border-radius:8px; }
     .header h1 { font-size:20px; }
     .header .region-label { font-size:16px; }
-    .kpi-row { grid-template-columns:repeat(2,1fr); gap:10px; }
+    .kpi-row { grid-template-columns:1fr; gap:10px; }
     .kpi-card { padding:14px 16px; border-radius:8px; }
-    .kpi-card .value { font-size:24px; }
+    .kpi-card .label { font-size:13px; }
+    .kpi-card .value { font-size:26px; }
+    .kpi-card .sub { font-size:12px; }
     .kpi-card .tag { position:static; display:inline-block; margin-top:4px; }
     .section-title { font-size:16px; }
     table { font-size:12px; }
@@ -223,20 +225,20 @@ body { background: var(--bg-page); color: var(--text-primary); }
     <div class="tag tag-down">日同比 -61.1%</div>
   </div>
   <div class="kpi-card" style="background:var(--dash-gold-soft);border-color:var(--dash-gold-edge)">
-    <div class="label" style="background:var(--dash-gold);color:#FFFFFF;padding:6px 10px;border-radius:6px;margin-bottom:8px;display:inline-block">月累计销售</div>
+    <div class="label" style="background:var(--dash-gold);color:#FFFFFF;padding:6px 10px;border-radius:6px;margin-bottom:8px;display:inline-block">月销售</div>
     <div class="value" style="color:var(--dash-store)">¥2,293,669</div>
     <div class="sub" style="color:var(--dash-store)">月指标 ¥333.0万 | 完成率 <span style="font-weight:700;color:var(--green)">68.9%</span></div>
     <div class="rate-bar-mini" style="width:100%;margin-top:4px"><div class="fill fill-rate-green" style="width:68.9%"></div></div>
     <div class="tag tag-down">月同比 -14.4%</div>
   </div>
   <div class="kpi-card" style="background:var(--dash-longtail-tint);border-color:var(--dash-longtail-edge)">
-    <div class="label" style="background:var(--dash-longtail);color:#FFFFFF;padding:6px 10px;border-radius:6px;margin-bottom:8px;display:inline-block">📦 长尾款 日销售</div>
+    <div class="label" style="background:var(--dash-longtail);color:#FFFFFF;padding:6px 10px;border-radius:6px;margin-bottom:8px;display:inline-block">📦 长尾款</div>
     <div class="value" style="color:var(--dash-longtail)">¥1,540</div>
     <div class="sub" style="color:var(--dash-longtail)">日指标 ¥8,312 | 完成率 <span style="font-weight:700;color:var(--red)">18.5%</span> | 4件</div>
     <div class="rate-bar-mini" style="width:100%;margin-top:4px"><div class="fill fill-rate-red" style="width:18.5%"></div></div>
   </div>
   <div class="kpi-card" style="background:var(--dash-newproduct-tint);border-color:var(--dash-newproduct-edge)">
-    <div class="label" style="background:var(--dash-newproduct);color:#FFFFFF;padding:6px 10px;border-radius:6px;margin-bottom:8px;display:inline-block">🆕新品 日销售</div>
+    <div class="label" style="background:var(--dash-newproduct);color:#FFFFFF;padding:6px 10px;border-radius:6px;margin-bottom:8px;display:inline-block">🆕新品</div>
     <div class="value" style="color:var(--dash-newproduct)">¥2,801</div>
     <div class="sub" style="color:var(--dash-newproduct)">11件 | 占日销 <span style="font-weight:700">8.7%</span></div>
   </div>
