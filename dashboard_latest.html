@@ -162,6 +162,17 @@ body { background: var(--bg-page); color: var(--text-primary); }
   .guide-filter { margin:4px 0 14px; }
   .guide-select { padding:8px 14px; border-radius:8px; border:1px solid var(--border); background:var(--card); color:var(--text); font-size:14px; font-weight:600; min-width:180px; cursor:pointer; outline:none; }
   .guide-select:focus { border-color:var(--dash-store); }
+  .kpi-guide-grid { display:grid; grid-template-columns:1.1fr 1fr; gap:16px; align-items:start; }
+  .kpi-guide-col { min-width:0; }
+  .guide-col-header { display:flex; align-items:center; justify-content:flex-start; gap:10px; margin-bottom:10px; flex-wrap:wrap; }
+  .guide-col-title { font-size:15px; font-weight:700; color:var(--dash-store); display:flex; align-items:center; gap:6px; }
+  .guide-col-body { min-height:60px; }
+  .kg-tabs { display:flex; gap:6px; margin-bottom:12px; border-bottom:1px solid var(--border); }
+  .kg-tab { padding:10px 18px; border:1px solid var(--border); border-bottom:none; border-radius:8px 8px 0 0; background:var(--card); color:var(--text); font-size:14px; font-weight:600; cursor:pointer; transition:all .15s; }
+  .kg-tab:hover { border-color:var(--dash-store); color:var(--dash-store); }
+  .kg-tab.active { background:var(--dash-store); color:#fff; border-color:var(--dash-store); }
+  .kg-pane { display:none; }
+  .kg-pane.active { display:block; }
   .page { display:none; }
   .page.active { display:block; }
   .nav-btn { display:inline-flex; align-items:center; gap:8px; padding:10px 20px; border-radius:8px; font-size:14px; font-weight:600; cursor:pointer; text-decoration:none; transition:background 0.2s; }
@@ -187,6 +198,9 @@ body { background: var(--bg-page); color: var(--text-primary); }
     .rate-bar-cell { min-width:60px; }
     .guide-group-title { font-size:13px; }
     .nav-btn { padding:8px 14px; font-size:13px; }
+    .kpi-guide-grid { grid-template-columns:1fr; }
+    .kg-tabs { gap:4px; }
+    .kg-tab { padding:8px 12px; font-size:13px; }
   }
 
 
@@ -206,7 +220,7 @@ body { background: var(--bg-page); color: var(--text-primary); }
 <div class="header">
   <div>
     <div class="region-label">🧱 苏中区域</div>
-    <h1>日销售看板<span style="font-size:14px;font-weight:400;color:var(--text-sub);margin-left:8px;">8月27日</span><span style="font-size:12px;font-weight:400;color:var(--text-sub);margin-left:6px;opacity:0.7;">更新于 8月27日</span><span style="font-size:11px;font-weight:400;color:var(--text-sub);margin-left:6px;opacity:0.5;">（数据截止 21:23）</span></h1>
+    <h1>日销售看板<span style="font-size:14px;font-weight:400;color:var(--text-sub);margin-left:8px;">8月28日</span><span style="font-size:12px;font-weight:400;color:var(--text-sub);margin-left:6px;opacity:0.7;">更新于 8月28日</span><span style="font-size:11px;font-weight:400;color:var(--text-sub);margin-left:6px;opacity:0.5;">（数据截止 12:44）</span></h1>
   </div>
 </div>
 
@@ -217,35 +231,39 @@ body { background: var(--bg-page); color: var(--text-primary); }
 <div class="kpi-row" style="grid-template-columns:repeat(4,1fr)">
   <div class="kpi-card" style="background:var(--dash-store-soft);border-color:var(--dash-store-edge)">
     <div class="label" style="background:var(--dash-store);color:#FFFFFF;padding:6px 10px;border-radius:6px;margin-bottom:8px;display:inline-block">日销售</div>
-    <div class="value" style="color:var(--dash-store)">¥58,779</div>
-    <div class="sub" style="color:var(--dash-store)">日指标 ¥6.7万 | 完成率 <span style="font-weight:700;color:var(--red)">88.4%</span></div>
-    <div class="rate-bar-mini" style="width:100%;margin-top:4px"><div class="fill fill-rate-green" style="width:88.4%"></div></div>
-    <div class="tag tag-down">日同比 -30.8%</div>
+    <div class="value" style="color:var(--dash-store)">¥15,620</div>
+    <div class="sub" style="color:var(--dash-store)">日指标 ¥9.6万 | 完成率 <span style="font-weight:700;color:var(--red)">16.3%</span></div>
+    <div class="rate-bar-mini" style="width:100%;margin-top:4px"><div class="fill fill-rate-red" style="width:16.3%"></div></div>
+    <div class="tag tag-down">日同比 -86.6%</div>
   </div>
   <div class="kpi-card" style="background:var(--dash-gold-soft);border-color:var(--dash-gold-edge)">
     <div class="label" style="background:var(--dash-gold);color:#FFFFFF;padding:6px 10px;border-radius:6px;margin-bottom:8px;display:inline-block">月销售</div>
-    <div class="value" style="color:var(--dash-store)">¥2,320,206</div>
-    <div class="sub" style="color:var(--dash-store)">月指标 ¥333.0万 | 完成率 <span style="font-weight:700;color:var(--green)">69.7%</span></div>
-    <div class="rate-bar-mini" style="width:100%;margin-top:4px"><div class="fill fill-rate-green" style="width:69.7%"></div></div>
-    <div class="tag tag-down">月同比 -13.5%</div>
+    <div class="value" style="color:var(--dash-store)">¥2,277,047</div>
+    <div class="sub" style="color:var(--dash-store)">月指标 ¥333.0万 | 完成率 <span style="font-weight:700;color:var(--green)">68.4%</span></div>
+    <div class="rate-bar-mini" style="width:100%;margin-top:4px"><div class="fill fill-rate-green" style="width:68.4%"></div></div>
+    <div class="tag tag-down">月同比 -17.8%</div>
   </div>
   <div class="kpi-card" style="background:var(--dash-longtail-tint);border-color:var(--dash-longtail-edge)">
     <div class="label" style="background:var(--dash-longtail);color:#FFFFFF;padding:6px 10px;border-radius:6px;margin-bottom:8px;display:inline-block">📦 长尾款</div>
-    <div class="value" style="color:var(--dash-longtail)">¥3,717</div>
-    <div class="sub" style="color:var(--dash-longtail)">日指标 ¥8,312 | 完成率 <span style="font-weight:700;color:var(--red)">44.7%</span> | 10件</div>
-    <div class="rate-bar-mini" style="width:100%;margin-top:4px"><div class="fill fill-rate-red" style="width:44.7%"></div></div>
+    <div class="value" style="color:var(--dash-longtail)">¥850</div>
+    <div class="sub" style="color:var(--dash-longtail)">日指标 ¥1.2万 | 完成率 <span style="font-weight:700;color:var(--red)">7.1%</span> | 3件</div>
+    <div class="rate-bar-mini" style="width:100%;margin-top:4px"><div class="fill fill-rate-red" style="width:7.1%"></div></div>
   </div>
   <div class="kpi-card" style="background:var(--dash-newproduct-tint);border-color:var(--dash-newproduct-edge)">
     <div class="label" style="background:var(--dash-newproduct);color:#FFFFFF;padding:6px 10px;border-radius:6px;margin-bottom:8px;display:inline-block">🆕新品</div>
-    <div class="value" style="color:var(--dash-newproduct)">¥5,203</div>
-    <div class="sub" style="color:var(--dash-newproduct)">21件 | 占日销 <span style="font-weight:700">8.9%</span></div>
+    <div class="value" style="color:var(--dash-newproduct)">¥1,360</div>
+    <div class="sub" style="color:var(--dash-newproduct)">6件 | 占日销 <span style="font-weight:700">8.7%</span></div>
   </div>
 </div>
 
 
-<!-- 门店KPI -->
+<!-- 门店KPI / 导购详情（tab 切换） -->
 <div class="section">
-  <div class="section-title section-title-store"><span class="section-icon">🏪</span>门店 KPI 详情</div>
+  <div class="kg-tabs">
+    <button class="kg-tab active" data-tab="kpi" onclick="switchKGTab('kpi', this)">🏪 门店KPI</button>
+    <button class="kg-tab" data-tab="guide" onclick="switchKGTab('guide', this)">👩 导购详情</button>
+  </div>
+  <div class="kg-pane kg-pane-kpi active">
   <div class="table-wrap">
   <table>
     <thead style="background:#4F88C9;color:#FFFFFF;">
@@ -269,141 +287,137 @@ body { background: var(--bg-page); color: var(--text-primary); }
 
       <tr>
         <td class="store-name">淮安万象城</td>
-        <td class="num">¥8,984</td>
-        <td>¥8,000</td>
-        <td class="rate-bar-cell"><span style="color:var(--green)">112.3%</span><div class="rate-bar-mini"><div class="fill fill-rate-green" style="width:100.0%"></div></div></td>
-        <td><span class="yoy-na">N/A</span></td>
-        <td class="num">¥799</td>
-        <td>8.9%</td>
-        <td class="num">¥1,823</td>
-        <td>20.3%</td>
-        <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
-        <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
-        <td>1.50</td>
-        <td>¥408</td>
-      </tr>
-      <tr>
-        <td class="store-name">扬州万象汇</td>
-        <td class="num">¥13,293</td>
+        <td class="num">¥5,929</td>
         <td>¥1.3万</td>
-        <td class="rate-bar-cell"><span style="color:var(--green)">102.2%</span><div class="rate-bar-mini"><div class="fill fill-rate-green" style="width:100.0%"></div></div></td>
-        <td><span class="yoy-up">+29.4%</span></td>
-        <td class="num">¥696</td>
-        <td>5.2%</td>
-        <td class="num">¥113</td>
-        <td>0.9%</td>
-        <td class="num">¥849</td>
+        <td class="rate-bar-cell"><span style="color:var(--red)">45.6%</span><div class="rate-bar-mini"><div class="fill fill-rate-red" style="width:45.6%"></div></div></td>
+        <td><span class="yoy-na">N/A</span></td>
         <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
-        <td>1.68</td>
-        <td>¥604</td>
-      </tr>
-      <tr>
-        <td class="store-name">扬州京华城</td>
-        <td class="num">¥14,160</td>
-        <td>¥1.6万</td>
-        <td class="rate-bar-cell"><span style="color:var(--green)">88.5%</span><div class="rate-bar-mini"><div class="fill fill-rate-green" style="width:88.5%"></div></div></td>
-        <td><span class="yoy-down">-36.6%</span></td>
-        <td class="num">¥249</td>
-        <td>1.8%</td>
-        <td class="num">¥106</td>
-        <td>0.7%</td>
-        <td class="num">¥1,307</td>
-        <td class="num">¥165</td>
-        <td>1.23</td>
-        <td>¥481</td>
+        <td>0.0%</td>
+        <td class="num">¥117</td>
+        <td>2.0%</td>
+        <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
+        <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
+        <td>1.25</td>
+        <td>¥794</td>
       </tr>
       <tr>
         <td class="store-name">淮安新亚</td>
-        <td class="num">¥3,049</td>
-        <td>¥3,500</td>
-        <td class="rate-bar-cell"><span style="color:var(--green)">87.1%</span><div class="rate-bar-mini"><div class="fill fill-rate-green" style="width:87.1%"></div></div></td>
-        <td><span class="yoy-down">-63.5%</span></td>
-        <td class="num">¥1,049</td>
-        <td>34.4%</td>
+        <td class="num">¥1,149</td>
+        <td>¥5,000</td>
+        <td class="rate-bar-cell"><span style="color:var(--red)">23.0%</span><div class="rate-bar-mini"><div class="fill fill-rate-red" style="width:23.0%"></div></div></td>
+        <td><span class="yoy-down">-85.4%</span></td>
         <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
         <td>0.0%</td>
-        <td class="num">¥219</td>
-        <td class="num">¥790</td>
-        <td>1.17</td>
-        <td>¥342</td>
+        <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
+        <td>0.0%</td>
+        <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
+        <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
+        <td>1.00</td>
+        <td>¥1,149</td>
       </tr>
       <tr>
         <td class="store-name">泰州万象城</td>
-        <td class="num">¥13,863</td>
-        <td>¥1.6万</td>
-        <td class="rate-bar-cell"><span style="color:var(--green)">86.6%</span><div class="rate-bar-mini"><div class="fill fill-rate-green" style="width:86.6%"></div></div></td>
-        <td><span class="yoy-up">+1.9%</span></td>
-        <td class="num">¥249</td>
-        <td>1.8%</td>
-        <td class="num">¥2,547</td>
-        <td>18.4%</td>
-        <td class="num">¥1,906</td>
-        <td class="num">¥820</td>
-        <td>1.40</td>
-        <td>¥506</td>
+        <td class="num">¥4,349</td>
+        <td>¥2.2万</td>
+        <td class="rate-bar-cell"><span style="color:var(--red)">19.8%</span><div class="rate-bar-mini"><div class="fill fill-rate-red" style="width:19.8%"></div></div></td>
+        <td><span class="yoy-down">-59.0%</span></td>
+        <td class="num">¥252</td>
+        <td>5.8%</td>
+        <td class="num">¥1,169</td>
+        <td>26.9%</td>
+        <td class="num">¥279</td>
+        <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
+        <td>1.20</td>
+        <td>¥501</td>
       </tr>
       <tr>
-        <td class="store-name">扬州江都金鹰</td>
-        <td class="num">¥4,335</td>
-        <td>¥6,000</td>
-        <td class="rate-bar-cell"><span style="color:var(--green)">72.2%</span><div class="rate-bar-mini"><div class="fill fill-rate-green" style="width:72.2%"></div></div></td>
-        <td><span class="yoy-down">-49.4%</span></td>
-        <td class="num">¥426</td>
-        <td>9.8%</td>
-        <td class="num">¥614</td>
-        <td>14.2%</td>
-        <td class="num">¥945</td>
+        <td class="store-name">扬州京华城</td>
+        <td class="num">¥1,943</td>
+        <td>¥2.2万</td>
+        <td class="rate-bar-cell"><span style="color:var(--red)">8.8%</span><div class="rate-bar-mini"><div class="fill fill-rate-red" style="width:8.8%"></div></div></td>
+        <td><span class="yoy-down">-90.9%</span></td>
         <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
-        <td>1.33</td>
-        <td>¥410</td>
+        <td>0.0%</td>
+        <td class="num">¥39</td>
+        <td>2.0%</td>
+        <td class="num">¥278</td>
+        <td class="num">¥271</td>
+        <td>1.25</td>
+        <td>¥243</td>
+      </tr>
+      <tr>
+        <td class="store-name">扬州万象汇</td>
+        <td class="num">¥1,523</td>
+        <td>¥1.8万</td>
+        <td class="rate-bar-cell"><span style="color:var(--red)">8.5%</span><div class="rate-bar-mini"><div class="fill fill-rate-red" style="width:8.5%"></div></div></td>
+        <td><span class="yoy-down">-93.1%</span></td>
+        <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
+        <td>0.0%</td>
+        <td class="num">¥35</td>
+        <td>2.3%</td>
+        <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
+        <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
+        <td>1.75</td>
+        <td>¥381</td>
       </tr>
       <tr>
         <td class="store-name">宿迁宝龙</td>
-        <td class="num">¥1,095</td>
-        <td>¥4,000</td>
-        <td class="rate-bar-cell"><span style="color:var(--red)">27.4%</span><div class="rate-bar-mini"><div class="fill fill-rate-red" style="width:27.4%"></div></div></td>
-        <td><span class="yoy-down">-87.6%</span></td>
-        <td class="num">¥249</td>
-        <td>22.7%</td>
+        <td class="num">¥408</td>
+        <td>¥6,000</td>
+        <td class="rate-bar-cell"><span style="color:var(--red)">6.8%</span><div class="rate-bar-mini"><div class="fill fill-rate-red" style="width:6.8%"></div></div></td>
+        <td><span class="yoy-down">-88.3%</span></td>
+        <td class="num">¥279</td>
+        <td>68.4%</td>
         <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
         <td>0.0%</td>
         <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
-        <td class="num">¥120</td>
+        <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
         <td>1.00</td>
-        <td>¥175</td>
+        <td>¥204</td>
+      </tr>
+      <tr>
+        <td class="store-name">扬州江都金鹰</td>
+        <td class="num">¥319</td>
+        <td>¥1.0万</td>
+        <td class="rate-bar-cell"><span style="color:var(--red)">3.2%</span><div class="rate-bar-mini"><div class="fill fill-rate-red" style="width:3.2%"></div></div></td>
+        <td><span class="yoy-down">-95.6%</span></td>
+        <td class="num">¥319</td>
+        <td>100.0%</td>
+        <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
+        <td>0.0%</td>
+        <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
+        <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
+        <td>1.00</td>
+        <td>¥319</td>
       </tr>
 
       <tr style="background:#3B6FB8;color:#FFFFFF;font-weight:700">
         <td class="store-name">苏中区域</td>
-        <td class="num">¥58,779</td>
-        <td>¥6.7万</td>
-        <td class="rate-bar-cell"><span style="color:var(--green)">88.4%</span><div class="rate-bar-mini"><div class="fill fill-rate-green" style="width:88.4%"></div></div></td>
-        <td><span class="yoy-down">-30.8%</span></td>
-        <td class="num">¥3,717</td>
-        <td>6.3%</td>
-        <td class="num">¥5,203</td>
-        <td>8.9%</td>
-        <td class="num">¥5,226</td>
-        <td class="num">¥1,895</td>
-        <td>1.38</td>
-        <td>¥460</td>
+        <td class="num">¥15,620</td>
+        <td>¥9.6万</td>
+        <td class="rate-bar-cell"><span style="color:var(--red)">16.3%</span><div class="rate-bar-mini"><div class="fill fill-rate-red" style="width:16.3%"></div></div></td>
+        <td><span class="yoy-down">-86.6%</span></td>
+        <td class="num">¥850</td>
+        <td>5.4%</td>
+        <td class="num">¥1,360</td>
+        <td>8.7%</td>
+        <td class="num">¥557</td>
+        <td class="num">¥271</td>
+        <td>1.26</td>
+        <td>¥491</td>
       </tr>
     </tbody>
   </table>
   </div>
 </div>
-
-
-<!-- 导购 -->
-<div class="section">
-  <div class="section-title section-title-guide"><span class="section-icon">👩</span>导购 销售详情 <span style="font-size:12px;font-weight:400;color:var(--text-sub);">（下拉选择门店）</span></div>
-  <div class="guide-filter">
-    <select class="guide-select" onchange="filterGuides(this.value)">
-      <option value="" selected>请选择门店</option>
+  <div class="kg-pane kg-pane-guide">
+    <div class="guide-col-header" style="margin-top:6px;">
+      <select class="guide-select" onchange="filterGuides(this.value)">
+        <option value="" selected>请选择门店</option>
 <option value="扬州万象汇">扬州万象汇</option><option value="扬州京华城">扬州京华城</option><option value="扬州江都金鹰">扬州江都金鹰</option><option value="泰州万象城">泰州万象城</option><option value="宿迁宝龙">宿迁宝龙</option><option value="淮安新亚">淮安新亚</option><option value="淮安万象城">淮安万象城</option>
-    </select>
-  </div>
-
+      </select>
+    </div>
+    <div class="guide-col-body">
   <div class="guide-group" data-store="扬州万象汇">
     <div class="guide-group-title">📍 扬州万象汇</div>
     <div class="guide-table-wrap">
@@ -428,49 +442,34 @@ body { background: var(--bg-page); color: var(--text-primary); }
       <tbody>
 
         <tr>
-          <td class="store-name">朱洪涛</td>
-          <td style="font-size:11px;color:var(--text-sub)">店员</td>
-          <td class="num">¥5,091</td>
-          <td class="num" style="color:#10B981;font-weight:600">¥243</td>
-          <td class="num">13</td>
-          <td class="num">19</td>
-          <td class="num">1.46</td>
-          <td class="num">¥15,537</td>
-          <td class="num">¥1,448</td>
-          <td class="num">¥209</td>
-          <td class="num">¥101,132</td>
-          <td>¥17.7万</td>
-          <td class="rate-bar-cell"><span style="color:var(--green)">57.1%</span><div class="rate-bar-mini"><div class="fill fill-rate-green" style="width:57.1%"></div></div></td>
-        </tr>
-        <tr>
           <td class="store-name">张荟奇</td>
           <td style="font-size:11px;color:var(--text-sub)">店员</td>
-          <td class="num">¥4,506</td>
-          <td class="num" style="color:#10B981;font-weight:600">¥453</td>
-          <td class="num">7</td>
-          <td class="num">14</td>
-          <td class="num">2.00</td>
-          <td class="num">¥8,447</td>
-          <td class="num">¥662</td>
+          <td class="num">¥1,523</td>
           <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
-          <td class="num">¥114,327</td>
+          <td class="num">4</td>
+          <td class="num">7</td>
+          <td class="num">1.75</td>
+          <td class="num">¥5,464</td>
+          <td class="num">¥209</td>
+          <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
+          <td class="num">¥111,344</td>
           <td>¥17.7万</td>
-          <td class="rate-bar-cell"><span style="color:var(--green)">64.5%</span><div class="rate-bar-mini"><div class="fill fill-rate-green" style="width:64.5%"></div></div></td>
+          <td class="rate-bar-cell"><span style="color:var(--green)">62.9%</span><div class="rate-bar-mini"><div class="fill fill-rate-green" style="width:62.9%"></div></div></td>
         </tr>
         <tr>
           <td class="store-name">李婷1</td>
           <td style="font-size:11px;color:var(--text-sub)">中级店长</td>
-          <td class="num">¥3,696</td>
           <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
-          <td class="num">2</td>
-          <td class="num">4</td>
-          <td class="num">2.00</td>
-          <td class="num">¥9,909</td>
           <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
-          <td class="num">¥849</td>
-          <td class="num">¥51,101</td>
+          <td class="num">0</td>
+          <td class="num">0</td>
+          <td class="num">-</td>
+          <td class="num">¥6,213</td>
+          <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
+          <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
+          <td class="num">¥47,405</td>
           <td>¥8.9万</td>
-          <td class="rate-bar-cell"><span style="color:var(--green)">57.7%</span><div class="rate-bar-mini"><div class="fill fill-rate-green" style="width:57.7%"></div></div></td>
+          <td class="rate-bar-cell"><span style="color:var(--green)">53.5%</span><div class="rate-bar-mini"><div class="fill fill-rate-green" style="width:53.5%"></div></div></td>
         </tr>
         <tr>
           <td class="store-name">文雅君</td>
@@ -487,20 +486,35 @@ body { background: var(--bg-page); color: var(--text-primary); }
           <td>¥17.7万</td>
           <td class="rate-bar-cell"><span style="color:var(--green)">56.5%</span><div class="rate-bar-mini"><div class="fill fill-rate-green" style="width:56.5%"></div></div></td>
         </tr>
+        <tr>
+          <td class="store-name">朱洪涛</td>
+          <td style="font-size:11px;color:var(--text-sub)">店员</td>
+          <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
+          <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
+          <td class="num">0</td>
+          <td class="num">0</td>
+          <td class="num">-</td>
+          <td class="num">¥10,446</td>
+          <td class="num">¥1,205</td>
+          <td class="num">¥209</td>
+          <td class="num">¥96,041</td>
+          <td>¥17.7万</td>
+          <td class="rate-bar-cell"><span style="color:var(--green)">54.2%</span><div class="rate-bar-mini"><div class="fill fill-rate-green" style="width:54.2%"></div></div></td>
+        </tr>
         <tr style="background:#10B981;color:#FFFFFF;font-weight:700">
           <td class="store-name">合计</td>
           <td>-</td>
-          <td class="num">¥13,293</td>
-          <td class="num">¥696</td>
-          <td class="num">22</td>
-          <td class="num">37</td>
-          <td class="num">1.68</td>
-          <td class="num">¥40,679</td>
-          <td class="num">¥2,774</td>
-          <td class="num">¥1,058</td>
-          <td class="num">¥366,620</td>
+          <td class="num">¥1,523</td>
+          <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
+          <td class="num">4</td>
+          <td class="num">7</td>
+          <td class="num">1.75</td>
+          <td class="num">¥28,909</td>
+          <td class="num">¥2,078</td>
+          <td class="num">¥209</td>
+          <td class="num">¥354,850</td>
           <td>¥62.0万</td>
-          <td class="rate-bar-cell"><span style="color:var(--green)">59.1%</span><div class="rate-bar-mini"><div class="fill fill-rate-green" style="width:59.1%"></div></div></td>
+          <td class="rate-bar-cell"><span style="color:var(--green)">57.2%</span><div class="rate-bar-mini"><div class="fill fill-rate-green" style="width:57.2%"></div></div></td>
         </tr>
       </tbody>
     </table>
@@ -530,64 +544,49 @@ body { background: var(--bg-page); color: var(--text-primary); }
       <tbody>
 
         <tr>
-          <td class="store-name">王永群</td>
-          <td style="font-size:11px;color:var(--text-sub)">初级培训专家</td>
-          <td class="num">¥6,116</td>
-          <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
-          <td class="num">11</td>
-          <td class="num">14</td>
-          <td class="num">1.27</td>
-          <td class="num">¥11,519</td>
-          <td class="num">¥216</td>
-          <td class="num">¥2,304</td>
-          <td class="num">¥154,058</td>
-          <td>¥16.9万</td>
-          <td class="rate-bar-cell"><span style="color:var(--green)">91.2%</span><div class="rate-bar-mini"><div class="fill fill-rate-green" style="width:91.2%"></div></div></td>
-        </tr>
-        <tr>
           <td class="store-name">丁茜</td>
           <td style="font-size:11px;color:var(--text-sub)">储备陈列专家</td>
-          <td class="num">¥3,601</td>
-          <td class="num" style="color:#10B981;font-weight:600">¥249</td>
-          <td class="num">8</td>
-          <td class="num">10</td>
-          <td class="num">1.25</td>
-          <td class="num">¥13,911</td>
-          <td class="num">¥2,191</td>
-          <td class="num">¥159</td>
-          <td class="num">¥118,325</td>
+          <td class="num">¥1,005</td>
+          <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
+          <td class="num">3</td>
+          <td class="num">5</td>
+          <td class="num">1.67</td>
+          <td class="num">¥11,315</td>
+          <td class="num">¥1,942</td>
+          <td class="num">¥278</td>
+          <td class="num">¥115,729</td>
           <td>¥16.9万</td>
-          <td class="rate-bar-cell"><span style="color:var(--green)">70.1%</span><div class="rate-bar-mini"><div class="fill fill-rate-green" style="width:70.1%"></div></div></td>
+          <td class="rate-bar-cell"><span style="color:var(--green)">68.5%</span><div class="rate-bar-mini"><div class="fill fill-rate-green" style="width:68.5%"></div></div></td>
         </tr>
         <tr>
           <td class="store-name">王泽馨</td>
           <td style="font-size:11px;color:var(--text-sub)">店员（长期兼职）</td>
-          <td class="num">¥2,124</td>
+          <td class="num">¥667</td>
           <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
-          <td class="num">5</td>
-          <td class="num">6</td>
-          <td class="num">1.20</td>
-          <td class="num">¥5,001</td>
+          <td class="num">3</td>
+          <td class="num">3</td>
+          <td class="num" style="color:#dc2626">1.00</td>
+          <td class="num">¥3,544</td>
           <td class="num">¥619</td>
-          <td class="num">¥828</td>
-          <td class="num">¥98,583</td>
+          <td class="num">¥249</td>
+          <td class="num">¥97,126</td>
           <td>¥16.9万</td>
-          <td class="rate-bar-cell"><span style="color:var(--green)">58.4%</span><div class="rate-bar-mini"><div class="fill fill-rate-green" style="width:58.4%"></div></div></td>
+          <td class="rate-bar-cell"><span style="color:var(--green)">57.5%</span><div class="rate-bar-mini"><div class="fill fill-rate-green" style="width:57.5%"></div></div></td>
         </tr>
         <tr>
           <td class="store-name">陆文一</td>
           <td style="font-size:11px;color:var(--text-sub)">初级店长</td>
-          <td class="num">¥1,575</td>
           <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
-          <td class="num">4</td>
-          <td class="num">5</td>
-          <td class="num">1.25</td>
-          <td class="num">¥5,648</td>
           <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
-          <td class="num">¥569</td>
-          <td class="num">¥43,116</td>
+          <td class="num">0</td>
+          <td class="num">0</td>
+          <td class="num">-</td>
+          <td class="num">¥4,073</td>
+          <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
+          <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
+          <td class="num">¥41,541</td>
           <td>¥8.4万</td>
-          <td class="rate-bar-cell"><span style="color:var(--green)">51.1%</span><div class="rate-bar-mini"><div class="fill fill-rate-green" style="width:51.1%"></div></div></td>
+          <td class="rate-bar-cell"><span style="color:var(--red)">49.2%</span><div class="rate-bar-mini"><div class="fill fill-rate-red" style="width:49.2%"></div></div></td>
         </tr>
         <tr>
           <td class="store-name">董文兵</td>
@@ -604,20 +603,35 @@ body { background: var(--bg-page); color: var(--text-primary); }
           <td>¥16.9万</td>
           <td class="rate-bar-cell"><span style="color:var(--green)">57.5%</span><div class="rate-bar-mini"><div class="fill fill-rate-green" style="width:57.5%"></div></div></td>
         </tr>
+        <tr>
+          <td class="store-name">王永群</td>
+          <td style="font-size:11px;color:var(--text-sub)">初级培训专家</td>
+          <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
+          <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
+          <td class="num">0</td>
+          <td class="num">0</td>
+          <td class="num">-</td>
+          <td class="num">¥5,403</td>
+          <td class="num">¥216</td>
+          <td class="num">¥2,304</td>
+          <td class="num">¥147,942</td>
+          <td>¥16.9万</td>
+          <td class="rate-bar-cell"><span style="color:var(--green)">87.6%</span><div class="rate-bar-mini"><div class="fill fill-rate-green" style="width:87.6%"></div></div></td>
+        </tr>
         <tr style="background:#10B981;color:#FFFFFF;font-weight:700">
           <td class="store-name">合计</td>
           <td>-</td>
-          <td class="num">¥13,416</td>
-          <td class="num">¥249</td>
-          <td class="num">28</td>
-          <td class="num">35</td>
-          <td class="num">1.25</td>
-          <td class="num">¥42,536</td>
-          <td class="num">¥3,267</td>
-          <td class="num">¥3,860</td>
-          <td class="num">¥511,276</td>
+          <td class="num">¥1,672</td>
+          <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
+          <td class="num">6</td>
+          <td class="num">8</td>
+          <td class="num">1.33</td>
+          <td class="num">¥30,792</td>
+          <td class="num">¥3,018</td>
+          <td class="num">¥2,831</td>
+          <td class="num">¥499,532</td>
           <td>¥76.0万</td>
-          <td class="rate-bar-cell"><span style="color:var(--green)">67.3%</span><div class="rate-bar-mini"><div class="fill fill-rate-green" style="width:67.3%"></div></div></td>
+          <td class="rate-bar-cell"><span style="color:var(--green)">65.7%</span><div class="rate-bar-mini"><div class="fill fill-rate-green" style="width:65.7%"></div></div></td>
         </tr>
       </tbody>
     </table>
@@ -647,49 +661,19 @@ body { background: var(--bg-page); color: var(--text-primary); }
       <tbody>
 
         <tr>
-          <td class="store-name">邰宇</td>
-          <td style="font-size:11px;color:var(--text-sub)">店员（长期兼职）</td>
-          <td class="num">¥2,112</td>
-          <td class="num" style="color:#10B981;font-weight:600">¥426</td>
-          <td class="num">6</td>
-          <td class="num">9</td>
-          <td class="num">1.50</td>
-          <td class="num">¥4,414</td>
-          <td class="num">¥1,519</td>
-          <td class="num">¥278</td>
-          <td class="num">¥49,377</td>
-          <td>¥9.7万</td>
-          <td class="rate-bar-cell"><span style="color:var(--green)">50.8%</span><div class="rate-bar-mini"><div class="fill fill-rate-green" style="width:50.8%"></div></div></td>
-        </tr>
-        <tr>
           <td class="store-name">朱奕然</td>
           <td style="font-size:11px;color:var(--text-sub)">店员</td>
-          <td class="num">¥1,137</td>
-          <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
-          <td class="num">3</td>
-          <td class="num">3</td>
+          <td class="num">¥319</td>
+          <td class="num" style="color:#10B981;font-weight:600">¥319</td>
+          <td class="num">1</td>
+          <td class="num">1</td>
           <td class="num" style="color:#dc2626">1.00</td>
-          <td class="num">¥7,734</td>
+          <td class="num">¥6,916</td>
+          <td class="num">¥1,568</td>
           <td class="num">¥1,249</td>
-          <td class="num">¥1,249</td>
-          <td class="num">¥59,813</td>
+          <td class="num">¥58,995</td>
           <td>¥9.7万</td>
-          <td class="rate-bar-cell"><span style="color:var(--green)">61.6%</span><div class="rate-bar-mini"><div class="fill fill-rate-green" style="width:61.6%"></div></div></td>
-        </tr>
-        <tr>
-          <td class="store-name">谭欣蔚</td>
-          <td style="font-size:11px;color:var(--text-sub)">店员</td>
-          <td class="num">¥1,086</td>
-          <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
-          <td class="num">3</td>
-          <td class="num">4</td>
-          <td class="num">1.33</td>
-          <td class="num">¥4,921</td>
-          <td class="num">¥768</td>
-          <td class="num">¥667</td>
-          <td class="num">¥58,903</td>
-          <td>¥9.7万</td>
-          <td class="rate-bar-cell"><span style="color:var(--green)">60.6%</span><div class="rate-bar-mini"><div class="fill fill-rate-green" style="width:60.6%"></div></div></td>
+          <td class="rate-bar-cell"><span style="color:var(--green)">60.7%</span><div class="rate-bar-mini"><div class="fill fill-rate-green" style="width:60.7%"></div></div></td>
         </tr>
         <tr>
           <td class="store-name">王伟</td>
@@ -706,20 +690,50 @@ body { background: var(--bg-page); color: var(--text-primary); }
           <td>¥4.9万</td>
           <td class="rate-bar-cell"><span style="color:var(--green)">129.4%</span><div class="rate-bar-mini"><div class="fill fill-rate-green" style="width:100.0%"></div></div></td>
         </tr>
+        <tr>
+          <td class="store-name">邰宇</td>
+          <td style="font-size:11px;color:var(--text-sub)">店员（长期兼职）</td>
+          <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
+          <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
+          <td class="num">0</td>
+          <td class="num">0</td>
+          <td class="num">-</td>
+          <td class="num">¥2,302</td>
+          <td class="num">¥1,093</td>
+          <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
+          <td class="num">¥47,265</td>
+          <td>¥9.7万</td>
+          <td class="rate-bar-cell"><span style="color:var(--red)">48.7%</span><div class="rate-bar-mini"><div class="fill fill-rate-red" style="width:48.7%"></div></div></td>
+        </tr>
+        <tr>
+          <td class="store-name">谭欣蔚</td>
+          <td style="font-size:11px;color:var(--text-sub)">店员</td>
+          <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
+          <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
+          <td class="num">0</td>
+          <td class="num">0</td>
+          <td class="num">-</td>
+          <td class="num">¥3,835</td>
+          <td class="num">¥768</td>
+          <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
+          <td class="num">¥57,817</td>
+          <td>¥9.7万</td>
+          <td class="rate-bar-cell"><span style="color:var(--green)">59.5%</span><div class="rate-bar-mini"><div class="fill fill-rate-green" style="width:59.5%"></div></div></td>
+        </tr>
         <tr style="background:#10B981;color:#FFFFFF;font-weight:700">
           <td class="store-name">合计</td>
           <td>-</td>
-          <td class="num">¥4,335</td>
-          <td class="num">¥426</td>
-          <td class="num">12</td>
-          <td class="num">16</td>
-          <td class="num">1.33</td>
-          <td class="num">¥20,002</td>
-          <td class="num">¥3,536</td>
-          <td class="num">¥2,194</td>
-          <td class="num">¥230,924</td>
+          <td class="num">¥319</td>
+          <td class="num">¥319</td>
+          <td class="num">1</td>
+          <td class="num">1</td>
+          <td class="num" style="color:#dc2626">1.00</td>
+          <td class="num">¥15,986</td>
+          <td class="num">¥3,429</td>
+          <td class="num">¥1,249</td>
+          <td class="num">¥226,908</td>
           <td>¥34.0万</td>
-          <td class="rate-bar-cell"><span style="color:var(--green)">67.9%</span><div class="rate-bar-mini"><div class="fill fill-rate-green" style="width:67.9%"></div></div></td>
+          <td class="rate-bar-cell"><span style="color:var(--green)">66.7%</span><div class="rate-bar-mini"><div class="fill fill-rate-green" style="width:66.7%"></div></div></td>
         </tr>
       </tbody>
     </table>
@@ -749,64 +763,64 @@ body { background: var(--bg-page); color: var(--text-primary); }
       <tbody>
 
         <tr>
-          <td class="store-name">王丹</td>
-          <td style="font-size:11px;color:var(--text-sub)">店员</td>
-          <td class="num">¥7,834</td>
-          <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
-          <td class="num">12</td>
-          <td class="num">16</td>
-          <td class="num">1.33</td>
-          <td class="num">¥12,922</td>
-          <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
-          <td class="num">¥1,378</td>
-          <td class="num">¥99,463</td>
-          <td>¥17.3万</td>
-          <td class="rate-bar-cell"><span style="color:var(--green)">57.4%</span><div class="rate-bar-mini"><div class="fill fill-rate-green" style="width:57.4%"></div></div></td>
+          <td class="store-name">黄小莉1</td>
+          <td style="font-size:11px;color:var(--text-sub)">初级店长</td>
+          <td class="num">¥2,854</td>
+          <td class="num" style="color:#10B981;font-weight:600">¥252</td>
+          <td class="num">5</td>
+          <td class="num">6</td>
+          <td class="num">1.20</td>
+          <td class="num">¥4,779</td>
+          <td class="num">¥252</td>
+          <td class="num">¥479</td>
+          <td class="num">¥89,527</td>
+          <td>¥8.7万</td>
+          <td class="rate-bar-cell"><span style="color:var(--green)">103.3%</span><div class="rate-bar-mini"><div class="fill fill-rate-green" style="width:100.0%"></div></div></td>
         </tr>
         <tr>
           <td class="store-name">王美玉</td>
           <td style="font-size:11px;color:var(--text-sub)">店员</td>
-          <td class="num">¥3,374</td>
-          <td class="num" style="color:#10B981;font-weight:600">¥249</td>
-          <td class="num">11</td>
-          <td class="num">16</td>
-          <td class="num">1.45</td>
-          <td class="num">¥9,321</td>
-          <td class="num">¥767</td>
-          <td class="num">¥468</td>
-          <td class="num">¥114,790</td>
+          <td class="num">¥1,495</td>
+          <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
+          <td class="num">4</td>
+          <td class="num">5</td>
+          <td class="num">1.25</td>
+          <td class="num">¥7,442</td>
+          <td class="num">¥518</td>
+          <td class="num">¥747</td>
+          <td class="num">¥112,911</td>
           <td>¥17.3万</td>
-          <td class="rate-bar-cell"><span style="color:var(--green)">66.2%</span><div class="rate-bar-mini"><div class="fill fill-rate-green" style="width:66.2%"></div></div></td>
-        </tr>
-        <tr>
-          <td class="store-name">黄小莉1</td>
-          <td style="font-size:11px;color:var(--text-sub)">初级店长</td>
-          <td class="num">¥1,307</td>
-          <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
-          <td class="num">4</td>
-          <td class="num">4</td>
-          <td class="num" style="color:#dc2626">1.00</td>
-          <td class="num">¥3,232</td>
-          <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
-          <td class="num">¥479</td>
-          <td class="num">¥87,980</td>
-          <td>¥8.7万</td>
-          <td class="rate-bar-cell"><span style="color:var(--green)">101.5%</span><div class="rate-bar-mini"><div class="fill fill-rate-green" style="width:100.0%"></div></div></td>
+          <td class="rate-bar-cell"><span style="color:var(--green)">65.1%</span><div class="rate-bar-mini"><div class="fill fill-rate-green" style="width:65.1%"></div></div></td>
         </tr>
         <tr>
           <td class="store-name">于小进</td>
           <td style="font-size:11px;color:var(--text-sub)">店员</td>
-          <td class="num">¥528</td>
           <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
-          <td class="num">1</td>
-          <td class="num">2</td>
-          <td class="num">2.00</td>
-          <td class="num">¥11,825</td>
+          <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
+          <td class="num">0</td>
+          <td class="num">0</td>
+          <td class="num">-</td>
+          <td class="num">¥11,297</td>
           <td class="num">¥456</td>
-          <td class="num">¥1,947</td>
-          <td class="num">¥100,716</td>
+          <td class="num">¥1,419</td>
+          <td class="num">¥100,188</td>
           <td>¥17.3万</td>
-          <td class="rate-bar-cell"><span style="color:var(--green)">58.1%</span><div class="rate-bar-mini"><div class="fill fill-rate-green" style="width:58.1%"></div></div></td>
+          <td class="rate-bar-cell"><span style="color:var(--green)">57.8%</span><div class="rate-bar-mini"><div class="fill fill-rate-green" style="width:57.8%"></div></div></td>
+        </tr>
+        <tr>
+          <td class="store-name">王丹</td>
+          <td style="font-size:11px;color:var(--text-sub)">店员</td>
+          <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
+          <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
+          <td class="num">0</td>
+          <td class="num">0</td>
+          <td class="num">-</td>
+          <td class="num">¥5,088</td>
+          <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
+          <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
+          <td class="num">¥91,629</td>
+          <td>¥17.3万</td>
+          <td class="rate-bar-cell"><span style="color:var(--green)">52.9%</span><div class="rate-bar-mini"><div class="fill fill-rate-green" style="width:52.9%"></div></div></td>
         </tr>
         <tr>
           <td class="store-name">王璐</td>
@@ -841,17 +855,17 @@ body { background: var(--bg-page); color: var(--text-primary); }
         <tr style="background:#10B981;color:#FFFFFF;font-weight:700">
           <td class="store-name">合计</td>
           <td>-</td>
-          <td class="num">¥13,043</td>
-          <td class="num">¥249</td>
-          <td class="num">28</td>
-          <td class="num">38</td>
-          <td class="num">1.36</td>
-          <td class="num">¥50,391</td>
-          <td class="num">¥2,334</td>
-          <td class="num">¥5,151</td>
-          <td class="num">¥522,831</td>
+          <td class="num">¥4,349</td>
+          <td class="num">¥252</td>
+          <td class="num">9</td>
+          <td class="num">11</td>
+          <td class="num">1.22</td>
+          <td class="num">¥41,697</td>
+          <td class="num">¥2,337</td>
+          <td class="num">¥3,524</td>
+          <td class="num">¥514,137</td>
           <td>¥78.0万</td>
-          <td class="rate-bar-cell"><span style="color:var(--green)">67.0%</span><div class="rate-bar-mini"><div class="fill fill-rate-green" style="width:67.0%"></div></div></td>
+          <td class="rate-bar-cell"><span style="color:var(--green)">65.9%</span><div class="rate-bar-mini"><div class="fill fill-rate-green" style="width:65.9%"></div></div></td>
         </tr>
       </tbody>
     </table>
@@ -881,34 +895,34 @@ body { background: var(--bg-page); color: var(--text-primary); }
       <tbody>
 
         <tr>
-          <td class="store-name">靳洋</td>
-          <td style="font-size:11px;color:var(--text-sub)">高级运营专家</td>
-          <td class="num">¥507</td>
-          <td class="num" style="color:#10B981;font-weight:600">¥249</td>
-          <td class="num">3</td>
-          <td class="num">3</td>
-          <td class="num" style="color:#dc2626">1.00</td>
-          <td class="num">¥2,298</td>
-          <td class="num">¥249</td>
-          <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
-          <td class="num">¥23,489</td>
-          <td>¥6.7万</td>
-          <td class="rate-bar-cell"><span style="color:var(--red)">35.2%</span><div class="rate-bar-mini"><div class="fill fill-rate-red" style="width:35.2%"></div></div></td>
-        </tr>
-        <tr>
           <td class="store-name">丁蒙</td>
           <td style="font-size:11px;color:var(--text-sub)">店员</td>
-          <td class="num">¥468</td>
-          <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
+          <td class="num">¥408</td>
+          <td class="num" style="color:#10B981;font-weight:600">¥279</td>
           <td class="num">2</td>
           <td class="num">2</td>
           <td class="num" style="color:#dc2626">1.00</td>
-          <td class="num">¥3,488</td>
-          <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
+          <td class="num">¥3,428</td>
+          <td class="num">¥279</td>
           <td class="num">¥89</td>
-          <td class="num">¥45,437</td>
+          <td class="num">¥45,377</td>
           <td>¥6.7万</td>
-          <td class="rate-bar-cell"><span style="color:var(--green)">68.2%</span><div class="rate-bar-mini"><div class="fill fill-rate-green" style="width:68.2%"></div></div></td>
+          <td class="rate-bar-cell"><span style="color:var(--green)">68.1%</span><div class="rate-bar-mini"><div class="fill fill-rate-green" style="width:68.1%"></div></div></td>
+        </tr>
+        <tr>
+          <td class="store-name">靳洋</td>
+          <td style="font-size:11px;color:var(--text-sub)">高级运营专家</td>
+          <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
+          <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
+          <td class="num">0</td>
+          <td class="num">0</td>
+          <td class="num">-</td>
+          <td class="num">¥1,791</td>
+          <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
+          <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
+          <td class="num">¥22,982</td>
+          <td>¥6.7万</td>
+          <td class="rate-bar-cell"><span style="color:var(--red)">34.5%</span><div class="rate-bar-mini"><div class="fill fill-rate-red" style="width:34.5%"></div></div></td>
         </tr>
         <tr>
           <td class="store-name">卓宁</td>
@@ -928,17 +942,17 @@ body { background: var(--bg-page); color: var(--text-primary); }
         <tr style="background:#10B981;color:#FFFFFF;font-weight:700">
           <td class="store-name">合计</td>
           <td>-</td>
-          <td class="num">¥975</td>
-          <td class="num">¥249</td>
-          <td class="num">5</td>
-          <td class="num">5</td>
+          <td class="num">¥408</td>
+          <td class="num">¥279</td>
+          <td class="num">2</td>
+          <td class="num">2</td>
           <td class="num" style="color:#dc2626">1.00</td>
-          <td class="num">¥7,180</td>
-          <td class="num">¥249</td>
+          <td class="num">¥6,613</td>
+          <td class="num">¥279</td>
           <td class="num">¥89</td>
-          <td class="num">¥104,166</td>
+          <td class="num">¥103,599</td>
           <td>¥20.0万</td>
-          <td class="rate-bar-cell"><span style="color:var(--green)">52.1%</span><div class="rate-bar-mini"><div class="fill fill-rate-green" style="width:52.1%"></div></div></td>
+          <td class="rate-bar-cell"><span style="color:var(--green)">51.8%</span><div class="rate-bar-mini"><div class="fill fill-rate-green" style="width:51.8%"></div></div></td>
         </tr>
       </tbody>
     </table>
@@ -968,34 +982,19 @@ body { background: var(--bg-page); color: var(--text-primary); }
       <tbody>
 
         <tr>
-          <td class="store-name">王毅</td>
-          <td style="font-size:11px;color:var(--text-sub)">中级陈列专家</td>
-          <td class="num">¥1,464</td>
-          <td class="num" style="color:#10B981;font-weight:600">¥259</td>
-          <td class="num">7</td>
-          <td class="num">7</td>
-          <td class="num" style="color:#dc2626">1.00</td>
-          <td class="num">¥4,045</td>
-          <td class="num">¥259</td>
-          <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
-          <td class="num">¥56,631</td>
-          <td>¥6.7万</td>
-          <td class="rate-bar-cell"><span style="color:var(--green)">84.9%</span><div class="rate-bar-mini"><div class="fill fill-rate-green" style="width:84.9%"></div></div></td>
-        </tr>
-        <tr>
           <td class="store-name">汤绚尧</td>
           <td style="font-size:11px;color:var(--text-sub)">店员（长期兼职）</td>
-          <td class="num">¥576</td>
+          <td class="num">¥1,149</td>
           <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
-          <td class="num">3</td>
-          <td class="num">5</td>
-          <td class="num">1.67</td>
-          <td class="num">¥3,357</td>
+          <td class="num">1</td>
+          <td class="num">1</td>
+          <td class="num" style="color:#dc2626">1.00</td>
+          <td class="num">¥3,930</td>
           <td class="num">¥453</td>
           <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
-          <td class="num">¥44,308</td>
+          <td class="num">¥44,881</td>
           <td>¥6.7万</td>
-          <td class="rate-bar-cell"><span style="color:var(--green)">66.5%</span><div class="rate-bar-mini"><div class="fill fill-rate-green" style="width:66.5%"></div></div></td>
+          <td class="rate-bar-cell"><span style="color:var(--green)">67.3%</span><div class="rate-bar-mini"><div class="fill fill-rate-green" style="width:67.3%"></div></div></td>
         </tr>
         <tr>
           <td class="store-name">钱晨</td>
@@ -1012,20 +1011,35 @@ body { background: var(--bg-page); color: var(--text-primary); }
           <td>¥6.7万</td>
           <td class="rate-bar-cell"><span style="color:var(--green)">62.1%</span><div class="rate-bar-mini"><div class="fill fill-rate-green" style="width:62.1%"></div></div></td>
         </tr>
+        <tr>
+          <td class="store-name">王毅</td>
+          <td style="font-size:11px;color:var(--text-sub)">中级陈列专家</td>
+          <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
+          <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
+          <td class="num">0</td>
+          <td class="num">0</td>
+          <td class="num">-</td>
+          <td class="num">¥2,581</td>
+          <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
+          <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
+          <td class="num">¥55,167</td>
+          <td>¥6.7万</td>
+          <td class="rate-bar-cell"><span style="color:var(--green)">82.8%</span><div class="rate-bar-mini"><div class="fill fill-rate-green" style="width:82.8%"></div></div></td>
+        </tr>
         <tr style="background:#10B981;color:#FFFFFF;font-weight:700">
           <td class="store-name">合计</td>
           <td>-</td>
-          <td class="num">¥2,040</td>
-          <td class="num">¥259</td>
-          <td class="num">10</td>
-          <td class="num">12</td>
-          <td class="num">1.20</td>
-          <td class="num">¥10,237</td>
-          <td class="num">¥712</td>
+          <td class="num">¥1,149</td>
           <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
-          <td class="num">¥142,348</td>
+          <td class="num">1</td>
+          <td class="num">1</td>
+          <td class="num" style="color:#dc2626">1.00</td>
+          <td class="num">¥9,346</td>
+          <td class="num">¥453</td>
+          <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
+          <td class="num">¥141,457</td>
           <td>¥20.0万</td>
-          <td class="rate-bar-cell"><span style="color:var(--green)">71.2%</span><div class="rate-bar-mini"><div class="fill fill-rate-green" style="width:71.2%"></div></div></td>
+          <td class="rate-bar-cell"><span style="color:var(--green)">70.7%</span><div class="rate-bar-mini"><div class="fill fill-rate-green" style="width:70.7%"></div></div></td>
         </tr>
       </tbody>
     </table>
@@ -1055,34 +1069,34 @@ body { background: var(--bg-page); color: var(--text-primary); }
       <tbody>
 
         <tr>
-          <td class="store-name">周小庆</td>
-          <td style="font-size:11px;color:var(--text-sub)">店员</td>
-          <td class="num">¥4,831</td>
-          <td class="num" style="color:#10B981;font-weight:600">¥799</td>
-          <td class="num">9</td>
-          <td class="num">19</td>
-          <td class="num">2.11</td>
-          <td class="num">¥19,978</td>
-          <td class="num">¥1,048</td>
-          <td class="num">¥3,626</td>
-          <td class="num">¥103,236</td>
-          <td>¥13.4万</td>
-          <td class="rate-bar-cell"><span style="color:var(--green)">76.8%</span><div class="rate-bar-mini"><div class="fill fill-rate-green" style="width:76.8%"></div></div></td>
-        </tr>
-        <tr>
           <td class="store-name">于思涵</td>
           <td style="font-size:11px;color:var(--text-sub)">店员（长期兼职）</td>
-          <td class="num">¥4,153</td>
+          <td class="num">¥5,144</td>
           <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
-          <td class="num">13</td>
-          <td class="num">17</td>
-          <td class="num">1.31</td>
-          <td class="num">¥7,626</td>
+          <td class="num">4</td>
+          <td class="num">6</td>
+          <td class="num">1.50</td>
+          <td class="num">¥8,617</td>
           <td class="num">¥229</td>
           <td class="num">¥1,468</td>
-          <td class="num">¥67,397</td>
+          <td class="num">¥68,388</td>
           <td>¥9.4万</td>
-          <td class="rate-bar-cell"><span style="color:var(--green)">71.7%</span><div class="rate-bar-mini"><div class="fill fill-rate-green" style="width:71.7%"></div></div></td>
+          <td class="rate-bar-cell"><span style="color:var(--green)">72.7%</span><div class="rate-bar-mini"><div class="fill fill-rate-green" style="width:72.7%"></div></div></td>
+        </tr>
+        <tr>
+          <td class="store-name">周小庆</td>
+          <td style="font-size:11px;color:var(--text-sub)">店员</td>
+          <td class="num">¥785</td>
+          <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
+          <td class="num">4</td>
+          <td class="num">6</td>
+          <td class="num">1.50</td>
+          <td class="num">¥15,932</td>
+          <td class="num">¥249</td>
+          <td class="num">¥3,626</td>
+          <td class="num">¥99,190</td>
+          <td>¥13.4万</td>
+          <td class="rate-bar-cell"><span style="color:var(--green)">73.8%</span><div class="rate-bar-mini"><div class="fill fill-rate-green" style="width:73.8%"></div></div></td>
         </tr>
         <tr>
           <td class="store-name">黄锦靓</td>
@@ -1117,150 +1131,22 @@ body { background: var(--bg-page); color: var(--text-primary); }
         <tr style="background:#10B981;color:#FFFFFF;font-weight:700">
           <td class="store-name">合计</td>
           <td>-</td>
-          <td class="num">¥8,984</td>
-          <td class="num">¥799</td>
-          <td class="num">22</td>
-          <td class="num">36</td>
-          <td class="num">1.64</td>
-          <td class="num">¥34,103</td>
-          <td class="num">¥1,488</td>
+          <td class="num">¥5,929</td>
+          <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
+          <td class="num">8</td>
+          <td class="num">12</td>
+          <td class="num">1.50</td>
+          <td class="num">¥31,048</td>
+          <td class="num">¥689</td>
           <td class="num">¥7,061</td>
-          <td class="num">¥310,199</td>
+          <td class="num">¥307,144</td>
           <td>¥43.0万</td>
-          <td class="rate-bar-cell"><span style="color:var(--green)">72.1%</span><div class="rate-bar-mini"><div class="fill fill-rate-green" style="width:72.1%"></div></div></td>
+          <td class="rate-bar-cell"><span style="color:var(--green)">71.4%</span><div class="rate-bar-mini"><div class="fill fill-rate-green" style="width:71.4%"></div></div></td>
         </tr>
       </tbody>
     </table>
     </div>
-  </div>
-</div>
-
-
-<!-- 样品销售 -->
-<div class="section">
-  <div class="section-title section-title-sample"><span class="section-icon">🧪</span>样品销售</div>
-  <div class="table-wrap">
-  <table>
-    <thead>
-      <tr>
-        <th style="text-align:left;background:#A06BD9;color:#FFFFFF;" rowspan="2">门店</th>
-        <th style="background:#3B82C9;color:#FFFFFF;" colspan="3">日</th>
-        <th style="background:#4F88C9;color:#FFFFFF;" colspan="3">WK35周累计</th>
-        <th style="background:#10B981;color:#FFFFFF;" colspan="3">月累计</th>
-      </tr>
-      <tr>
-        <th style="background:#3B82C9;color:#FFFFFF;">件数</th>
-        <th style="background:#3B82C9;color:#FFFFFF;">零售价</th>
-        <th style="background:#3B82C9;color:#FFFFFF;">结算金额</th>
-        <th style="background:#4F88C9;color:#FFFFFF;">件数</th>
-        <th style="background:#4F88C9;color:#FFFFFF;">零售价</th>
-        <th style="background:#4F88C9;color:#FFFFFF;">结算金额</th>
-        <th style="background:#10B981;color:#FFFFFF;">件数</th>
-        <th style="background:#10B981;color:#FFFFFF;">零售价</th>
-        <th style="background:#10B981;color:#FFFFFF;">结算金额</th>
-      </tr>
-    </thead>
-    <tbody>
-
-      <tr>
-        <td class="store-name">扬州万象汇</td>
-        <td class="num" style="font-weight:700"><span style="color:var(--red);font-weight:700">0</span></td>
-        <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
-        <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
-        <td class="num" style="font-weight:700"><span style="color:var(--red);font-weight:700">0</span></td>
-        <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
-        <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
-        <td class="num" style="font-weight:700">29</td>
-        <td class="num">¥25,881</td>
-        <td class="num">¥8,820</td>
-      </tr>
-      <tr>
-        <td class="store-name">扬州京华城</td>
-        <td class="num" style="font-weight:700"><span style="color:var(--red);font-weight:700">0</span></td>
-        <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
-        <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
-        <td class="num" style="font-weight:700"><span style="color:var(--red);font-weight:700">0</span></td>
-        <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
-        <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
-        <td class="num" style="font-weight:700">28</td>
-        <td class="num">¥19,992</td>
-        <td class="num">¥4,929</td>
-      </tr>
-      <tr>
-        <td class="store-name">扬州江都金鹰</td>
-        <td class="num" style="font-weight:700"><span style="color:var(--red);font-weight:700">0</span></td>
-        <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
-        <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
-        <td class="num" style="font-weight:700"><span style="color:var(--red);font-weight:700">0</span></td>
-        <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
-        <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
-        <td class="num" style="font-weight:700">29</td>
-        <td class="num">¥18,791</td>
-        <td class="num">¥5,360</td>
-      </tr>
-      <tr>
-        <td class="store-name">泰州万象城</td>
-        <td class="num" style="font-weight:700"><span style="color:var(--red);font-weight:700">0</span></td>
-        <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
-        <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
-        <td class="num" style="font-weight:700"><span style="color:var(--red);font-weight:700">0</span></td>
-        <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
-        <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
-        <td class="num" style="font-weight:700">29</td>
-        <td class="num">¥22,831</td>
-        <td class="num">¥6,098</td>
-      </tr>
-      <tr>
-        <td class="store-name">宿迁宝龙</td>
-        <td class="num" style="font-weight:700"><span style="color:var(--red);font-weight:700">0</span></td>
-        <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
-        <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
-        <td class="num" style="font-weight:700">29</td>
-        <td class="num">¥18,911</td>
-        <td class="num">¥3,788</td>
-        <td class="num" style="font-weight:700">45</td>
-        <td class="num">¥28,865</td>
-        <td class="num">¥6,744</td>
-      </tr>
-      <tr>
-        <td class="store-name">淮安新亚</td>
-        <td class="num" style="font-weight:700"><span style="color:var(--red);font-weight:700">0</span></td>
-        <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
-        <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
-        <td class="num" style="font-weight:700"><span style="color:var(--red);font-weight:700">0</span></td>
-        <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
-        <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
-        <td class="num" style="font-weight:700">20</td>
-        <td class="num">¥16,620</td>
-        <td class="num">¥3,977</td>
-      </tr>
-      <tr>
-        <td class="store-name">淮安万象城</td>
-        <td class="num" style="font-weight:700"><span style="color:var(--red);font-weight:700">0</span></td>
-        <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
-        <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
-        <td class="num" style="font-weight:700">1</td>
-        <td class="num">¥279</td>
-        <td class="num">¥112</td>
-        <td class="num" style="font-weight:700">25</td>
-        <td class="num">¥16,525</td>
-        <td class="num">¥4,169</td>
-      </tr>
-
-      <tr style="background:#7B4FB8;color:#FFFFFF;font-weight:700">
-        <td class="store-name">苏中区域</td>
-        <td class="num" style="font-weight:700"><span style="color:var(--red);font-weight:700">0</span></td>
-        <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
-        <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
-        <td class="num" style="font-weight:700">30</td>
-        <td class="num">¥19,190</td>
-        <td class="num">¥3,900</td>
-        <td class="num" style="font-weight:700">205</td>
-        <td class="num">¥149,505</td>
-        <td class="num">¥40,097</td>
-      </tr>
-    </tbody>
-  </table>
+  </div></div>
   </div>
 </div>
 
@@ -1272,6 +1158,13 @@ function filterGuides(store) {
   document.querySelectorAll('.guide-group').forEach(function(g) {
     g.style.display = (store && g.getAttribute('data-store') === store) ? 'block' : 'none';
   });
+}
+function switchKGTab(tab, btn) {
+  document.querySelectorAll('.kg-tab').forEach(function(b) { b.classList.remove('active'); });
+  document.querySelectorAll('.kg-pane').forEach(function(p) { p.classList.remove('active'); });
+  if (btn) btn.classList.add('active');
+  var pane = document.querySelector('.kg-pane-' + tab);
+  if (pane) pane.classList.add('active');
 }
 </script>
 
