@@ -286,7 +286,7 @@ function renderStore(store){
   let html='<div class="kpi-row">'+
     '<div class="kpi-card"><div class="label">月累计销售</div><div class="value" style="color:'+color+'">'+fmtAmt(d.month_amt)+'</div><div class="sub">月目标'+fmtAmt(d.target)+' | 完成率'+d.month_rate.toFixed(1)+'%</div></div>'+
     '<div class="kpi-card"><div class="label">月完成率</div><div class="value '+(d.month_rate>=50?'green':'red')+'">'+d.month_rate.toFixed(1)+'%</div><div class="sub">区域'+region.month_rate.toFixed(1)+'%</div></div>'+
-    '<div class="kpi-card"><div class="label">月环比</div><div class="value '+(isNA(d.mom)?'':colorPct(d.mom))+'">'+(isNA(d.mom)?'N/A':(d.mom>=0?'+':'')+d.mom.toFixed(1)+'%')+'</div><div class="sub">vs 7月1-26日</div></div>'+
+    '<div class="kpi-card"><div class="label">月环比</div><div class="value '+(isNA(d.mom)?'':colorPct(d.mom))+'">'+(isNA(d.mom)?'N/A':(d.mom>=0?'+':'')+d.mom.toFixed(1)+'%')+'</div><div class="sub">vs 7月1-29日</div></div>'+
     '<div class="kpi-card"><div class="label">月同比</div><div class="value '+(isNA(d.yoy)?'':colorPct(d.yoy))+'">'+(isNA(d.yoy)?'N/A':fmtPct(d.yoy))+'</div><div class="sub">'+(isNA(d.yoy)?'新店无同期':'vs去年同期')+'</div></div>'+
     '<div class="kpi-card"><div class="label">月连带率</div><div class="value blue">'+d.month_jd.toFixed(2)+'</div><div class="sub">区域'+region.month_jd.toFixed(2)+'</div></div>'+
     '<div class="kpi-card"><div class="label">月客单价</div><div class="value blue">¥'+Math.round(d.month_atv)+'</div><div class="sub">区域¥'+Math.round(region.month_atv)+'</div></div>'+
@@ -360,7 +360,7 @@ function renderStore(store){
   const mAmt=d.month_amt,mPrev=d.mom_prev||0;
   charts.mom=new Chart(document.getElementById('chartMom'),{
     type:'bar',
-    data:{labels:['7月1-26日','8月1-26日'],datasets:[{label:'月销售',data:[mPrev,mAmt],backgroundColor:[mPrev>=mAmt?'#16a34a80':'#94a3b880',mAmt>=mPrev?color+'cc':'#dc262680'],borderColor:['#64748b',color],borderWidth:2,borderRadius:8,barPercentage:.5}]},
+    data:{labels:['7月1-29日','8月1-29日'],datasets:[{label:'月销售',data:[mPrev,mAmt],backgroundColor:[mPrev>=mAmt?'#16a34a80':'#94a3b880',mAmt>=mPrev?color+'cc':'#dc262680'],borderColor:['#64748b',color],borderWidth:2,borderRadius:8,barPercentage:.5}]},
     options:{responsive:true,maintainAspectRatio:false,
       plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>'月销售: '+fmtAmt(ctx.raw),afterLabel:ctx=>{if(ctx.dataIndex===1&&mPrev>0){const diff=((mAmt-mPrev)/mPrev*100);return '月环比: '+(diff>=0?'+':'')+diff.toFixed(1)+'%'}return ''}}}},
       scales:{y:{ticks:{callback:v=>fmtAmt(v)}}}}
@@ -592,8 +592,8 @@ function renderComparison(){
   charts.cmpMom=new Chart(document.getElementById('cmpMom'),{
     type:'bar',
     data:{labels:momData.map(x=>x.s),datasets:[
-      {label:'7月1-26日',data:momData.map(x=>DATA[x.s].mom_prev||0),backgroundColor:'#94a3b880',borderColor:'#64748b',borderWidth:1,borderRadius:4},
-      {label:'8月1-26日',data:momData.map(x=>DATA[x.s].month_amt||0),backgroundColor:momData.map(x=>STORE_COLORS[x.s]+'cc'),borderColor:momData.map(x=>STORE_COLORS[x.s]),borderWidth:1,borderRadius:4}
+      {label:'7月1-29日',data:momData.map(x=>DATA[x.s].mom_prev||0),backgroundColor:'#94a3b880',borderColor:'#64748b',borderWidth:1,borderRadius:4},
+      {label:'8月1-29日',data:momData.map(x=>DATA[x.s].month_amt||0),backgroundColor:momData.map(x=>STORE_COLORS[x.s]+'cc'),borderColor:momData.map(x=>STORE_COLORS[x.s]),borderWidth:1,borderRadius:4}
     ]},
     options:{responsive:true,maintainAspectRatio:false,
       plugins:{legend:{position:'top'},tooltip:{callbacks:{label:ctx=>ctx.dataset.label+': '+fmtAmt(ctx.raw)}}},
