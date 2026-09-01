@@ -225,7 +225,7 @@ function concNew(key){
   const detailKey = isR ? '_region' : key;
   const na=d.new_amt||0, rate=d.new_rate||0, rRate=r.new_rate||0;
   const label = isR ? '区域' : key;
-  const c = label+'本月新品（上市日期在本月）销售'+fmtAmt(na)+'，占月销售'+rate.toFixed(1)+'%（'+(isR?('区域'+rate.toFixed(1)):'区域'+rRate.toFixed(1))+'%）。';
+  const c = label+'新品（上市日期≥2026/08/29）销售'+fmtAmt(na)+'，占月销售'+rate.toFixed(1)+'%（'+(isR?('区域'+rate.toFixed(1)):'区域'+rRate.toFixed(1))+'%）。';
   let o='';
   if(!isR){
     if(rate < rRate-1) o='新品占比低于区域'+(rRate-rate).toFixed(1)+'个百分点，建议加强当月新品首周陈列、堆头和导购主推话术。';
@@ -305,7 +305,7 @@ function renderStore(store){
     '<div class="chart-card"><h3><span class="icon">📊</span> 月环比（9月 vs 8月同期）</h3><div class="chart-wrap"><canvas id="chartMom"></canvas></div>'+concMom(store)+'</div>'+
     '<div class="chart-card"><h3><span class="icon">🏆</span> TOP10产品月销排名（含件数）</h3><div class="chart-wrap"><canvas id="chartTopProducts"></canvas></div>'+concTop(store)+'</div></div>';
 
-  html+='<div class="chart-grid full"><div class="chart-card"><h3><span class="icon">🆕</span> 新品TOP销售排名（上市日期=本月）</h3><div class="chart-wrap"><canvas id="chartNewProducts"></canvas></div>'+concNew(store)+'</div></div>';
+  html+='<div class="chart-grid full"><div class="chart-card"><h3><span class="icon">🆕</span> 新品TOP销售排名（上市日期≥2026/08/29）</h3><div class="chart-wrap"><canvas id="chartNewProducts"></canvas></div>'+concNew(store)+'</div></div>';
 
   const totWos=daily.reduce((a,x)=>a+x.wos,0),totJl=daily.reduce((a,x)=>a+x.jl,0);
   const wosPct=d.month_amt>0?(totWos/d.month_amt*100):0,jlPct=d.month_amt>0?(totJl/d.month_amt*100):0,bothPct=d.month_amt>0?((totWos+totJl)/d.month_amt*100):0;
@@ -377,7 +377,7 @@ function renderStore(store){
       scales:{x:{ticks:{callback:v=>fmtAmt(v)}}}}
   });
 
-  // Chart: New products TOP (上市日期=本月)
+  // Chart: New products TOP (上市日期>=NEW_PRODUCT_SINCE)
   const npDetail=(DATA['_new_products_detail']||{})[store]||[];
   const npCanvas=document.getElementById('chartNewProducts');
   if(npDetail.length>0){
@@ -541,10 +541,10 @@ function renderComparison(){
   const newShareData=STORE_ORDER.map(s=>{const d=DATA[s];return{s,v:d.new_rate||0,amt:d.new_amt||0};}).sort((a,b)=>b.v-a.v);
   const rNewRate=r.new_rate||0;
   html+='<div class="chart-grid">'+
-    '<div class="chart-card"><h3><span class="icon">🆕</span> 各门店新品销售占比对比（上市日期=本月）</h3><div class="chart-wrap"><canvas id="cmpNewShare"></canvas></div>'+
+    '<div class="chart-card"><h3><span class="icon">🆕</span> 各门店新品销售占比对比（上市日期≥2026/08/29）</h3><div class="chart-wrap"><canvas id="cmpNewShare"></canvas></div>'+
     conc(function(){const rs=STORE_ORDER.map(s=>({s,v:DATA[s].new_rate||0})).sort((a,b)=>b.v-a.v);if(rs[0].v===0)return '本月暂无新品销售记录。';return '新品占比最高'+rs[0].s+'('+rs[0].v.toFixed(1)+'%)。';}(),function(){const rs=STORE_ORDER.map(s=>({s,v:DATA[s].new_rate||0,amt:DATA[s].new_amt||0}));const zero=rs.filter(x=>x.amt===0);const below=rs.filter(x=>x.v<rNewRate&&x.amt>0);let o='';if(zero.length>0)o+=zero.map(x=>x.s).join('、')+'本月无新品销售，需紧急排查新品铺货与陈列。';if(below.length>0)o+=below.map(x=>x.s+'('+x.v.toFixed(1)+'%)').join('、')+'新品占比低于区域('+rNewRate.toFixed(1)+'%)。';if(!o)o='各门店均有新品销售且占比达区域水平，动销良好。';return o;}())+
     '</div>'+
-    '<div class="chart-card"><h3><span class="icon">🆕</span> 区域新品TOP销售排名（上市日期=本月）</h3><div class="chart-wrap"><canvas id="cmpNewProducts"></canvas></div>'+concNew('区域对比')+'</div></div>';
+    '<div class="chart-card"><h3><span class="icon">🆕</span> 区域新品TOP销售排名（上市日期≥2026/08/29）</h3><div class="chart-wrap"><canvas id="cmpNewProducts"></canvas></div>'+concNew('区域对比')+'</div></div>';
 
   html+='<div class="chart-grid full"><div class="chart-card"><h3><span class="icon">📋</span> 区域月维度汇总表</h3><table class="summary-table" id="cmpTable"></table></div></div>';
 
@@ -654,7 +654,7 @@ function renderComparison(){
       scales:{y:{ticks:{callback:v=>v+'%'}}}}
   });
 
-  // Chart: New-product share by store (上市日期=本月)
+  // Chart: New-product share by store (上市日期>=NEW_PRODUCT_SINCE)
   charts.cmpNewShare=new Chart(document.getElementById('cmpNewShare'),{
     type:'bar',
     data:{labels:newShareData.map(x=>x.s),datasets:[
