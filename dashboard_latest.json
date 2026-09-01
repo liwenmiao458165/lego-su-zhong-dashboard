@@ -1,307 +1,307 @@
 {
   "region": {
-    "day_amt": 45811.0,
-    "month_amt": 2307238.2,
-    "wk28_amt": 44883.0,
-    "day_target": 44500.0,
+    "day_amt": 12593.25,
+    "month_amt": 12593.25,
+    "wk28_amt": 12593.25,
+    "day_target": 202000.0,
     "month_target": 3330000.0,
-    "day_rate": 102.95,
-    "month_rate": 69.29,
-    "day_yoy_pct": -25.98,
-    "month_yoy_pct": -25.04,
-    "day_jd": 1.33,
-    "day_kdj": 403.17,
-    "np_day_amt": 8475.93,
-    "np_month_amt": 341181.67,
-    "np_day_qty": 25,
-    "np_month_qty": 1205,
-    "np_day_pct": 18.5,
-    "np_month_pct": 14.79
+    "day_rate": 6.23,
+    "month_rate": 0.38,
+    "day_yoy_pct": -89.28,
+    "month_yoy_pct": -89.28,
+    "day_jd": 1.65,
+    "day_kdj": 629.66,
+    "np_day_amt": 3887.0,
+    "np_month_amt": 3887.0,
+    "np_day_qty": 3,
+    "np_month_qty": 3,
+    "np_day_pct": 30.87,
+    "np_month_pct": 30.87
   },
   "stores": {
     "扬州万象汇": {
-      "day_amt": 10845.0,
-      "wk28_amt": 9917.0,
-      "month_amt": 394216.0,
-      "day_rate": 135.56,
-      "month_rate": 63.58,
-      "day_yoy_pct": -9.66,
-      "month_yoy_pct": -33.92,
-      "day_jd": 1.45,
-      "day_kdj": 542.25,
-      "day_cnt": 20,
-      "day_lt_amt": 1118.0,
-      "day_lt_qty": 2,
-      "month_lt_amt": 44319.39,
-      "month_lt_qty": 94,
-      "lt_rate": 57.19,
-      "lt_day_rate": 111.8,
-      "lt_daily_target": 1000.0,
-      "lt_month_target": 77500.0,
-      "day_np_amt": 316.93,
-      "day_np_qty": 3,
-      "month_np_amt": 57909.93,
-      "month_np_qty": 184
+      "day_amt": 1912.0,
+      "wk28_amt": 1912.0,
+      "month_amt": 1912.0,
+      "day_rate": 5.03,
+      "month_rate": 0.31,
+      "day_yoy_pct": -89.54,
+      "month_yoy_pct": -89.54,
+      "day_jd": 2.67,
+      "day_kdj": 637.33,
+      "day_cnt": 3,
+      "day_lt_amt": 0.0,
+      "day_lt_qty": 0,
+      "month_lt_amt": 0.0,
+      "month_lt_qty": 0,
+      "lt_rate": 0.0,
+      "lt_day_rate": 0.0,
+      "lt_daily_target": 1520.0,
+      "lt_month_target": 24800.0,
+      "day_np_amt": 0.0,
+      "day_np_qty": 0,
+      "month_np_amt": 0.0,
+      "month_np_qty": 0
     },
     "扬州京华城": {
-      "day_amt": 10259.0,
-      "wk28_amt": 10259.0,
-      "month_amt": 533247.0,
-      "day_rate": 102.59,
-      "month_rate": 70.16,
-      "day_yoy_pct": -44.91,
-      "month_yoy_pct": -24.82,
-      "day_jd": 1.35,
-      "day_kdj": 446.04,
-      "day_cnt": 23,
-      "day_lt_amt": 899.0,
+      "day_amt": 4778.25,
+      "wk28_amt": 4778.25,
+      "month_amt": 4778.25,
+      "day_rate": 10.39,
+      "month_rate": 0.63,
+      "day_yoy_pct": -90.04,
+      "month_yoy_pct": -90.04,
+      "day_jd": 1.4,
+      "day_kdj": 955.65,
+      "day_cnt": 5,
+      "day_lt_amt": 1199.25,
       "day_lt_qty": 1,
-      "month_lt_amt": 45241.0,
-      "month_lt_qty": 109,
-      "lt_rate": 47.62,
-      "lt_day_rate": 71.92,
-      "lt_daily_target": 1250.0,
-      "lt_month_target": 95000.0,
-      "day_np_amt": 2589.0,
-      "day_np_qty": 5,
-      "month_np_amt": 93210.5,
-      "month_np_qty": 232
+      "month_lt_amt": 1199.25,
+      "month_lt_qty": 1,
+      "lt_rate": 3.94,
+      "lt_day_rate": 65.18,
+      "lt_daily_target": 1840.0,
+      "lt_month_target": 30400.0,
+      "day_np_amt": 1869.0,
+      "day_np_qty": 1,
+      "month_np_amt": 1869.0,
+      "month_np_qty": 1
     },
     "扬州江都金鹰": {
-      "day_amt": 3719.0,
-      "wk28_amt": 3719.0,
-      "month_amt": 237684.0,
-      "day_rate": 74.38,
-      "month_rate": 69.91,
-      "day_yoy_pct": -40.51,
-      "month_yoy_pct": -15.74,
-      "day_jd": 1.15,
-      "day_kdj": 340.54,
-      "day_cnt": 13,
+      "day_amt": 1886.0,
+      "wk28_amt": 1886.0,
+      "month_amt": 1886.0,
+      "day_rate": 9.43,
+      "month_rate": 0.55,
+      "day_yoy_pct": -85.89,
+      "month_yoy_pct": -85.89,
+      "day_jd": 1.0,
+      "day_kdj": 471.5,
+      "day_cnt": 4,
       "day_lt_amt": 0.0,
       "day_lt_qty": 0,
-      "month_lt_amt": 24941.0,
-      "month_lt_qty": 58,
-      "lt_rate": 58.68,
+      "month_lt_amt": 0.0,
+      "month_lt_qty": 0,
+      "lt_rate": 0.0,
       "lt_day_rate": 0.0,
-      "lt_daily_target": 625.0,
-      "lt_month_target": 42500.0,
-      "day_np_amt": 39.0,
-      "day_np_qty": 1,
-      "month_np_amt": 23420.0,
-      "month_np_qty": 95
+      "lt_daily_target": 800.0,
+      "lt_month_target": 13600.0,
+      "day_np_amt": 0.0,
+      "day_np_qty": 0,
+      "month_np_amt": 0.0,
+      "month_np_qty": 0
     },
     "泰州万象城": {
-      "day_amt": 12003.0,
-      "wk28_amt": 12003.0,
-      "month_amt": 551794.0,
-      "day_rate": 120.03,
-      "month_rate": 70.74,
-      "day_yoy_pct": -13.99,
-      "month_yoy_pct": -3.67,
-      "day_jd": 1.35,
-      "day_kdj": 461.65,
-      "day_cnt": 26,
-      "day_lt_amt": 59.0,
+      "day_amt": 3653.0,
+      "wk28_amt": 3653.0,
+      "month_amt": 3653.0,
+      "day_rate": 7.31,
+      "month_rate": 0.47,
+      "day_yoy_pct": -83.21,
+      "month_yoy_pct": -83.21,
+      "day_jd": 1.6,
+      "day_kdj": 730.6,
+      "day_cnt": 5,
+      "day_lt_amt": 202.0,
       "day_lt_qty": 1,
-      "month_lt_amt": 33510.0,
-      "month_lt_qty": 90,
-      "lt_rate": 34.37,
-      "lt_day_rate": 4.72,
-      "lt_daily_target": 1250.0,
-      "lt_month_target": 97500.0,
-      "day_np_amt": 5115.0,
-      "day_np_qty": 11,
-      "month_np_amt": 86764.73,
-      "month_np_qty": 243
+      "month_lt_amt": 202.0,
+      "month_lt_qty": 1,
+      "lt_rate": 0.65,
+      "lt_day_rate": 10.1,
+      "lt_daily_target": 2000.0,
+      "lt_month_target": 31200.0,
+      "day_np_amt": 2018.0,
+      "day_np_qty": 2,
+      "month_np_amt": 2018.0,
+      "month_np_qty": 2
     },
     "宿迁宝龙": {
-      "day_amt": 1604.0,
-      "wk28_amt": 1604.0,
-      "month_amt": 114825.04,
-      "day_rate": 53.47,
-      "month_rate": 57.41,
-      "day_yoy_pct": -66.54,
-      "month_yoy_pct": -24.9,
-      "day_jd": 1.0,
-      "day_kdj": 267.33,
-      "day_cnt": 6,
+      "day_amt": 98.0,
+      "wk28_amt": 98.0,
+      "month_amt": 98.0,
+      "day_rate": 0.89,
+      "month_rate": 0.05,
+      "day_yoy_pct": -97.4,
+      "month_yoy_pct": -97.4,
+      "day_jd": 2.0,
+      "day_kdj": 98.0,
+      "day_cnt": 1,
       "day_lt_amt": 0.0,
       "day_lt_qty": 0,
-      "month_lt_amt": 5258.04,
-      "month_lt_qty": 18,
-      "lt_rate": 21.03,
+      "month_lt_amt": 0.0,
+      "month_lt_qty": 0,
+      "lt_rate": 0.0,
       "lt_day_rate": 0.0,
-      "lt_daily_target": 375.0,
-      "lt_month_target": 25000.0,
-      "day_np_amt": 39.0,
-      "day_np_qty": 1,
-      "month_np_amt": 15746.51,
-      "month_np_qty": 51
+      "lt_daily_target": 440.0,
+      "lt_month_target": 8000.0,
+      "day_np_amt": 0.0,
+      "day_np_qty": 0,
+      "month_np_amt": 0.0,
+      "month_np_qty": 0
     },
     "淮安新亚": {
-      "day_amt": 4510.0,
-      "wk28_amt": 4510.0,
-      "month_amt": 158885.08,
-      "day_rate": 180.4,
-      "month_rate": 79.44,
-      "day_yoy_pct": 89.02,
-      "month_yoy_pct": -53.52,
-      "day_jd": 1.31,
-      "day_kdj": 366.08,
-      "day_cnt": 13,
+      "day_amt": 78.0,
+      "wk28_amt": 78.0,
+      "month_amt": 78.0,
+      "day_rate": 0.65,
+      "month_rate": 0.04,
+      "day_yoy_pct": -99.27,
+      "month_yoy_pct": -99.27,
+      "day_jd": 2.0,
+      "day_kdj": 78.0,
+      "day_cnt": 1,
       "day_lt_amt": 0.0,
       "day_lt_qty": 0,
-      "month_lt_amt": 13429.08,
-      "month_lt_qty": 35,
-      "lt_rate": 53.72,
+      "month_lt_amt": 0.0,
+      "month_lt_qty": 0,
+      "lt_rate": 0.0,
       "lt_day_rate": 0.0,
-      "lt_daily_target": 312.5,
-      "lt_month_target": 25000.0,
-      "day_np_amt": 74.0,
-      "day_np_qty": 2,
-      "month_np_amt": 27036.0,
-      "month_np_qty": 123
+      "lt_daily_target": 480.0,
+      "lt_month_target": 8000.0,
+      "day_np_amt": 0.0,
+      "day_np_qty": 0,
+      "month_np_amt": 0.0,
+      "month_np_qty": 0
     },
     "淮安万象城": {
-      "day_amt": 2871.0,
-      "wk28_amt": 2871.0,
-      "month_amt": 316587.08,
-      "day_rate": 47.85,
-      "month_rate": 73.62,
+      "day_amt": 188.0,
+      "wk28_amt": 188.0,
+      "month_amt": 188.0,
+      "day_rate": 0.75,
+      "month_rate": 0.04,
       "day_yoy_pct": null,
       "month_yoy_pct": null,
-      "day_jd": 1.4,
-      "day_kdj": 191.4,
-      "day_cnt": 15,
-      "day_lt_amt": 229.0,
-      "day_lt_qty": 1,
-      "month_lt_amt": 27584.71,
-      "month_lt_qty": 68,
-      "lt_rate": 51.32,
-      "lt_day_rate": 30.53,
-      "lt_daily_target": 750.0,
-      "lt_month_target": 53750.0,
-      "day_np_amt": 303.0,
-      "day_np_qty": 2,
-      "month_np_amt": 37094.0,
-      "month_np_qty": 277
+      "day_jd": 2.0,
+      "day_kdj": 188.0,
+      "day_cnt": 1,
+      "day_lt_amt": 0.0,
+      "day_lt_qty": 0,
+      "month_lt_amt": 0.0,
+      "month_lt_qty": 0,
+      "lt_rate": 0.0,
+      "lt_day_rate": 0.0,
+      "lt_daily_target": 1000.0,
+      "lt_month_target": 17200.0,
+      "day_np_amt": 0.0,
+      "day_np_qty": 0,
+      "month_np_amt": 0.0,
+      "month_np_qty": 0
     }
   },
   "wos": {
     "扬州万象汇": {
       "day_amt": 0.0,
       "wk28_amt": 0.0,
-      "month_amt": 12423.0,
+      "month_amt": 0.0,
       "day_pct": 0.0,
       "wk28_pct": 0.0,
-      "month_pct": 3.2
+      "month_pct": 0.0
     },
     "扬州京华城": {
-      "day_amt": 1199.0,
-      "wk28_amt": 1199.0,
-      "month_amt": 31168.0,
-      "day_pct": 11.7,
-      "wk28_pct": 11.7,
-      "month_pct": 5.8
+      "day_amt": 2177.25,
+      "wk28_amt": 2177.25,
+      "month_amt": 2177.25,
+      "day_pct": 45.6,
+      "wk28_pct": 45.6,
+      "month_pct": 45.6
     },
     "扬州江都金鹰": {
       "day_amt": 0.0,
       "wk28_amt": 0.0,
-      "month_amt": 14396.0,
+      "month_amt": 0.0,
       "day_pct": 0.0,
       "wk28_pct": 0.0,
-      "month_pct": 6.1
+      "month_pct": 0.0
     },
     "泰州万象城": {
-      "day_amt": 1476.0,
-      "wk28_amt": 1476.0,
-      "month_amt": 42068.0,
-      "day_pct": 12.3,
-      "wk28_pct": 12.3,
-      "month_pct": 7.6
+      "day_amt": 2439.0,
+      "wk28_amt": 2439.0,
+      "month_amt": 2439.0,
+      "day_pct": 66.8,
+      "wk28_pct": 66.8,
+      "month_pct": 66.8
     },
     "宿迁宝龙": {
       "day_amt": 0.0,
       "wk28_amt": 0.0,
-      "month_amt": 2402.0,
+      "month_amt": 0.0,
       "day_pct": 0.0,
       "wk28_pct": 0.0,
-      "month_pct": 2.1
+      "month_pct": 0.0
     },
     "淮安新亚": {
-      "day_amt": 798.0,
-      "wk28_amt": 798.0,
-      "month_amt": 12480.0,
-      "day_pct": 17.7,
-      "wk28_pct": 17.7,
-      "month_pct": 7.9
+      "day_amt": 0.0,
+      "wk28_amt": 0.0,
+      "month_amt": 0.0,
+      "day_pct": 0.0,
+      "wk28_pct": 0.0,
+      "month_pct": 0.0
     },
     "淮安万象城": {
       "day_amt": 0.0,
       "wk28_amt": 0.0,
-      "month_amt": 30866.0,
+      "month_amt": 0.0,
       "day_pct": 0.0,
       "wk28_pct": 0.0,
-      "month_pct": 9.7
+      "month_pct": 0.0
     }
   },
   "jl": {
     "扬州万象汇": {
-      "day_amt": 1409.0,
-      "wk28_amt": 481.0,
-      "month_amt": 31004.0,
-      "day_pct": 13.0,
-      "wk28_pct": 4.9,
-      "month_pct": 7.9
+      "day_amt": 0.0,
+      "wk28_amt": 0.0,
+      "month_amt": 0.0,
+      "day_pct": 0.0,
+      "wk28_pct": 0.0,
+      "month_pct": 0.0
     },
     "扬州京华城": {
-      "day_amt": 1498.0,
-      "wk28_amt": 1498.0,
-      "month_amt": 23723.0,
-      "day_pct": 14.6,
-      "wk28_pct": 14.6,
-      "month_pct": 4.4
+      "day_amt": 233.0,
+      "wk28_amt": 233.0,
+      "month_amt": 233.0,
+      "day_pct": 4.9,
+      "wk28_pct": 4.9,
+      "month_pct": 4.9
     },
     "扬州江都金鹰": {
-      "day_amt": 161.0,
-      "wk28_amt": 161.0,
-      "month_amt": 7711.0,
-      "day_pct": 4.3,
-      "wk28_pct": 4.3,
-      "month_pct": 3.2
+      "day_amt": 0.0,
+      "wk28_amt": 0.0,
+      "month_amt": 0.0,
+      "day_pct": 0.0,
+      "wk28_pct": 0.0,
+      "month_pct": 0.0
     },
     "泰州万象城": {
-      "day_amt": 177.0,
-      "wk28_amt": 177.0,
-      "month_amt": 29034.0,
-      "day_pct": 1.5,
-      "wk28_pct": 1.5,
-      "month_pct": 5.3
+      "day_amt": 516.0,
+      "wk28_amt": 516.0,
+      "month_amt": 516.0,
+      "day_pct": 14.1,
+      "wk28_pct": 14.1,
+      "month_pct": 14.1
     },
     "宿迁宝龙": {
       "day_amt": 0.0,
       "wk28_amt": 0.0,
-      "month_amt": 7628.04,
+      "month_amt": 0.0,
       "day_pct": 0.0,
       "wk28_pct": 0.0,
-      "month_pct": 6.6
+      "month_pct": 0.0
     },
     "淮安新亚": {
-      "day_amt": 703.0,
-      "wk28_amt": 703.0,
-      "month_amt": 14770.08,
-      "day_pct": 15.6,
-      "wk28_pct": 15.6,
-      "month_pct": 9.3
+      "day_amt": 0.0,
+      "wk28_amt": 0.0,
+      "month_amt": 0.0,
+      "day_pct": 0.0,
+      "wk28_pct": 0.0,
+      "month_pct": 0.0
     },
     "淮安万象城": {
-      "day_amt": 210.0,
-      "wk28_amt": 210.0,
-      "month_amt": 12013.08,
-      "day_pct": 7.3,
-      "wk28_pct": 7.3,
-      "month_pct": 3.8
+      "day_amt": 0.0,
+      "wk28_amt": 0.0,
+      "month_amt": 0.0,
+      "day_pct": 0.0,
+      "wk28_pct": 0.0,
+      "month_pct": 0.0
     }
   },
   "sample": {
@@ -312,9 +312,9 @@
       "wk28_qty": 0,
       "wk28_retail": 0.0,
       "wk28_amt": 0.0,
-      "month_qty": 29,
-      "month_retail": 25881.0,
-      "month_amt": 8820.0
+      "month_qty": 0,
+      "month_retail": 0.0,
+      "month_amt": 0.0
     },
     "扬州京华城": {
       "day_qty": 0,
@@ -323,9 +323,9 @@
       "wk28_qty": 0,
       "wk28_retail": 0.0,
       "wk28_amt": 0.0,
-      "month_qty": 28,
-      "month_retail": 19992.0,
-      "month_amt": 4929.0
+      "month_qty": 0,
+      "month_retail": 0.0,
+      "month_amt": 0.0
     },
     "扬州江都金鹰": {
       "day_qty": 0,
@@ -334,9 +334,9 @@
       "wk28_qty": 0,
       "wk28_retail": 0.0,
       "wk28_amt": 0.0,
-      "month_qty": 29,
-      "month_retail": 18791.0,
-      "month_amt": 5360.0
+      "month_qty": 0,
+      "month_retail": 0.0,
+      "month_amt": 0.0
     },
     "泰州万象城": {
       "day_qty": 0,
@@ -345,9 +345,9 @@
       "wk28_qty": 0,
       "wk28_retail": 0.0,
       "wk28_amt": 0.0,
-      "month_qty": 29,
-      "month_retail": 22831.0,
-      "month_amt": 6098.0
+      "month_qty": 0,
+      "month_retail": 0.0,
+      "month_amt": 0.0
     },
     "宿迁宝龙": {
       "day_qty": 0,
@@ -356,9 +356,9 @@
       "wk28_qty": 0,
       "wk28_retail": 0.0,
       "wk28_amt": 0.0,
-      "month_qty": 45,
-      "month_retail": 28865.0,
-      "month_amt": 6744.0
+      "month_qty": 0,
+      "month_retail": 0.0,
+      "month_amt": 0.0
     },
     "淮安新亚": {
       "day_qty": 0,
@@ -367,9 +367,9 @@
       "wk28_qty": 0,
       "wk28_retail": 0.0,
       "wk28_amt": 0.0,
-      "month_qty": 20,
-      "month_retail": 16620.0,
-      "month_amt": 3977.0
+      "month_qty": 0,
+      "month_retail": 0.0,
+      "month_amt": 0.0
     },
     "淮安万象城": {
       "day_qty": 0,
@@ -378,9 +378,9 @@
       "wk28_qty": 0,
       "wk28_retail": 0.0,
       "wk28_amt": 0.0,
-      "month_qty": 25,
-      "month_retail": 16525.0,
-      "month_amt": 4169.0
+      "month_qty": 0,
+      "month_retail": 0.0,
+      "month_amt": 0.0
     }
   },
   "sample_region": {
@@ -390,189 +390,189 @@
     "wk28_qty": 0,
     "wk28_retail": 0.0,
     "wk28_amt": 0.0,
-    "month_qty": 205,
-    "month_retail": 149505.0,
-    "month_amt": 40097.0
+    "month_qty": 0,
+    "month_retail": 0.0,
+    "month_amt": 0.0
   },
   "guide": {
     "李婷1": {
       "store": "扬州万象汇",
       "title": "中级店长",
       "target": 88571.4285714286,
-      "day": 0.0,
-      "wk28": 0.0,
-      "month": 47405.0,
+      "day": 417.0,
+      "wk28": 417.0,
+      "month": 417.0,
       "day_lt": 0.0,
       "wk28_lt": 0.0,
-      "month_lt": 3319.0,
+      "month_lt": 0.0,
       "day_np": 0.0,
       "wk28_np": 0.0,
-      "month_np": 8886.0,
+      "month_np": 0.0,
       "wk_wos": 0,
-      "day_cnt": 0,
-      "day_qty": 0,
-      "day_jd": 0
+      "day_cnt": 1,
+      "day_qty": 3,
+      "day_jd": 3.0
     },
     "文雅君": {
       "store": "扬州万象汇",
       "title": "中级陈列专家",
       "target": 177142.857142857,
-      "day": 466.0,
-      "wk28": 466.0,
-      "month": 100526.0,
+      "day": 0.0,
+      "wk28": 0.0,
+      "month": 0.0,
       "day_lt": 0.0,
       "wk28_lt": 0.0,
-      "month_lt": 11198.0,
-      "day_np": 35.0,
-      "wk28_np": 35.0,
-      "month_np": 20261.0,
+      "month_lt": 0.0,
+      "day_np": 0.0,
+      "wk28_np": 0.0,
+      "month_np": 0.0,
       "wk_wos": 0,
-      "day_cnt": 3,
-      "day_qty": 4,
-      "day_jd": 1.33
+      "day_cnt": 0,
+      "day_qty": 0,
+      "day_jd": 0
     },
     "张荟奇": {
       "store": "扬州万象汇",
       "title": "店员",
       "target": 177142.857142857,
-      "day": 8184.0,
-      "wk28": 8184.0,
-      "month": 118005.0,
-      "day_lt": 869.0,
-      "wk28_lt": 869.0,
-      "month_lt": 14438.0,
-      "day_np": 244.0,
-      "wk28_np": 244.0,
-      "month_np": 14687.0,
+      "day": 0.0,
+      "wk28": 0.0,
+      "month": 0.0,
+      "day_lt": 0.0,
+      "wk28_lt": 0.0,
+      "month_lt": 0.0,
+      "day_np": 0.0,
+      "wk28_np": 0.0,
+      "month_np": 0.0,
       "wk_wos": 0,
-      "day_cnt": 11,
-      "day_qty": 16,
-      "day_jd": 1.45
+      "day_cnt": 0,
+      "day_qty": 0,
+      "day_jd": 0
     },
     "朱洪涛": {
       "store": "扬州万象汇",
       "title": "店员",
       "target": 177142.857142857,
-      "day": 786.0,
-      "wk28": 786.0,
-      "month": 96827.0,
-      "day_lt": 249.0,
-      "wk28_lt": 249.0,
-      "month_lt": 14159.0,
+      "day": 1495.0,
+      "wk28": 1495.0,
+      "month": 1495.0,
+      "day_lt": 0.0,
+      "wk28_lt": 0.0,
+      "month_lt": 0.0,
       "day_np": 0.0,
       "wk28_np": 0.0,
-      "month_np": 11198.0,
+      "month_np": 0.0,
       "wk_wos": 0,
-      "day_cnt": 3,
-      "day_qty": 4,
-      "day_jd": 1.33
+      "day_cnt": 2,
+      "day_qty": 5,
+      "day_jd": 2.5
     },
     "陆文一": {
       "store": "扬州京华城",
       "title": "初级店长",
       "target": 84444.4444444444,
-      "day": 1693.0,
-      "wk28": 1693.0,
-      "month": 43234.0,
+      "day": 0.0,
+      "wk28": 0.0,
+      "month": 0.0,
       "day_lt": 0.0,
       "wk28_lt": 0.0,
-      "month_lt": 2270.0,
-      "day_np": 39.0,
-      "wk28_np": 39.0,
-      "month_np": 10813.0,
+      "month_lt": 0.0,
+      "day_np": 0.0,
+      "wk28_np": 0.0,
+      "month_np": 0.0,
       "wk_wos": 0,
-      "day_cnt": 5,
-      "day_qty": 7,
-      "day_jd": 1.4
+      "day_cnt": 0,
+      "day_qty": 0,
+      "day_jd": 0
     },
     "丁茜": {
       "store": "扬州京华城",
       "title": "储备陈列专家",
       "target": 168888.888888889,
-      "day": 1204.0,
-      "wk28": 1204.0,
-      "month": 115928.0,
+      "day": 0.0,
+      "wk28": 0.0,
+      "month": 0.0,
       "day_lt": 0.0,
       "wk28_lt": 0.0,
-      "month_lt": 15566.0,
-      "day_np": 488.0,
-      "wk28_np": 488.0,
-      "month_np": 20486.0,
+      "month_lt": 0.0,
+      "day_np": 0.0,
+      "wk28_np": 0.0,
+      "month_np": 0.0,
       "wk_wos": 0,
-      "day_cnt": 4,
-      "day_qty": 6,
-      "day_jd": 1.5
+      "day_cnt": 0,
+      "day_qty": 0,
+      "day_jd": 0
     },
     "董文兵": {
       "store": "扬州京华城",
       "title": "店员",
       "target": 168888.888888889,
-      "day": 1295.0,
-      "wk28": 1295.0,
-      "month": 98489.0,
+      "day": 0.0,
+      "wk28": 0.0,
+      "month": 0.0,
       "day_lt": 0.0,
       "wk28_lt": 0.0,
-      "month_lt": 6518.0,
+      "month_lt": 0.0,
       "day_np": 0.0,
       "wk28_np": 0.0,
-      "month_np": 15902.0,
+      "month_np": 0.0,
       "wk_wos": 0,
-      "day_cnt": 4,
-      "day_qty": 5,
-      "day_jd": 1.25
+      "day_cnt": 0,
+      "day_qty": 0,
+      "day_jd": 0
     },
     "王永群": {
       "store": "扬州京华城",
       "title": "初级培训专家",
       "target": 168888.888888889,
-      "day": 3564.0,
-      "wk28": 3564.0,
-      "month": 151506.0,
+      "day": 2368.0,
+      "wk28": 2368.0,
+      "month": 2368.0,
       "day_lt": 0.0,
       "wk28_lt": 0.0,
-      "month_lt": 12528.0,
-      "day_np": 2062.0,
-      "wk28_np": 2062.0,
-      "month_np": 29281.0,
-      "wk_wos": 1199.0,
-      "day_cnt": 3,
-      "day_qty": 6,
-      "day_jd": 2.0
+      "month_lt": 0.0,
+      "day_np": 1869.0,
+      "wk28_np": 1869.0,
+      "month_np": 1869.0,
+      "wk_wos": 0,
+      "day_cnt": 2,
+      "day_qty": 2,
+      "day_jd": 1.0
     },
     "王泽馨": {
       "store": "扬州京华城",
       "title": "店员（长期兼职）",
       "target": 168888.888888889,
-      "day": 1005.0,
-      "wk28": 1005.0,
-      "month": 97464.0,
+      "day": 0.0,
+      "wk28": 0.0,
+      "month": 0.0,
       "day_lt": 0.0,
       "wk28_lt": 0.0,
-      "month_lt": 7191.0,
+      "month_lt": 0.0,
       "day_np": 0.0,
       "wk28_np": 0.0,
-      "month_np": 13774.0,
+      "month_np": 0.0,
       "wk_wos": 0,
-      "day_cnt": 5,
-      "day_qty": 5,
-      "day_jd": 1.0
+      "day_cnt": 0,
+      "day_qty": 0,
+      "day_jd": 0
     },
     "王伟": {
       "store": "扬州江都金鹰",
       "title": "初级店长",
       "target": 48571.4285714286,
-      "day": 438.0,
-      "wk28": 438.0,
-      "month": 63269.0,
+      "day": 437.0,
+      "wk28": 437.0,
+      "month": 437.0,
       "day_lt": 0.0,
       "wk28_lt": 0.0,
-      "month_lt": 6818.0,
+      "month_lt": 0.0,
       "day_np": 0.0,
       "wk28_np": 0.0,
-      "month_np": 9277.0,
+      "month_np": 0.0,
       "wk_wos": 0,
-      "day_cnt": 2,
-      "day_qty": 2,
+      "day_cnt": 3,
+      "day_qty": 3,
       "day_jd": 1.0
     },
     "邰宇": {
@@ -581,13 +581,13 @@
       "target": 97142.8571428571,
       "day": 0.0,
       "wk28": 0.0,
-      "month": 47265.0,
+      "month": 0.0,
       "day_lt": 0.0,
       "wk28_lt": 0.0,
-      "month_lt": 5439.0,
+      "month_lt": 0.0,
       "day_np": 0.0,
       "wk28_np": 0.0,
-      "month_np": 4229.0,
+      "month_np": 0.0,
       "wk_wos": 0,
       "day_cnt": 0,
       "day_qty": 0,
@@ -597,289 +597,289 @@
       "store": "扬州江都金鹰",
       "title": "店员",
       "target": 97142.8571428571,
-      "day": 1105.0,
-      "wk28": 1105.0,
-      "month": 58922.0,
+      "day": 0.0,
+      "wk28": 0.0,
+      "month": 0.0,
       "day_lt": 0.0,
       "wk28_lt": 0.0,
-      "month_lt": 7615.0,
-      "day_np": 39.0,
-      "wk28_np": 39.0,
-      "month_np": 5468.0,
+      "month_lt": 0.0,
+      "day_np": 0.0,
+      "wk28_np": 0.0,
+      "month_np": 0.0,
       "wk_wos": 0,
-      "day_cnt": 6,
-      "day_qty": 7,
-      "day_jd": 1.17
+      "day_cnt": 0,
+      "day_qty": 0,
+      "day_jd": 0
     },
     "朱奕然": {
       "store": "扬州江都金鹰",
       "title": "店员",
       "target": 97142.8571428571,
-      "day": 2015.0,
-      "wk28": 2015.0,
-      "month": 60691.0,
+      "day": 1449.0,
+      "wk28": 1449.0,
+      "month": 1449.0,
       "day_lt": 0.0,
       "wk28_lt": 0.0,
-      "month_lt": 5069.0,
+      "month_lt": 0.0,
       "day_np": 0.0,
       "wk28_np": 0.0,
-      "month_np": 4446.0,
-      "wk_wos": 0,
-      "day_cnt": 4,
-      "day_qty": 5,
-      "day_jd": 1.25
-    },
-    "黄小莉1": {
-      "store": "泰州万象城",
-      "title": "初级店长",
-      "target": 86666.6666666667,
-      "day": 1606.0,
-      "wk28": 1606.0,
-      "month": 88279.0,
-      "day_lt": 0.0,
-      "wk28_lt": 0.0,
-      "month_lt": 7699.0,
-      "day_np": 425.0,
-      "wk28_np": 425.0,
-      "month_np": 17045.0,
-      "wk_wos": 0,
-      "day_cnt": 3,
-      "day_qty": 4,
-      "day_jd": 1.33
-    },
-    "于小进": {
-      "store": "泰州万象城",
-      "title": "店员",
-      "target": 173333.333333333,
-      "day": 1176.0,
-      "wk28": 1176.0,
-      "month": 101364.0,
-      "day_lt": 59.0,
-      "wk28_lt": 59.0,
-      "month_lt": 4423.0,
-      "day_np": 549.0,
-      "wk28_np": 549.0,
-      "month_np": 14444.0,
-      "wk_wos": 0,
-      "day_cnt": 4,
-      "day_qty": 4,
-      "day_jd": 1.0
-    },
-    "王丹": {
-      "store": "泰州万象城",
-      "title": "店员",
-      "target": 173333.333333333,
-      "day": 5138.0,
-      "wk28": 5138.0,
-      "month": 96767.0,
-      "day_lt": 0.0,
-      "wk28_lt": 0.0,
-      "month_lt": 3905.0,
-      "day_np": 2227.0,
-      "wk28_np": 2227.0,
-      "month_np": 15365.0,
-      "wk_wos": 0,
-      "day_cnt": 9,
-      "day_qty": 12,
-      "day_jd": 1.33
-    },
-    "王璐": {
-      "store": "泰州万象城",
-      "title": "店员",
-      "target": 173333.333333333,
-      "day": 1875.0,
-      "wk28": 1875.0,
-      "month": 98941.0,
-      "day_lt": 0.0,
-      "wk28_lt": 0.0,
-      "month_lt": 6527.0,
-      "day_np": 618.0,
-      "wk28_np": 618.0,
-      "month_np": 18532.0,
-      "wk_wos": 0,
-      "day_cnt": 3,
-      "day_qty": 5,
-      "day_jd": 1.67
-    },
-    "王美玉": {
-      "store": "泰州万象城",
-      "title": "店员",
-      "target": 173333.333333333,
-      "day": 1782.0,
-      "wk28": 1782.0,
-      "month": 113198.0,
-      "day_lt": 0.0,
-      "wk28_lt": 0.0,
-      "month_lt": 8796.0,
-      "day_np": 1047.0,
-      "wk28_np": 1047.0,
-      "month_np": 19897.0,
-      "wk_wos": 1227.0,
-      "day_cnt": 5,
-      "day_qty": 8,
-      "day_jd": 1.6
-    },
-    "靳洋": {
-      "store": "宿迁宝龙",
-      "title": "高级运营专家",
-      "target": 66666.6666666667,
-      "day": 128.0,
-      "wk28": 128.0,
-      "month": 23110.0,
-      "day_lt": 0.0,
-      "wk28_lt": 0.0,
-      "month_lt": 2170.0,
-      "day_np": 39.0,
-      "wk28_np": 39.0,
-      "month_np": 2897.0,
-      "wk_wos": 0,
-      "day_cnt": 2,
-      "day_qty": 2,
-      "day_jd": 1.0
-    },
-    "丁蒙": {
-      "store": "宿迁宝龙",
-      "title": "店员",
-      "target": 66666.6666666667,
-      "day": 279.0,
-      "wk28": 279.0,
-      "month": 45248.0,
-      "day_lt": 0.0,
-      "wk28_lt": 0.0,
-      "month_lt": 1225.0,
-      "day_np": 0.0,
-      "wk28_np": 0.0,
-      "month_np": 4832.0,
+      "month_np": 0.0,
       "wk_wos": 0,
       "day_cnt": 1,
       "day_qty": 1,
       "day_jd": 1.0
     },
+    "黄小莉1": {
+      "store": "泰州万象城",
+      "title": "初级店长",
+      "target": 86666.6666666667,
+      "day": 421.0,
+      "wk28": 421.0,
+      "month": 421.0,
+      "day_lt": 202.0,
+      "wk28_lt": 202.0,
+      "month_lt": 202.0,
+      "day_np": 0.0,
+      "wk28_np": 0.0,
+      "month_np": 0.0,
+      "wk_wos": 421.0,
+      "day_cnt": 1,
+      "day_qty": 2,
+      "day_jd": 2.0
+    },
+    "于小进": {
+      "store": "泰州万象城",
+      "title": "店员",
+      "target": 173333.333333333,
+      "day": 0.0,
+      "wk28": 0.0,
+      "month": 0.0,
+      "day_lt": 0.0,
+      "wk28_lt": 0.0,
+      "month_lt": 0.0,
+      "day_np": 0.0,
+      "wk28_np": 0.0,
+      "month_np": 0.0,
+      "wk_wos": 0,
+      "day_cnt": 0,
+      "day_qty": 0,
+      "day_jd": 0
+    },
+    "王丹": {
+      "store": "泰州万象城",
+      "title": "店员",
+      "target": 173333.333333333,
+      "day": 698.0,
+      "wk28": 698.0,
+      "month": 698.0,
+      "day_lt": 0.0,
+      "wk28_lt": 0.0,
+      "month_lt": 0.0,
+      "day_np": 0.0,
+      "wk28_np": 0.0,
+      "month_np": 0.0,
+      "wk_wos": 0,
+      "day_cnt": 2,
+      "day_qty": 2,
+      "day_jd": 1.0
+    },
+    "王璐": {
+      "store": "泰州万象城",
+      "title": "店员",
+      "target": 173333.333333333,
+      "day": 2018.0,
+      "wk28": 2018.0,
+      "month": 2018.0,
+      "day_lt": 0.0,
+      "wk28_lt": 0.0,
+      "month_lt": 0.0,
+      "day_np": 2018.0,
+      "wk28_np": 2018.0,
+      "month_np": 2018.0,
+      "wk_wos": 2018.0,
+      "day_cnt": 1,
+      "day_qty": 2,
+      "day_jd": 2.0
+    },
+    "王美玉": {
+      "store": "泰州万象城",
+      "title": "店员",
+      "target": 173333.333333333,
+      "day": 0.0,
+      "wk28": 0.0,
+      "month": 0.0,
+      "day_lt": 0.0,
+      "wk28_lt": 0.0,
+      "month_lt": 0.0,
+      "day_np": 0.0,
+      "wk28_np": 0.0,
+      "month_np": 0.0,
+      "wk_wos": 0,
+      "day_cnt": 0,
+      "day_qty": 0,
+      "day_jd": 0
+    },
+    "靳洋": {
+      "store": "宿迁宝龙",
+      "title": "高级运营专家",
+      "target": 66666.6666666667,
+      "day": 0.0,
+      "wk28": 0.0,
+      "month": 0.0,
+      "day_lt": 0.0,
+      "wk28_lt": 0.0,
+      "month_lt": 0.0,
+      "day_np": 0.0,
+      "wk28_np": 0.0,
+      "month_np": 0.0,
+      "wk_wos": 0,
+      "day_cnt": 0,
+      "day_qty": 0,
+      "day_jd": 0
+    },
+    "丁蒙": {
+      "store": "宿迁宝龙",
+      "title": "店员",
+      "target": 66666.6666666667,
+      "day": 98.0,
+      "wk28": 98.0,
+      "month": 98.0,
+      "day_lt": 0.0,
+      "wk28_lt": 0.0,
+      "month_lt": 0.0,
+      "day_np": 0.0,
+      "wk28_np": 0.0,
+      "month_np": 0.0,
+      "wk_wos": 0,
+      "day_cnt": 1,
+      "day_qty": 2,
+      "day_jd": 2.0
+    },
     "卓宁": {
       "store": "宿迁宝龙",
       "title": "店员",
       "target": 66666.6666666667,
-      "day": 1197.0,
-      "wk28": 1197.0,
-      "month": 36437.0,
+      "day": 0.0,
+      "wk28": 0.0,
+      "month": 0.0,
       "day_lt": 0.0,
       "wk28_lt": 0.0,
-      "month_lt": 1040.0,
+      "month_lt": 0.0,
       "day_np": 0.0,
       "wk28_np": 0.0,
-      "month_np": 7072.0,
+      "month_np": 0.0,
       "wk_wos": 0,
-      "day_cnt": 3,
-      "day_qty": 3,
-      "day_jd": 1.0
+      "day_cnt": 0,
+      "day_qty": 0,
+      "day_jd": 0
     },
     "钱晨": {
       "store": "淮安新亚",
       "title": "初级培训专家",
       "target": 66666.6666666667,
-      "day": 1117.0,
-      "wk28": 1117.0,
-      "month": 42526.0,
+      "day": 0.0,
+      "wk28": 0.0,
+      "month": 0.0,
       "day_lt": 0.0,
       "wk28_lt": 0.0,
-      "month_lt": 2207.0,
-      "day_np": 39.0,
-      "wk28_np": 39.0,
-      "month_np": 9641.0,
+      "month_lt": 0.0,
+      "day_np": 0.0,
+      "wk28_np": 0.0,
+      "month_np": 0.0,
       "wk_wos": 0,
-      "day_cnt": 1,
-      "day_qty": 3,
-      "day_jd": 3.0
+      "day_cnt": 0,
+      "day_qty": 0,
+      "day_jd": 0
     },
     "汤绚尧": {
       "store": "淮安新亚",
       "title": "店员（长期兼职）",
       "target": 66666.6666666667,
-      "day": 1214.0,
-      "wk28": 1214.0,
-      "month": 44946.0,
+      "day": 0.0,
+      "wk28": 0.0,
+      "month": 0.0,
       "day_lt": 0.0,
       "wk28_lt": 0.0,
-      "month_lt": 5380.0,
-      "day_np": 35.0,
-      "wk28_np": 35.0,
-      "month_np": 9444.0,
+      "month_lt": 0.0,
+      "day_np": 0.0,
+      "wk28_np": 0.0,
+      "month_np": 0.0,
       "wk_wos": 0,
-      "day_cnt": 5,
-      "day_qty": 6,
-      "day_jd": 1.2
+      "day_cnt": 0,
+      "day_qty": 0,
+      "day_jd": 0
     },
     "王毅": {
       "store": "淮安新亚",
       "title": "中级陈列专家",
       "target": 66666.6666666667,
-      "day": 1476.0,
-      "wk28": 1476.0,
-      "month": 56643.0,
+      "day": 78.0,
+      "wk28": 78.0,
+      "month": 78.0,
       "day_lt": 0.0,
       "wk28_lt": 0.0,
-      "month_lt": 4232.0,
+      "month_lt": 0.0,
       "day_np": 0.0,
       "wk28_np": 0.0,
-      "month_np": 6610.0,
-      "wk_wos": 798.0,
-      "day_cnt": 4,
-      "day_qty": 4,
-      "day_jd": 1.0
+      "month_np": 0.0,
+      "wk_wos": 0,
+      "day_cnt": 1,
+      "day_qty": 2,
+      "day_jd": 2.0
     },
     "黄锦靓": {
       "store": "淮安万象城",
       "title": "初级店长",
       "target": 67187.5,
-      "day": 706.0,
-      "wk28": 706.0,
-      "month": 35824.0,
+      "day": 188.0,
+      "wk28": 188.0,
+      "month": 188.0,
       "day_lt": 0.0,
       "wk28_lt": 0.0,
-      "month_lt": 1814.0,
+      "month_lt": 0.0,
       "day_np": 0.0,
       "wk28_np": 0.0,
-      "month_np": 7229.0,
+      "month_np": 0.0,
       "wk_wos": 0,
-      "day_cnt": 4,
-      "day_qty": 4,
-      "day_jd": 1.0
+      "day_cnt": 1,
+      "day_qty": 2,
+      "day_jd": 2.0
     },
     "钱晓凡": {
       "store": "淮安万象城",
       "title": "店员",
       "target": 134375.0,
-      "day": 1222.0,
-      "wk28": 1222.0,
-      "month": 105670.0,
-      "day_lt": 229.0,
-      "wk28_lt": 229.0,
-      "month_lt": 10372.0,
-      "day_np": 269.0,
-      "wk28_np": 269.0,
-      "month_np": 9339.0,
+      "day": 0.0,
+      "wk28": 0.0,
+      "month": 0.0,
+      "day_lt": 0.0,
+      "wk28_lt": 0.0,
+      "month_lt": 0.0,
+      "day_np": 0.0,
+      "wk28_np": 0.0,
+      "month_np": 0.0,
       "wk_wos": 0,
-      "day_cnt": 5,
-      "day_qty": 8,
-      "day_jd": 1.6
+      "day_cnt": 0,
+      "day_qty": 0,
+      "day_jd": 0
     },
     "于思涵": {
       "store": "淮安万象城",
       "title": "店员（长期兼职）",
       "target": 94062.5,
-      "day": 733.0,
-      "wk28": 733.0,
-      "month": 63977.0,
+      "day": 0.0,
+      "wk28": 0.0,
+      "month": 0.0,
       "day_lt": 0.0,
       "wk28_lt": 0.0,
-      "month_lt": 5534.0,
-      "day_np": 34.0,
-      "wk28_np": 34.0,
-      "month_np": 8115.0,
+      "month_lt": 0.0,
+      "day_np": 0.0,
+      "wk28_np": 0.0,
+      "month_np": 0.0,
       "wk_wos": 0,
-      "day_cnt": 4,
-      "day_qty": 7,
-      "day_jd": 1.75
+      "day_cnt": 0,
+      "day_qty": 0,
+      "day_jd": 0
     },
     "周小庆": {
       "store": "淮安万象城",
@@ -887,13 +887,13 @@
       "target": 134375.0,
       "day": 0.0,
       "wk28": 0.0,
-      "month": 98405.0,
+      "month": 0.0,
       "day_lt": 0.0,
       "wk28_lt": 0.0,
-      "month_lt": 8502.0,
+      "month_lt": 0.0,
       "day_np": 0.0,
       "wk28_np": 0.0,
-      "month_np": 12411.0,
+      "month_np": 0.0,
       "wk_wos": 0,
       "day_cnt": 0,
       "day_qty": 0,
@@ -905,7 +905,7 @@
       "target": 0,
       "day": 0.0,
       "wk28": 0.0,
-      "month": 22816.0,
+      "month": 0.0,
       "day_cnt": 0,
       "day_qty": 0,
       "day_jd": 0
@@ -914,122 +914,122 @@
   "store_monthly_targets": {
     "扬州万象汇": {
       "month": 620000.0,
-      "daily": 8000.0
+      "daily": 38000.0
     },
     "扬州京华城": {
       "month": 760000.0,
-      "daily": 10000.0
+      "daily": 46000.0
     },
     "扬州江都金鹰": {
       "month": 340000.0,
-      "daily": 5000.0
+      "daily": 20000.0
     },
     "泰州万象城": {
       "month": 780000.0,
-      "daily": 10000.0
+      "daily": 50000.0
     },
     "宿迁宝龙": {
       "month": 200000.0,
-      "daily": 3000.0
+      "daily": 11000.0
     },
     "淮安新亚": {
       "month": 200000.0,
-      "daily": 2500.0
+      "daily": 12000.0
     },
     "淮安万象城": {
       "month": 430000.0,
-      "daily": 6000.0
+      "daily": 25000.0
     }
   },
   "store_daily_targets": {
-    "扬州万象汇": 8000.0,
-    "扬州京华城": 10000.0,
-    "扬州江都金鹰": 5000.0,
-    "泰州万象城": 10000.0,
-    "宿迁宝龙": 3000.0,
-    "淮安新亚": 2500.0,
-    "淮安万象城": 6000.0
+    "扬州万象汇": 38000.0,
+    "扬州京华城": 46000.0,
+    "扬州江都金鹰": 20000.0,
+    "泰州万象城": 50000.0,
+    "宿迁宝龙": 11000.0,
+    "淮安新亚": 12000.0,
+    "淮安万象城": 25000.0
   },
   "store_lt_monthly_targets": {
     "扬州万象汇": {
-      "month": 77500.0,
-      "daily": 1000.0
+      "month": 24800.0,
+      "daily": 1520.0
     },
     "扬州京华城": {
-      "month": 95000.0,
-      "daily": 1250.0
+      "month": 30400.0,
+      "daily": 1840.0
     },
     "扬州江都金鹰": {
-      "month": 42500.0,
-      "daily": 625.0
+      "month": 13600.0,
+      "daily": 800.0
     },
     "泰州万象城": {
-      "month": 97500.0,
-      "daily": 1250.0
+      "month": 31200.0,
+      "daily": 2000.0
     },
     "宿迁宝龙": {
-      "month": 25000.0,
-      "daily": 375.0
+      "month": 8000.0,
+      "daily": 440.0
     },
     "淮安新亚": {
-      "month": 25000.0,
-      "daily": 312.5
+      "month": 8000.0,
+      "daily": 480.0
     },
     "淮安万象城": {
-      "month": 53750.0,
-      "daily": 750.0
+      "month": 17200.0,
+      "daily": 1000.0
     }
   },
   "store_yoy_day": {
-    "扬州万象汇": 12005.0,
-    "扬州京华城": 18622.0,
-    "扬州江都金鹰": 6251.0,
-    "泰州万象城": 13956.0,
-    "宿迁宝龙": 4794.0,
-    "淮安新亚": 2386.0
+    "扬州万象汇": 18274.0,
+    "扬州京华城": 47997.0,
+    "扬州江都金鹰": 13368.0,
+    "泰州万象城": 21752.0,
+    "宿迁宝龙": 3768.0,
+    "淮安新亚": 10615.0
   },
   "store_yoy_month_cum": {
-    "扬州万象汇": 596545.1,
-    "扬州京华城": 709277.05,
-    "扬州江都金鹰": 282076.4,
-    "泰州万象城": 572790.05,
-    "宿迁宝龙": 152902.5,
-    "淮安新亚": 341849.65
+    "扬州万象汇": 18274.0,
+    "扬州京华城": 47997.0,
+    "扬州江都金鹰": 13368.0,
+    "泰州万象城": 21752.0,
+    "宿迁宝龙": 3768.0,
+    "淮安新亚": 10615.0
   },
   "np14_track": {
-    "launch_date": "2026-08-01",
+    "launch_date": "2026-09-01",
     "skus": [
       {
         "name": "马里奥街机",
         "lego": "72051",
         "matrix": {
           "扬州万象汇": {
-            "orders": 4,
-            "qty": 4
+            "orders": 0,
+            "qty": 0
           },
           "扬州京华城": {
-            "orders": 11,
-            "qty": 9
+            "orders": 0,
+            "qty": 0
           },
           "扬州江都金鹰": {
-            "orders": 2,
-            "qty": 2
+            "orders": 0,
+            "qty": 0
           },
           "泰州万象城": {
-            "orders": 4,
-            "qty": 4
+            "orders": 0,
+            "qty": 0
           },
           "宿迁宝龙": {
-            "orders": 2,
-            "qty": 2
+            "orders": 0,
+            "qty": 0
           },
           "淮安新亚": {
-            "orders": 3,
-            "qty": 3
+            "orders": 0,
+            "qty": 0
           },
           "淮安万象城": {
-            "orders": 1,
-            "qty": 1
+            "orders": 0,
+            "qty": 0
           }
         }
       },
@@ -1038,32 +1038,32 @@
         "lego": "42233",
         "matrix": {
           "扬州万象汇": {
-            "orders": 77,
-            "qty": 94
+            "orders": 0,
+            "qty": 0
           },
           "扬州京华城": {
-            "orders": 74,
-            "qty": 86
+            "orders": 0,
+            "qty": 0
           },
           "扬州江都金鹰": {
-            "orders": 55,
-            "qty": 53
+            "orders": 0,
+            "qty": 0
           },
           "泰州万象城": {
-            "orders": 74,
-            "qty": 85
+            "orders": 0,
+            "qty": 0
           },
           "宿迁宝龙": {
-            "orders": 26,
-            "qty": 30
+            "orders": 0,
+            "qty": 0
           },
           "淮安新亚": {
-            "orders": 57,
-            "qty": 74
+            "orders": 1,
+            "qty": 1
           },
           "淮安万象城": {
-            "orders": 193,
-            "qty": 207
+            "orders": 1,
+            "qty": 1
           }
         }
       },
@@ -1072,32 +1072,32 @@
         "lego": "42235",
         "matrix": {
           "扬州万象汇": {
-            "orders": 31,
-            "qty": 23
+            "orders": 1,
+            "qty": 1
           },
           "扬州京华城": {
-            "orders": 35,
-            "qty": 33
+            "orders": 0,
+            "qty": 0
           },
           "扬州江都金鹰": {
-            "orders": 18,
-            "qty": 14
+            "orders": 0,
+            "qty": 0
           },
           "泰州万象城": {
-            "orders": 57,
-            "qty": 55
+            "orders": 0,
+            "qty": 0
           },
           "宿迁宝龙": {
-            "orders": 5,
-            "qty": 5
+            "orders": 0,
+            "qty": 0
           },
           "淮安新亚": {
-            "orders": 11,
-            "qty": 11
+            "orders": 0,
+            "qty": 0
           },
           "淮安万象城": {
-            "orders": 20,
-            "qty": 16
+            "orders": 0,
+            "qty": 0
           }
         }
       },
@@ -1106,32 +1106,32 @@
         "lego": "11382",
         "matrix": {
           "扬州万象汇": {
-            "orders": 3,
-            "qty": 3
+            "orders": 0,
+            "qty": 0
           },
           "扬州京华城": {
-            "orders": 8,
-            "qty": 8
+            "orders": 0,
+            "qty": 0
           },
           "扬州江都金鹰": {
-            "orders": 1,
-            "qty": 1
+            "orders": 0,
+            "qty": 0
           },
           "泰州万象城": {
-            "orders": 10,
-            "qty": 6
+            "orders": 0,
+            "qty": 0
           },
           "宿迁宝龙": {
-            "orders": 1,
-            "qty": 1
+            "orders": 0,
+            "qty": 0
           },
           "淮安新亚": {
-            "orders": 5,
-            "qty": 3
+            "orders": 0,
+            "qty": 0
           },
           "淮安万象城": {
-            "orders": 3,
-            "qty": 3
+            "orders": 0,
+            "qty": 0
           }
         }
       },
@@ -1140,20 +1140,20 @@
         "lego": "75643",
         "matrix": {
           "扬州万象汇": {
-            "orders": 3,
-            "qty": 3
+            "orders": 0,
+            "qty": 0
           },
           "扬州京华城": {
-            "orders": 4,
-            "qty": 2
+            "orders": 0,
+            "qty": 0
           },
           "扬州江都金鹰": {
             "orders": 0,
             "qty": 0
           },
           "泰州万象城": {
-            "orders": 2,
-            "qty": 2
+            "orders": 0,
+            "qty": 0
           },
           "宿迁宝龙": {
             "orders": 0,
@@ -1164,8 +1164,8 @@
             "qty": 0
           },
           "淮安万象城": {
-            "orders": 2,
-            "qty": 2
+            "orders": 0,
+            "qty": 0
           }
         }
       },
@@ -1174,32 +1174,32 @@
         "lego": "21582",
         "matrix": {
           "扬州万象汇": {
-            "orders": 6,
-            "qty": 6
+            "orders": 1,
+            "qty": 1
           },
           "扬州京华城": {
-            "orders": 8,
-            "qty": 8
+            "orders": 0,
+            "qty": 0
           },
           "扬州江都金鹰": {
-            "orders": 2,
-            "qty": 2
+            "orders": 0,
+            "qty": 0
           },
           "泰州万象城": {
-            "orders": 3,
-            "qty": 3
+            "orders": 0,
+            "qty": 0
           },
           "宿迁宝龙": {
-            "orders": 3,
-            "qty": 3
+            "orders": 0,
+            "qty": 0
           },
           "淮安新亚": {
-            "orders": 3,
-            "qty": 3
+            "orders": 0,
+            "qty": 0
           },
           "淮安万象城": {
-            "orders": 3,
-            "qty": 3
+            "orders": 0,
+            "qty": 0
           }
         }
       },
@@ -1208,27 +1208,27 @@
         "lego": "75646",
         "matrix": {
           "扬州万象汇": {
-            "orders": 1,
-            "qty": 1
-          },
-          "扬州京华城": {
-            "orders": 1,
-            "qty": 1
-          },
-          "扬州江都金鹰": {
             "orders": 0,
             "qty": 0
           },
+          "扬州京华城": {
+            "orders": 0,
+            "qty": 0
+          },
+          "扬州江都金鹰": {
+            "orders": 1,
+            "qty": 1
+          },
           "泰州万象城": {
-            "orders": 2,
-            "qty": 2
+            "orders": 0,
+            "qty": 0
           },
           "宿迁宝龙": {
             "orders": 0,
             "qty": 0
           },
           "淮安新亚": {
-            "orders": 4,
+            "orders": 0,
             "qty": 0
           },
           "淮安万象城": {
@@ -1239,11 +1239,11 @@
       },
       {
         "name": "橡胶果实",
-        "lego": "75647",
+        "lego": null,
         "matrix": {
           "扬州万象汇": {
-            "orders": 2,
-            "qty": 2
+            "orders": 0,
+            "qty": 0
           },
           "扬州京华城": {
             "orders": 0,
@@ -1254,8 +1254,8 @@
             "qty": 0
           },
           "泰州万象城": {
-            "orders": 1,
-            "qty": 1
+            "orders": 0,
+            "qty": 0
           },
           "宿迁宝龙": {
             "orders": 0,
@@ -1273,125 +1273,125 @@
       },
       {
         "name": "宝马 E30 M3",
-        "lego": "77263",
+        "lego": null,
         "matrix": {
           "扬州万象汇": {
-            "orders": 5,
-            "qty": 5
+            "orders": 0,
+            "qty": 0
           },
           "扬州京华城": {
-            "orders": 11,
-            "qty": 9
+            "orders": 0,
+            "qty": 0
           },
           "扬州江都金鹰": {
-            "orders": 4,
-            "qty": 4
+            "orders": 0,
+            "qty": 0
           },
           "泰州万象城": {
-            "orders": 6,
-            "qty": 6
+            "orders": 0,
+            "qty": 0
           },
           "宿迁宝龙": {
-            "orders": 2,
-            "qty": 2
+            "orders": 0,
+            "qty": 0
           },
           "淮安新亚": {
-            "orders": 9,
-            "qty": 7
+            "orders": 0,
+            "qty": 0
           },
           "淮安万象城": {
-            "orders": 5,
-            "qty": 5
+            "orders": 0,
+            "qty": 0
           }
         }
       },
       {
         "name": "捷豹Project 7&路虎Defender",
-        "lego": "77264",
+        "lego": null,
         "matrix": {
           "扬州万象汇": {
-            "orders": 12,
-            "qty": 8
+            "orders": 0,
+            "qty": 0
           },
           "扬州京华城": {
-            "orders": 8,
-            "qty": 8
+            "orders": 0,
+            "qty": 0
           },
           "扬州江都金鹰": {
-            "orders": 2,
-            "qty": 2
+            "orders": 0,
+            "qty": 0
           },
           "泰州万象城": {
-            "orders": 12,
-            "qty": 12
+            "orders": 0,
+            "qty": 0
           },
           "宿迁宝龙": {
             "orders": 0,
             "qty": 0
           },
           "淮安新亚": {
-            "orders": 4,
-            "qty": 4
+            "orders": 0,
+            "qty": 0
           },
           "淮安万象城": {
-            "orders": 9,
-            "qty": 9
+            "orders": 0,
+            "qty": 0
           }
         }
       },
       {
         "name": "道奇 Viper GTS-R 跑车",
-        "lego": "42234",
+        "lego": null,
         "matrix": {
           "扬州万象汇": {
-            "orders": 3,
-            "qty": 3
+            "orders": 0,
+            "qty": 0
           },
           "扬州京华城": {
-            "orders": 14,
-            "qty": 12
+            "orders": 0,
+            "qty": 0
           },
           "扬州江都金鹰": {
-            "orders": 6,
-            "qty": 6
+            "orders": 0,
+            "qty": 0
           },
           "泰州万象城": {
-            "orders": 13,
-            "qty": 13
+            "orders": 0,
+            "qty": 0
           },
           "宿迁宝龙": {
-            "orders": 1,
-            "qty": 1
+            "orders": 0,
+            "qty": 0
           },
           "淮安新亚": {
-            "orders": 4,
-            "qty": 4
+            "orders": 0,
+            "qty": 0
           },
           "淮安万象城": {
-            "orders": 2,
-            "qty": 2
+            "orders": 0,
+            "qty": 0
           }
         }
       },
       {
         "name": "杜卡迪 Desmo450 MX 原厂摩托车",
-        "lego": "42238",
+        "lego": null,
         "matrix": {
           "扬州万象汇": {
-            "orders": 6,
-            "qty": 6
+            "orders": 0,
+            "qty": 0
           },
           "扬州京华城": {
-            "orders": 1,
-            "qty": 1
+            "orders": 0,
+            "qty": 0
           },
           "扬州江都金鹰": {
-            "orders": 2,
-            "qty": 2
+            "orders": 0,
+            "qty": 0
           },
           "泰州万象城": {
-            "orders": 9,
-            "qty": 9
+            "orders": 0,
+            "qty": 0
           },
           "宿迁宝龙": {
             "orders": 0,
@@ -1402,38 +1402,38 @@
             "qty": 0
           },
           "淮安万象城": {
-            "orders": 4,
-            "qty": 4
+            "orders": 0,
+            "qty": 0
           }
         }
       },
       {
         "name": "蝙蝠战车 Tumbler",
-        "lego": "42239",
+        "lego": null,
         "matrix": {
           "扬州万象汇": {
-            "orders": 1,
-            "qty": 1
+            "orders": 0,
+            "qty": 0
           },
           "扬州京华城": {
-            "orders": 5,
-            "qty": 5
+            "orders": 0,
+            "qty": 0
           },
           "扬州江都金鹰": {
-            "orders": 1,
-            "qty": 1
+            "orders": 0,
+            "qty": 0
           },
           "泰州万象城": {
-            "orders": 3,
-            "qty": 3
+            "orders": 0,
+            "qty": 0
           },
           "宿迁宝龙": {
-            "orders": 1,
-            "qty": 1
+            "orders": 0,
+            "qty": 0
           },
           "淮安新亚": {
-            "orders": 2,
-            "qty": 2
+            "orders": 0,
+            "qty": 0
           },
           "淮安万象城": {
             "orders": 0,
@@ -1443,56 +1443,56 @@
       },
       {
         "name": "道格钥匙链",
-        "lego": "854329",
+        "lego": null,
         "matrix": {
           "扬州万象汇": {
-            "orders": 3,
-            "qty": 3
+            "orders": 0,
+            "qty": 0
           },
           "扬州京华城": {
-            "orders": 1,
-            "qty": 1
+            "orders": 0,
+            "qty": 0
           },
           "扬州江都金鹰": {
-            "orders": 2,
-            "qty": 2
+            "orders": 0,
+            "qty": 0
           },
           "泰州万象城": {
             "orders": 0,
             "qty": 0
           },
           "宿迁宝龙": {
-            "orders": 1,
-            "qty": 1
+            "orders": 0,
+            "qty": 0
           },
           "淮安新亚": {
             "orders": 0,
             "qty": 0
           },
           "淮安万象城": {
-            "orders": 2,
-            "qty": 2
+            "orders": 0,
+            "qty": 0
           }
         }
       }
     ],
     "store_orders": {
-      "扬州万象汇": 157,
-      "扬州京华城": 181,
-      "扬州江都金鹰": 95,
-      "泰州万象城": 196,
-      "宿迁宝龙": 42,
-      "淮安新亚": 102,
-      "淮安万象城": 244
+      "扬州万象汇": 2,
+      "扬州京华城": 0,
+      "扬州江都金鹰": 1,
+      "泰州万象城": 0,
+      "宿迁宝龙": 0,
+      "淮安新亚": 1,
+      "淮安万象城": 1
     },
     "store_qty": {
-      "扬州万象汇": 162,
-      "扬州京华城": 183,
-      "扬州江都金鹰": 89,
-      "泰州万象城": 201,
-      "宿迁宝龙": 46,
-      "淮安新亚": 111,
-      "淮安万象城": 254
+      "扬州万象汇": 2,
+      "扬州京华城": 0,
+      "扬州江都金鹰": 1,
+      "泰州万象城": 0,
+      "宿迁宝龙": 0,
+      "淮安新亚": 1,
+      "淮安万象城": 1
     },
     "store_target": {
       "扬州万象汇": 269,
