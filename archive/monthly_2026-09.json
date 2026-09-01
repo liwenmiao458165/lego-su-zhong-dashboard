@@ -19,6 +19,8 @@
     "month_jl": 0.0,
     "month_lt": 0.0,
     "month_lt_qty": 0,
+    "month_lt_target": 50000.0,
+    "month_lt_rate": 0.0,
     "daily": [
       {
         "day": 1,
@@ -29,6 +31,8 @@
         "yoy_pct": -91.5,
         "lt": 0.0,
         "lt_qty": 0,
+        "lt_target": 2000.0,
+        "lt_rate": 0.0,
         "wos": 0.0,
         "jl": 0.0,
         "tx_cnt": 1
@@ -58,6 +62,8 @@
     "month_jl": 161.0,
     "month_lt": 1199.25,
     "month_lt_qty": 1,
+    "month_lt_target": 70000.0,
+    "month_lt_rate": 1.7,
     "daily": [
       {
         "day": 1,
@@ -68,6 +74,8 @@
         "yoy_pct": -76.1,
         "lt": 1199.25,
         "lt_qty": 1,
+        "lt_target": 2800.0,
+        "lt_rate": 42.8,
         "wos": 2177.25,
         "jl": 161.0,
         "tx_cnt": 4
@@ -97,6 +105,8 @@
     "month_jl": 0.0,
     "month_lt": 0.0,
     "month_lt_qty": 0,
+    "month_lt_target": 27500.0,
+    "month_lt_rate": 0.0,
     "daily": [
       {
         "day": 1,
@@ -107,6 +117,8 @@
         "yoy_pct": -23.3,
         "lt": 0.0,
         "lt_qty": 0,
+        "lt_target": 1100.0,
+        "lt_rate": 0.0,
         "wos": 0.0,
         "jl": 0.0,
         "tx_cnt": 1
@@ -136,6 +148,8 @@
     "month_jl": 0.0,
     "month_lt": 202.0,
     "month_lt_qty": 1,
+    "month_lt_target": 70000.0,
+    "month_lt_rate": 0.3,
     "daily": [
       {
         "day": 1,
@@ -146,6 +160,8 @@
         "yoy_pct": -73.8,
         "lt": 202.0,
         "lt_qty": 1,
+        "lt_target": 2800.0,
+        "lt_rate": 7.2,
         "wos": 2439.0,
         "jl": 0.0,
         "tx_cnt": 3
@@ -175,6 +191,8 @@
     "month_jl": 0.0,
     "month_lt": 0.0,
     "month_lt_qty": 0,
+    "month_lt_target": 16250.0,
+    "month_lt_rate": 0.0,
     "daily": [
       {
         "day": 1,
@@ -185,6 +203,8 @@
         "yoy_pct": -86.2,
         "lt": 0.0,
         "lt_qty": 0,
+        "lt_target": 650.0,
+        "lt_rate": 0.0,
         "wos": 0.0,
         "jl": 0.0,
         "tx_cnt": 1
@@ -214,6 +234,8 @@
     "month_jl": 0.0,
     "month_lt": 0.0,
     "month_lt_qty": 0,
+    "month_lt_target": 20000.0,
+    "month_lt_rate": 0.0,
     "daily": [
       {
         "day": 1,
@@ -224,6 +246,8 @@
         "yoy_pct": -100.0,
         "lt": 0.0,
         "lt_qty": 0,
+        "lt_target": 800.0,
+        "lt_rate": 0.0,
         "wos": 0.0,
         "jl": 0.0,
         "tx_cnt": 0
@@ -253,6 +277,8 @@
     "month_jl": 0.0,
     "month_lt": 0.0,
     "month_lt_qty": 0,
+    "month_lt_target": 60000.0,
+    "month_lt_rate": 0.0,
     "daily": [
       {
         "day": 1,
@@ -263,6 +289,8 @@
         "yoy_pct": null,
         "lt": 0.0,
         "lt_qty": 0,
+        "lt_target": 2400.0,
+        "lt_rate": 0.0,
         "wos": 0.0,
         "jl": 0.0,
         "tx_cnt": 0
@@ -282,11 +310,14 @@
     "month_wos": 4616.25,
     "month_jl": 161.0,
     "month_lt": 1401.25,
+    "month_lt_qty": 2,
     "mom": -93.7,
     "yoy": -78.5,
     "month_rate": 0.4,
     "month_atv": 926.82,
     "month_jd": 1.7,
+    "month_lt_target": 313750.0,
+    "month_lt_rate": 0.4,
     "new_amt": 3887.0,
     "new_qty": 3,
     "new_cnt": 2,
@@ -300,7 +331,9 @@
         "yoy_amt": 43187.0,
         "yoy_pct": -78.5,
         "lt": 1401.25,
-        "lt_qty": 2
+        "lt_qty": 2,
+        "lt_target": 12550.0,
+        "lt_rate": 11.2
       }
     ]
   },
@@ -1156,6 +1189,8 @@
       "宿迁宝龙",
       "淮安新亚",
       "淮安万象城"
-    ]
+    ],
+    "lt_target_rate": 0.125,
+    "new_product_since": "2026-08-29"
   }
 }
