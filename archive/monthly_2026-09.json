@@ -1,16 +1,16 @@
 {
   "扬州万象汇": {
-    "month_amt": 397.0,
-    "mom": -98.5,
+    "month_amt": 1495.0,
+    "mom": -94.2,
     "mom_prev": 25825.0,
-    "yoy": -91.5,
+    "yoy": -68.2,
     "yoy_prev": 4698.0,
     "target": 400000.0,
-    "month_rate": 0.1,
-    "month_cnt": 1,
-    "month_qty": 3,
-    "month_atv": 397.0,
-    "month_jd": 3.0,
+    "month_rate": 0.4,
+    "month_cnt": 2,
+    "month_qty": 5,
+    "month_atv": 747.5,
+    "month_jd": 2.5,
     "month_wos": 0.0,
     "new_amt": 0.0,
     "new_qty": 0,
@@ -19,23 +19,23 @@
     "month_jl": 0.0,
     "month_lt": 0.0,
     "month_lt_qty": 0,
-    "month_lt_target": 50000.0,
+    "month_lt_target": 16000.0,
     "month_lt_rate": 0.0,
     "daily": [
       {
         "day": 1,
-        "amt": 397.0,
+        "amt": 1495.0,
         "target": 13333.33,
-        "rate": 3.0,
+        "rate": 11.2,
         "yoy_amt": 4698.0,
-        "yoy_pct": -91.5,
+        "yoy_pct": -68.2,
         "lt": 0.0,
         "lt_qty": 0,
-        "lt_target": 2000.0,
+        "lt_target": 640.0,
         "lt_rate": 0.0,
         "wos": 0.0,
         "jl": 0.0,
-        "tx_cnt": 1
+        "tx_cnt": 2
       }
     ],
     "daily_prev": [
@@ -62,8 +62,8 @@
     "month_jl": 161.0,
     "month_lt": 1199.25,
     "month_lt_qty": 1,
-    "month_lt_target": 70000.0,
-    "month_lt_rate": 1.7,
+    "month_lt_target": 22400.0,
+    "month_lt_rate": 5.4,
     "daily": [
       {
         "day": 1,
@@ -74,8 +74,8 @@
         "yoy_pct": -76.1,
         "lt": 1199.25,
         "lt_qty": 1,
-        "lt_target": 2800.0,
-        "lt_rate": 42.8,
+        "lt_target": 896.0,
+        "lt_rate": 133.8,
         "wos": 2177.25,
         "jl": 161.0,
         "tx_cnt": 4
@@ -105,7 +105,7 @@
     "month_jl": 0.0,
     "month_lt": 0.0,
     "month_lt_qty": 0,
-    "month_lt_target": 27500.0,
+    "month_lt_target": 8800.0,
     "month_lt_rate": 0.0,
     "daily": [
       {
@@ -117,7 +117,7 @@
         "yoy_pct": -23.3,
         "lt": 0.0,
         "lt_qty": 0,
-        "lt_target": 1100.0,
+        "lt_target": 352.0,
         "lt_rate": 0.0,
         "wos": 0.0,
         "jl": 0.0,
@@ -148,8 +148,8 @@
     "month_jl": 0.0,
     "month_lt": 202.0,
     "month_lt_qty": 1,
-    "month_lt_target": 70000.0,
-    "month_lt_rate": 0.3,
+    "month_lt_target": 22400.0,
+    "month_lt_rate": 0.9,
     "daily": [
       {
         "day": 1,
@@ -160,8 +160,8 @@
         "yoy_pct": -73.8,
         "lt": 202.0,
         "lt_qty": 1,
-        "lt_target": 2800.0,
-        "lt_rate": 7.2,
+        "lt_target": 896.0,
+        "lt_rate": 22.5,
         "wos": 2439.0,
         "jl": 0.0,
         "tx_cnt": 3
@@ -191,7 +191,7 @@
     "month_jl": 0.0,
     "month_lt": 0.0,
     "month_lt_qty": 0,
-    "month_lt_target": 16250.0,
+    "month_lt_target": 5200.0,
     "month_lt_rate": 0.0,
     "daily": [
       {
@@ -203,7 +203,7 @@
         "yoy_pct": -86.2,
         "lt": 0.0,
         "lt_qty": 0,
-        "lt_target": 650.0,
+        "lt_target": 208.0,
         "lt_rate": 0.0,
         "wos": 0.0,
         "jl": 0.0,
@@ -215,42 +215,42 @@
     ]
   },
   "淮安新亚": {
-    "month_amt": 0.0,
-    "mom": -100.0,
+    "month_amt": 78.0,
+    "mom": -99.1,
     "mom_prev": 8894.0,
-    "yoy": -100.0,
+    "yoy": -98.7,
     "yoy_prev": 6161.0,
     "target": 160000.0,
     "month_rate": 0.0,
-    "month_cnt": 0,
-    "month_qty": 0,
-    "month_atv": 0,
-    "month_jd": 0,
+    "month_cnt": 1,
+    "month_qty": 2,
+    "month_atv": 78.0,
+    "month_jd": 2.0,
     "month_wos": 0.0,
     "new_amt": 0.0,
     "new_qty": 0,
     "new_cnt": 0,
-    "new_rate": 0,
+    "new_rate": 0.0,
     "month_jl": 0.0,
     "month_lt": 0.0,
     "month_lt_qty": 0,
-    "month_lt_target": 20000.0,
+    "month_lt_target": 6400.0,
     "month_lt_rate": 0.0,
     "daily": [
       {
         "day": 1,
-        "amt": 0.0,
+        "amt": 78.0,
         "target": 5333.33,
-        "rate": 0.0,
+        "rate": 1.5,
         "yoy_amt": 6161.0,
-        "yoy_pct": -100.0,
+        "yoy_pct": -98.7,
         "lt": 0.0,
         "lt_qty": 0,
-        "lt_target": 800.0,
+        "lt_target": 256.0,
         "lt_rate": 0.0,
         "wos": 0.0,
         "jl": 0.0,
-        "tx_cnt": 0
+        "tx_cnt": 1
       }
     ],
     "daily_prev": [
@@ -277,7 +277,7 @@
     "month_jl": 0.0,
     "month_lt": 0.0,
     "month_lt_qty": 0,
-    "month_lt_target": 60000.0,
+    "month_lt_target": 19200.0,
     "month_lt_rate": 0.0,
     "daily": [
       {
@@ -289,7 +289,7 @@
         "yoy_pct": null,
         "lt": 0.0,
         "lt_qty": 0,
-        "lt_target": 2400.0,
+        "lt_target": 768.0,
         "lt_rate": 0.0,
         "wos": 0.0,
         "jl": 0.0,
@@ -301,44 +301,46 @@
     ]
   },
   "_region": {
-    "month_amt": 9268.25,
+    "month_amt": 10444.25,
     "mom_prev": 146905.0,
     "yoy_prev": 43187.0,
     "target": 2510000.0,
-    "month_cnt": 10,
-    "month_qty": 17,
+    "month_cnt": 12,
+    "month_qty": 21,
     "month_wos": 4616.25,
     "month_jl": 161.0,
     "month_lt": 1401.25,
     "month_lt_qty": 2,
-    "mom": -93.7,
-    "yoy": -78.5,
+    "mom": -92.9,
+    "yoy": -75.8,
     "month_rate": 0.4,
-    "month_atv": 926.82,
-    "month_jd": 1.7,
-    "month_lt_target": 313750.0,
-    "month_lt_rate": 0.4,
+    "month_atv": 870.35,
+    "month_jd": 1.75,
+    "month_lt_target": 100400.0,
+    "month_lt_rate": 1.4,
     "new_amt": 3887.0,
     "new_qty": 3,
     "new_cnt": 2,
-    "new_rate": 41.9,
+    "new_rate": 37.2,
     "daily": [
       {
         "day": 1,
-        "amt": 9268.25,
+        "amt": 10444.25,
         "target": 80967.74,
-        "rate": 11.4,
+        "rate": 12.9,
         "yoy_amt": 43187.0,
-        "yoy_pct": -78.5,
+        "yoy_pct": -75.8,
         "lt": 1401.25,
         "lt_qty": 2,
-        "lt_target": 12550.0,
-        "lt_rate": 11.2
+        "lt_target": 4016.0,
+        "lt_rate": 34.9
       }
     ]
   },
   "_series": {
     "扬州万象汇": {
+      "TECHNIC": 564.0,
+      "FRIENDS": 534.0,
       "LEL": 397.0
     },
     "扬州京华城": {
@@ -359,13 +361,18 @@
     "宿迁宝龙": {
       "LEL": 98.0
     },
-    "淮安新亚": {},
+    "淮安新亚": {
+      "LEL": 47.0,
+      "TECHNIC": 31.0
+    },
     "淮安万象城": {},
     "_region": {
       "ICONS": 3768.0,
       "EDITIONS": 2177.25,
       "ONE PIECE": 1449.0,
-      "LEL": 816.0,
+      "LEL": 863.0,
+      "TECHNIC": 595.0,
+      "FRIENDS": 534.0,
       "SUPER MARIO": 499.0,
       "DUPLO": 340.0,
       "JURASSIC WORLD": 219.0
@@ -373,6 +380,14 @@
   },
   "_products": {
     "扬州万象汇": {
+      "法拉利 488 Pista 跑车": {
+        "amt": 564.0,
+        "qty": 1
+      },
+      "梦幻糖果乐园": {
+        "amt": 534.0,
+        "qty": 1
+      },
       "伦敦明信片": {
         "amt": 139.0,
         "qty": 1
@@ -450,7 +465,16 @@
         "qty": 1
       }
     },
-    "淮安新亚": {},
+    "淮安新亚": {
+      "米妮钥匙链": {
+        "amt": 47.0,
+        "qty": 1
+      },
+      "迷你工程车盲盒": {
+        "amt": 31.0,
+        "qty": 1
+      }
+    },
     "淮安万象城": {},
     "_region": {
       "海绵宝宝：比奇堡": {
@@ -467,6 +491,14 @@
       },
       "梅西 – 足球传奇": {
         "amt": 699.0,
+        "qty": 1
+      },
+      "法拉利 488 Pista 跑车": {
+        "amt": 564.0,
+        "qty": 1
+      },
+      "梦幻糖果乐园": {
+        "amt": 534.0,
         "qty": 1
       },
       "Game Boy™积木游戏机": {
@@ -512,6 +544,14 @@
       "达斯·维德钥匙链": {
         "amt": 49.0,
         "qty": 1
+      },
+      "米妮钥匙链": {
+        "amt": 47.0,
+        "qty": 1
+      },
+      "迷你工程车盲盒": {
+        "amt": 31.0,
+        "qty": 1
       }
     }
   },
@@ -522,18 +562,18 @@
         "store": "扬州万象汇",
         "title": "店员",
         "target": 177142.857142857,
-        "m_sales": 397.0,
-        "m_qty": 3,
-        "m_cnt": 1,
-        "m_atv": 397.0,
-        "m_jd": 3.0,
+        "m_sales": 1495.0,
+        "m_qty": 5,
+        "m_cnt": 2,
+        "m_atv": 747.5,
+        "m_jd": 2.5,
         "m_wos": 0,
         "m_lt": 0.0,
         "m_lt_qty": 0,
         "m_np": 0.0,
-        "m_rate": 0.2,
+        "m_rate": 0.8,
         "m_prev": 6378.0,
-        "mom": -93.8
+        "mom": -76.6
       },
       {
         "name": "文雅君",
@@ -906,6 +946,24 @@
     ],
     "淮安新亚": [
       {
+        "name": "王毅",
+        "store": "淮安新亚",
+        "title": "中级陈列专家",
+        "target": 66666.6666666667,
+        "m_sales": 78.0,
+        "m_qty": 2,
+        "m_cnt": 1,
+        "m_atv": 78.0,
+        "m_jd": 2.0,
+        "m_wos": 0,
+        "m_lt": 0.0,
+        "m_lt_qty": 0,
+        "m_np": 0.0,
+        "m_rate": 0.1,
+        "m_prev": 4659.0,
+        "mom": -98.3
+      },
+      {
         "name": "钱晨",
         "store": "淮安新亚",
         "title": "初级培训专家",
@@ -939,24 +997,6 @@
         "m_np": 0,
         "m_rate": 0.0,
         "m_prev": 1015.0,
-        "mom": -100.0
-      },
-      {
-        "name": "王毅",
-        "store": "淮安新亚",
-        "title": "中级陈列专家",
-        "target": 66666.6666666667,
-        "m_sales": 0,
-        "m_qty": 0,
-        "m_cnt": 0,
-        "m_atv": 0,
-        "m_jd": 0,
-        "m_wos": 0,
-        "m_lt": 0,
-        "m_lt_qty": 0,
-        "m_np": 0,
-        "m_rate": 0.0,
-        "m_prev": 4659.0,
         "mom": -100.0
       }
     ],
@@ -1137,7 +1177,7 @@
   "_conversion": {
     "扬州万象汇": {
       "flow": 0,
-      "cnt": 1,
+      "cnt": 2,
       "rate": null
     },
     "扬州京华城": {
@@ -1162,7 +1202,7 @@
     },
     "淮安新亚": {
       "flow": 0,
-      "cnt": 0,
+      "cnt": 1,
       "rate": null
     },
     "淮安万象城": {
@@ -1172,7 +1212,7 @@
     },
     "_region": {
       "flow": 0,
-      "cnt": 10,
+      "cnt": 12,
       "rate": null
     }
   },
@@ -1190,7 +1230,7 @@
       "淮安新亚",
       "淮安万象城"
     ],
-    "lt_target_rate": 0.125,
+    "lt_target_rate": 0.04,
     "new_product_since": "2026-08-29"
   }
 }
