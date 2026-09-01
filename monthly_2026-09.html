@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>苏中区域 9月门店月度交互分析</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+:root{--bg:#f8fafc;--card-bg:#fff;--border:#e2e8f0;--text:#1e293b;--text-muted:#64748b;--red:#dc2626;--green:#16a34a;--blue:#0284c7;--orange:#ea580c;--purple:#7c3aed}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;background:var(--bg);color:var(--text)}
+.header{background:linear-gradient(135deg,#1e293b 0%,#334155 100%);color:#fff;padding:20px 30px;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+.header h1{font-size:22px;font-weight:700}
+.header .subtitle{font-size:13px;opacity:.7;margin-top:4px}
+.store-tabs{display:flex;gap:8px;padding:12px 30px;background:#fff;border-bottom:1px solid var(--border);overflow-x:auto;position:sticky;top:64px;z-index:99}
+.store-tab{padding:8px 20px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:600;white-space:nowrap;border:2px solid var(--border);background:#fff;transition:all .2s}
+.store-tab:hover{border-color:var(--purple)}
+.store-tab.active{color:#fff;border-color:transparent}
+.store-tab[data-store="扬州万象汇"].active{background:#7c3aed}
+.store-tab[data-store="扬州京华城"].active{background:#0ea5e9}
+.store-tab[data-store="扬州江都金鹰"].active{background:#059669}
+.store-tab[data-store="泰州万象城"].active{background:#dc2626}
+.store-tab[data-store="宿迁宝龙"].active{background:#ea580c}
+.store-tab[data-store="淮安新亚"].active{background:#0891b2}
+.store-tab[data-store="淮安万象城"].active{background:#9333ea}
+.store-tab[data-store="区域对比"].active{background:#1e293b}
+.container{max-width:1400px;margin:0 auto;padding:20px 30px}
+.kpi-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-bottom:24px}
+.kpi-card{background:var(--card-bg);border-radius:12px;padding:16px;box-shadow:0 1px 3px rgba(0,0,0,.08);border:1px solid var(--border);text-align:center}
+.kpi-card .label{font-size:12px;color:var(--text-muted);margin-bottom:6px}
+.kpi-card .value{font-size:24px;font-weight:800}
+.kpi-card .sub{font-size:11px;margin-top:4px}
+.kpi-card .value.red{color:var(--red)}.kpi-card .value.green{color:var(--green)}.kpi-card .value.blue{color:var(--blue)}.kpi-card .value.orange{color:var(--orange)}.kpi-card .value.purple{color:var(--purple)}
+.chart-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px}
+.chart-grid.full{grid-template-columns:1fr}
+.chart-card{background:var(--card-bg);border-radius:12px;padding:20px;box-shadow:0 1px 3px rgba(0,0,0,.08);border:1px solid var(--border)}
+.chart-card h3{font-size:15px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:6px}
+.chart-card h3 .icon{font-size:18px}
+.chart-wrap{position:relative;height:320px}
+.chart-wrap.tall{height:380px}
+.summary-table{width:100%;border-collapse:collapse;font-size:13px}
+.summary-table th{background:#f1f5f9;padding:10px 12px;text-align:center;font-weight:700;border-bottom:2px solid var(--border)}
+.summary-table td{padding:8px 12px;text-align:center;border-bottom:1px solid var(--border)}
+.summary-table tr:hover{background:#f8fafc}
+#cmpTable.summary-table{table-layout:fixed;width:100%;font-size:12px}
+#cmpTable.summary-table th,
+#cmpTable.summary-table td{padding:6px 4px;white-space:normal}
+#cmpTable.summary-table th:first-child,
+#cmpTable.summary-table .store-name{width:100px;min-width:100px;padding:6px 6px;text-align:left;font-weight:600;white-space:normal}
+#cmpTable.summary-table th{width:56px;min-width:56px}
+.badge{display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700}
+.badge.green{background:#dcfce7;color:#166534}.badge.red{background:#fee2e2;color:#991b1b}.badge.gray{background:#f1f5f9;color:#64748b}
+.conclusion{font-size:13px;color:#475569;margin-top:10px;padding:0;background:#f8fafc;border-radius:6px;border-left:3px solid var(--purple);line-height:1.5;overflow:hidden}
+.conc-title{padding:8px 12px 4px 12px;font-weight:700;color:#1e293b}
+.conc-body{padding:0 12px 8px 12px}
+.conc-opportunity{padding:6px 12px;background:#fef3c7;border-top:1px solid #f59e0b;font-size:12px;color:#92400e;line-height:1.6}
+.conc-opportunity .conc-label{font-weight:700;color:#b45309}
+.footer{text-align:center;padding:30px;color:var(--text-muted);font-size:12px}
+@media(max-width:900px){.kpi-row{grid-template-columns:repeat(3,1fr)}.chart-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="header"><div style="display:flex;align-items:center;gap:16px;">
+<a href="index.html" style="background:rgba(255,255,255,.15);color:#fff;padding:8px 16px;border-radius:8px;font-size:14px;font-weight:600;text-decoration:none;white-space:nowrap;">← 返回看板</a>
+<div><h1>📊 苏中区域 9月门店月度交互分析</h1>
+<div style="display:inline-block;margin-top:6px;background:#fef3c7;color:#92400e;border:1px solid #f59e0b;border-radius:6px;padding:3px 10px;font-size:12px;font-weight:600;">📌 9月归档快照 · 数据已锁定，不随后续更新变化</div><div class="subtitle">数据周期：2026年9月1日-9月1日 | 月环比=上月同时间区间(8月1-1日) | 生成时间：<span id="genTime"></span></div>
+</div></div></div>
+<div class="store-tabs" id="storeTabs">
+<div class="store-tab active" data-store="区域对比" onclick="selectStore('区域对比')">📈 区域对比</div>
+<div class="store-tab" data-store="扬州万象汇" onclick="selectStore('扬州万象汇')">🏪 扬州万象汇</div>
+<div class="store-tab" data-store="扬州京华城" onclick="selectStore('扬州京华城')">🏪 扬州京华城</div>
+<div class="store-tab" data-store="扬州江都金鹰" onclick="selectStore('扬州江都金鹰')">🏪 扬州江都金鹰</div>
+<div class="store-tab" data-store="泰州万象城" onclick="selectStore('泰州万象城')">🏪 泰州万象城</div>
+<div class="store-tab" data-store="宿迁宝龙" onclick="selectStore('宿迁宝龙')">🏪 宿迁宝龙</div>
+<div class="store-tab" data-store="淮安新亚" onclick="selectStore('淮安新亚')">🏪 淮安新亚</div>
+<div class="store-tab" data-store="淮安万象城" onclick="selectStore('淮安万象城')">🏪 淮安万象城</div>
+</div>
+<div class="container" id="content"></div>
+<div class="footer">
+<p>🧱 苏中区域销售看板 - 月度分析 | 数据口径：结算金额(含退货扣减)，排除赠品/样品/零金额</p>
+<p>月环比=vs 8月1-1日同期 | 淮安万象城为新店，无同比数据(N/A)</p>
+</div>
+<script>
+const DATA = {"扬州万象汇":{"month_amt":397.0,"mom":-98.5,"mom_prev":25825.0,"yoy":-91.5,"yoy_prev":4698.0,"target":400000.0,"month_rate":0.1,"month_cnt":1,"month_qty":3,"month_atv":397.0,"month_jd":3.0,"month_wos":0.0,"new_amt":0.0,"new_qty":0,"new_cnt":0,"new_rate":0.0,"month_jl":0.0,"month_lt":0.0,"month_lt_qty":0,"daily":[{"day":1,"amt":397.0,"target":13333.33,"rate":3.0,"yoy_amt":4698.0,"yoy_pct":-91.5,"lt":0.0,"lt_qty":0,"wos":0.0,"jl":0.0,"tx_cnt":1}],"daily_prev":[25825.0]},"扬州京华城":{"month_amt":4706.25,"mom":-89.1,"mom_prev":42995.0,"yoy":-76.1,"yoy_prev":19724.0,"target":560000.0,"month_rate":0.8,"month_cnt":4,"month_qty":6,"month_atv":1176.56,"month_jd":1.5,"month_wos":2177.25,"new_amt":1869.0,"new_qty":1,"new_cnt":1,"new_rate":39.7,"month_jl":161.0,"month_lt":1199.25,"month_lt_qty":1,"daily":[{"day":1,"amt":4706.25,"target":18666.67,"rate":25.2,"yoy_amt":19724.0,"yoy_pct":-76.1,"lt":1199.25,"lt_qty":1,"wos":2177.25,"jl":161.0,"tx_cnt":4}],"daily_prev":[42995.0]},"扬州江都金鹰":{"month_amt":1449.0,"mom":-89.9,"mom_prev":14389.0,"yoy":-23.3,"yoy_prev":1890.0,"target":220000.0,"month_rate":0.7,"month_cnt":1,"month_qty":1,"month_atv":1449.0,"month_jd":1.0,"month_wos":0.0,"new_amt":0.0,"new_qty":0,"new_cnt":0,"new_rate":0.0,"month_jl":0.0,"month_lt":0.0,"month_lt_qty":0,"daily":[{"day":1,"amt":1449.0,"target":7333.33,"rate":19.8,"yoy_amt":1890.0,"yoy_pct":-23.3,"lt":0.0,"lt_qty":0,"wos":0.0,"jl":0.0,"tx_cnt":1}],"daily_prev":[14389.0]},"泰州万象城":{"month_amt":2618.0,"mom":-92.0,"mom_prev":32527.0,"yoy":-73.8,"yoy_prev":10004.0,"target":560000.0,"month_rate":0.5,"month_cnt":3,"month_qty":5,"month_atv":872.67,"month_jd":1.67,"month_wos":2439.0,"new_amt":2018.0,"new_qty":2,"new_cnt":1,"new_rate":77.1,"month_jl":0.0,"month_lt":202.0,"month_lt_qty":1,"daily":[{"day":1,"amt":2618.0,"target":18666.67,"rate":14.0,"yoy_amt":10004.0,"yoy_pct":-73.8,"lt":202.0,"lt_qty":1,"wos":2439.0,"jl":0.0,"tx_cnt":3}],"daily_prev":[32527.0]},"宿迁宝龙":{"month_amt":98.0,"mom":-98.7,"mom_prev":7414.0,"yoy":-86.2,"yoy_prev":710.0,"target":130000.0,"month_rate":0.1,"month_cnt":1,"month_qty":2,"month_atv":98.0,"month_jd":2.0,"month_wos":0.0,"new_amt":0.0,"new_qty":0,"new_cnt":0,"new_rate":0.0,"month_jl":0.0,"month_lt":0.0,"month_lt_qty":0,"daily":[{"day":1,"amt":98.0,"target":4333.33,"rate":2.3,"yoy_amt":710.0,"yoy_pct":-86.2,"lt":0.0,"lt_qty":0,"wos":0.0,"jl":0.0,"tx_cnt":1}],"daily_prev":[7414.0]},"淮安新亚":{"month_amt":0.0,"mom":-100.0,"mom_prev":8894.0,"yoy":-100.0,"yoy_prev":6161.0,"target":160000.0,"month_rate":0.0,"month_cnt":0,"month_qty":0,"month_atv":0,"month_jd":0,"month_wos":0.0,"new_amt":0.0,"new_qty":0,"new_cnt":0,"new_rate":0,"month_jl":0.0,"month_lt":0.0,"month_lt_qty":0,"daily":[{"day":1,"amt":0.0,"target":5333.33,"rate":0.0,"yoy_amt":6161.0,"yoy_pct":-100.0,"lt":0.0,"lt_qty":0,"wos":0.0,"jl":0.0,"tx_cnt":0}],"daily_prev":[8894.0]},"淮安万象城":{"month_amt":0.0,"mom":-100.0,"mom_prev":14861.0,"yoy":null,"yoy_prev":0,"target":480000.0,"month_rate":0.0,"month_cnt":0,"month_qty":0,"month_atv":0,"month_jd":0,"month_wos":0.0,"new_amt":0.0,"new_qty":0,"new_cnt":0,"new_rate":0,"month_jl":0.0,"month_lt":0.0,"month_lt_qty":0,"daily":[{"day":1,"amt":0.0,"target":16000.0,"rate":0.0,"yoy_amt":0,"yoy_pct":null,"lt":0.0,"lt_qty":0,"wos":0.0,"jl":0.0,"tx_cnt":0}],"daily_prev":[14861.0]},"_region":{"month_amt":9268.25,"mom_prev":146905.0,"yoy_prev":43187.0,"target":2510000.0,"month_cnt":10,"month_qty":17,"month_wos":4616.25,"month_jl":161.0,"month_lt":1401.25,"mom":-93.7,"yoy":-78.5,"month_rate":0.4,"month_atv":926.82,"month_jd":1.7,"new_amt":3887.0,"new_qty":3,"new_cnt":2,"new_rate":41.9,"daily":[{"day":1,"amt":9268.25,"target":80967.74,"rate":11.4,"yoy_amt":43187.0,"yoy_pct":-78.5,"lt":1401.25,"lt_qty":2}]},"_series":{"扬州万象汇":{"LEL":397.0},"扬州京华城":{"EDITIONS":2177.25,"ICONS":1869.0,"SUPER MARIO":499.0,"DUPLO":161.0},"扬州江都金鹰":{"ONE PIECE":1449.0},"泰州万象城":{"ICONS":1899.0,"LEL":321.0,"JURASSIC WORLD":219.0,"DUPLO":179.0},"宿迁宝龙":{"LEL":98.0},"淮安新亚":{},"淮安万象城":{},"_region":{"ICONS":3768.0,"EDITIONS":2177.25,"ONE PIECE":1449.0,"LEL":816.0,"SUPER MARIO":499.0,"DUPLO":340.0,"JURASSIC WORLD":219.0}},"_products":{"扬州万象汇":{"伦敦明信片":{"amt":139.0,"qty":1},"纽约明信片":{"amt":139.0,"qty":1},"意大利明信片":{"amt":119.0,"qty":1}},"扬州京华城":{"海绵宝宝：比奇堡":{"amt":1869.0,"qty":1},"梅西的庆祝时刻":{"amt":1199.25,"qty":1},"梅西 – 足球传奇":{"amt":699.0,"qty":1},"Game Boy™积木游戏机":{"amt":499.0,"qty":1},"梅西 – 经典进球瞬间":{"amt":279.0,"qty":1},"拖拉机与市场":{"amt":161.0,"qty":1}},"扬州江都金鹰":{"卡普的海军战舰":{"amt":1449.0,"qty":1}},"泰州万象城":{"海绵宝宝：比奇堡":{"amt":1899.0,"qty":1},"恐龙宝宝：无齿翼龙":{"amt":219.0,"qty":1},"财神爷":{"amt":202.0,"qty":1},"拖拉机与市场":{"amt":179.0,"qty":1},"海绵宝宝玩偶":{"amt":119.0,"qty":1}},"宿迁宝龙":{"幽灵蜘蛛钥匙扣":{"amt":49.0,"qty":1},"达斯·维德钥匙链":{"amt":49.0,"qty":1}},"淮安新亚":{},"淮安万象城":{},"_region":{"海绵宝宝：比奇堡":{"amt":3768.0,"qty":2},"卡普的海军战舰":{"amt":1449.0,"qty":1},"梅西的庆祝时刻":{"amt":1199.25,"qty":1},"梅西 – 足球传奇":{"amt":699.0,"qty":1},"Game Boy™积木游戏机":{"amt":499.0,"qty":1},"拖拉机与市场":{"amt":340.0,"qty":2},"梅西 – 经典进球瞬间":{"amt":279.0,"qty":1},"恐龙宝宝：无齿翼龙":{"amt":219.0,"qty":1},"财神爷":{"amt":202.0,"qty":1},"伦敦明信片":{"amt":139.0,"qty":1},"纽约明信片":{"amt":139.0,"qty":1},"意大利明信片":{"amt":119.0,"qty":1},"海绵宝宝玩偶":{"amt":119.0,"qty":1},"幽灵蜘蛛钥匙扣":{"amt":49.0,"qty":1},"达斯·维德钥匙链":{"amt":49.0,"qty":1}}},"_guides":{"扬州万象汇":[{"name":"朱洪涛","store":"扬州万象汇","title":"店员","target":177142.857142857,"m_sales":397.0,"m_qty":3,"m_cnt":1,"m_atv":397.0,"m_jd":3.0,"m_wos":0,"m_lt":0.0,"m_lt_qty":0,"m_np":0.0,"m_rate":0.2,"m_prev":6378.0,"mom":-93.8},{"name":"文雅君","store":"扬州万象汇","title":"中级陈列专家","target":177142.857142857,"m_sales":0,"m_qty":0,"m_cnt":0,"m_atv":0,"m_jd":0,"m_wos":0,"m_lt":0,"m_lt_qty":0,"m_np":0,"m_rate":0.0,"m_prev":7820.0,"mom":-100.0},{"name":"张荟奇","store":"扬州万象汇","title":"店员","target":177142.857142857,"m_sales":0,"m_qty":0,"m_cnt":0,"m_atv":0,"m_jd":0,"m_wos":0,"m_lt":0,"m_lt_qty":0,"m_np":0,"m_rate":0.0,"m_prev":7959.0,"mom":-100.0},{"name":"李婷1","store":"扬州万象汇","title":"中级店长","target":88571.4285714286,"m_sales":0,"m_qty":0,"m_cnt":0,"m_atv":0,"m_jd":0,"m_wos":0,"m_lt":0,"m_lt_qty":0,"m_np":0,"m_rate":0.0,"m_prev":1781.0,"mom":-100.0}],"扬州京华城":[{"name":"王永群","store":"扬州京华城","title":"初级培训专家","target":168888.888888889,"m_sales":2368.0,"m_qty":2,"m_cnt":2,"m_atv":1184.0,"m_jd":1.0,"m_wos":0,"m_lt":0.0,"m_lt_qty":0,"m_np":1869.0,"m_rate":1.4,"m_prev":12936.0,"mom":-81.7},{"name":"陆文一","store":"扬州京华城","title":"初级店长","target":84444.4444444444,"m_sales":0,"m_qty":0,"m_cnt":0,"m_atv":0,"m_jd":0,"m_wos":0,"m_lt":0,"m_lt_qty":0,"m_np":0,"m_rate":0.0,"m_prev":2384.0,"mom":-100.0},{"name":"丁茜","store":"扬州京华城","title":"储备陈列专家","target":168888.888888889,"m_sales":0,"m_qty":0,"m_cnt":0,"m_atv":0,"m_jd":0,"m_wos":0,"m_lt":0,"m_lt_qty":0,"m_np":0,"m_rate":0.0,"m_prev":8476.0,"mom":-100.0},{"name":"董文兵","store":"扬州京华城","title":"店员","target":168888.888888889,"m_sales":0,"m_qty":0,"m_cnt":0,"m_atv":0,"m_jd":0,"m_wos":0,"m_lt":0,"m_lt_qty":0,"m_np":0,"m_rate":0.0,"m_prev":8338.0,"mom":-100.0},{"name":"王泽馨","store":"扬州京华城","title":"店员（长期兼职）","target":168888.888888889,"m_sales":0,"m_qty":0,"m_cnt":0,"m_atv":0,"m_jd":0,"m_wos":0,"m_lt":0,"m_lt_qty":0,"m_np":0,"m_rate":0.0,"m_prev":9794.0,"mom":-100.0}],"扬州江都金鹰":[{"name":"朱奕然","store":"扬州江都金鹰","title":"店员","target":97142.8571428571,"m_sales":1449.0,"m_qty":1,"m_cnt":1,"m_atv":1449.0,"m_jd":1.0,"m_wos":0,"m_lt":0.0,"m_lt_qty":0,"m_np":0.0,"m_rate":1.5,"m_prev":3361.0,"mom":-56.9},{"name":"王伟","store":"扬州江都金鹰","title":"初级店长","target":48571.4285714286,"m_sales":0,"m_qty":0,"m_cnt":0,"m_atv":0,"m_jd":0,"m_wos":0,"m_lt":0,"m_lt_qty":0,"m_np":0,"m_rate":0.0,"m_prev":2337.0,"mom":-100.0},{"name":"邰宇","store":"扬州江都金鹰","title":"店员（长期兼职）","target":97142.8571428571,"m_sales":0,"m_qty":0,"m_cnt":0,"m_atv":0,"m_jd":0,"m_wos":0,"m_lt":0,"m_lt_qty":0,"m_np":0,"m_rate":0.0,"m_prev":2058.0,"mom":-100.0},{"name":"谭欣蔚","store":"扬州江都金鹰","title":"店员","target":97142.8571428571,"m_sales":0,"m_qty":0,"m_cnt":0,"m_atv":0,"m_jd":0,"m_wos":0,"m_lt":0,"m_lt_qty":0,"m_np":0,"m_rate":0.0,"m_prev":5312.0,"mom":-100.0}],"泰州万象城":[{"name":"王璐","store":"泰州万象城","title":"店员","target":173333.333333333,"m_sales":2018.0,"m_qty":2,"m_cnt":1,"m_atv":2018.0,"m_jd":2.0,"m_wos":2018.0,"m_lt":0.0,"m_lt_qty":0,"m_np":2018.0,"m_rate":1.2,"m_prev":6253.0,"mom":-67.7},{"name":"黄小莉1","store":"泰州万象城","title":"初级店长","target":86666.6666666667,"m_sales":421.0,"m_qty":2,"m_cnt":1,"m_atv":421.0,"m_jd":2.0,"m_wos":421.0,"m_lt":202.0,"m_lt_qty":1,"m_np":0.0,"m_rate":0.5,"m_prev":6817.0,"mom":-93.8},{"name":"王丹","store":"泰州万象城","title":"店员","target":173333.333333333,"m_sales":179.0,"m_qty":1,"m_cnt":1,"m_atv":179.0,"m_jd":1.0,"m_wos":0,"m_lt":0.0,"m_lt_qty":0,"m_np":0.0,"m_rate":0.1,"m_prev":4153.0,"mom":-95.7},{"name":"于小进","store":"泰州万象城","title":"店员","target":173333.333333333,"m_sales":0,"m_qty":0,"m_cnt":0,"m_atv":0,"m_jd":0,"m_wos":0,"m_lt":0,"m_lt_qty":0,"m_np":0,"m_rate":0.0,"m_prev":7520.0,"mom":-100.0},{"name":"王美玉","store":"泰州万象城","title":"店员","target":173333.333333333,"m_sales":0,"m_qty":0,"m_cnt":0,"m_atv":0,"m_jd":0,"m_wos":0,"m_lt":0,"m_lt_qty":0,"m_np":0,"m_rate":0.0,"m_prev":5612.0,"mom":-100.0}],"宿迁宝龙":[{"name":"丁蒙","store":"宿迁宝龙","title":"店员","target":66666.6666666667,"m_sales":98.0,"m_qty":2,"m_cnt":1,"m_atv":98.0,"m_jd":2.0,"m_wos":0,"m_lt":0.0,"m_lt_qty":0,"m_np":0.0,"m_rate":0.1,"m_prev":2525.0,"mom":-96.1},{"name":"靳洋","store":"宿迁宝龙","title":"高级运营专家","target":66666.6666666667,"m_sales":0,"m_qty":0,"m_cnt":0,"m_atv":0,"m_jd":0,"m_wos":0,"m_lt":0,"m_lt_qty":0,"m_np":0,"m_rate":0.0,"m_prev":743.0,"mom":-100.0},{"name":"卓宁","store":"宿迁宝龙","title":"店员","target":66666.6666666667,"m_sales":0,"m_qty":0,"m_cnt":0,"m_atv":0,"m_jd":0,"m_wos":0,"m_lt":0,"m_lt_qty":0,"m_np":0,"m_rate":0.0,"m_prev":2892.0,"mom":-100.0}],"淮安新亚":[{"name":"钱晨","store":"淮安新亚","title":"初级培训专家","target":66666.6666666667,"m_sales":0,"m_qty":0,"m_cnt":0,"m_atv":0,"m_jd":0,"m_wos":0,"m_lt":0,"m_lt_qty":0,"m_np":0,"m_rate":0.0,"m_prev":1343.0,"mom":-100.0},{"name":"汤绚尧","store":"淮安新亚","title":"店员（长期兼职）","target":66666.6666666667,"m_sales":0,"m_qty":0,"m_cnt":0,"m_atv":0,"m_jd":0,"m_wos":0,"m_lt":0,"m_lt_qty":0,"m_np":0,"m_rate":0.0,"m_prev":1015.0,"mom":-100.0},{"name":"王毅","store":"淮安新亚","title":"中级陈列专家","target":66666.6666666667,"m_sales":0,"m_qty":0,"m_cnt":0,"m_atv":0,"m_jd":0,"m_wos":0,"m_lt":0,"m_lt_qty":0,"m_np":0,"m_rate":0.0,"m_prev":4659.0,"mom":-100.0}],"淮安万象城":[{"name":"黄锦靓","store":"淮安万象城","title":"初级店长","target":67187.5,"m_sales":0,"m_qty":0,"m_cnt":0,"m_atv":0,"m_jd":0,"m_wos":0,"m_lt":0,"m_lt_qty":0,"m_np":0,"m_rate":0.0,"m_prev":1262.0,"mom":-100.0},{"name":"钱晓凡","store":"淮安万象城","title":"店员","target":134375.0,"m_sales":0,"m_qty":0,"m_cnt":0,"m_atv":0,"m_jd":0,"m_wos":0,"m_lt":0,"m_lt_qty":0,"m_np":0,"m_rate":0.0,"m_prev":6355.0,"mom":-100.0},{"name":"于思涵","store":"淮安万象城","title":"店员（长期兼职）","target":94062.5,"m_sales":0,"m_qty":0,"m_cnt":0,"m_atv":0,"m_jd":0,"m_wos":0,"m_lt":0,"m_lt_qty":0,"m_np":0,"m_rate":0.0,"m_prev":1405.0,"mom":-100.0},{"name":"周小庆","store":"淮安万象城","title":"店员","target":134375.0,"m_sales":0,"m_qty":0,"m_cnt":0,"m_atv":0,"m_jd":0,"m_wos":0,"m_lt":0,"m_lt_qty":0,"m_np":0,"m_rate":0.0,"m_prev":4779.0,"mom":-100.0}]},"_sample":{"扬州万象汇":{"month_qty":0,"month_retail":0,"month_amt":0.0},"扬州京华城":{"month_qty":0,"month_retail":0,"month_amt":0.0},"扬州江都金鹰":{"month_qty":0,"month_retail":0,"month_amt":0.0},"泰州万象城":{"month_qty":0,"month_retail":0,"month_amt":0.0},"宿迁宝龙":{"month_qty":0,"month_retail":0,"month_amt":0.0},"淮安新亚":{"month_qty":0,"month_retail":0,"month_amt":0.0},"淮安万象城":{"month_qty":0,"month_retail":0,"month_amt":0.0}},"_sample_region":{"month_qty":0,"month_retail":0,"month_amt":0.0},"_new_products":["玩具总动员弹簧狗的书挡","三眼仔 披萨星球火箭之旅","梅西的庆祝时刻","法拉利车队HP刘易斯·汉密尔顿头盔","侏罗纪公园 Jeep® Wrangler 吉普","布雷兹的马场","神盾局天空母舰","曼达洛人N-1型星际战斗机","迈凯伦万事达卡 F1® 车队兰多·诺里斯头盔","维尼修斯 – 经典进球瞬间","可爱考拉之家","梦幻仙境游乐园","霍格沃茨草药课植物","翻倒巷魔法店","《爱丽丝梦游仙境》","2026年美国足球国家队球衣","钢铁侠大战奥创机器人"],"_new_products_detail":{"扬州万象汇":[],"扬州京华城":[{"name":"海绵宝宝：比奇堡","amt":1869.0,"qty":1}],"扬州江都金鹰":[],"泰州万象城":[{"name":"海绵宝宝：比奇堡","amt":1899.0,"qty":1},{"name":"海绵宝宝玩偶","amt":119.0,"qty":1}],"宿迁宝龙":[],"淮安新亚":[],"淮安万象城":[],"_region":[{"name":"海绵宝宝：比奇堡","amt":3768.0,"qty":2},{"name":"海绵宝宝玩偶","amt":119.0,"qty":1}]},"_conversion":{"扬州万象汇":{"flow":0,"cnt":1,"rate":null},"扬州京华城":{"flow":0,"cnt":4,"rate":null},"扬州江都金鹰":{"flow":0,"cnt":1,"rate":null},"泰州万象城":{"flow":0,"cnt":3,"rate":null},"宿迁宝龙":{"flow":0,"cnt":1,"rate":null},"淮安新亚":{"flow":0,"cnt":0,"rate":null},"淮安万象城":{"flow":0,"cnt":0,"rate":null},"_region":{"flow":0,"cnt":10,"rate":null}},"_meta":{"report_date":"9月1日","report_day":1,"report_day_index":2,"max_date":"2026-09-01","store_order":["扬州万象汇","扬州京华城","扬州江都金鹰","泰州万象城","宿迁宝龙","淮安新亚","淮安万象城"]}};
+
+const STORE_ORDER=['扬州万象汇','扬州京华城','扬州江都金鹰','泰州万象城','宿迁宝龙','淮安新亚','淮安万象城'];
+const STORE_COLORS={'扬州万象汇':'#7c3aed','扬州京华城':'#0ea5e9','扬州江都金鹰':'#059669','泰州万象城':'#dc2626','宿迁宝龙':'#ea580c','淮安新亚':'#0891b2','淮安万象城':'#9333ea'};
+const SC=['#7c3aed','#0ea5e9','#059669','#dc2626','#ea580c','#0891b2','#9333ea','#d97706','#65a30d','#4f46e5','#e11d48','#0d9488','#c026d3','#7c2d12','#1e40af','#831843','#365314','#854d0e','#3730a3','#9f1239'];
+let charts={};
+let currentStore='区域对比';
+
+function fmtAmt(v){if(v===null||v===undefined)return 'N/A';return '¥'+Math.round(v).toLocaleString()}
+function fmtWan(v){if(v===null||v===undefined)return 'N/A';return (v/10000).toFixed(1)+'万'}
+function fmtPct(v){if(v===null||v===undefined)return 'N/A';return v.toFixed(1)+'%'}
+function colorPct(v){if(v===null||v===undefined)return '';return v>=0?'green':'red'}
+function isNA(v){return v===null||v===undefined}
+function regVal(fn){return STORE_ORDER.reduce((a,s)=>a+fn(DATA[s]),0)}
+function conc(c,o){if(!o)return '<div class="conclusion"><div class="conc-title">📋 结论</div><div class="conc-body">'+c+'</div></div>';return '<div class="conclusion"><div class="conc-title">📋 结论</div><div class="conc-body">'+c+'</div><div class="conc-opportunity"><span class="conc-label">💡 需关注的机会点</span><br>'+o+'</div></div>'}
+
+function concKPI(s){
+  const d=DATA[s],r=DATA['_region'];
+  const atv=d.month_atv,jd=d.month_jd,ratv=r.month_atv,rjd=r.month_jd;
+  const wpct=d.month_amt>0?d.month_wos/d.month_amt*100:0,rwpct=r.month_amt>0?r.month_wos/r.month_amt*100:0;
+  const lpct=d.month_amt>0?d.month_lt/d.month_amt*100:0,rlpct=r.month_amt>0?r.month_lt/r.month_amt*100:0;
+  const rate=d.month_rate,rrate=r.month_rate;
+  const below=[];
+  if(rate<rrate)below.push('月完成率'+rate.toFixed(1)+'%（区域'+rrate.toFixed(1)+'%，差'+(rrate-rate).toFixed(1)+'pct）');
+  if(!isNA(d.yoy)&&!isNA(r.yoy)&&d.yoy<r.yoy)below.push('月同比'+d.yoy.toFixed(1)+'%（区域'+r.yoy.toFixed(1)+'%）');
+  if(!isNA(d.mom)&&!isNA(r.mom)&&d.mom<r.mom)below.push('月环比'+d.mom.toFixed(1)+'%（区域'+r.mom.toFixed(1)+'%）');
+  if(atv<ratv)below.push('客单价¥'+Math.round(atv)+'（区域¥'+Math.round(ratv)+'，差¥'+Math.round(ratv-atv)+'）');
+  if(jd<rjd)below.push('连带率'+jd.toFixed(2)+'（区域'+rjd.toFixed(2)+'，差'+(rjd-jd).toFixed(2)+'）');
+  if(wpct<rwpct)below.push('WOS占比'+wpct.toFixed(1)+'%（区域'+rwpct.toFixed(1)+'%）');
+  if(lpct<rlpct)below.push('长尾款占比'+lpct.toFixed(1)+'%（区域'+rlpct.toFixed(1)+'%）');
+  const c=s+'KPI汇总：月销售'+fmtAmt(d.month_amt)+'，完成率'+rate.toFixed(1)+'%，连带率'+jd.toFixed(2)+'，客单价¥'+Math.round(atv)+'。';
+  let o='';
+  if(below.length>0)o='低于区域整体的KPI：'+below.join('；')+'。需逐项分析差距原因，制定提升计划。';
+  else o='各项KPI均达到或优于区域整体水平，保持当前运营策略。';
+  return conc(c,o);
+}
+
+function concSeries(s){
+  const d=DATA[s];const sd=(DATA['_series']||{})[s]||{};
+  const ents=Object.entries(sd).sort((a,b)=>b[1]-a[1]);
+  if(ents.length===0)return conc('暂无系列数据。');
+  const total=d.month_amt||1;
+  const top3=ents.slice(0,3);
+  const pct=top3.reduce((a,[k,v])=>a+v,0)/total*100;
+  const topPcts=ents.slice(0,10).map(([k,v])=>k+'('+fmtAmt(v)+',占比'+(v/total*100).toFixed(1)+'%)');
+  const c='TOP10系列：'+topPcts.join('、')+'；TOP3合计占比'+pct.toFixed(1)+'%。';
+  let o='';
+  if(pct>70)o='TOP3系列过于集中，建议丰富中长尾系列推荐降低依赖风险。';else if(pct<35)o='系列分布较散，建议打造1-2个核心系列重点陈列。';else o='系列结构良好，保持均衡推荐同时强化核心系列。';
+  const focusTop3=['CITY','TECHNIC','NINJAGO'];
+  const missingTop3=focusTop3.filter(n=>!top3.some(([k])=>k.toUpperCase().includes(n)));
+  if(missingTop3.length>0)o+='重点系列'+missingTop3.join('、')+'未进TOP3（排名需提升），建议加强陈列和推荐。';
+  const inTop3=focusTop3.filter(n=>top3.some(([k])=>k.toUpperCase().includes(n)));
+  if(inTop3.length>0)o+='重点系列'+inTop3.join('、')+'在TOP3表现良好。';
+  const top5=ents.slice(0,5);
+  const minecraftInTop5=top5.some(([k])=>k.toUpperCase().includes('MINECRAFT'));
+  if(!minecraftInTop5)o+='MINECRAFT未进TOP5，需关注沙盒游戏IP粉丝群体引流和推荐。';
+  // BOTANICALS植物系列销售占比
+  const botanicalAmt=ents.reduce((a,[k,v])=>k.toUpperCase().includes('BOTANICAL')?a+v:a,0);
+  const botanicalPct=botanicalAmt/total*100;
+  const botanicalStr=botanicalAmt>0?'BOTANICALS植物系列占比'+botanicalPct.toFixed(1)+'%。':'BOTANICALS植物系列本月无销售。';
+  // 结论中加入BOTANICALS占比
+  const c2=c+botanicalStr;
+  if(botanicalAmt>0){
+    o+='BOTANICALS植物系列销售占比'+botanicalPct.toFixed(1)+'%（指标4.1%）';
+    if(botanicalPct<4.1)o+='，低于指标，需加强植物系列陈列和推荐，抓住礼品/家居装饰客群。';
+    else o+='，达到指标。';
+  }else{
+    o+='BOTANICALS植物系列本月无销售，低于指标4.1%，建议关注植物系列铺货和推荐。';
+  }
+  return conc(c2,o);
+}
+function concRadar(s){
+  const d=DATA[s];const r=DATA['_region'];
+  const atv=d.month_atv,ratv=r.month_atv,jd=d.month_jd,rjd=r.month_jd;
+  const cnt=d.month_cnt,rcnt=r.month_cnt/7;
+  const wpct=d.month_amt>0?d.month_wos/d.month_amt*100:0,rwpct=r.month_amt>0?r.month_wos/r.month_amt*100:0;
+  const lpct=d.month_amt>0?d.month_lt/d.month_amt*100:0,rlpct=r.month_amt>0?r.month_lt/r.month_amt*100:0;
+  const items=[['客单价',atv>ratv],['连带率',jd>rjd],['笔数',cnt>rcnt],['WOS占比',wpct>rwpct],['长尾款占比',lpct>rlpct]];
+  const lead=items.filter(x=>x[1]).map(x=>x[0]),weak=items.filter(x=>!x[1]).map(x=>x[0]);
+  const c=s+'在'+(lead.length>0?lead.join('、'):'无')+'维度领先区域'+(weak.length>0?'，'+weak.join('、')+'维度低于区域需提升':'，各维度均优于区域，综合能力突出')+'。';
+  let o='';
+  if(weak.length>0){
+    const gaps=[];
+    if(weak.includes('客单价'))gaps.push('客单价差¥'+Math.round(ratv-atv)+'（¥'+Math.round(atv)+' vs ¥'+Math.round(ratv)+'）');
+    if(weak.includes('连带率'))gaps.push('连带率差'+(rjd-jd).toFixed(2)+'（'+jd.toFixed(2)+' vs '+rjd.toFixed(2)+'）');
+    if(weak.includes('笔数'))gaps.push('月笔数差'+(rcnt-cnt).toFixed(0)+'（'+cnt+' vs '+rcnt.toFixed(0)+'）');
+    if(weak.includes('WOS占比'))gaps.push('WOS占比差'+(rwpct-wpct).toFixed(1)+'%（'+wpct.toFixed(1)+'% vs '+rwpct.toFixed(1)+'%）');
+    if(weak.includes('长尾款占比'))gaps.push('长尾款占比差'+(rlpct-lpct).toFixed(1)+'%（'+lpct.toFixed(1)+'% vs '+rlpct.toFixed(1)+'%）');
+    o='低于区域均值的维度：'+gaps.join('；')+'。';
+  }
+  if(lead.length>=4&&!weak.length)o+='多维度领先区域，保持优势策略可推广至其他门店。';
+  if(!o)o='各维度均优于区域水平，综合运营能力突出，保持当前策略。';
+  return conc(c,o);
+}
+function concLongTail(s){
+  const d=DATA[s],r=DATA['_region'];
+  const lpct=d.month_amt>0?d.month_lt/d.month_amt*100:0;
+  const rl=r.month_amt>0?r.month_lt/r.month_amt*100:0;
+  const c=s+'本月长尾款'+fmtAmt(d.month_lt)+'，占比'+lpct.toFixed(1)+'%；区域长尾款占比'+rl.toFixed(1)+'%。';
+  let o='';if(lpct<rl-2)o='长尾款占比低于区域均值'+(rl-lpct).toFixed(1)+'个百分点，建议加强79款SKU推荐话术培训，收银台增加长尾小件陈列位。';else if(lpct>rl+2)o='长尾款占比高于区域均值'+(lpct-rl).toFixed(1)+'个百分点，继续保持关联推荐策略。';else o='长尾款与区域持平，关注件单价提升和连带搭配。';
+  const rlt=regVal(x=>x.month_lt)/7;
+  if(d.month_lt<rlt*0.7)o+='长尾款金额低于区域门店均值（¥'+Math.round(rlt)+'），需重点跟进长尾款推荐。';
+  if(d.month_lt_qty<10)o+='月度长尾件数偏低，需持续推荐确保占比达标。';
+  return conc(c,o);
+}
+function concMom(s){
+  const d=DATA[s],r=DATA['_region'];
+  const c=s+'月环比'+(isNA(d.mom)?'N/A':(d.mom>=0?'+':'')+d.mom.toFixed(1)+'%')+'，'+(isNA(r.mom)?'区域N/A':'区域'+(r.mom>=0?'+':'')+r.mom.toFixed(1)+'%')+'。';
+  let o='';if(!isNA(d.mom)){if(d.mom<-10)o='月环比下滑明显，需复盘本月客流和转化率下降原因，排查天气/活动/竞品影响。';else if(d.mom<-3)o='月环比小幅下滑，关注下半月恢复节奏。';else if(d.mom<3)o='月环比基本持平，需寻找增长突破点。';else o='月环比增长良好，总结本月成功经验复制。';}else o='新店需建立基准月数据后再分析环比趋势。';
+  return conc(c,o);
+}
+function concTop(s){
+  const d=DATA[s];const pd=(DATA['_products']||{})[s]||{};
+  const ents=Object.entries(pd).map(([k,v])=>[k,v.amt||v,v.qty||0]).sort((a,b)=>b[1]-a[1]);
+  if(ents.length===0)return conc('暂无产品数据。');
+  const [n,a,q]=ents[0];const pct=d.month_amt>0?a/d.month_amt*100:0;
+  const c='TOP1产品「'+n+'」销售'+fmtAmt(a)+'（'+q+'件），占月销售'+pct.toFixed(1)+'%。';
+  let o='';if(pct>25)o='TOP1单品依赖度过高（>25%），警惕库存不足和缺货风险，建议培养第二梯队爆款。';
+  // check 当月新品是否进入TOP10
+  const newProds=DATA['_new_products']||[];
+  if(newProds.length>0){
+    const top10Names=ents.slice(0,10).map(([k])=>k);
+    const newInTop=newProds.filter(np=>top10Names.some(tn=>tn.includes(np)||np.includes(tn)));
+    if(newInTop.length>0)o+='当月新品「'+newInTop.join('、')+'」进入TOP10，表现突出，建议加大陈列和推荐力度。';
+    else o+='当月新品无一款进入TOP10，需关注新品陈列位置和推荐话术，加强新品首周曝光。';
+  }
+  // check 区域TOP10产品门店是否也在TOP10
+  const rpd=(DATA['_products']||{})['_region']||{};
+  const rEnts=Object.entries(rpd).map(([k,v])=>[k,v.amt||v,v.qty||0]).sort((a,b)=>b[1]-a[1]).slice(0,10);
+  const storeTop10=new Set(ents.slice(0,10).map(([k])=>k));
+  const rInStore=rEnts.filter(([k])=>storeTop10.has(k));
+  const rNotInStore=rEnts.filter(([k])=>!storeTop10.has(k));
+  if(rInStore.length>0)o+='区域TOP10中'+rInStore.length+'款门店也有在TOP10（'+rInStore.map(([k])=>k).join('、')+'）';
+  if(rNotInStore.length>0)o+=(rInStore.length>0?'，':'')+'区域TOP10中'+rNotInStore.length+'款门店未进入TOP10（'+rNotInStore.map(([k])=>k).join('、')+'），建议对齐区域爆款推荐策略。';
+  else if(rInStore.length===10)o+='门店TOP10与区域完全重合，产品结构高度一致。';
+  return conc(c,o);
+}
+function concNew(key){
+  const isR = (key==='区域对比'||key==='_region');
+  const d = isR ? DATA['_region'] : DATA[key];
+  const r = DATA['_region'];
+  const detailKey = isR ? '_region' : key;
+  const na=d.new_amt||0, rate=d.new_rate||0, rRate=r.new_rate||0;
+  const label = isR ? '区域' : key;
+  const c = label+'本月新品（上市日期在本月）销售'+fmtAmt(na)+'，占月销售'+rate.toFixed(1)+'%（'+(isR?('区域'+rate.toFixed(1)):'区域'+rRate.toFixed(1))+'%）。';
+  let o='';
+  if(!isR){
+    if(rate < rRate-1) o='新品占比低于区域'+(rRate-rate).toFixed(1)+'个百分点，建议加强当月新品首周陈列、堆头和导购主推话术。';
+    else if(rate > rRate+1) o='新品占比高于区域，新品推荐动销突出，保持并提炼陈列经验推广。';
+    else o='新品占比与区域持平，维持当前新品铺货和推荐节奏。';
+  } else {
+    if(rRate>=10) o='新品占比达'+rRate.toFixed(1)+'%，动销良好，建议持续强化新品首周曝光与跨店调货保障。';
+    else o='新品占比偏低（'+rRate.toFixed(1)+'%），需统筹区域新品铺货、陈列标准与导购主推话术。';
+  }
+  const detail=(DATA['_new_products_detail']||{})[detailKey]||[];
+  if(detail.length>0) o+='TOP新品：'+detail.slice(0,3).map(x=>x.name+'('+fmtAmt(x.amt)+')').join('、')+'。';
+  return conc(c,o);
+}
+function concGuideSales(s){
+  const gs=(DATA['_guides']||{})[s]||[];if(gs.length===0)return conc('暂无导购数据。');
+  const top=gs.reduce((a,b)=>b.m_sales>a.m_sales?b:a);
+  const tot=gs.reduce((a,g)=>a+g.m_sales,0);
+  const c='TOP1导购'+top.name+'月销售'+fmtAmt(top.m_sales)+'（完成率'+top.m_rate.toFixed(1)+'%），门店导购合计'+fmtAmt(tot)+'。';
+  let o='';const stAvg=gs.length>0?tot/gs.length:0;
+  const allRegGuides=[];STORE_ORDER.forEach(t=>{(DATA['_guides']||{})[t]?.forEach(g=>allRegGuides.push(g));});
+  const regAvg=allRegGuides.length>0?allRegGuides.reduce((a,g)=>a+g.m_sales,0)/allRegGuides.length:0;
+  const topPct=tot>0?top.m_sales/tot*100:0;if(topPct>50)o='TOP导购销售占门店'+topPct.toFixed(0)+'%，建议头部经验分享复制，缩小导购间差距。';
+  const belowSt=gs.filter(g=>g.m_sales>0&&g.m_sales<stAvg*0.7);
+  if(belowSt.length>0)o+=belowSt.map(g=>g.name+'('+fmtAmt(g.m_sales)+')').join('、')+'低于门店均值'+fmtAmt(stAvg)+'，需重点跟进销售技巧辅导。';
+  const belowReg=gs.filter(g=>g.m_sales>0&&g.m_sales<regAvg*0.7);
+  if(belowReg.length>0)o+=belowReg.map(g=>g.name).join('、')+'低于区域导购均值'+fmtAmt(regAvg)+'，建议安排导师带教和排班优化。';
+  const low=gs.filter(g=>g.m_rate<30&&g.m_sales>0);if(low.length>0)o+=low.length+'位导购完成率不足30%，需一对一辅导。';
+  if(!o)o='导购团队整体表现均衡（门店人均'+fmtAmt(stAvg)+'，区域人均'+fmtAmt(regAvg)+'），继续保持团队协作氛围。';
+  return conc(c,o);
+}
+function concGuideJdKdj(s){
+  const d=DATA[s],r=DATA['_region'];
+  const c=s+'月连带率'+d.month_jd.toFixed(2)+'，客单价¥'+Math.round(d.month_atv)+'；区域连带率'+r.month_jd.toFixed(2)+'，客单价¥'+Math.round(r.month_atv)+'。';
+  let o='';if(d.month_jd<r.month_jd-0.1)o='连带率低于区域均值'+(r.month_jd-d.month_jd).toFixed(2)+'（'+d.month_jd.toFixed(2)+' vs '+r.month_jd.toFixed(2)+'），建议强化跨品类搭配推荐话术培训。';else if(d.month_jd<r.month_jd)o='连带率略低于区域（差'+(r.month_jd-d.month_jd).toFixed(2)+'），关注搭配推荐微调。';else o='连带率表现良好（高于区域'+(d.month_jd-r.month_jd).toFixed(2)+'），关注高端产品推荐提升客单价。';
+  if(d.month_atv<r.month_atv*0.85)o+='客单价低于区域¥'+Math.round(r.month_atv-d.month_atv)+'（¥'+Math.round(d.month_atv)+' vs ¥'+Math.round(r.month_atv)+'），建议引导客户关注高价套装和限定款。';
+  else if(d.month_atv<r.month_atv)o+='客单价略低于区域¥'+Math.round(r.month_atv-d.month_atv)+'，适度推荐高单价产品。';
+  return conc(c,o);
+}
+function concGuideLt(s){
+  const gs=(DATA['_guides']||{})[s]||[];if(gs.length===0)return conc('暂无导购数据。');
+  const top=gs.reduce((a,b)=>b.m_lt>a.m_lt?b:a);
+  const tot=gs.reduce((a,g)=>a+g.m_lt,0),tq=gs.reduce((a,g)=>a+g.m_lt_qty,0);
+  const c='长尾款TOP导购'+top.name+'：'+fmtAmt(top.m_lt)+'（'+top.m_lt_qty+'件）；门店导购长尾款合计'+fmtAmt(tot)+'（'+tq+'件）。';
+  let o='';const ltAvg=gs.length>0?tot/gs.length:0;
+  const lowLt=gs.filter(g=>g.m_lt===0||(g.m_sales>0&&g.m_lt/g.m_sales<0.03));
+  if(lowLt.length>0)o+=lowLt.map(g=>g.name+'(¥'+(g.m_lt||0).toFixed(0)+')').join('、')+'长尾款占比偏低（门店均值¥'+Math.round(ltAvg)+'），建议专项培训79款SKU知识和搭配推荐。';
+  const zeroLt=gs.filter(g=>g.m_lt===0&&g.m_sales>0);
+  if(zeroLt.length>0)o+=zeroLt.map(g=>g.name).join('、')+'本月零长尾款销售，需重点跟进79款SKU推荐。';
+  if(!o)o='导购长尾推荐整体较好（门店人均¥'+Math.round(ltAvg)+'），保持79款SKU的日常陈列和推荐习惯。';
+  return conc(c,o);
+}
+
+function renderStore(store){
+  const d=DATA[store],region=DATA['_region'],color=STORE_COLORS[store],daily=d.daily;
+  const cvo=(DATA['_conversion']||{});
+  const cvoRate=(cvo[store]?cvo[store].rate:null);
+  const cvoRegionRate=(cvo._region?cvo._region.rate:null);
+  let html='<div class="kpi-row">'+
+    '<div class="kpi-card"><div class="label">月累计销售</div><div class="value" style="color:'+color+'">'+fmtAmt(d.month_amt)+'</div><div class="sub">月目标'+fmtAmt(d.target)+' | 完成率'+d.month_rate.toFixed(1)+'%</div></div>'+
+    '<div class="kpi-card"><div class="label">月完成率</div><div class="value '+(d.month_rate>=50?'green':'red')+'">'+d.month_rate.toFixed(1)+'%</div><div class="sub">区域'+region.month_rate.toFixed(1)+'%</div></div>'+
+    '<div class="kpi-card"><div class="label">月环比</div><div class="value '+(isNA(d.mom)?'':colorPct(d.mom))+'">'+(isNA(d.mom)?'N/A':(d.mom>=0?'+':'')+d.mom.toFixed(1)+'%')+'</div><div class="sub">vs 8月1-1日</div></div>'+
+    '<div class="kpi-card"><div class="label">月同比</div><div class="value '+(isNA(d.yoy)?'':colorPct(d.yoy))+'">'+(isNA(d.yoy)?'N/A':fmtPct(d.yoy))+'</div><div class="sub">'+(isNA(d.yoy)?'新店无同期':'vs去年同期')+'</div></div>'+
+    '<div class="kpi-card"><div class="label">月连带率</div><div class="value blue">'+d.month_jd.toFixed(2)+'</div><div class="sub">区域'+region.month_jd.toFixed(2)+'</div></div>'+
+    '<div class="kpi-card"><div class="label">月客单价</div><div class="value blue">¥'+Math.round(d.month_atv)+'</div><div class="sub">区域¥'+Math.round(region.month_atv)+'</div></div>'+
+    '<div class="kpi-card"><div class="label">月成交率</div><div class="value '+(cvoRate===null?'gray':(cvoRate>=cvoRegionRate?'green':'red'))+'">'+(cvoRate===null?'缺客流':cvoRate.toFixed(2)+'%')+'</div><div class="sub">区域'+(cvoRegionRate===null?'N/A':cvoRegionRate.toFixed(2))+'% | '+(cvo[store]?cvo[store].cnt:'0')+'笔/'+ (cvo[store]?cvo[store].flow:'0') +'客流</div></div>'+
+    '<div class="kpi-card"><div class="label">长尾款月累计</div><div class="value purple">'+fmtAmt(d.month_lt)+'</div><div class="sub">'+d.month_lt_qty+'件 | 占比'+(d.month_amt>0?(d.month_lt/d.month_amt*100).toFixed(1):0)+'%</div></div>'+
+    '<div class="kpi-card"><div class="label">新品月累计</div><div class="value" style="color:#db2777">'+fmtAmt(d.new_amt||0)+'</div><div class="sub">'+(d.new_qty||0)+'件 | 占比'+(d.new_rate||0).toFixed(1)+'%</div></div>'+
+    '</div>';
+
+  html+=concKPI(store);
+
+  html+='<div class="chart-grid">'+
+    '<div class="chart-card"><h3><span class="icon">📊</span> 产品系列结构（9月累计）</h3><div class="chart-wrap"><canvas id="chartSeriesPie"></canvas></div>'+concSeries(store)+'</div>'+
+    '<div class="chart-card"><h3><span class="icon">🎯</span> 门店月维度能力雷达图（vs区域均值）</h3><div class="chart-wrap"><canvas id="chartRadar"></canvas></div>'+concRadar(store)+'</div></div>';
+
+  html+='<div class="chart-grid">'+
+    '<div class="chart-card"><h3><span class="icon">📊</span> 月环比（9月 vs 8月同期）</h3><div class="chart-wrap"><canvas id="chartMom"></canvas></div>'+concMom(store)+'</div>'+
+    '<div class="chart-card"><h3><span class="icon">🏆</span> TOP10产品月销排名（含件数）</h3><div class="chart-wrap"><canvas id="chartTopProducts"></canvas></div>'+concTop(store)+'</div></div>';
+
+  html+='<div class="chart-grid full"><div class="chart-card"><h3><span class="icon">🆕</span> 新品TOP销售排名（上市日期=本月）</h3><div class="chart-wrap"><canvas id="chartNewProducts"></canvas></div>'+concNew(store)+'</div></div>';
+
+  const totWos=daily.reduce((a,x)=>a+x.wos,0),totJl=daily.reduce((a,x)=>a+x.jl,0);
+  const wosPct=d.month_amt>0?(totWos/d.month_amt*100):0,jlPct=d.month_amt>0?(totJl/d.month_amt*100):0,bothPct=d.month_amt>0?((totWos+totJl)/d.month_amt*100):0;
+  const rTotWos=regVal(x=>x.month_wos),rTotJl=regVal(x=>x.month_jl),rTot=regVal(x=>x.month_amt);
+  const rBothPct=rTot>0?((rTotWos+rTotJl)/rTot*100):0;
+  html+='<div class="chart-grid full"><div class="chart-card"><h3><span class="icon">⚡</span> WOS & 即时零售 月累计对比（vs区域）</h3><div class="chart-wrap"><canvas id="chartWosJl"></canvas></div>'+
+    conc(store+'本月WOS '+fmtAmt(totWos)+'（占比'+wosPct.toFixed(1)+'%），即时零售 '+fmtAmt(totJl)+'（占比'+jlPct.toFixed(1)+'%），两渠道合计占比'+bothPct.toFixed(1)+'%。',bothPct<rBothPct?'WOS+即时零售合计占比低于区域（'+rBothPct.toFixed(1)+'%），建议加大线上渠道活动投放，强化美团/饿了么专属优惠引流。':bothPct>rBothPct+3?'线上渠道占比高于区域，多渠道运营成熟，建议保持投放策略并关注转化效率。':'线上渠道占比与区域持平，适度增加即时零售平台曝光。')+'</div></div>';
+
+  html+='<div class="chart-grid">'+
+    '<div class="chart-card"><h3><span class="icon">👩</span> 导购月销售+WOS+月环比</h3><div class="chart-wrap tall" style="height:400px;"><canvas id="chartGuideSales"></canvas></div>'+concGuideSales(store)+'</div>'+
+    '<div class="chart-card"><h3><span class="icon">🔄</span> 导购连带率+客单价</h3><div class="chart-wrap tall" style="height:400px;"><canvas id="chartGuideJdKdj"></canvas></div>'+concGuideJdKdj(store)+'</div></div>';
+
+  html+='<div class="chart-grid full"><div class="chart-card"><h3><span class="icon">📦</span> 导购长尾款分析（金额/件数）</h3><div class="chart-wrap tall" style="height:400px;"><canvas id="chartGuideLt"></canvas></div>'+concGuideLt(store)+'</div></div>';
+  html+='<div class="chart-grid full"><div class="chart-card"><h3><span class="icon">📋</span> 导购月维度明细</h3><table class="summary-table" id="guideTable"></table></div></div>';
+
+  document.getElementById('content').innerHTML=html;
+  Object.values(charts).forEach(c=>c&&c.destroy());charts={};
+
+  // Chart: Series Pie
+  const sd=(DATA['_series']||{})[store]||{};
+  const se=Object.entries(sd).sort((a,b)=>b[1]-a[1]);
+  const top10=se.slice(0,10),oth=se.slice(10).reduce((a,[k,v])=>a+v,0);
+  charts.seriesPie=new Chart(document.getElementById('chartSeriesPie'),{
+    type:'doughnut',
+    data:{labels:top10.map(([k])=>k).concat(oth>0?['其他']:[]),datasets:[{data:top10.map(([k,v])=>v).concat(oth>0?[oth]:[]),backgroundColor:SC.slice(0,top10.length+(oth>0?1:0)),borderWidth:2,borderColor:'#fff'}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{font:{size:11},padding:6}},tooltip:{callbacks:{label:ctx=>{const pct=d.month_amt>0?(ctx.raw/d.month_amt*100).toFixed(1):0;return ctx.label+': '+fmtAmt(ctx.raw)+' ('+pct+'%)'}}}},cutout:'55%'}
+  });
+
+  // Chart: Radar
+  const atv=d.month_atv,jd=d.month_jd,cnt=d.month_cnt;
+  const wpct=d.month_amt>0?d.month_wos/d.month_amt*100:0,lpct=d.month_amt>0?d.month_lt/d.month_amt*100:0;
+  const ratv=region.month_atv,rjd=region.month_jd,rcnt=region.month_cnt/7;
+  const rwpct=region.month_amt>0?region.month_wos/region.month_amt*100:0,rlpct=region.month_amt>0?region.month_lt/region.month_amt*100:0;
+  const rIdx=(sv,rv)=>rv>0?sv/rv*100:0;
+  const rYoyIdx=(sy,ry)=>{if(isNA(sy))return 0;if(isNA(ry))return 100;return 100+(sy-ry)*3};
+  const rL=['月同比','月客单价','月连带率','月笔数','WOS占比','长尾款占比'];
+  const rRS=[d.yoy,atv,jd,cnt,wpct,lpct],rRR=[region.yoy,ratv,rjd,rcnt,rwpct,rlpct];
+  const rF=['%','¥','','笔','%','%'];
+  const sR=[rYoyIdx(d.yoy,region.yoy),rIdx(atv,ratv),rIdx(jd,rjd),rIdx(cnt,rcnt),rIdx(wpct,rwpct),rIdx(lpct,rlpct)];
+  charts.radar=new Chart(document.getElementById('chartRadar'),{
+    type:'radar',
+    data:{labels:rL,datasets:[
+      {label:store,data:sR,borderColor:color,backgroundColor:color+'30',borderWidth:2,pointRadius:4},
+      {label:'区域均值(=100)',data:[100,100,100,100,100,100],borderColor:'#64748b',backgroundColor:'#64748b15',borderWidth:2,pointRadius:3,borderDash:[4,4]}
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{position:'top'},tooltip:{callbacks:{label:ctx=>{const i=ctx.dataIndex,u=rF[i],sv=rRS[i],rv=rRR[i];const sStr=isNA(sv)?'N/A':(u==='¥'?'¥'+Math.round(sv):(u==='%'?sv.toFixed(1)+'%':(u==='笔'?sv+'笔':sv.toFixed(2))));const rStr=isNA(rv)?'N/A':(u==='¥'?'¥'+Math.round(rv):(u==='%'?rv.toFixed(1)+'%':(u==='笔'?Math.round(rv)+'笔':rv.toFixed(2))));return ctx.dataset.label+': 指数'+ctx.raw.toFixed(0)+' | 门店'+sStr+' | 区域'+rStr;}}}},
+      scales:{r:{beginAtZero:true,suggestedMin:0,suggestedMax:200,ticks:{stepSize:50}}}}
+  });
+
+  // Chart 5: MoM (9月 vs 8月同期)
+  const mAmt=d.month_amt,mPrev=d.mom_prev||0;
+  charts.mom=new Chart(document.getElementById('chartMom'),{
+    type:'bar',
+    data:{labels:['8月1-1日','9月1-1日'],datasets:[{label:'月销售',data:[mPrev,mAmt],backgroundColor:[mPrev>=mAmt?'#16a34a80':'#94a3b880',mAmt>=mPrev?color+'cc':'#dc262680'],borderColor:['#64748b',color],borderWidth:2,borderRadius:8,barPercentage:.5}]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>'月销售: '+fmtAmt(ctx.raw),afterLabel:ctx=>{if(ctx.dataIndex===1&&mPrev>0){const diff=((mAmt-mPrev)/mPrev*100);return '月环比: '+(diff>=0?'+':'')+diff.toFixed(1)+'%'}return ''}}}},
+      scales:{y:{ticks:{callback:v=>fmtAmt(v)}}}}
+  });
+
+  // Chart 6: TOP10 Products (with qty)
+  const pd=(DATA['_products']||{})[store]||{};
+  const pEnts=Object.entries(pd).map(([k,v])=>[k,v.amt||v,v.qty||0]).sort((a,b)=>b[1]-a[1]).slice(0,10);
+  charts.topProducts=new Chart(document.getElementById('chartTopProducts'),{
+    type:'bar',
+    data:{labels:pEnts.map(([k])=>k),datasets:[{label:'月销售',data:pEnts.map(([k,a,q])=>a),backgroundColor:SC.slice(0,pEnts.length).map(c=>c+'cc'),borderColor:SC.slice(0,pEnts.length),borderWidth:1,borderRadius:4}]},
+    options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>{const idx=ctx.dataIndex;const [n,a,q]=pEnts[idx];const pct=d.month_amt>0?(a/d.month_amt*100).toFixed(1):0;return n+': '+fmtAmt(a)+' ('+pct+'%, '+q+'件)'}}}},
+      scales:{x:{ticks:{callback:v=>fmtAmt(v)}}}}
+  });
+
+  // Chart: New products TOP (上市日期=本月)
+  const npDetail=(DATA['_new_products_detail']||{})[store]||[];
+  const npCanvas=document.getElementById('chartNewProducts');
+  if(npDetail.length>0){
+    charts.newProducts=new Chart(npCanvas,{
+      type:'bar',
+      data:{labels:npDetail.map(x=>x.name),datasets:[{label:'新品销售',data:npDetail.map(x=>x.amt),backgroundColor:SC.slice(0,npDetail.length).map(c=>c+'cc'),borderColor:SC.slice(0,npDetail.length),borderWidth:1,borderRadius:4}]},
+      options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',
+        plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>{const x=npDetail[ctx.dataIndex];const pct=d.month_amt>0?(x.amt/d.month_amt*100).toFixed(1):0;return x.name+': '+fmtAmt(x.amt)+' ('+pct+'%, '+x.qty+'件)';}}}},
+        scales:{x:{ticks:{callback:v=>fmtAmt(v)}}}}
+    });
+  }else{
+    npCanvas.parentNode.innerHTML='<div style="padding:40px;text-align:center;color:#94a3b8">本月无新品销售记录</div>';
+  }
+
+  // Chart: WOS & 即时零售 monthly comparison (store vs region)
+  charts.wosJl=new Chart(document.getElementById('chartWosJl'),{
+    type:'bar',
+    data:{labels:['WOS','即时零售'],datasets:[
+      {label:store,data:[totWos,totJl],backgroundColor:[color+'cc',color+'cc'],borderColor:[color,color],borderWidth:1,borderRadius:6},
+      {label:'区域均值',data:[rTotWos/7,rTotJl/7],backgroundColor:['#94a3b8cc','#94a3b8cc'],borderColor:['#64748b','#64748b'],borderWidth:1,borderRadius:6}
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{position:'top'},tooltip:{callbacks:{label:ctx=>ctx.dataset.label+': '+fmtAmt(ctx.raw)}}},
+      scales:{y:{ticks:{callback:v=>fmtAmt(v)}}}}
+  });
+
+  // Guide charts
+  const guides=(DATA['_guides']||{})[store]||[];
+  if(guides.length>0){
+    const gLabels=guides.map(g=>g.name);
+
+    // Chart 7: Guide sales + WOS + MoM (merged)
+    charts.guideSales=new Chart(document.getElementById('chartGuideSales'),{
+      data:{labels:gLabels,datasets:[
+        {type:'bar',label:'月销售',data:guides.map(g=>g.m_sales),backgroundColor:guides.map(g=>g.m_sales>0?color+'cc':'#e2e8f0'),borderColor:color,borderWidth:1,borderRadius:4,xAxisID:'x',order:3},
+        {type:'bar',label:'WOS',data:guides.map(g=>g.m_wos),backgroundColor:'#0284c7cc',borderColor:'#0284c7',borderWidth:1,borderRadius:4,xAxisID:'x',order:2},
+        {type:'line',label:'月环比(%)',data:guides.map(g=>g.mom),borderColor:'#dc2626',backgroundColor:'transparent',borderWidth:2,pointRadius:5,pointBackgroundColor:'#dc2626',pointBorderColor:'#fff',pointBorderWidth:2,tension:.2,xAxisID:'x1',order:1}
+      ]},
+      options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',
+        plugins:{legend:{position:'top',labels:{font:{size:12}}},tooltip:{callbacks:{label:ctx=>{if(ctx.dataset.label==='月销售')return '月销售: '+fmtAmt(ctx.raw);if(ctx.dataset.label==='WOS')return 'WOS: '+fmtAmt(ctx.raw);return '月环比: '+(isNA(ctx.raw)?'N/A':(ctx.raw>=0?'+':'')+ctx.raw.toFixed(1)+'%')}}}},
+        scales:{x:{position:'bottom',title:{display:true,text:'金额(¥)'},ticks:{callback:v=>fmtAmt(v)}},x1:{position:'top',title:{display:true,text:'月环比(%)'},ticks:{callback:v=>v+'%'},grid:{drawOnChartArea:false}},y:{ticks:{font:{size:13,weight:'600'}}}}}
+    });
+
+    // Chart 8: Guide JD + ATV (merged)
+    charts.guideJdKdj=new Chart(document.getElementById('chartGuideJdKdj'),{
+      data:{labels:gLabels,datasets:[
+        {type:'bar',label:'连带率',data:guides.map(g=>g.m_jd),backgroundColor:'#059669cc',borderColor:'#059669',borderWidth:1,borderRadius:4,xAxisID:'x',order:2},
+        {type:'line',label:'客单价(¥)',data:guides.map(g=>g.m_atv),borderColor:'#dc2626',backgroundColor:'transparent',borderWidth:2,pointRadius:6,pointBackgroundColor:'#dc2626',pointBorderColor:'#fff',pointBorderWidth:2,tension:.2,xAxisID:'x1',order:1}
+      ]},
+      options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',
+        plugins:{legend:{position:'top',labels:{font:{size:12}}},tooltip:{callbacks:{label:ctx=>{if(ctx.dataset.label==='连带率')return '连带率: '+ctx.raw.toFixed(2);return '客单价: ¥'+Math.round(ctx.raw)}}}},
+        scales:{x:{position:'bottom',title:{display:true,text:'连带率'},ticks:{callback:v=>v.toFixed(1)}},x1:{position:'top',title:{display:true,text:'客单价(¥)'},ticks:{callback:v=>'¥'+v},grid:{drawOnChartArea:false}},y:{ticks:{font:{size:13,weight:'600'}}}}}
+    });
+
+    // Chart 9: Guide long-tail (amount + qty)
+    charts.guideLt=new Chart(document.getElementById('chartGuideLt'),{
+      data:{labels:gLabels,datasets:[
+        {type:'bar',label:'长尾款金额',data:guides.map(g=>g.m_lt),backgroundColor:'#7c3aedcc',borderColor:'#7c3aed',borderWidth:1,borderRadius:4,xAxisID:'x',order:2},
+        {type:'line',label:'长尾款件数',data:guides.map(g=>g.m_lt_qty),borderColor:'#ea580c',backgroundColor:'transparent',borderWidth:2,pointRadius:6,pointBackgroundColor:'#ea580c',pointBorderColor:'#fff',pointBorderWidth:2,tension:.2,xAxisID:'x1',order:1}
+      ]},
+      options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',
+        plugins:{legend:{position:'top',labels:{font:{size:12}}},tooltip:{callbacks:{label:ctx=>{if(ctx.dataset.label.includes('金额'))return '长尾款: '+fmtAmt(ctx.raw);return '件数: '+ctx.raw+'件'}}}},
+        scales:{x:{position:'bottom',title:{display:true,text:'金额(¥)'},ticks:{callback:v=>fmtAmt(v)}},x1:{position:'top',title:{display:true,text:'件数'},ticks:{callback:v=>v+'件'},grid:{drawOnChartArea:false}},y:{ticks:{font:{size:13,weight:'600'}}}}}
+    });
+
+    // Guide table
+    const _mJdArr=guides.filter(g=>g.m_cnt>0).map(g=>g.m_jd);
+    const mJdAvg=_mJdArr.length?_mJdArr.reduce((a,b)=>a+b,0)/_mJdArr.length:null;
+    let gHtml='<thead><tr><th>导购</th><th>职务</th><th>月销售</th><th>月目标</th><th>月完成率</th><th>月环比</th><th>笔数</th><th>件数</th><th>客单价</th><th>连带率</th><th>WOS</th><th>长尾款</th><th>长尾件数</th><th style="color:#db2777">新品</th></tr></thead><tbody>';
+    guides.forEach(g=>{
+      const mb=isNA(g.mom)?'<span class="badge gray">N/A</span>':(g.mom>=0?'<span class="badge green">+'+g.mom.toFixed(1)+'%</span>':'<span class="badge red">'+g.mom.toFixed(1)+'%</span>');
+      gHtml+='<tr><td class="store-name" style="color:'+color+'">'+g.name+'</td><td style="font-size:11px;color:#64748b">'+g.title+'</td><td style="font-weight:700">'+fmtAmt(g.m_sales)+'</td><td>'+fmtAmt(g.target)+'</td><td style="color:'+(g.m_rate>=50?'#16a34a':'#dc2626')+';font-weight:700">'+g.m_rate.toFixed(1)+'%</td><td>'+mb+'</td><td>'+g.m_cnt+'</td><td>'+g.m_qty+'件</td><td>¥'+Math.round(g.m_atv)+'</td><td'+(mJdAvg!==null&&g.m_cnt>0&&g.m_jd<mJdAvg?' style="color:#dc2626;font-weight:700"':'')+'>'+g.m_jd.toFixed(2)+'</td><td>'+(g.m_wos>0?fmtAmt(g.m_wos):'<span style="color:#94a3b8">-</span>')+'</td><td>'+(g.m_lt>0?fmtAmt(g.m_lt):'<span style="color:#94a3b8">-</span>')+'</td><td>'+g.m_lt_qty+'件</td><td style="color:#db2777">'+(g.m_np>0?fmtAmt(g.m_np):'<span style="color:#94a3b8">-</span>')+'</td></tr>';
+    });
+    const tS=guides.reduce((a,g)=>a+g.m_sales,0),tT=guides.reduce((a,g)=>a+g.target,0),tC=guides.reduce((a,g)=>a+g.m_cnt,0),tQ=guides.reduce((a,g)=>a+g.m_qty,0),tW=guides.reduce((a,g)=>a+g.m_wos,0),tL=guides.reduce((a,g)=>a+g.m_lt,0),tLQ=guides.reduce((a,g)=>a+g.m_lt_qty,0),tNP=guides.reduce((a,g)=>a+(g.m_np||0),0);
+    const tP=guides.reduce((a,g)=>a+(g.m_prev||0),0);
+    const tMom=tP>0?((tS-tP)/tP*100):null;
+    const tMb=isNA(tMom)?'<span class="badge gray">N/A</span>':(tMom>=0?'<span class="badge green">+'+tMom.toFixed(1)+'%</span>':'<span class="badge red">'+tMom.toFixed(1)+'%</span>');
+    gHtml+='<tr style="background:#05966915;font-weight:700"><td class="store-name">合计</td><td>-</td><td>'+fmtAmt(tS)+'</td><td>'+fmtAmt(tT)+'</td><td style="color:'+(tT>0&&tS/tT*100>=50?'#16a34a':'#dc2626')+'">'+(tT>0?(tS/tT*100).toFixed(1):0)+'%</td><td>'+tMb+'</td><td>'+tC+'</td><td>'+tQ+'件</td><td>¥'+Math.round(tS/Math.max(tC,1))+'</td><td>'+(tQ/Math.max(tC,1)).toFixed(2)+'</td><td>'+(tW>0?fmtAmt(tW):'-')+'</td><td>'+(tL>0?fmtAmt(tL):'-')+'</td><td>'+tLQ+'件</td><td style="color:#db2777">'+(tNP>0?fmtAmt(tNP):'-')+'</td></tr>';
+    gHtml+='</tbody>';
+    document.getElementById('guideTable').innerHTML=gHtml;
+    if(mJdAvg!==null){const _note=document.createElement('div');_note.style.cssText='font-size:11px;color:#dc2626;margin-top:4px';_note.textContent='🔴 本月连带率低于本店导购均值（'+mJdAvg.toFixed(2)+'）已标红';document.getElementById('guideTable').parentNode.appendChild(_note);}
+    const _gAvg=tS/(guides.length||1);
+    const _gBelow=guides.filter(g=>g.m_sales>0 && g.m_sales<_gAvg*0.7);
+    const _gLow=guides.filter(g=>g.m_rate<30 && g.m_sales>0);
+    const _gTop=guides.slice().sort((a,b)=>b.m_sales-a.m_sales)[0];
+    let _gConcNote=document.createElement('div');
+    _gConcNote.style.cssText='margin-top:10px';
+    _gConcNote.innerHTML=conc('本店'+guides.length+'名导购，月销售合计'+fmtAmt(tS)+'；TOP导购'+(_gTop?_gTop.name+'（'+fmtAmt(_gTop.m_sales)+'）':'-')+'领先。'+(mJdAvg!==null?('其中'+guides.filter(g=>g.m_cnt>0&&g.m_jd<mJdAvg).length+'人连带率低于店均'+mJdAvg.toFixed(2)+'，已标红。'):''),(_gBelow.length>0?('低于店均月销售（¥'+Math.round(_gAvg)+'）的导购：'+_gBelow.map(g=>g.name+'（¥'+Math.round(g.m_sales)+'）').join('、')+'，需加强一对一销售辅导。'):'')+(_gLow.length>0?(_gLow.map(g=>g.name).join('、')+'月完成率不足30%，需重点帮扶。'):'导购团队月销售分布均衡，保持当前带教节奏。'));
+    document.getElementById('guideTable').parentNode.appendChild(_gConcNote);
+  }
+}
+
+function renderComparison(){
+  const r=DATA['_region'];
+  const totAmt=regVal(x=>x.month_amt);
+  const totTarget=regVal(x=>x.target);
+  const totRate=totTarget>0?totAmt/totTarget*100:0;
+  const totCnt=regVal(x=>x.month_cnt);
+  const totWos=regVal(x=>x.month_wos);
+  const totJl=regVal(x=>x.month_jl);
+  const totLt=regVal(x=>x.month_lt);
+  const totLtQty=regVal(x=>x.month_lt_qty);
+  const totNewAmt=regVal(x=>(x.new_amt||0));
+  const totNewRate=r.new_rate||0;
+  const sReg=DATA['_sample_region']||{month_amt:0,month_qty:0};
+  let html='<div class="kpi-row">'+
+    '<div class="kpi-card"><div class="label">区域月累计</div><div class="value" style="color:#1e293b">'+fmtAmt(totAmt)+'</div><div class="sub">月目标'+fmtAmt(totTarget)+' | <span style="color:'+(totRate>=50?'#16a34a':'#dc2626')+';font-weight:700">完成率'+totRate.toFixed(1)+'%</span></div></div>'+
+    '<div class="kpi-card"><div class="label">区域月环比</div><div class="value '+(isNA(r.mom)?'':colorPct(r.mom))+'">'+(isNA(r.mom)?'N/A':(r.mom>=0?'+':'')+r.mom.toFixed(1)+'%')+'</div><div class="sub">vs上月同期</div></div>'+
+    '<div class="kpi-card"><div class="label">区域月同比</div><div class="value '+(isNA(r.yoy)?'':colorPct(r.yoy))+'">'+(isNA(r.yoy)?'N/A':fmtPct(r.yoy))+'</div><div class="sub">vs去年同期</div></div>'+
+    '<div class="kpi-card"><div class="label">区域月连带率</div><div class="value blue">'+r.month_jd.toFixed(2)+'</div><div class="sub">'+totCnt+'笔</div></div>'+
+    '<div class="kpi-card"><div class="label">区域月客单价</div><div class="value blue">¥'+Math.round(r.month_atv)+'</div><div class="sub">7家门店</div></div>'+
+    '<div class="kpi-card"><div class="label">区域长尾款月累计</div><div class="value purple">'+fmtAmt(totLt)+'</div><div class="sub">'+totLtQty+'件 | 占比'+(totAmt>0?(totLt/totAmt*100).toFixed(1):0)+'%</div></div>'+
+    '<div class="kpi-card"><div class="label">区域样品月累计</div><div class="value" style="color:#9333ea">'+fmtAmt(sReg.month_amt||0)+'</div><div class="sub">'+(sReg.month_qty||0)+'件（独立口径，不计入门店销售额）</div></div>'+
+    '<div class="kpi-card"><div class="label">区域新品月累计</div><div class="value" style="color:#db2777">'+fmtAmt(r.new_amt||0)+'</div><div class="sub">'+(r.new_qty||0)+'件 | 占比'+(r.new_rate||0).toFixed(1)+'%</div></div>'+
+    '</div>';
+
+  html+=conc('区域本月月累计'+fmtAmt(totAmt)+'，月目标'+fmtAmt(totTarget)+'，完成率'+totRate.toFixed(1)+'%；月同比'+fmtPct(r.yoy)+'，月环比'+(isNA(r.mom)?'N/A':(r.mom>=0?'+':'')+r.mom.toFixed(1)+'%。'),function(){const rates=STORE_ORDER.map(s=>({s,rate:DATA[s].month_rate}));const avg=rates.reduce((a,x)=>a+x.rate,0)/rates.length;const below=rates.filter(x=>x.rate<avg).sort((a,b)=>a.rate-b.rate);const wy=STORE_ORDER.map(s=>({s,v:DATA[s].yoy})).filter(x=>!isNA(x.v)).sort((a,b)=>a.v-b.v)[0];let o='';if(below.length>0)o+='完成率低于区域均值（'+avg.toFixed(1)+'%）的门店：'+below.map(x=>x.s+'('+x.rate.toFixed(1)+'%)').join('、')+'，是区域达标主要短板，建议城市经理驻店帮扶并复盘目标拆解。';if(wy)o+=' '+wy.s+'月同比最低（'+fmtPct(wy.v)+'），需重点排查品类缺货与竞品分流。';return o||'各门店完成率均衡，区域整体达标进度健康。';}());
+
+  // Pre-compute ltSampleData for use in conc() and chart
+  const ltSampleData=STORE_ORDER.map(s=>{const d=DATA[s];const sampD=(DATA['_sample']||{})[s]||{};return{s,ltAmt:d.month_lt||0,ltQty:d.month_lt_qty||0,ltPct:d.month_amt>0?(d.month_lt||0)/d.month_amt*100:0,sampAmt:sampD.month_amt||0,sampQty:sampD.month_qty||0};}).sort((a,b)=>b.ltAmt-a.ltAmt);
+
+  html+='<div class="chart-grid">'+
+    '<div class="chart-card"><h3><span class="icon">📈</span> 各门店月累计销售&完成率对比</h3><div class="chart-wrap"><canvas id="cmpAmt"></canvas></div>'+
+    conc(function(){const sr=STORE_ORDER.map(s=>{const d=DATA[s];return{s,amt:d.month_amt,target:d.target,rate:d.month_rate};}).sort((a,b)=>b.rate-a.rate);return '完成率排名：'+sr.map(x=>x.s+' '+x.rate.toFixed(1)+'%').join('、')+'，区域合计'+fmtAmt(totAmt)+'。';}(),function(){const sr=STORE_ORDER.map(s=>{const d=DATA[s];return{s,amt:d.month_amt,target:d.target,rate:d.month_rate};}).sort((a,b)=>b.rate-a.rate);const avgRate=sr.reduce((a,x)=>a+x.rate,0)/sr.length;const below=sr.filter(x=>x.rate<avgRate);const above=sr.filter(x=>x.rate>=avgRate);let o='';if(below.length>0)o+='低于区域均值（'+avgRate.toFixed(1)+'%）的门店：'+below.map(x=>x.s+'('+x.rate.toFixed(1)+'%,差'+(avgRate-x.rate).toFixed(1)+'pct)').join('、')+'，需重点跟进目标达成。';if(above.length>0)o+=above.map(x=>x.s+'('+x.rate.toFixed(1)+'%)').join('、')+'完成率领先，可提炼经验推广。';return o||'各门店完成率较为均衡。';}())+'</div>'+
+    '<div class="chart-card"><h3><span class="icon">📊</span> 各门店月同比对比</h3><div class="chart-wrap"><canvas id="cmpYoy"></canvas></div>'+
+    conc(function(){const s=STORE_ORDER.map(x=>({s:x,v:DATA[x].yoy})).filter(x=>!isNA(x.v)).sort((a,b)=>b.v-a.v);if(s.length===0)return '暂无同比数据。';return '月同比最高'+s[0].s+'('+fmtPct(s[0].v)+')，最低'+s[s.length-1].s+'('+fmtPct(s[s.length-1].v)+')，区域'+fmtPct(r.yoy)+'。';}(),function(){const s=STORE_ORDER.map(x=>({s:x,v:DATA[x].yoy})).filter(x=>!isNA(x.v));const neg=s.filter(x=>x.v<0);if(neg.length>0)return neg.map(x=>x.s+'('+fmtPct(x.v)+')').join('、')+'同比下滑，需关注其品类结构调整和竞品分流影响。';if(r.yoy<0)return '区域整体同比下滑，检视去年同期爆款是否缺货。';return '区域同比表现良好，保持品类结构和渠道策略。';}())+'</div></div>';
+
+  html+='<div class="chart-grid">'+
+    '<div class="chart-card"><h3><span class="icon">🎯</span> 各门店客单价&连带率对比</h3><div class="chart-wrap"><canvas id="cmpAtvJd"></canvas></div>'+
+    conc(function(){const atv=STORE_ORDER.map(s=>({s,v:DATA[s].month_atv})).sort((a,b)=>b.v-a.v);const jd=STORE_ORDER.map(s=>({s,v:DATA[s].month_jd})).sort((a,b)=>b.v-a.v);return '客单价最高'+atv[0].s+'(¥'+Math.round(atv[0].v)+')，连带率最高'+jd[0].s+'('+jd[0].v.toFixed(2)+')。';}(),function(){const jdV=STORE_ORDER.map(s=>({s,v:DATA[s].month_jd})).sort((a,b)=>b.v-a.v);const atvV=STORE_ORDER.map(s=>({s,v:DATA[s].month_atv})).sort((a,b)=>b.v-a.v);const ratv=r.month_atv,rjd=r.month_jd;const atvBelow=atvV.filter(x=>x.v<ratv);const jdBelow=jdV.filter(x=>x.v<rjd);let t='';if(atvBelow.length>0)t+=atvBelow.map(x=>x.s+'(¥'+Math.round(x.v)+',差¥'+Math.round(ratv-x.v)+')').join('、')+'客单价低于区域均值¥'+Math.round(ratv)+'，建议引导高端产品推荐。';if(jdBelow.length>0)t+=jdBelow.map(x=>x.s+'('+x.v.toFixed(2)+',差'+(rjd-x.v).toFixed(2)+')').join('、')+'连带率低于区域均值'+rjd.toFixed(2)+'，建议强化搭配推荐培训。';return t||'各门店客单价和连带率均达区域均值，保持现有推荐策略。';}())+'</div>'+
+    '<div class="chart-card"><h3><span class="icon">📉</span> 各门店月环比对比</h3><div class="chart-wrap"><canvas id="cmpMom"></canvas></div>'+
+    conc(function(){const s=STORE_ORDER.map(x=>({s:x,v:DATA[x].mom})).filter(x=>!isNA(x.v)).sort((a,b)=>b.v-a.v);if(s.length===0)return '暂无环比数据。';return '月环比最佳'+s[0].s+'('+(s[0].v>=0?'+':'')+s[0].v.toFixed(1)+'%)，区域'+(isNA(r.mom)?'N/A':(r.mom>=0?'+':'')+r.mom.toFixed(1)+'%')+'。';}(),function(){const s=STORE_ORDER.map(x=>({s:x,v:DATA[x].mom})).filter(x=>!isNA(x.v));const reMom=isNA(r.mom)?0:r.mom;const below=s.filter(x=>x.v<reMom);const neg=s.filter(x=>x.v<-8);let o='';if(below.length>0&&!isNA(r.mom))o+='低于区域月环比（'+fmtPct(r.mom)+'）的门店：'+below.map(x=>x.s+'('+fmtPct(x.v)+')').join('、')+'，需复盘客流转化变化。';if(neg.length>0)o+=neg.map(x=>x.s+'('+x.v.toFixed(1)+'%)').join('、')+'环比下滑较大，需关注竞品及促销影响。';return o||'各门店月环比基本平稳，关注下半月冲量节奏。';}())+'</div></div>';
+
+
+  // 门店月成交率 & 长尾款 对比（半宽并排，第三排）
+  const cvo=(DATA['_conversion']||{});
+  const convData=STORE_ORDER.map(s=>({s,v:cvo[s]?cvo[s].rate:0,flow:cvo[s]?cvo[s].flow:0,cnt:cvo[s]?cvo[s].cnt:0})).sort((a,b)=>b.v-a.v);
+  const rConv=cvo._region||{};
+  html+='<div class="chart-grid">'+
+    '<div class="chart-card"><h3><span class="icon">📦</span> 各门店长尾款 & 样品销售月累计对比（标注占比）</h3><div class="chart-wrap"><canvas id="cmpLtSample"></canvas></div>'+
+    conc('区域长尾款月累计'+fmtAmt(totLt)+'（'+totLtQty+'件，占比'+(totAmt>0?(totLt/totAmt*100).toFixed(1):0)+'%）。各门店长尾款占比：'+ltSampleData.filter(x=>x.ltAmt>0).map(x=>x.s+x.ltPct.toFixed(1)+'%').join('、')+'。样品月累计'+fmtAmt(sReg.month_amt||0)+'（'+(sReg.month_qty||0)+'件）。',function(){const lpct=totAmt>0?totLt/totAmt*100:0;if(lpct<8)return '区域长尾款占比偏低（'+lpct.toFixed(1)+'%），建议统一部署79款SKU推荐话术培训和收银台陈列优化。';if(lpct>15)return '区域长尾款占比优秀（'+lpct.toFixed(1)+'%），保持当前关联推荐策略。';return '长尾款占比适中，关注各门店间均衡性。';}())+
+    '</div>'+
+    '<div class="chart-card"><h3><span class="icon">🎯</span> 各门店月成交率对比（成交笔数/客流量，本月累计）</h3><div class="chart-wrap"><canvas id="cmpConv"></canvas></div>'+
+    conc('区域月成交率'+(rConv.rate?rConv.rate.toFixed(2):'N/A')+'%（月成交'+(rConv.cnt||0)+'笔 ÷ 月客流'+(rConv.flow||0)+'人次）。各店：'+convData.map(x=>x.s+(x.v===null?'N/A':x.v.toFixed(2)+'%')).join('、')+'。',function(){const valid=convData.filter(x=>x.v!==null);const avg=valid.length?valid.reduce((a,x)=>a+x.v,0)/valid.length:0;const below=valid.filter(x=>x.v<avg);let o='';if(below.length>0)o+='低于区域均值（'+avg.toFixed(2)+'%）的门店：'+below.map(x=>x.s+'('+x.v.toFixed(2)+'%,差'+(avg-x.v).toFixed(2)+'pct)').join('、')+'，客流未有效转化为笔数，需提升进店转化（橱窗陈列/试玩体验/导购拦截话术）。';else o+='各门店成交率较为均衡。';if(valid.length){const best=valid[0],worst=valid[valid.length-1];o+='最高'+best.s+'('+best.v.toFixed(2)+'%)与最低'+worst.s+'('+worst.v.toFixed(2)+'%)相差'+(best.v-worst.v).toFixed(2)+'pct，差距明显可对标提升。';}return o;}())+
+    '</div></div>';
+
+  // WOS & JL comparison + Series proportion
+  html+='<div class="chart-grid">'+
+    '<div class="chart-card"><h3><span class="icon">⚡</span> 各门店WOS & 即时零售月累计对比</h3><div class="chart-wrap"><canvas id="cmpWosJl"></canvas></div>'+
+    conc('WOS月累计'+fmtAmt(totWos)+'（占比'+(totAmt>0?(totWos/totAmt*100).toFixed(1):0)+'%），即时零售'+fmtAmt(totJl)+'（占比'+(totAmt>0?(totJl/totAmt*100).toFixed(1):0)+'%）。',function(){const wpct=totAmt>0?totWos/totAmt*100:0,jpct=totAmt>0?totJl/totAmt*100:0;const lowW=STORE_ORDER.filter(s=>DATA[s].month_amt>0&&DATA[s].month_wos/DATA[s].month_amt*100<3);let t='';if(wpct+jpct<10)t='WOS+即时零售合计占比不足10%，建议加大线上渠道投放力度，特别是美团/饿了么专属活动。';else if(wpct+jpct>20)t='线上渠道占比超过20%，多渠道运营成熟。';else t='线上渠道占比中等，适度增加即时零售平台曝光和WOS直播频次。';if(lowW.length>0)t+=' '+lowW.join('、')+'WOS占比偏低，需重点提升。';return t;}())+'</div>'+
+    '<div class="chart-card"><h3><span class="icon">📊</span> 区域产品系列结构（月累计）</h3><div class="chart-wrap"><canvas id="cmpRegSeries"></canvas></div>'+
+    conc(function(){const rs=(DATA['_series']||{})['_region']||{};const ents=Object.entries(rs).sort((a,b)=>b[1]-a[1]);if(ents.length===0)return '暂无系列数据。';const top10=ents.slice(0,10);const t3pct=totAmt>0?ents.slice(0,3).reduce((a,[,v])=>a+v,0)/totAmt*100:0;const botAmt=ents.reduce((a,[k,v])=>k.toUpperCase().includes('BOTANICAL')?a+v:a,0);const botPct=totAmt>0?botAmt/totAmt*100:0;return '区域TOP10系列：'+top10.map(([k,v])=>k+'('+fmtAmt(v)+',占比'+(totAmt>0?(v/totAmt*100).toFixed(1):0)+'%)').join('、')+'；TOP3合计占比'+t3pct.toFixed(1)+'%。BOTANICALS植物系列占比'+botPct.toFixed(1)+'%（指标4.1%）。';}(),function(){const rs=(DATA['_series']||{})['_region']||{};const ents=Object.entries(rs).sort((a,b)=>b[1]-a[1]);if(ents.length===0)return '';const top3=ents.slice(0,3);const top5=ents.slice(0,5);const t3pct=totAmt>0?top3.reduce((a,[,v])=>a+v,0)/totAmt*100:0;let o='';if(t3pct>65)o+='区域TOP3系列占比过高（'+t3pct.toFixed(1)+'%），建议丰富中长尾系列陈列和推荐。';else if(t3pct<30)o+='系列分布过于分散，建议集中打造1-2个主推系列。';else o+='系列结构均衡，保持当前推荐策略。';const focusTop3=['CITY','TECHNIC','NINJAGO'];const missingTop3=focusTop3.filter(n=>!top3.some(([k])=>k.toUpperCase().includes(n)));if(missingTop3.length>0)o+='重点系列'+missingTop3.join('、')+'未进TOP3，建议加强陈列和推荐。';const inTop3=focusTop3.filter(n=>top3.some(([k])=>k.toUpperCase().includes(n)));if(inTop3.length>0)o+='重点系列'+inTop3.join('、')+'在TOP3表现良好。';if(!top5.some(([k])=>k.toUpperCase().includes('MINECRAFT')))o+='MINECRAFT未进TOP5，需关注沙盒游戏IP粉丝群体引流。';const botAmt=ents.reduce((a,[k,v])=>k.toUpperCase().includes('BOTANICAL')?a+v:a,0);const botPct=totAmt>0?botAmt/totAmt*100:0;if(botAmt>0){o+='BOTANICALS植物系列占比'+botPct.toFixed(1)+'%（指标4.1%）';if(botPct<4.1)o+='，低于指标，需加强植物系列陈列和推荐。';else o+='，达到指标。';}else{o+='BOTANICALS植物系列无销售，低于指标4.1%，建议关注植物系列铺货和推荐。';}return o;}())+'</div></div>';
+
+
+
+  // Regional TOP10 products
+  html+='<div class="chart-grid full"><div class="chart-card"><h3><span class="icon">🏆</span> 区域TOP10产品月销排名（含件数）</h3><div class="chart-wrap"><canvas id="cmpRegProducts"></canvas></div>'+
+    conc(function(){const rp=(DATA['_products']||{})['_region']||{};const ents=Object.entries(rp).map(([k,v])=>[k,v.amt||v,v.qty||0]).sort((a,b)=>b[1]-a[1]).slice(0,3);if(ents.length===0)return '暂无产品数据。';return '区域TOP3产品：'+ents.map(([n,a,q])=>n+'('+fmtAmt(a)+','+q+'件)').join('、')+'。';}(),function(){const rp=(DATA['_products']||{})['_region']||{};const ents=Object.entries(rp).map(([k,v])=>[k,v.amt||v,v.qty||0]).sort((a,b)=>b[1]-a[1]);if(ents.length===0)return '';const t1=ents[0];const t1pct=totAmt>0?t1[1]/totAmt*100:0;let o='';if(t1pct>20)o+='TOP1产品占比'+t1pct.toFixed(1)+'%，依赖度高，需关注库存和缺货风险。';else o+='区域产品结构多元，无过度依赖单品的风险。';const newProds=DATA['_new_products']||[];if(newProds.length>0){const top10Names=ents.slice(0,10).map(([k])=>k);const newInTop=newProds.filter(np=>top10Names.some(tn=>tn.includes(np)||np.includes(tn)));if(newInTop.length>0)o+='当月新品「'+newInTop.join('、')+'」进入区域TOP10，表现突出，建议加大陈列推荐。';else o+='当月新品无进入区域TOP10，需关注新品陈列位置和推荐话术。';}return o;}())+'</div></div>';
+
+  // 新品模块：各店新品占比对比 + 区域新品TOP
+  const newShareData=STORE_ORDER.map(s=>{const d=DATA[s];return{s,v:d.new_rate||0,amt:d.new_amt||0};}).sort((a,b)=>b.v-a.v);
+  const rNewRate=r.new_rate||0;
+  html+='<div class="chart-grid">'+
+    '<div class="chart-card"><h3><span class="icon">🆕</span> 各门店新品销售占比对比（上市日期=本月）</h3><div class="chart-wrap"><canvas id="cmpNewShare"></canvas></div>'+
+    conc(function(){const rs=STORE_ORDER.map(s=>({s,v:DATA[s].new_rate||0})).sort((a,b)=>b.v-a.v);if(rs[0].v===0)return '本月暂无新品销售记录。';return '新品占比最高'+rs[0].s+'('+rs[0].v.toFixed(1)+'%)。';}(),function(){const rs=STORE_ORDER.map(s=>({s,v:DATA[s].new_rate||0,amt:DATA[s].new_amt||0}));const zero=rs.filter(x=>x.amt===0);const below=rs.filter(x=>x.v<rNewRate&&x.amt>0);let o='';if(zero.length>0)o+=zero.map(x=>x.s).join('、')+'本月无新品销售，需紧急排查新品铺货与陈列。';if(below.length>0)o+=below.map(x=>x.s+'('+x.v.toFixed(1)+'%)').join('、')+'新品占比低于区域('+rNewRate.toFixed(1)+'%)。';if(!o)o='各门店均有新品销售且占比达区域水平，动销良好。';return o;}())+
+    '</div>'+
+    '<div class="chart-card"><h3><span class="icon">🆕</span> 区域新品TOP销售排名（上市日期=本月）</h3><div class="chart-wrap"><canvas id="cmpNewProducts"></canvas></div>'+concNew('区域对比')+'</div></div>';
+
+  html+='<div class="chart-grid full"><div class="chart-card"><h3><span class="icon">📋</span> 区域月维度汇总表</h3><table class="summary-table" id="cmpTable"></table></div></div>';
+
+  html+='<div class="chart-grid full"><div class="chart-card"><h3><span class="icon">👩</span> 全区域导购月度完成率排名</h3><div class="chart-wrap tall" style="height:600px;"><canvas id="cmpGuides"></canvas></div>'+
+    conc(function(){const all=[];STORE_ORDER.forEach(s=>{(DATA['_guides']||{})[s]?.forEach(g=>all.push(g));});all.sort((a,b)=>b.m_rate-a.m_rate);if(all.length===0)return '暂无导购数据。';const t=all[0];return '完成率第一'+t.name+'('+t.store+')'+t.m_rate.toFixed(1)+'%，月销售'+fmtAmt(t.m_sales)+'。';}(),function(){const all=[];STORE_ORDER.forEach(s=>{(DATA['_guides']||{})[s]?.forEach(g=>all.push(g));});all.sort((a,b)=>b.m_rate-a.m_rate);if(all.length===0)return '';const regAvg=all.filter(g=>g.m_sales>0).reduce((a,g)=>a+g.m_sales,0)/all.filter(g=>g.m_sales>0).length;const below=all.filter(g=>g.m_sales>0&&g.m_sales<regAvg*0.7);const high=all.filter(g=>g.m_rate>=80);const low=all.filter(g=>g.m_rate<30&&g.m_sales>0);let o='';if(below.length>0)o+='低于区域均值¥'+Math.round(regAvg)+'的导购：'+below.map(g=>g.name+'('+g.store+',¥'+Math.round(g.m_sales)+')').join('、')+'，需重点跟进销售辅导和排班优化。';if(high.length>0)o+=high.map(g=>g.name+'('+g.store+')').join('、')+'完成率优秀(≥80%)，建议经验分享。';if(low.length>0)o+=low.map(g=>g.name+'('+g.store+')').join('、')+'完成率不足30%，需一对一辅导。';return o||'各导购完成率较为均衡（区域人均¥'+Math.round(regAvg)+'）。';}())+'</div></div>';
+
+  document.getElementById('content').innerHTML=html;
+  Object.values(charts).forEach(c=>c&&c.destroy());charts={};
+
+  // Chart 1: Monthly amount + completion rate (sorted by rate, dual axis)
+  const storeRates=STORE_ORDER.map(s=>{const d=DATA[s];return{s,v:d.month_amt,target:d.target,rate:d.month_rate};}).sort((a,b)=>b.rate-a.rate);
+  charts.cmpAmt=new Chart(document.getElementById('cmpAmt'),{
+    data:{labels:storeRates.map(x=>x.s+'\n'+x.rate.toFixed(1)+'%'),datasets:[
+      {type:'bar',label:'月累计',data:storeRates.map(x=>x.v),backgroundColor:storeRates.map(x=>STORE_COLORS[x.s]+'cc'),borderColor:storeRates.map(x=>STORE_COLORS[x.s]),borderWidth:1,borderRadius:6,yAxisID:'y'},
+      {type:'line',label:'完成率',data:storeRates.map(x=>x.rate),borderColor:'#dc2626',backgroundColor:'transparent',borderWidth:2,pointRadius:5,pointBackgroundColor:'#dc2626',tension:.3,yAxisID:'y1'}
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{position:'top'},tooltip:{callbacks:{label:ctx=>{const x=storeRates[ctx.dataIndex];if(ctx.dataset.type==='line')return '完成率: '+x.rate.toFixed(1)+'%';return '月销售: '+fmtAmt(x.v)+' | 月目标: '+fmtAmt(x.target)+' | 完成率: '+x.rate.toFixed(1)+'%';}}}},
+      scales:{y:{position:'left',title:{display:true,text:'月累计(¥)'},ticks:{callback:v=>fmtAmt(v)}},y1:{position:'right',title:{display:true,text:'完成率(%)'},grid:{drawOnChartArea:false},ticks:{callback:v=>v+'%'}}}}
+  });
+
+  // Chart 2: YoY
+  const yoyData=STORE_ORDER.map(s=>({s,v:DATA[s].yoy}));
+  charts.cmpYoy=new Chart(document.getElementById('cmpYoy'),{
+    type:'bar',
+    data:{labels:yoyData.map(x=>x.s),datasets:[{label:'月同比',data:yoyData.map(x=>x.v),backgroundColor:yoyData.map(x=>isNA(x.v)?'#e2e8f0':(x.v>=0?'#16a34acc':'#dc2626cc')),borderColor:yoyData.map(x=>isNA(x.v)?'#94a3b8':(x.v>=0?'#16a34a':'#dc2626')),borderWidth:1,borderRadius:6}]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>isNA(ctx.raw)?'N/A':'月同比: '+(ctx.raw>=0?'+':'')+ctx.raw.toFixed(1)+'%'}}},
+      scales:{y:{ticks:{callback:v=>v+'%'}}}}
+  });
+
+  // Chart 3: ATV & JD (dual axis)
+  charts.cmpAtvJd=new Chart(document.getElementById('cmpAtvJd'),{
+    data:{labels:STORE_ORDER,datasets:[
+      {type:'bar',label:'客单价',data:STORE_ORDER.map(s=>DATA[s].month_atv),backgroundColor:'#0ea5e9cc',borderColor:'#0ea5e9',borderWidth:1,borderRadius:4,yAxisID:'y'},
+      {type:'line',label:'连带率',data:STORE_ORDER.map(s=>DATA[s].month_jd),borderColor:'#dc2626',backgroundColor:'transparent',borderWidth:2,pointRadius:6,pointBackgroundColor:'#dc2626',tension:.3,yAxisID:'y1'}
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{position:'top'},tooltip:{callbacks:{label:ctx=>{if(ctx.dataset.label.includes('客单'))return '客单价: ¥'+Math.round(ctx.raw);return '连带率: '+ctx.raw.toFixed(2)}}}},
+      scales:{y:{position:'left',title:{display:true,text:'客单价(¥)'},ticks:{callback:v=>'¥'+v}},y1:{position:'right',title:{display:true,text:'连带率'},grid:{drawOnChartArea:false},ticks:{callback:v=>v.toFixed(1)}}}}
+  });
+
+  // Chart 4: MoM
+  const momData=STORE_ORDER.map(s=>({s,v:DATA[s].mom}));
+  charts.cmpMom=new Chart(document.getElementById('cmpMom'),{
+    type:'bar',
+    data:{labels:momData.map(x=>x.s),datasets:[
+      {label:'8月1-1日',data:momData.map(x=>DATA[x.s].mom_prev||0),backgroundColor:'#94a3b880',borderColor:'#64748b',borderWidth:1,borderRadius:4},
+      {label:'9月1-1日',data:momData.map(x=>DATA[x.s].month_amt||0),backgroundColor:momData.map(x=>STORE_COLORS[x.s]+'cc'),borderColor:momData.map(x=>STORE_COLORS[x.s]),borderWidth:1,borderRadius:4}
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{position:'top'},tooltip:{callbacks:{label:ctx=>ctx.dataset.label+': '+fmtAmt(ctx.raw)}}},
+      scales:{y:{ticks:{callback:v=>fmtAmt(v)}}}}
+  });
+
+  // Chart 5: WOS & JL comparison
+  charts.cmpWosJl=new Chart(document.getElementById('cmpWosJl'),{
+    type:'bar',
+    data:{labels:STORE_ORDER,datasets:[
+      {label:'WOS',data:STORE_ORDER.map(s=>DATA[s].month_wos),backgroundColor:'#0284c7cc',borderColor:'#0284c7',borderWidth:1,borderRadius:4},
+      {label:'即时零售',data:STORE_ORDER.map(s=>DATA[s].month_jl),backgroundColor:'#ea580ccc',borderColor:'#ea580c',borderWidth:1,borderRadius:4}
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{position:'top'},tooltip:{callbacks:{label:ctx=>ctx.dataset.label+': '+fmtAmt(ctx.raw)}}},
+      scales:{y:{ticks:{callback:v=>fmtAmt(v)}}}}
+  });
+
+  // Chart: Combined long-tail & sample comparison
+  charts.cmpLtSample=new Chart(document.getElementById('cmpLtSample'),{
+    type:'bar',
+    data:{labels:ltSampleData.map(x=>x.s),datasets:[
+      {label:'长尾款',data:ltSampleData.map(x=>x.ltAmt),backgroundColor:'#ea580ccc',borderColor:'#ea580c',borderWidth:1,borderRadius:4},
+      {label:'样品',data:ltSampleData.map(x=>x.sampAmt),backgroundColor:'#9333eacc',borderColor:'#9333ea',borderWidth:1,borderRadius:4}
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{position:'top'},tooltip:{callbacks:{label:ctx=>{const x=ltSampleData[ctx.dataIndex];if(ctx.datasetIndex===0)return '长尾款: '+fmtAmt(x.ltAmt)+' ('+x.ltQty+'件, 占比'+x.ltPct.toFixed(1)+'%)';return '样品: '+fmtAmt(x.sampAmt)+' ('+x.sampQty+'件)';}}}},
+      scales:{y:{ticks:{callback:v=>fmtAmt(v)}}}}
+  });
+
+  // Chart 6: Regional series doughnut
+  const rs=(DATA['_series']||{})['_region']||{};
+  const rse=Object.entries(rs).sort((a,b)=>b[1]-a[1]);
+  const rtop10=rse.slice(0,10),roth=rse.slice(10).reduce((a,[,v])=>a+v,0);
+  charts.cmpRegSeries=new Chart(document.getElementById('cmpRegSeries'),{
+    type:'doughnut',
+    data:{labels:rtop10.map(([k])=>k).concat(roth>0?['其他']:[]),datasets:[{data:rtop10.map(([,v])=>v).concat(roth>0?[roth]:[]),backgroundColor:SC.slice(0,rtop10.length+(roth>0?1:0)),borderWidth:2,borderColor:'#fff'}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{font:{size:11},padding:6}},tooltip:{callbacks:{label:ctx=>{const pct=totAmt>0?(ctx.raw/totAmt*100).toFixed(1):0;return ctx.label+': '+fmtAmt(ctx.raw)+' ('+pct+'%)'}}}},cutout:'55%'}
+  });
+
+  // Chart 7: Regional TOP10 products
+  const rp=(DATA['_products']||{})['_region']||{};
+  const rpEnts=Object.entries(rp).map(([k,v])=>[k,v.amt||v,v.qty||0]).sort((a,b)=>b[1]-a[1]).slice(0,10);
+  charts.cmpRegProducts=new Chart(document.getElementById('cmpRegProducts'),{
+    type:'bar',
+    data:{labels:rpEnts.map(([k])=>k),datasets:[{label:'月销售',data:rpEnts.map(([k,a,q])=>a),backgroundColor:SC.slice(0,rpEnts.length).map(c=>c+'cc'),borderColor:SC.slice(0,rpEnts.length),borderWidth:1,borderRadius:4}]},
+    options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>{const idx=ctx.dataIndex;const [n,a,q]=rpEnts[idx];const pct=totAmt>0?(a/totAmt*100).toFixed(1):0;return n+': '+fmtAmt(a)+' ('+pct+'%, '+q+'件)'}}}},
+      scales:{x:{ticks:{callback:v=>fmtAmt(v)}}}}
+  });
+
+  // Chart: 门店月成交率
+  charts.cmpConv=new Chart(document.getElementById('cmpConv'),{
+    type:'bar',
+    data:{labels:convData.map(x=>x.s),datasets:[{label:'月成交率',data:convData.map(x=>x.v),backgroundColor:convData.map(x=>STORE_COLORS[x.s]+'cc'),borderColor:convData.map(x=>STORE_COLORS[x.s]),borderWidth:1,borderRadius:6}]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>{const x=convData[ctx.dataIndex];return '月成交率: '+(x.v===null?'缺客流':x.v.toFixed(2)+'%')+' | 笔数'+x.cnt+' / 客流'+x.flow;}}}},
+      scales:{y:{ticks:{callback:v=>v+'%'}}}}
+  });
+
+  // Chart: New-product share by store (上市日期=本月)
+  charts.cmpNewShare=new Chart(document.getElementById('cmpNewShare'),{
+    type:'bar',
+    data:{labels:newShareData.map(x=>x.s),datasets:[
+      {label:'新品占比',data:newShareData.map(x=>x.v),backgroundColor:newShareData.map(x=>STORE_COLORS[x.s]+'cc'),borderColor:newShareData.map(x=>STORE_COLORS[x.s]),borderWidth:1,borderRadius:6},
+      {label:'区域均值',type:'line',data:newShareData.map(x=>rNewRate),borderColor:'#1e293b',backgroundColor:'transparent',borderWidth:2,pointRadius:0,borderDash:[6,4]}
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{position:'top'},tooltip:{callbacks:{label:ctx=>{const x=newShareData[ctx.dataIndex];if(ctx.dataset.label==='新品占比')return '新品占比: '+x.v.toFixed(1)+'% | 新品额: '+fmtAmt(x.amt);return '区域均值: '+ctx.raw.toFixed(1)+'%';}}}},
+      scales:{y:{ticks:{callback:v=>v+'%'}}}}
+  });
+
+  // Chart: Regional new-product TOP
+  const npRegDetail=(DATA['_new_products_detail']||{})['_region']||[];
+  if(npRegDetail.length>0){
+    charts.cmpNewProducts=new Chart(document.getElementById('cmpNewProducts'),{
+      type:'bar',
+      data:{labels:npRegDetail.map(x=>x.name),datasets:[{label:'新品销售',data:npRegDetail.map(x=>x.amt),backgroundColor:SC.slice(0,npRegDetail.length).map(c=>c+'cc'),borderColor:SC.slice(0,npRegDetail.length),borderWidth:1,borderRadius:4}]},
+      options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',
+        plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>{const x=npRegDetail[ctx.dataIndex];const pct=totAmt>0?(x.amt/totAmt*100).toFixed(1):0;return x.name+': '+fmtAmt(x.amt)+' ('+pct+'%, '+x.qty+'件)';}}}},
+        scales:{x:{ticks:{callback:v=>fmtAmt(v)}}}}
+    });
+  }else{
+    document.getElementById('cmpNewProducts').parentNode.innerHTML='<div style="padding:40px;text-align:center;color:#94a3b8">本月无新品销售记录</div>';
+  }
+
+  // Summary table
+  let tHtml='<thead><tr><th>门店</th><th>月累计</th><th>月目标</th><th>月完成率</th><th>月同比</th><th>月环比</th><th>笔数</th><th>客单价</th><th>连带率</th><th>成交率</th><th>WOS</th><th>即时零售</th><th>长尾款</th><th>长尾件数</th><th>长尾占比</th><th>新品额</th><th>新品占比</th><th>样品</th><th>样品件数</th></tr></thead><tbody>';
+  // 区域均值（区域汇总表低于均值标红）
+  const regMonthAmtAvg=totAmt/STORE_ORDER.length;
+  const regMonthCntAvg=totCnt/STORE_ORDER.length;
+  const regMonthATV=r.month_atv;
+  const regMonthJD=r.month_jd;
+  const regMonthLtPctAvg=STORE_ORDER.reduce((a,s)=>a+(DATA[s].month_amt>0?(DATA[s].month_lt/DATA[s].month_amt*100):0),0)/STORE_ORDER.length;
+  const regMonthNewPctAvg=STORE_ORDER.reduce((a,s)=>a+(DATA[s].month_amt>0?((DATA[s].new_amt||0)/DATA[s].month_amt*100):0),0)/STORE_ORDER.length;
+  STORE_ORDER.forEach(s=>{
+    const d=DATA[s];
+    const lpct=d.month_amt>0?(d.month_lt/d.month_amt*100):0;
+    const sd=((DATA['_sample']||{})[s])||{};
+    const yb=isNA(d.yoy)?'<span class="badge gray">N/A</span>':(d.yoy>=0?'<span class="badge green">+'+d.yoy.toFixed(1)+'%</span>':'<span class="badge red">'+d.yoy.toFixed(1)+'%</span>');
+    const mb=isNA(d.mom)?'<span class="badge gray">N/A</span>':(d.mom>=0?'<span class="badge green">+'+d.mom.toFixed(1)+'%</span>':'<span class="badge red">'+d.mom.toFixed(1)+'%</span>');
+    tHtml+='<tr><td class="store-name" style="color:'+STORE_COLORS[s]+'">'+s+'</td><td style="font-weight:700'+(d.month_amt<regMonthAmtAvg?';color:#dc2626':'')+'">'+fmtAmt(d.month_amt)+'</td><td>'+fmtWan(d.target)+'</td><td style="color:'+(d.month_rate>=50?'#16a34a':'#dc2626')+';font-weight:700">'+d.month_rate.toFixed(1)+'%</td><td>'+yb+'</td><td>'+mb+'</td><td'+(d.month_cnt<regMonthCntAvg?' style="color:#dc2626;font-weight:700"':'')+'>'+d.month_cnt+'</td><td'+(d.month_atv<regMonthATV?' style="color:#dc2626;font-weight:700"':'')+'>¥'+Math.round(d.month_atv)+'</td><td'+(d.month_jd<regMonthJD?' style="color:#dc2626;font-weight:700"':'')+'>'+d.month_jd.toFixed(2)+'</td><td style="color:'+((cvo[s]&&cvo[s].rate>=rConv.rate)?'#16a34a':'#dc2626')+';font-weight:700">'+((cvo[s]&&cvo[s].rate)?cvo[s].rate.toFixed(2):'N/A')+'%</td><td>'+fmtAmt(d.month_wos)+'</td><td>'+fmtAmt(d.month_jl)+'</td><td>'+fmtAmt(d.month_lt)+'</td><td>'+(d.month_lt_qty||0)+'件</td><td style="color:'+(lpct<regMonthLtPctAvg?'#dc2626':'#16a34a')+';font-weight:700">'+lpct.toFixed(1)+'%</td>'+
+'<td'+(d.new_amt<regMonthAmtAvg?' style="color:#dc2626;font-weight:700"':'')+'>'+fmtAmt(d.new_amt||0)+'</td>'+
+'<td style="color:'+((d.new_rate||0)<regMonthNewPctAvg?'#dc2626':'#16a34a')+';font-weight:700">'+((d.new_rate||0)).toFixed(1)+'%</td>'+
+'<td style="color:#9333ea">'+fmtAmt(sd.month_amt||0)+'</td><td>'+(sd.month_qty||0)+'件</td></tr>';
+  });
+  tHtml+='<tr style="background:#7c3aed10;font-weight:700"><td class="store-name">区域合计</td><td>'+fmtAmt(totAmt)+'</td><td>'+fmtWan(totTarget)+'</td><td style="color:'+(totRate>=50?'#16a34a':'#dc2626')+'">'+totRate.toFixed(1)+'%</td><td>'+(isNA(r.yoy)?'<span class="badge gray">N/A</span>':(r.yoy>=0?'<span class="badge green">+'+r.yoy.toFixed(1)+'%</span>':'<span class="badge red">'+r.yoy.toFixed(1)+'%</span>'))+'</td><td>'+(isNA(r.mom)?'<span class="badge gray">N/A</span>':(r.mom>=0?'<span class="badge green">+'+r.mom.toFixed(1)+'%</span>':'<span class="badge red">'+r.mom.toFixed(1)+'%</span>'))+'</td><td>'+totCnt+'</td><td>¥'+Math.round(r.month_atv)+'</td><td>'+r.month_jd.toFixed(2)+'</td><td style="color:#16a34a;font-weight:700">'+(rConv.rate?rConv.rate.toFixed(2):'N/A')+'%</td><td>'+fmtAmt(totWos)+'</td><td>'+fmtAmt(totJl)+'</td><td>'+fmtAmt(totLt)+'</td><td>'+totLtQty+'件</td><td style="color:'+(totAmt>0&&(totLt/totAmt*100)>=10?'#16a34a':'#dc2626')+';font-weight:700">'+(totAmt>0?(totLt/totAmt*100).toFixed(1):0)+'%</td>'+
+'<td>'+fmtAmt(totNewAmt)+'</td>'+
+'<td style="color:#16a34a;font-weight:700">'+totNewRate.toFixed(1)+'%</td>'+
+'<td style="color:#9333ea">'+fmtAmt(sReg.month_amt||0)+'</td><td>'+(sReg.month_qty||0)+'件</td></tr>';
+  tHtml+='</tbody>';
+  document.getElementById('cmpTable').innerHTML=tHtml;
+  // 区域均值标红说明
+  let cmpNote=document.getElementById('cmpTableNote');
+  if(cmpNote) cmpNote.remove();
+  cmpNote=document.createElement('div');
+  cmpNote.id='cmpTableNote';
+  cmpNote.style='margin-top:10px;padding:8px 12px;background:#fef2f2;border:1px solid #fecaca;border-radius:8px;font-size:13px;color:#dc2626;font-weight:700';
+  cmpNote.textContent='🔴 月累计/笔数/客单价/连带率/长尾占比/新品占比 低于区域均值已标红（月累计¥'+Math.round(regMonthAmtAvg)+'、笔数'+Math.round(regMonthCntAvg)+'、客单价¥'+Math.round(regMonthATV)+'、连带率'+regMonthJD.toFixed(2)+'、长尾占比'+regMonthLtPctAvg.toFixed(1)+'%、新品占比'+regMonthNewPctAvg.toFixed(1)+'%）';
+  document.getElementById('cmpTable').parentNode.appendChild(cmpNote);
+  let _cmpConc=document.createElement('div');
+  _cmpConc.style.cssText='margin-top:10px';
+  const _below=STORE_ORDER.filter(s=>DATA[s].month_amt<regMonthAmtAvg);
+  const _dual=STORE_ORDER.filter(s=>!isNA(DATA[s].yoy)&&DATA[s].yoy<0&&!isNA(DATA[s].mom)&&DATA[s].mom<0);
+  const _topRate=STORE_ORDER.map(s=>({s,rate:DATA[s].month_rate})).sort((a,b)=>b.rate-a.rate)[0];
+  _cmpConc.innerHTML=conc('区域7店中'+_below.length+'家月累计低于区域均值（¥'+Math.round(regMonthAmtAvg)+'）：'+(_below.length?_below.map(s=>s).join('、')+'。':'均超均值。')+_topRate.s+'完成率领先（'+_topRate.rate.toFixed(1)+'%）。',(_dual.length>0?(_dual.map(s=>s).join('、')+'同环比双降，是区域主要拖累，建议集中资源帮扶并复盘品类与客流。'):(_below.length===0?'各门店月累计与同环比表现均衡，区域整体健康。':'')));
+  document.getElementById('cmpTable').parentNode.appendChild(_cmpConc);
+
+  // All guides ranking chart — sorted by completion rate
+  const allGuides=[];
+  STORE_ORDER.forEach(s=>{((DATA['_guides']||{})[s]||[]).forEach(g=>allGuides.push(g));});
+  allGuides.sort((a,b)=>b.m_rate-a.m_rate);
+  if(allGuides.length>0){
+    charts.cmpGuides=new Chart(document.getElementById('cmpGuides'),{
+      type:'bar',
+      data:{labels:allGuides.map(g=>g.name+'('+g.store+') '+g.m_rate.toFixed(1)+'%'),datasets:[{label:'月度完成率(%)',data:allGuides.map(g=>g.m_rate),backgroundColor:allGuides.map(g=>g.m_rate>=50?STORE_COLORS[g.store]+'cc':'#dc2626cc'),borderColor:allGuides.map(g=>g.m_rate>=50?STORE_COLORS[g.store]:'#dc2626'),borderWidth:1,borderRadius:4}]},
+      options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',
+        plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>{const g=allGuides[ctx.dataIndex];return g.name+'('+g.store+'): 完成率'+g.m_rate.toFixed(1)+'% | 月销售'+fmtAmt(g.m_sales)+' | 月目标'+fmtAmt(g.target)+' | 月环比'+(isNA(g.mom)?'N/A':(g.mom>=0?'+':'')+g.mom.toFixed(1)+'%')}}}},
+        scales:{x:{title:{display:true,text:'完成率(%)'},ticks:{callback:v=>v+'%'}}}}
+    });
+  }
+}
+
+function selectStore(store){
+  currentStore=store;
+  document.querySelectorAll('.store-tab').forEach(t=>t.classList.toggle('active',t.dataset.store===store));
+  if(store==='区域对比'){renderComparison();}
+  else{renderStore(store);}
+}
+
+document.addEventListener('DOMContentLoaded',()=>{
+  document.getElementById('genTime').textContent=new Date().toLocaleString('zh-CN');
+  selectStore(currentStore);
+});
+</script>
+</body>
+</html>
