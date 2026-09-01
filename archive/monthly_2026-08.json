@@ -14824,44 +14824,44 @@
   },
   "_conversion": {
     "扬州万象汇": {
-      "flow": 0,
+      "flow": 12137,
       "cnt": 1071,
-      "rate": null
+      "rate": 8.82
     },
     "扬州京华城": {
-      "flow": 0,
+      "flow": 16243,
       "cnt": 1355,
-      "rate": null
+      "rate": 8.34
     },
     "扬州江都金鹰": {
-      "flow": 0,
+      "flow": 7286,
       "cnt": 702,
-      "rate": null
+      "rate": 9.63
     },
     "泰州万象城": {
-      "flow": 0,
+      "flow": 21189,
       "cnt": 1484,
-      "rate": null
+      "rate": 7.0
     },
     "宿迁宝龙": {
-      "flow": 0,
+      "flow": 6415,
       "cnt": 393,
-      "rate": null
+      "rate": 6.13
     },
     "淮安新亚": {
-      "flow": 0,
+      "flow": 3878,
       "cnt": 478,
-      "rate": null
+      "rate": 12.33
     },
     "淮安万象城": {
-      "flow": 0,
+      "flow": 8441,
       "cnt": 1099,
-      "rate": null
+      "rate": 13.02
     },
     "_region": {
-      "flow": 0,
+      "flow": 75589,
       "cnt": 6582,
-      "rate": null
+      "rate": 8.71
     }
   },
   "_meta": {
