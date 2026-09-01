@@ -86,8 +86,8 @@ const DATA = {"扬州万象汇":{"month_amt":1495.0,"mom":-94.2,"mom_prev":25825
 const STORE_ORDER=['扬州万象汇','扬州京华城','扬州江都金鹰','泰州万象城','宿迁宝龙','淮安新亚','淮安万象城'];
 const STORE_COLORS={'扬州万象汇':'#7c3aed','扬州京华城':'#0ea5e9','扬州江都金鹰':'#059669','泰州万象城':'#dc2626','宿迁宝龙':'#ea580c','淮安新亚':'#0891b2','淮安万象城':'#9333ea'};
 const SC=['#7c3aed','#0ea5e9','#059669','#dc2626','#ea580c','#0891b2','#9333ea','#d97706','#65a30d','#4f46e5','#e11d48','#0d9488','#c026d3','#7c2d12','#1e40af','#831843','#365314','#854d0e','#3730a3','#9f1239'];
-// 长尾款指标口径：指标 = 销售指标 × LT_RATE（默认 12.5%，由 extract_monthly 写入 _meta）
-const LTR=((DATA['_meta']||{}).lt_target_rate)||0.125;
+// 长尾款指标口径：指标 = 销售指标 × LT_RATE（默认 4%，由 extract_monthly 写入 _meta；用户 2026-09-01 定案）
+const LTR=((DATA['_meta']||{}).lt_target_rate)||0.04;
 const LTR_LABEL=(LTR*100).toFixed(LTR*100%1?1:0)+'%';
 let charts={};
 let currentStore='区域对比';
@@ -187,7 +187,7 @@ function concLongTail(s){
   const rlt=regVal(x=>x.month_lt)/7;
   if(d.month_lt<rlt*0.7)o+='长尾款金额低于区域门店均值（¥'+Math.round(rlt)+'），需重点跟进长尾款推荐。';
   if(d.month_lt_qty<10)o+='月度长尾件数偏低，需持续推荐确保占比达标。';
-  // 长尾完成率 = 长尾款 ÷（销售指标 × 12.5%）
+  // 长尾完成率 = 长尾款 ÷（销售指标 × LTR_LABEL）
   const ltt=d.month_lt_target||0;
   if(ltt>0){const lr=d.month_lt/ltt*100;o+='长尾款指标'+fmtAmt(ltt)+'（销售指标×'+LTR_LABEL+'），完成率'+lr.toFixed(1)+'%'+(lr<100?'，尚差'+fmtAmt(ltt-d.month_lt)+'。':'，已达标。');}
   return conc(c,o);
@@ -289,7 +289,7 @@ function renderStore(store){
   const cvo=(DATA['_conversion']||{});
   const cvoRate=(cvo[store]?cvo[store].rate:null);
   const cvoRegionRate=(cvo._region?cvo._region.rate:null);
-  // 长尾完成率 = 长尾款 ÷（销售指标 × 12.5%）
+  // 长尾完成率 = 长尾款 ÷（销售指标 × LTR_LABEL）
   const _ltT=d.month_lt_target||0;
   const _ltRt=_ltT>0?(d.month_lt/_ltT*100):null;
   let html='<div class="kpi-row">'+
@@ -706,7 +706,7 @@ function renderComparison(){
     const d=DATA[s];
     const lpct=d.month_amt>0?(d.month_lt/d.month_amt*100):0;
     const _ltt=d.month_lt_target||0;
-    const _ltr=_ltt>0?(d.month_lt/_ltt*100):null;  // 长尾完成率（指标=销售指标×12.5%）
+    const _ltr=_ltt>0?(d.month_lt/_ltt*100):null;  // 长尾完成率（指标=销售指标×LTR_LABEL）
     const sd=((DATA['_sample']||{})[s])||{};
     const yb=isNA(d.yoy)?'<span class="badge gray">N/A</span>':(d.yoy>=0?'<span class="badge green">+'+d.yoy.toFixed(1)+'%</span>':'<span class="badge red">'+d.yoy.toFixed(1)+'%</span>');
     const mb=isNA(d.mom)?'<span class="badge gray">N/A</span>':(d.mom>=0?'<span class="badge green">+'+d.mom.toFixed(1)+'%</span>':'<span class="badge red">'+d.mom.toFixed(1)+'%</span>');
