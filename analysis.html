@@ -10,12 +10,18 @@
   .wrap { max-width:760px; margin:0 auto; }
   h1 { font-size:26px; font-weight:700; margin-bottom:6px; }
   .sub { color:#6b7280; font-size:14px; margin-bottom:32px; }
+  .sec { font-size:16px; font-weight:700; color:#475569; margin:36px 0 14px; padding-bottom:8px; border-bottom:1px solid #e5e7eb; }
   .cards { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+  .arch-grid { grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:14px; }
   a.card { text-decoration:none; color:inherit; background:#fff; border:1px solid #e8eaed; border-radius:14px; padding:28px 24px; transition:transform .15s, box-shadow .15s; display:block; }
+  a.card.arch { padding:18px 20px; border-radius:10px; }
   a.card:hover { transform:translateY(-4px); box-shadow:0 12px 28px rgba(0,0,0,0.10); }
   .icon { font-size:34px; }
   .t { font-size:19px; font-weight:700; margin:12px 0 6px; }
+  a.card.arch .t { font-size:15px; margin:0 0 6px; display:flex; align-items:center; gap:8px; }
+  .tag { font-size:11px; font-weight:600; color:#fff; background:#7c3aed; border-radius:5px; padding:2px 7px; }
   .d { font-size:13px; color:#6b7280; line-height:1.6; }
+  a.card.arch .d { font-size:12px; }
   .bar { height:4px; border-radius:4px; margin-top:16px; }
   .bar.w { background:linear-gradient(90deg,#059669,#10b981); }
   .bar.m { background:linear-gradient(90deg,#7c3aed,#9333ea); }
@@ -24,22 +30,30 @@
 </head>
 <body>
 <div class="wrap">
-  <h1>📊 苏中区域 · 周/月维度分析</h1>
-  <div class="sub">数据更新于 2026-08-31 收盘（WK36 / 7月1日–8月31日）</div>
+  <h1>&#128202; 苏中区域 · 周/月维度分析</h1>
+  <div class="sub">数据更新于 2026-08-31 收盘（WK36）</div>
   <div class="cards">
     <a class="card" href="weekly_analysis.html">
-      <div class="icon">🟢</div>
+      <div class="icon">&#128994;</div>
       <div class="t">周维度分析</div>
       <div class="d">WK36（08.31–08.31）门店/导购/系列/区域对比，含成交率、连带、长尾款、WOS 机会点诊断。</div>
       <div class="bar w"></div>
     </a>
     <a class="card" href="monthly_analysis.html">
-      <div class="icon">🟣</div>
-      <div class="t">月维度分析</div>
-      <div class="d">7月1日–31日 vs 上月同期，门店到区域机会点诊断（9 维度 Excel + 5 Tab 交互看板）。</div>
+      <div class="icon">&#128995;</div>
+      <div class="t">月维度分析（当月）</div>
+      <div class="d">8月1日–31日 vs 上月同期，门店到区域机会点诊断（9 维度 Excel + 5 Tab 交互看板）。</div>
       <div class="bar m"></div>
     </a>
   </div>
+  <h2 class="sec">🗂 历史月分析归档</h2>
+  <div class="cards arch-grid">
+      <a class="card arch" href="monthly_2026-08.html">
+        <div class="t">2026年8月<span class="tag" style="background:#7c3aed">完整月</span></div>
+        <div class="d">数据周期 8月1日–31日 · 252KB · 快照已锁定</div>
+      </a>
+  </div>
+
   <div class="foot">每日主看板请返回日维度链接 · 本页为周/月专项分析</div>
 </div>
 </body>
