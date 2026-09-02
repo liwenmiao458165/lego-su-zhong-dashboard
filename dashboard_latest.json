@@ -3,10 +3,10 @@
     "day_amt": 11062.0,
     "month_amt": 21506.25,
     "wk28_amt": 21506.25,
-    "day_target": 0.0,
-    "month_target": 0.0,
-    "day_rate": Infinity,
-    "month_rate": Infinity,
+    "day_target": 62750.0,
+    "month_target": 2510000.0,
+    "day_rate": 17.63,
+    "month_rate": 0.86,
     "day_yoy_pct": -89.1,
     "month_yoy_pct": -84.95,
     "day_jd": 1.27,
@@ -23,10 +23,10 @@
       "day_amt": 1764.0,
       "wk28_amt": 3259.0,
       "month_amt": 3259.0,
-      "day_target": 0.0,
-      "month_target": 0.0,
-      "day_rate": Infinity,
-      "month_rate": Infinity,
+      "day_target": 10000.0,
+      "month_target": 400000.0,
+      "day_rate": 17.64,
+      "month_rate": 0.81,
       "day_yoy_pct": -72.99,
       "month_yoy_pct": -70.97,
       "day_jd": 1.5,
@@ -36,10 +36,10 @@
       "day_lt_qty": 0,
       "month_lt_amt": 0.0,
       "month_lt_qty": 0,
-      "lt_rate": NaN,
-      "lt_day_rate": NaN,
-      "lt_daily_target": 0.0,
-      "lt_month_target": 0.0,
+      "lt_rate": 0.0,
+      "lt_day_rate": 0.0,
+      "lt_daily_target": 400.0,
+      "lt_month_target": 16000.0,
       "day_np_amt": 107.0,
       "day_np_qty": 1,
       "month_np_amt": 107.0,
@@ -49,10 +49,10 @@
       "day_amt": 2011.0,
       "wk28_amt": 6717.25,
       "month_amt": 6717.25,
-      "day_target": 0.0,
-      "month_target": 0.0,
-      "day_rate": Infinity,
-      "month_rate": Infinity,
+      "day_target": 14000.0,
+      "month_target": 560000.0,
+      "day_rate": 14.36,
+      "month_rate": 1.2,
       "day_yoy_pct": -97.42,
       "month_yoy_pct": -93.12,
       "day_jd": 1.0,
@@ -62,10 +62,10 @@
       "day_lt_qty": 2,
       "month_lt_amt": 2067.25,
       "month_lt_qty": 3,
-      "lt_rate": Infinity,
-      "lt_day_rate": Infinity,
-      "lt_daily_target": 0.0,
-      "lt_month_target": 0.0,
+      "lt_rate": 9.23,
+      "lt_day_rate": 155.0,
+      "lt_daily_target": 560.0,
+      "lt_month_target": 22400.0,
       "day_np_amt": 0.0,
       "day_np_qty": 0,
       "month_np_amt": 1869.0,
@@ -75,10 +75,10 @@
       "day_amt": 4057.0,
       "wk28_amt": 5506.0,
       "month_amt": 5506.0,
-      "day_target": 0.0,
-      "month_target": 0.0,
-      "day_rate": Infinity,
-      "month_rate": Infinity,
+      "day_target": 5500.0,
+      "month_target": 220000.0,
+      "day_rate": 73.76,
+      "month_rate": 2.5,
       "day_yoy_pct": 4.35,
       "month_yoy_pct": -4.71,
       "day_jd": 1.6,
@@ -88,10 +88,10 @@
       "day_lt_qty": 2,
       "month_lt_amt": 445.0,
       "month_lt_qty": 2,
-      "lt_rate": Infinity,
-      "lt_day_rate": Infinity,
-      "lt_daily_target": 0.0,
-      "lt_month_target": 0.0,
+      "lt_rate": 5.06,
+      "lt_day_rate": 202.27,
+      "lt_daily_target": 220.0,
+      "lt_month_target": 8800.0,
       "day_np_amt": 0.0,
       "day_np_qty": 0,
       "month_np_amt": 0.0,
@@ -101,10 +101,10 @@
       "day_amt": 712.0,
       "wk28_amt": 3330.0,
       "month_amt": 3330.0,
-      "day_target": 0.0,
-      "month_target": 0.0,
-      "day_rate": Infinity,
-      "month_rate": Infinity,
+      "day_target": 14000.0,
+      "month_target": 560000.0,
+      "day_rate": 5.09,
+      "month_rate": 0.59,
       "day_yoy_pct": -82.75,
       "month_yoy_pct": -76.44,
       "day_jd": 1.0,
@@ -114,10 +114,10 @@
       "day_lt_qty": 2,
       "month_lt_amt": 576.0,
       "month_lt_qty": 3,
-      "lt_rate": Infinity,
-      "lt_day_rate": Infinity,
-      "lt_daily_target": 0.0,
-      "lt_month_target": 0.0,
+      "lt_rate": 2.57,
+      "lt_day_rate": 66.79,
+      "lt_daily_target": 560.0,
+      "lt_month_target": 22400.0,
       "day_np_amt": 0.0,
       "day_np_qty": 0,
       "month_np_amt": 2018.0,
@@ -127,10 +127,10 @@
       "day_amt": 647.0,
       "wk28_amt": 745.0,
       "month_amt": 745.0,
-      "day_target": 0.0,
-      "month_target": 0.0,
-      "day_rate": Infinity,
-      "month_rate": Infinity,
+      "day_target": 3250.0,
+      "month_target": 130000.0,
+      "day_rate": 19.91,
+      "month_rate": 0.57,
       "day_yoy_pct": -4.71,
       "month_yoy_pct": -46.36,
       "day_jd": 1.0,
@@ -140,10 +140,10 @@
       "day_lt_qty": 0,
       "month_lt_amt": 0.0,
       "month_lt_qty": 0,
-      "lt_rate": NaN,
-      "lt_day_rate": NaN,
-      "lt_daily_target": 0.0,
-      "lt_month_target": 0.0,
+      "lt_rate": 0.0,
+      "lt_day_rate": 0.0,
+      "lt_daily_target": 130.0,
+      "lt_month_target": 5200.0,
       "day_np_amt": 0.0,
       "day_np_qty": 0,
       "month_np_amt": 0.0,
@@ -153,10 +153,10 @@
       "day_amt": 1177.0,
       "wk28_amt": 1255.0,
       "month_amt": 1255.0,
-      "day_target": 0.0,
-      "month_target": 0.0,
-      "day_rate": Infinity,
-      "month_rate": Infinity,
+      "day_target": 4000.0,
+      "month_target": 160000.0,
+      "day_rate": 29.42,
+      "month_rate": 0.78,
       "day_yoy_pct": -41.21,
       "month_yoy_pct": -84.63,
       "day_jd": 3.0,
@@ -166,10 +166,10 @@
       "day_lt_qty": 1,
       "month_lt_amt": 272.0,
       "month_lt_qty": 1,
-      "lt_rate": Infinity,
-      "lt_day_rate": Infinity,
-      "lt_daily_target": 0.0,
-      "lt_month_target": 0.0,
+      "lt_rate": 4.25,
+      "lt_day_rate": 170.0,
+      "lt_daily_target": 160.0,
+      "lt_month_target": 6400.0,
       "day_np_amt": 0.0,
       "day_np_qty": 0,
       "month_np_amt": 0.0,
@@ -179,10 +179,10 @@
       "day_amt": 694.0,
       "wk28_amt": 694.0,
       "month_amt": 694.0,
-      "day_target": 0.0,
-      "month_target": 0.0,
-      "day_rate": Infinity,
-      "month_rate": Infinity,
+      "day_target": 12000.0,
+      "month_target": 480000.0,
+      "day_rate": 5.78,
+      "month_rate": 0.14,
       "day_yoy_pct": null,
       "month_yoy_pct": null,
       "day_jd": 1.2,
@@ -192,10 +192,10 @@
       "day_lt_qty": 0,
       "month_lt_amt": 0.0,
       "month_lt_qty": 0,
-      "lt_rate": NaN,
-      "lt_day_rate": NaN,
-      "lt_daily_target": 0.0,
-      "lt_month_target": 0.0,
+      "lt_rate": 0.0,
+      "lt_day_rate": 0.0,
+      "lt_daily_target": 480.0,
+      "lt_month_target": 19200.0,
       "day_np_amt": 0.0,
       "day_np_qty": 0,
       "month_np_amt": 0.0,
@@ -927,71 +927,71 @@
   },
   "store_monthly_targets": {
     "扬州万象汇": {
-      "month": 0.0,
-      "daily": 0.0
+      "month": 400000.0,
+      "daily": 10000.0
     },
     "扬州京华城": {
-      "month": 0.0,
-      "daily": 0.0
+      "month": 560000.0,
+      "daily": 14000.0
     },
     "扬州江都金鹰": {
-      "month": 0.0,
-      "daily": 0.0
+      "month": 220000.0,
+      "daily": 5500.0
     },
     "泰州万象城": {
-      "month": 0.0,
-      "daily": 0.0
+      "month": 560000.0,
+      "daily": 14000.0
     },
     "宿迁宝龙": {
-      "month": 0.0,
-      "daily": 0.0
+      "month": 130000.0,
+      "daily": 3250.0
     },
     "淮安新亚": {
-      "month": 0.0,
-      "daily": 0.0
+      "month": 160000.0,
+      "daily": 4000.0
     },
     "淮安万象城": {
-      "month": 0.0,
-      "daily": 0.0
+      "month": 480000.0,
+      "daily": 12000.0
     }
   },
   "store_daily_targets": {
-    "扬州万象汇": 0.0,
-    "扬州京华城": 0.0,
-    "扬州江都金鹰": 0.0,
-    "泰州万象城": 0.0,
-    "宿迁宝龙": 0.0,
-    "淮安新亚": 0.0,
-    "淮安万象城": 0.0
+    "扬州万象汇": 10000.0,
+    "扬州京华城": 14000.0,
+    "扬州江都金鹰": 5500.0,
+    "泰州万象城": 14000.0,
+    "宿迁宝龙": 3250.0,
+    "淮安新亚": 4000.0,
+    "淮安万象城": 12000.0
   },
   "store_lt_monthly_targets": {
     "扬州万象汇": {
-      "month": 0.0,
-      "daily": 0.0
+      "month": 16000.0,
+      "daily": 400.0
     },
     "扬州京华城": {
-      "month": 0.0,
-      "daily": 0.0
+      "month": 22400.0,
+      "daily": 560.0
     },
     "扬州江都金鹰": {
-      "month": 0.0,
-      "daily": 0.0
+      "month": 8800.0,
+      "daily": 220.0
     },
     "泰州万象城": {
-      "month": 0.0,
-      "daily": 0.0
+      "month": 22400.0,
+      "daily": 560.0
     },
     "宿迁宝龙": {
-      "month": 0.0,
-      "daily": 0.0
+      "month": 5200.0,
+      "daily": 130.0
     },
     "淮安新亚": {
-      "month": 0.0,
-      "daily": 0.0
+      "month": 6400.0,
+      "daily": 160.0
     },
     "淮安万象城": {
-      "month": 0.0,
-      "daily": 0.0
+      "month": 19200.0,
+      "daily": 480.0
     }
   },
   "store_yoy_day": {
