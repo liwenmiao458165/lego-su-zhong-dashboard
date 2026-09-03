@@ -1,37 +1,37 @@
 {
   "region": {
-    "day_amt": 20246.0,
-    "month_amt": 83732.75,
-    "wk28_amt": 128615.75,
+    "day_amt": 21174.0,
+    "month_amt": 84660.75,
+    "wk28_amt": 129543.75,
     "day_target": 55220.0,
     "month_target": 2510000.0,
-    "day_rate": 36.66,
-    "month_rate": 3.34,
-    "day_yoy_pct": -27.33,
-    "month_yoy_pct": -53.38,
-    "day_jd": 1.22,
-    "day_kdj": 410.02,
+    "day_rate": 38.34,
+    "month_rate": 3.37,
+    "day_yoy_pct": -23.83,
+    "month_yoy_pct": -52.82,
+    "day_jd": 1.21,
+    "day_kdj": 412.1,
     "np_day_amt": 119.0,
     "np_month_amt": 7950.0,
     "np_day_qty": 1,
     "np_month_qty": 8,
-    "np_day_pct": 0.59,
-    "np_month_pct": 9.49
+    "np_day_pct": 0.56,
+    "np_month_pct": 9.39
   },
   "stores": {
     "扬州万象汇": {
-      "day_amt": 6058.0,
-      "wk28_amt": 21432.0,
-      "month_amt": 11515.0,
+      "day_amt": 6437.0,
+      "wk28_amt": 21811.0,
+      "month_amt": 11894.0,
       "day_target": 8800.0,
       "month_target": 400000.0,
-      "day_rate": 68.84,
-      "month_rate": 2.88,
-      "day_yoy_pct": -22.69,
-      "month_yoy_pct": -39.6,
-      "day_jd": 1.18,
-      "day_kdj": 573.91,
-      "day_cnt": 11,
+      "day_rate": 73.15,
+      "month_rate": 2.97,
+      "day_yoy_pct": -17.85,
+      "month_yoy_pct": -37.61,
+      "day_jd": 1.17,
+      "day_kdj": 557.67,
+      "day_cnt": 12,
       "day_lt_amt": 264.0,
       "day_lt_qty": 1,
       "month_lt_amt": 453.0,
@@ -46,18 +46,18 @@
       "month_np_qty": 1
     },
     "扬州京华城": {
-      "day_amt": 4081.0,
-      "wk28_amt": 35731.25,
-      "month_amt": 25472.25,
+      "day_amt": 4630.0,
+      "wk28_amt": 36280.25,
+      "month_amt": 26021.25,
       "day_target": 12320.0,
       "month_target": 560000.0,
-      "day_rate": 33.12,
-      "month_rate": 4.55,
-      "day_yoy_pct": -22.18,
-      "month_yoy_pct": -75.24,
-      "day_jd": 1.23,
-      "day_kdj": 313.92,
-      "day_cnt": 13,
+      "day_rate": 37.58,
+      "month_rate": 4.65,
+      "day_yoy_pct": -11.71,
+      "month_yoy_pct": -74.71,
+      "day_jd": 1.21,
+      "day_kdj": 330.71,
+      "day_cnt": 14,
       "day_lt_amt": 0.0,
       "day_lt_qty": 0,
       "month_lt_amt": 2067.25,
@@ -215,9 +215,9 @@
       "day_amt": 547.0,
       "wk28_amt": 4301.25,
       "month_amt": 3102.25,
-      "day_pct": 13.4,
-      "wk28_pct": 12.0,
-      "month_pct": 12.2
+      "day_pct": 11.8,
+      "wk28_pct": 11.9,
+      "month_pct": 11.9
     },
     "扬州江都金鹰": {
       "day_amt": 0.0,
@@ -266,15 +266,15 @@
       "wk28_amt": 1509.0,
       "month_amt": 1028.0,
       "day_pct": 0.0,
-      "wk28_pct": 7.0,
-      "month_pct": 8.9
+      "wk28_pct": 6.9,
+      "month_pct": 8.6
     },
     "扬州京华城": {
       "day_amt": 415.0,
       "wk28_amt": 2146.0,
       "month_amt": 648.0,
-      "day_pct": 10.2,
-      "wk28_pct": 6.0,
+      "day_pct": 9.0,
+      "wk28_pct": 5.9,
       "month_pct": 2.5
     },
     "扬州江都金鹰": {
@@ -467,9 +467,9 @@
       "store": "扬州万象汇",
       "title": "店员",
       "target": 114285.714285714,
-      "day": 3764.0,
-      "wk28": 6045.0,
-      "month": 5259.0,
+      "day": 4143.0,
+      "wk28": 6424.0,
+      "month": 5638.0,
       "day_lt": 264.0,
       "wk28_lt": 513.0,
       "month_lt": 264.0,
@@ -477,9 +477,9 @@
       "wk28_np": 0.0,
       "month_np": 0.0,
       "wk_wos": 0,
-      "day_cnt": 5,
-      "day_qty": 6,
-      "day_jd": 1.2
+      "day_cnt": 6,
+      "day_qty": 7,
+      "day_jd": 1.17
     },
     "陆文一": {
       "store": "扬州京华城",
@@ -521,9 +521,9 @@
       "store": "扬州京华城",
       "title": "店员",
       "target": 124444.444444444,
-      "day": 826.0,
-      "wk28": 5774.0,
-      "month": 4479.0,
+      "day": 1375.0,
+      "wk28": 6323.0,
+      "month": 5028.0,
       "day_lt": 0.0,
       "wk28_lt": 0.0,
       "month_lt": 0.0,
@@ -531,9 +531,9 @@
       "wk28_np": 1869.0,
       "month_np": 1869.0,
       "wk_wos": 0,
-      "day_cnt": 3,
-      "day_qty": 4,
-      "day_jd": 1.33
+      "day_cnt": 4,
+      "day_qty": 5,
+      "day_jd": 1.25
     },
     "王永群": {
       "store": "扬州京华城",
@@ -1108,8 +1108,8 @@
             "qty": 1
           },
           "扬州京华城": {
-            "orders": 1,
-            "qty": 1
+            "orders": 2,
+            "qty": 2
           },
           "扬州江都金鹰": {
             "orders": 0,
@@ -1510,7 +1510,7 @@
     ],
     "store_orders": {
       "扬州万象汇": 2,
-      "扬州京华城": 6,
+      "扬州京华城": 7,
       "扬州江都金鹰": 3,
       "泰州万象城": 9,
       "宿迁宝龙": 0,
@@ -1519,7 +1519,7 @@
     },
     "store_qty": {
       "扬州万象汇": 2,
-      "扬州京华城": 8,
+      "扬州京华城": 9,
       "扬州江都金鹰": 4,
       "泰州万象城": 9,
       "宿迁宝龙": 0,
