@@ -460,6 +460,8 @@ function renderComparison(){
   const regYoy=r.wk_yoy;
   const regWkTarget=STORE_ORDER.reduce((sum,s)=>sum+DATA[s].daily.reduce((a,x)=>a+(x.target||0),0),0);
   const regWkRate=regWkTarget>0?totAmt/regWkTarget*100:0;
+  const totLtTarget=STORE_ORDER.reduce((a,s)=>a+(DATA[s].wk_lt_target||0),0);
+  const totLtRate=totLtTarget>0?totLt/totLtTarget*100:null;
   let html='<div class="kpi-row">'+
     '<div class="kpi-card"><div class="label">区域WK36周累计</div><div class="value" style="color:#1e293b">'+fmtAmt(totAmt)+'</div><div class="sub">周目标'+fmtAmt(regWkTarget)+' | <span style="color:'+(regWkRate>=50?'#16a34a':'#dc2626')+';font-weight:700">完成率'+regWkRate.toFixed(1)+'%</span></div></div>'+
     '<div class="kpi-card"><div class="label">区域周环比</div><div class="value '+(isNA(r.wow)?'':colorPct(r.wow))+'">'+(isNA(r.wow)?'N/A':(r.wow>=0?'+':'')+r.wow.toFixed(1)+'%')+'</div><div class="sub">vs WK35</div></div>'+
@@ -482,8 +484,6 @@ function renderComparison(){
     const ltTarget=d.wk_lt_target||0;
     return{s,ltAmt:d.wk_lt||0,ltQty,ltTarget,ltRt:ltTarget>0?(d.wk_lt||0)/ltTarget*100:null,ltPct:d.wk_amt>0?(d.wk_lt||0)/d.wk_amt*100:0,sampAmt:sampD.wk_amt||0,sampQty:sampD.wk_qty||0};
   }).sort((a,b)=>b.ltAmt-a.ltAmt);
-  const totLtTarget=STORE_ORDER.reduce((a,s)=>a+(DATA[s].wk_lt_target||0),0);
-  const totLtRate=totLtTarget>0?totLt/totLtTarget*100:null;
 
   // Chart 1: Weekly amount comparison (bar)
   html+='<div class="chart-grid">'+
