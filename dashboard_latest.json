@@ -423,13 +423,13 @@
       "wk28_np": 329.0,
       "month_np": 329.0,
       "wk_wos": 1461.0,
-      "day_cnt": 0,
-      "day_qty": 0,
-      "day_jd": 0,
-      "month_cnt": 0,
-      "month_qty": 0,
-      "month_jd": 0,
-      "month_atv": 0
+      "day_cnt": 9,
+      "day_qty": 13,
+      "day_jd": 1.44,
+      "month_cnt": 15,
+      "month_qty": 24,
+      "month_jd": 1.6,
+      "month_atv": 401.07
     },
     "文雅君": {
       "store": "扬州万象汇",
@@ -661,13 +661,13 @@
       "wk28_np": 0.0,
       "month_np": 0.0,
       "wk_wos": 1172.0,
-      "day_cnt": 0,
-      "day_qty": 0,
-      "day_jd": 0,
-      "month_cnt": 0,
-      "month_qty": 0,
-      "month_jd": 0,
-      "month_atv": 0
+      "day_cnt": 12,
+      "day_qty": 16,
+      "day_jd": 1.33,
+      "month_cnt": 17,
+      "month_qty": 24,
+      "month_jd": 1.41,
+      "month_atv": 454.24
     },
     "于小进": {
       "store": "泰州万象城",
