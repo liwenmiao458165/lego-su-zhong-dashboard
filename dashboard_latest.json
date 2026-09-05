@@ -425,7 +425,11 @@
       "wk_wos": 1461.0,
       "day_cnt": 0,
       "day_qty": 0,
-      "day_jd": 0
+      "day_jd": 0,
+      "month_cnt": 0,
+      "month_qty": 0,
+      "month_jd": 0,
+      "month_atv": 0
     },
     "文雅君": {
       "store": "扬州万象汇",
@@ -659,7 +663,11 @@
       "wk_wos": 1172.0,
       "day_cnt": 0,
       "day_qty": 0,
-      "day_jd": 0
+      "day_jd": 0,
+      "month_cnt": 0,
+      "month_qty": 0,
+      "month_jd": 0,
+      "month_atv": 0
     },
     "于小进": {
       "store": "泰州万象城",
