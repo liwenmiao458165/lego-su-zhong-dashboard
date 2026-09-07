@@ -123,22 +123,22 @@
     ]
   },
   "扬州京华城": {
-    "month_amt": 99182.25,
-    "mom": -24.7,
+    "month_amt": 102449.25,
+    "mom": -22.3,
     "mom_prev": 131792.0,
-    "yoy": -29.7,
+    "yoy": -27.4,
     "yoy_prev": 141050.0,
     "target": 560000.0,
-    "month_rate": 17.7,
-    "month_cnt": 215,
-    "month_qty": 288,
-    "month_atv": 461.31,
-    "month_jd": 1.34,
-    "month_wos": 10682.25,
+    "month_rate": 18.3,
+    "month_cnt": 218,
+    "month_qty": 291,
+    "month_atv": 469.95,
+    "month_jd": 1.33,
+    "month_wos": 12001.25,
     "new_amt": 5638.0,
     "new_qty": 13,
     "new_cnt": 12,
-    "new_rate": 5.7,
+    "new_rate": 5.5,
     "month_jl": 2007.0,
     "month_lt": 19166.25,
     "month_lt_qty": 32,
@@ -192,33 +192,33 @@
       },
       {
         "day": 4,
-        "amt": 21621.0,
+        "amt": 23569.0,
         "target": 18666.67,
-        "rate": 115.8,
+        "rate": 126.3,
         "yoy_amt": 7910.0,
-        "yoy_pct": 173.3,
+        "yoy_pct": 198.0,
         "lt": 6405.0,
         "lt_qty": 12,
         "lt_target": 672.0,
         "lt_rate": 953.1,
         "wos": 1190.0,
         "jl": 832.0,
-        "tx_cnt": 43
+        "tx_cnt": 45
       },
       {
         "day": 5,
-        "amt": 25338.0,
+        "amt": 26657.0,
         "target": 18666.67,
-        "rate": 135.7,
+        "rate": 142.8,
         "yoy_amt": 14945.0,
-        "yoy_pct": 69.5,
+        "yoy_pct": 78.4,
         "lt": 6370.0,
         "lt_qty": 9,
         "lt_target": 1456.0,
         "lt_rate": 437.5,
-        "wos": 4929.0,
+        "wos": 6248.0,
         "jl": 239.0,
-        "tx_cnt": 56
+        "tx_cnt": 57
       },
       {
         "day": 6,
@@ -861,27 +861,27 @@
     ]
   },
   "_region": {
-    "month_amt": 369504.25,
+    "month_amt": 372771.25,
     "mom_prev": 576440.08,
     "yoy_prev": 315850.0,
     "target": 2510000.0,
-    "month_cnt": 857,
-    "month_qty": 1166,
-    "month_wos": 44175.75,
+    "month_cnt": 860,
+    "month_qty": 1169,
+    "month_wos": 45494.75,
     "month_jl": 13295.5,
     "month_lt": 56604.75,
     "month_lt_qty": 109,
-    "mom": -35.9,
-    "yoy": 3.3,
-    "month_rate": 14.7,
-    "month_atv": 431.16,
+    "mom": -35.3,
+    "yoy": 4.3,
+    "month_rate": 14.9,
+    "month_atv": 433.45,
     "month_jd": 1.36,
     "month_lt_target": 100400.0,
     "month_lt_rate": 56.4,
     "new_amt": 18007.0,
     "new_qty": 40,
     "new_cnt": 37,
-    "new_rate": 4.9,
+    "new_rate": 4.8,
     "daily": [
       {
         "day": 1,
@@ -921,11 +921,11 @@
       },
       {
         "day": 4,
-        "amt": 63830.0,
+        "amt": 65778.0,
         "target": 80967.74,
-        "rate": 78.8,
+        "rate": 81.2,
         "yoy_amt": 31387.0,
-        "yoy_pct": 85.8,
+        "yoy_pct": 92.0,
         "lt": 13438.0,
         "lt_qty": 29,
         "lt_target": 3012.0,
@@ -933,11 +933,11 @@
       },
       {
         "day": 5,
-        "amt": 123606.5,
+        "amt": 124925.5,
         "target": 80967.74,
-        "rate": 152.7,
+        "rate": 154.3,
         "yoy_amt": 51166.0,
-        "yoy_pct": 107.2,
+        "yoy_pct": 109.8,
         "lt": 22006.5,
         "lt_qty": 39,
         "lt_target": 6526.0,
@@ -984,7 +984,7 @@
       "DISNEY JUNIOR": 189.0
     },
     "扬州京华城": {
-      "TECHNIC": 17746.0,
+      "TECHNIC": 18295.0,
       "ICONS": 10151.0,
       "CITY": 9878.0,
       "SUPER MARIO": 7738.0,
@@ -993,6 +993,7 @@
       "NINJAGO": 5162.0,
       "SPEED CHAMPIONS": 4324.0,
       "EDITIONS": 3773.25,
+      "ONE PIECE": 3599.0,
       "DISNEY ANIMATION": 3573.0,
       "THE LEGEND OF ZELDA": 3148.0,
       "SUPER HEROES": 3066.0,
@@ -1000,9 +1001,9 @@
       "DUPLO": 2770.0,
       "CHINESE FESTIVALS": 2317.0,
       "BOTANICALS": 2286.0,
-      "ONE PIECE": 2200.0,
       "LEGO IDEAS": 2023.0,
       "JURASSIC WORLD": 1697.0,
+      "HARRY POTTER TM": 1319.0,
       "CREATOR": 807.0,
       "STAR WARS TM": 779.0,
       "BLUEY": 410.0,
@@ -1113,7 +1114,7 @@
       "SUPER HEROES": 179.0
     },
     "_region": {
-      "TECHNIC": 58127.5,
+      "TECHNIC": 58676.5,
       "NINJAGO": 41810.0,
       "CITY": 40023.0,
       "ICONS": 39677.0,
@@ -1127,12 +1128,12 @@
       "LEGO IDEAS": 12037.0,
       "THE LEGEND OF ZELDA": 11018.0,
       "EDITIONS": 9110.25,
+      "ONE PIECE": 7887.0,
       "BOTANICALS": 7430.0,
-      "ONE PIECE": 6488.0,
       "CHINESE FESTIVALS": 5901.0,
+      "HARRY POTTER TM": 5814.0,
       "CREATOR": 5688.0,
       "SUPER HEROES": 4983.0,
-      "HARRY POTTER TM": 4495.0,
       "JURASSIC WORLD": 3877.0,
       "STAR WARS TM": 2324.0,
       "MONKIE KID": 1148.0,
@@ -1649,9 +1650,17 @@
         "amt": 2995.0,
         "qty": 5
       },
+      "卡普的海军战舰": {
+        "amt": 2818.0,
+        "qty": 2
+      },
       "杰克·史派罗船长的海盗船": {
         "amt": 2799.0,
         "qty": 1
+      },
+      "宝马 M4 GT3 EVO 赛车": {
+        "amt": 2218.0,
+        "qty": 4
       },
       "橙色的猫": {
         "amt": 2023.0,
@@ -1685,10 +1694,6 @@
         "amt": 1724.0,
         "qty": 2
       },
-      "宝马 M4 GT3 EVO 赛车": {
-        "amt": 1669.0,
-        "qty": 3
-      },
       "定制款福特野马GT赛车": {
         "amt": 1648.0,
         "qty": 2
@@ -1709,13 +1714,13 @@
         "amt": 1429.0,
         "qty": 1
       },
-      "卡普的海军战舰": {
-        "amt": 1419.0,
-        "qty": 1
-      },
       "15周年纪念款 忍者道场展示台": {
         "amt": 1346.0,
         "qty": 4
+      },
+      "《哈利·波特与魔法石》电影 – 收藏版": {
+        "amt": 1319.0,
+        "qty": 1
       },
       "梅西的庆祝时刻": {
         "amt": 1199.25,
@@ -4069,6 +4074,10 @@
         "amt": 6034.0,
         "qty": 12
       },
+      "卡普的海军战舰": {
+        "amt": 5716.0,
+        "qty": 4
+      },
       "迷你霍格沃茨城堡": {
         "amt": 5619.0,
         "qty": 17
@@ -4089,10 +4098,6 @@
         "amt": 4320.0,
         "qty": 13
       },
-      "卡普的海军战舰": {
-        "amt": 4317.0,
-        "qty": 3
-      },
       "封赏之地战车": {
         "amt": 4275.0,
         "qty": 4
@@ -4105,6 +4110,10 @@
         "amt": 4138.0,
         "qty": 16
       },
+      "宝马 M4 GT3 EVO 赛车": {
+        "amt": 3941.0,
+        "qty": 7
+      },
       "东坡望月楼": {
         "amt": 3776.0,
         "qty": 4
@@ -4116,10 +4125,6 @@
       "NASA Artemis 太空发射系统": {
         "amt": 3523.0,
         "qty": 7
-      },
-      "宝马 M4 GT3 EVO 赛车": {
-        "amt": 3392.0,
-        "qty": 6
       },
       "终极战斗神龙": {
         "amt": 3368.0,
@@ -4156,6 +4161,10 @@
       "道奇 Viper GTS-R 跑车": {
         "amt": 2805.0,
         "qty": 5
+      },
+      "《哈利·波特与魔法石》电影 – 收藏版": {
+        "amt": 2668.0,
+        "qty": 2
       },
       "客运飞机": {
         "amt": 2643.0,
@@ -4364,10 +4373,6 @@
       "红牛车队 RB20 F1® 赛车": {
         "amt": 1379.0,
         "qty": 6
-      },
-      "《哈利·波特与魔法石》电影 – 收藏版": {
-        "amt": 1349.0,
-        "qty": 1
       },
       "凯的神龙战斗机甲": {
         "amt": 1288.0,
@@ -5420,6 +5425,24 @@
     ],
     "扬州京华城": [
       {
+        "name": "丁茜",
+        "store": "扬州京华城",
+        "title": "储备陈列专家",
+        "target": 124444.444444444,
+        "m_sales": 24806.0,
+        "m_qty": 58,
+        "m_cnt": 43,
+        "m_atv": 576.88,
+        "m_jd": 1.35,
+        "m_wos": 1457.0,
+        "m_lt": 3153.0,
+        "m_lt_qty": 6,
+        "m_np": 119.0,
+        "m_rate": 19.9,
+        "m_prev": 22881.0,
+        "mom": 8.4
+      },
+      {
         "name": "王泽馨",
         "store": "扬州京华城",
         "title": "店员（长期兼职）",
@@ -5438,40 +5461,22 @@
         "mom": -16.4
       },
       {
-        "name": "丁茜",
-        "store": "扬州京华城",
-        "title": "储备陈列专家",
-        "target": 124444.444444444,
-        "m_sales": 22858.0,
-        "m_qty": 56,
-        "m_cnt": 41,
-        "m_atv": 557.51,
-        "m_jd": 1.37,
-        "m_wos": 1457.0,
-        "m_lt": 3153.0,
-        "m_lt_qty": 6,
-        "m_np": 119.0,
-        "m_rate": 18.4,
-        "m_prev": 22881.0,
-        "mom": -0.1
-      },
-      {
         "name": "王永群",
         "store": "扬州京华城",
         "title": "初级培训专家",
         "target": 124444.444444444,
-        "m_sales": 19892.0,
-        "m_qty": 54,
-        "m_cnt": 36,
-        "m_atv": 552.56,
-        "m_jd": 1.5,
-        "m_wos": 2392.0,
+        "m_sales": 21211.0,
+        "m_qty": 55,
+        "m_cnt": 37,
+        "m_atv": 573.27,
+        "m_jd": 1.49,
+        "m_wos": 3711.0,
         "m_lt": 6109.0,
         "m_lt_qty": 7,
         "m_np": 1988.0,
-        "m_rate": 16.0,
+        "m_rate": 17.0,
         "m_prev": 33719.0,
-        "mom": -41.0
+        "mom": -37.1
       },
       {
         "name": "董文兵",
@@ -6049,8 +6054,8 @@
     },
     "扬州京华城": {
       "flow": 2585,
-      "cnt": 215,
-      "rate": 8.32
+      "cnt": 218,
+      "rate": 8.43
     },
     "扬州江都金鹰": {
       "flow": 891,
@@ -6079,8 +6084,8 @@
     },
     "_region": {
       "flow": 10169,
-      "cnt": 857,
-      "rate": 8.43
+      "cnt": 860,
+      "rate": 8.46
     }
   },
   "_meta": {
