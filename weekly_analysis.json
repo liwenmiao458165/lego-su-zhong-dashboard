@@ -994,23 +994,23 @@
     "wk_lt_rate": 139.1
   },
   "_region": {
-    "day_amt": 308.0,
-    "month_amt": 369812.25,
+    "day_amt": 1535.0,
+    "month_amt": 374306.25,
     "wk28_amt": 454288.5,
     "day_target": 40160.0,
     "month_target": 2510000.0,
-    "day_rate": 0.77,
-    "month_rate": 14.73,
-    "day_yoy_pct": -99.66,
-    "month_yoy_pct": -19.58,
+    "day_rate": 3.82,
+    "month_rate": 14.91,
+    "day_yoy_pct": -98.3,
+    "month_yoy_pct": -18.47,
     "day_jd": 1.0,
-    "day_kdj": 154.0,
+    "day_kdj": 255.83,
     "np_day_amt": 0.0,
     "np_month_amt": 18007.0,
     "np_day_qty": 0,
     "np_month_qty": 40,
     "np_day_pct": 0.0,
-    "np_month_pct": 4.87,
+    "np_month_pct": 4.81,
     "wk_yoy": -37.2,
     "wk_np_amt": 18007.0,
     "wk_amt": 417654.25,
@@ -6490,86 +6490,86 @@
   ],
   "_conversion": {
     "扬州万象汇": {
-      "flow": 1472,
+      "flow": 0,
       "cnt": 140,
-      "rate": 9.51
+      "rate": null
     },
     "扬州京华城": {
-      "flow": 2585,
+      "flow": 0,
       "cnt": 218,
-      "rate": 8.43
+      "rate": null
     },
     "扬州江都金鹰": {
-      "flow": 891,
+      "flow": 0,
       "cnt": 84,
-      "rate": 9.43
+      "rate": null
     },
     "泰州万象城": {
-      "flow": 2833,
+      "flow": 0,
       "cnt": 184,
-      "rate": 6.49
+      "rate": null
     },
     "宿迁宝龙": {
-      "flow": 887,
+      "flow": 0,
       "cnt": 61,
-      "rate": 6.88
+      "rate": null
     },
     "淮安新亚": {
-      "flow": 481,
+      "flow": 0,
       "cnt": 53,
-      "rate": 11.02
+      "rate": null
     },
     "淮安万象城": {
-      "flow": 1020,
+      "flow": 0,
       "cnt": 120,
-      "rate": 11.76
+      "rate": null
     },
     "_region": {
-      "flow": 10169,
+      "flow": 0,
       "cnt": 860,
-      "rate": 8.46
+      "rate": null
     }
   },
   "_weekly_conversion": {
     "扬州万象汇": {
-      "flow": 1652,
+      "flow": 0,
       "cnt": 159,
-      "rate": 9.62
+      "rate": null
     },
     "扬州京华城": {
-      "flow": 2909,
+      "flow": 0,
       "cnt": 241,
-      "rate": 8.28
+      "rate": null
     },
     "扬州江都金鹰": {
-      "flow": 1009,
+      "flow": 0,
       "cnt": 97,
-      "rate": 9.61
+      "rate": null
     },
     "泰州万象城": {
-      "flow": 3170,
+      "flow": 0,
       "cnt": 210,
-      "rate": 6.62
+      "rate": null
     },
     "宿迁宝龙": {
-      "flow": 999,
+      "flow": 0,
       "cnt": 67,
-      "rate": 6.71
+      "rate": null
     },
     "淮安新亚": {
-      "flow": 573,
+      "flow": 0,
       "cnt": 66,
-      "rate": 11.52
+      "rate": null
     },
     "淮安万象城": {
-      "flow": 1138,
+      "flow": 0,
       "cnt": 135,
-      "rate": 11.86
+      "rate": null
     },
     "_region": {
-      "flow": 11450,
+      "flow": 0,
       "cnt": 975,
-      "rate": 8.52
+      "rate": null
     }
   },
   "_meta": {
