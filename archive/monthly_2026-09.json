@@ -1410,23 +1410,23 @@
     ]
   },
   "淮安万象城": {
-    "month_amt": 94465.0,
-    "mom": -44.3,
+    "month_amt": 95065.0,
+    "mom": -44.0,
     "mom_prev": 169712.08,
     "yoy": null,
     "yoy_prev": 0,
     "target": 480000.0,
-    "month_rate": 19.7,
-    "month_cnt": 275,
-    "month_qty": 360,
-    "month_atv": 343.51,
+    "month_rate": 19.8,
+    "month_cnt": 277,
+    "month_qty": 362,
+    "month_atv": 343.19,
     "month_jd": 1.31,
     "month_wos": 10207.0,
     "new_amt": 4345.0,
     "new_qty": 5,
     "new_cnt": 5,
     "new_rate": 4.6,
-    "month_jl": 1904.0,
+    "month_jl": 2504.0,
     "month_lt": 12271.0,
     "month_lt_qty": 29,
     "month_lt_target": 19200.0,
@@ -1524,9 +1524,9 @@
       },
       {
         "day": 7,
-        "amt": 4040.0,
+        "amt": 4640.0,
         "target": 16000.0,
-        "rate": 25.2,
+        "rate": 29.0,
         "yoy_amt": 0,
         "yoy_pct": null,
         "lt": 1986.0,
@@ -1534,8 +1534,8 @@
         "lt_target": 307.2,
         "lt_rate": 646.5,
         "wos": 0.0,
-        "jl": 241.0,
-        "tx_cnt": 10
+        "jl": 841.0,
+        "tx_cnt": 12
       },
       {
         "day": 8,
@@ -1645,20 +1645,20 @@
     ]
   },
   "_region": {
-    "month_amt": 737280.5,
+    "month_amt": 737880.5,
     "mom_prev": 1163259.62,
     "yoy_prev": 716869.0,
     "target": 2510000.0,
-    "month_cnt": 1760,
-    "month_qty": 2376,
+    "month_cnt": 1762,
+    "month_qty": 2378,
     "month_wos": 79119.5,
-    "month_jl": 28850.0,
+    "month_jl": 29450.0,
     "month_lt": 99715.83,
     "month_lt_qty": 222,
     "mom": -36.6,
     "yoy": -10.3,
     "month_rate": 29.4,
-    "month_atv": 418.91,
+    "month_atv": 418.77,
     "month_jd": 1.35,
     "month_lt_target": 100400.0,
     "month_lt_rate": 99.3,
@@ -1741,9 +1741,9 @@
       },
       {
         "day": 7,
-        "amt": 31202.75,
+        "amt": 31802.75,
         "target": 80967.74,
-        "rate": 38.5,
+        "rate": 39.3,
         "yoy_amt": 90269.0,
         "yoy_pct": -69.9,
         "lt": 13399.75,
@@ -1967,7 +1967,7 @@
       "STAR WARS TM": 511.0
     },
     "淮安万象城": {
-      "NINJAGO": 13520.0,
+      "NINJAGO": 13955.0,
       "CITY": 13238.0,
       "TECHNIC": 11030.0,
       "MINECRAFT": 8355.0,
@@ -1984,15 +1984,15 @@
       "THE LEGEND OF ZELDA": 1574.0,
       "LEGO IDEAS": 1349.0,
       "CREATOR": 1234.0,
+      "SUPER HEROES": 1035.0,
       "MONKIE KID": 966.0,
-      "SUPER HEROES": 870.0,
       "STAR WARS TM": 404.0,
       "JURASSIC WORLD": 269.0
     },
     "_region": {
       "TECHNIC": 122619.5,
       "CITY": 87739.5,
-      "NINJAGO": 72242.48,
+      "NINJAGO": 72677.48,
       "ICONS": 56325.0,
       "LEL": 53365.22,
       "MINECRAFT": 48175.0,
@@ -2008,7 +2008,7 @@
       "SUPER MARIO": 14918.0,
       "ONE PIECE": 12224.0,
       "CREATOR": 11125.0,
-      "SUPER HEROES": 8497.0,
+      "SUPER HEROES": 8662.0,
       "CHINESE FESTIVALS": 7698.0,
       "JURASSIC WORLD": 6987.0,
       "MONKIE KID": 4257.0,
@@ -6057,6 +6057,10 @@
         "amt": 860.0,
         "qty": 5
       },
+      "杰的忍者变形战车": {
+        "amt": 854.0,
+        "qty": 2
+      },
       "喷气式客运飞机": {
         "amt": 837.0,
         "qty": 3
@@ -6185,6 +6189,10 @@
         "amt": 529.0,
         "qty": 1
       },
+      "蜘蛛侠汽车大战毒液化金刚狼": {
+        "amt": 523.0,
+        "qty": 3
+      },
       "齐尔瓦的猿龙猛兽": {
         "amt": 517.0,
         "qty": 3
@@ -6253,10 +6261,6 @@
         "amt": 434.0,
         "qty": 5
       },
-      "杰的忍者变形战车": {
-        "amt": 419.0,
-        "qty": 1
-      },
       "狐狸": {
         "amt": 399.0,
         "qty": 1
@@ -6288,10 +6292,6 @@
       "骷髅": {
         "amt": 369.0,
         "qty": 1
-      },
-      "蜘蛛侠汽车大战毒液化金刚狼": {
-        "amt": 358.0,
-        "qty": 2
       },
       "海绵宝宝玩偶": {
         "amt": 357.0,
@@ -7167,6 +7167,10 @@
         "amt": 1587.0,
         "qty": 3
       },
+      "蜘蛛侠汽车大战毒液化金刚狼": {
+        "amt": 1580.0,
+        "qty": 9
+      },
       "开花的仙人掌": {
         "amt": 1577.49,
         "qty": 6
@@ -7211,10 +7215,6 @@
         "amt": 1422.0,
         "qty": 18
       },
-      "蜘蛛侠汽车大战毒液化金刚狼": {
-        "amt": 1415.0,
-        "qty": 8
-      },
       "心湖城度假大酒店": {
         "amt": 1399.0,
         "qty": 1
@@ -7258,6 +7258,10 @@
       "法拉利 F1® 赛车维修站": {
         "amt": 1305.0,
         "qty": 5
+      },
+      "杰的忍者变形战车": {
+        "amt": 1303.0,
+        "qty": 3
       },
       "守护神龙": {
         "amt": 1299.0,
@@ -7498,10 +7502,6 @@
       "末影人塔楼": {
         "amt": 869.0,
         "qty": 1
-      },
-      "杰的忍者变形战车": {
-        "amt": 868.0,
-        "qty": 2
       },
       "可爱的仓鼠": {
         "amt": 858.0,
@@ -8896,44 +8896,44 @@
   },
   "_conversion": {
     "扬州万象汇": {
-      "flow": 2820,
+      "flow": 0,
       "cnt": 277,
-      "rate": 9.82
+      "rate": null
     },
     "扬州京华城": {
-      "flow": 4976,
+      "flow": 0,
       "cnt": 416,
-      "rate": 8.36
+      "rate": null
     },
     "扬州江都金鹰": {
-      "flow": 1803,
+      "flow": 0,
       "cnt": 169,
-      "rate": 9.37
+      "rate": null
     },
     "泰州万象城": {
-      "flow": 5564,
+      "flow": 0,
       "cnt": 371,
-      "rate": 6.67
+      "rate": null
     },
     "宿迁宝龙": {
-      "flow": 1711,
+      "flow": 0,
       "cnt": 106,
-      "rate": 6.2
+      "rate": null
     },
     "淮安新亚": {
-      "flow": 1010,
+      "flow": 0,
       "cnt": 146,
-      "rate": 14.46
+      "rate": null
     },
     "淮安万象城": {
-      "flow": 2123,
-      "cnt": 275,
-      "rate": 12.95
+      "flow": 0,
+      "cnt": 277,
+      "rate": null
     },
     "_region": {
-      "flow": 20007,
-      "cnt": 1760,
-      "rate": 8.8
+      "flow": 0,
+      "cnt": 1762,
+      "rate": null
     }
   },
   "_meta": {
