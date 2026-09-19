@@ -210,6 +210,35 @@ body { background: var(--bg-page); color: var(--text-primary); }
     .kg-tab { padding:8px 12px; font-size:13px; }
   }
 
+  /* 门店 KPI 表格列宽压缩（2026-09-19 新增：14 列在常规屏宽下溢出导致「客单价」被截）
+     - 全屏 ≥1200px：列宽 70-90px，可容 14 列不溢出
+     - 中等屏 1024-1199px：字号缩到 11px、padding 减半
+     - 窄屏 ≤1024px：隐藏「即时零售」「新品占比」两列，留 12 列
+  */
+  .kg-pane-kpi table { table-layout:fixed; min-width:0; }
+  .kg-pane-kpi table th, .kg-pane-kpi table td { padding:7px 4px; font-size:12px; }
+  .kg-pane-kpi table th:nth-child(1), .kg-pane-kpi table td:nth-child(1) { min-width:80px; }      /* 门店 */
+  .kg-pane-kpi table th:nth-child(2), .kg-pane-kpi table td:nth-child(2) { min-width:78px; }      /* 日销售 */
+  .kg-pane-kpi table th:nth-child(3), .kg-pane-kpi table td:nth-child(3) { min-width:62px; }      /* 日指标 */
+  .kg-pane-kpi table th:nth-child(4), .kg-pane-kpi table td:nth-child(4) { min-width:82px; }      /* 日完成率 */
+  .kg-pane-kpi table th:nth-child(5), .kg-pane-kpi table td:nth-child(5) { min-width:62px; }      /* 日同比 */
+  .kg-pane-kpi table th:nth-child(6), .kg-pane-kpi table td:nth-child(6) { min-width:78px; }      /* 日长尾销售 */
+  .kg-pane-kpi table th:nth-child(7), .kg-pane-kpi table td:nth-child(7) { min-width:78px; }      /* 新客主推款 */
+  .kg-pane-kpi table th:nth-child(8), .kg-pane-kpi table td:nth-child(8) { min-width:78px; }      /* 秋特销售 */
+  .kg-pane-kpi table th:nth-child(9), .kg-pane-kpi table td:nth-child(9) { min-width:78px; }      /* 新品销售 */
+  .kg-pane-kpi table th:nth-child(10), .kg-pane-kpi table td:nth-child(10) { min-width:54px; }   /* 新品占比 */
+  .kg-pane-kpi table th:nth-child(11), .kg-pane-kpi table td:nth-child(11) { min-width:68px; }   /* WOS */
+  .kg-pane-kpi table th:nth-child(12), .kg-pane-kpi table td:nth-child(12) { min-width:68px; }   /* 即时零售 */
+  .kg-pane-kpi table th:nth-child(13), .kg-pane-kpi table td:nth-child(13) { min-width:54px; }   /* 连带率 */
+  .kg-pane-kpi table th:nth-child(14), .kg-pane-kpi table td:nth-child(14) { min-width:62px; }   /* 客单价 */
+  @media(max-width:1199px) {
+    .kg-pane-kpi table th, .kg-pane-kpi table td { padding:6px 3px; font-size:11px; }
+  }
+  @media(max-width:1023px) {
+    .kg-pane-kpi table th:nth-child(10), .kg-pane-kpi table td:nth-child(10),
+    .kg-pane-kpi table th:nth-child(12), .kg-pane-kpi table td:nth-child(12) { display:none; }
+  }
+
 
   /* KPI卡顶边按 section 区分品类色 */
   .section-title-store ~ * .kpi-card,
