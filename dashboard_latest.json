@@ -22,7 +22,15 @@
     "xc_day_qty": 4,
     "xc_month_qty": 108,
     "xc_day_pct": 1.93,
-    "xc_month_pct": 2.22
+    "xc_month_pct": 2.22,
+    "qj_day_amt": 8054.0,
+    "qj_month_amt": 16618.0,
+    "qj_day_qty": 17,
+    "qj_month_qty": 34,
+    "qj_day_pct": 19.49,
+    "qj_month_pct": 1.8,
+    "qj_recommend_day_amt": 5841.0,
+    "qj_recommend_month_amt": 13075.0
   },
   "stores": {
     "扬州万象汇": {
