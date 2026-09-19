@@ -49,7 +49,11 @@
       "day_np_amt": 0.0,
       "day_np_qty": 0,
       "month_np_amt": 7720.0,
-      "month_np_qty": 19
+      "month_np_qty": 19,
+      "day_xc_amt": 89.0,
+      "day_xc_qty": 1,
+      "month_xc_amt": 3324.0,
+      "month_xc_qty": 20
     },
     "扬州京华城": {
       "day_amt": 7092.0,
@@ -75,7 +79,11 @@
       "day_np_amt": 0.0,
       "day_np_qty": 0,
       "month_np_amt": 8962.0,
-      "month_np_qty": 20
+      "month_np_qty": 20,
+      "day_xc_amt": 0.0,
+      "day_xc_qty": 0,
+      "month_xc_amt": 6358.0,
+      "month_xc_qty": 26
     },
     "扬州江都金鹰": {
       "day_amt": 4335.0,
@@ -101,7 +109,11 @@
       "day_np_amt": 0.0,
       "day_np_qty": 0,
       "month_np_amt": 2129.0,
-      "month_np_qty": 10
+      "month_np_qty": 10,
+      "day_xc_amt": 89.0,
+      "day_xc_qty": 1,
+      "month_xc_amt": 1824.0,
+      "month_xc_qty": 12
     },
     "泰州万象城": {
       "day_amt": 12635.0,
@@ -127,7 +139,11 @@
       "day_np_amt": 342.0,
       "day_np_qty": 1,
       "month_np_amt": 9813.0,
-      "month_np_qty": 21
+      "month_np_qty": 21,
+      "day_xc_amt": 89.0,
+      "day_xc_qty": 1,
+      "month_xc_amt": 3126.0,
+      "month_xc_qty": 20
     },
     "宿迁宝龙": {
       "day_amt": 2823.0,
@@ -153,7 +169,11 @@
       "day_np_amt": 0.0,
       "day_np_qty": 0,
       "month_np_amt": 1002.0,
-      "month_np_qty": 3
+      "month_np_qty": 3,
+      "day_xc_amt": 0.0,
+      "day_xc_qty": 0,
+      "month_xc_amt": 1310.0,
+      "month_xc_qty": 9
     },
     "淮安新亚": {
       "day_amt": 6028.0,
@@ -179,7 +199,11 @@
       "day_np_amt": 0.0,
       "day_np_qty": 0,
       "month_np_amt": 737.0,
-      "month_np_qty": 4
+      "month_np_qty": 4,
+      "day_xc_amt": 0.0,
+      "day_xc_qty": 0,
+      "month_xc_amt": 2338.0,
+      "month_xc_qty": 10
     },
     "淮安万象城": {
       "day_amt": 3110.0,
@@ -205,7 +229,11 @@
       "day_np_amt": 0.0,
       "day_np_qty": 0,
       "month_np_amt": 4777.0,
-      "month_np_qty": 7
+      "month_np_qty": 7,
+      "day_xc_amt": 529.0,
+      "day_xc_qty": 1,
+      "month_xc_amt": 2206.0,
+      "month_xc_qty": 11
     }
   },
   "wos": {
