@@ -53,7 +53,11 @@
       "day_xc_amt": 89.0,
       "day_xc_qty": 1,
       "month_xc_amt": 3324.0,
-      "month_xc_qty": 20
+      "month_xc_qty": 20,
+      "day_qj_amt": 909.0,
+      "day_qj_qty": 1,
+      "month_qj_amt": 3133.0,
+      "month_qj_qty": 5
     },
     "扬州京华城": {
       "day_amt": 7092.0,
@@ -83,7 +87,11 @@
       "day_xc_amt": 0.0,
       "day_xc_qty": 0,
       "month_xc_amt": 6358.0,
-      "month_xc_qty": 26
+      "month_xc_qty": 26,
+      "day_qj_amt": 1871.0,
+      "day_qj_qty": 5,
+      "month_qj_amt": 4396.0,
+      "month_qj_qty": 11
     },
     "扬州江都金鹰": {
       "day_amt": 4335.0,
@@ -113,7 +121,11 @@
       "day_xc_amt": 89.0,
       "day_xc_qty": 1,
       "month_xc_amt": 1824.0,
-      "month_xc_qty": 12
+      "month_xc_qty": 12,
+      "day_qj_amt": 1314.0,
+      "day_qj_qty": 2,
+      "month_qj_amt": 1314.0,
+      "month_qj_qty": 2
     },
     "泰州万象城": {
       "day_amt": 12635.0,
@@ -143,7 +155,11 @@
       "day_xc_amt": 89.0,
       "day_xc_qty": 1,
       "month_xc_amt": 3126.0,
-      "month_xc_qty": 20
+      "month_xc_qty": 20,
+      "day_qj_amt": 1055.0,
+      "day_qj_qty": 2,
+      "month_qj_amt": 1823.0,
+      "month_qj_qty": 4
     },
     "宿迁宝龙": {
       "day_amt": 2823.0,
@@ -173,7 +189,11 @@
       "day_xc_amt": 0.0,
       "day_xc_qty": 0,
       "month_xc_amt": 1310.0,
-      "month_xc_qty": 9
+      "month_xc_qty": 9,
+      "day_qj_amt": 0.0,
+      "day_qj_qty": 0,
+      "month_qj_amt": 1088.0,
+      "month_qj_qty": 2
     },
     "淮安新亚": {
       "day_amt": 6028.0,
@@ -203,7 +223,11 @@
       "day_xc_amt": 0.0,
       "day_xc_qty": 0,
       "month_xc_amt": 2338.0,
-      "month_xc_qty": 10
+      "month_xc_qty": 10,
+      "day_qj_amt": 1935.0,
+      "day_qj_qty": 4,
+      "month_qj_amt": 2365.0,
+      "month_qj_qty": 6
     },
     "淮安万象城": {
       "day_amt": 3110.0,
@@ -233,7 +257,11 @@
       "day_xc_amt": 529.0,
       "day_xc_qty": 1,
       "month_xc_amt": 2206.0,
-      "month_xc_qty": 11
+      "month_xc_qty": 11,
+      "day_qj_amt": 970.0,
+      "day_qj_qty": 3,
+      "month_qj_amt": 2499.0,
+      "month_qj_qty": 4
     }
   },
   "wos": {
