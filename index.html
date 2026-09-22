@@ -196,7 +196,12 @@ body { background: var(--bg-page); color: var(--text-primary); }
     .header { padding:16px 18px; border-radius:8px; }
     .header h1 { font-size:20px; }
     .header .region-label { font-size:16px; }
-    .kpi-row { grid-template-columns:1fr; gap:10px; }
+    /* KPI 卡不塌成1列：保持横向滑动看完整 5 张 */
+    .kpi-row { grid-template-columns:repeat(5,1fr); gap:10px; overflow-x:auto; -webkit-overflow-scrolling:touch; padding-bottom:6px; }
+    .kpi-row .kpi-card { min-width:170px; }
+    @media(max-width:480px) {
+      .kpi-row { grid-template-columns:repeat(5, 170px); }
+    }
     .kpi-card { padding:14px 16px; border-radius:8px; }
     .kpi-card .label { font-size:13px; }
     .kpi-card .value { font-size:26px; }
