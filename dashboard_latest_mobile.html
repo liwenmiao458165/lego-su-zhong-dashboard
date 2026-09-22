@@ -205,7 +205,9 @@ body { background: var(--bg-page); color: var(--text-primary); }
     .kpi-card .tag { position:static; display:inline-block; margin-top:4px; }
     .section-title { font-size:16px; }
     table { font-size:12px; }
-    th, td { padding:8px 6px; }
+    th, td { padding:12px 8px; line-height:1.55; }
+    .kg-pane-kpi table th, .kg-pane-kpi table td { padding:14px 8px; line-height:1.55; font-size:12px; }
+    .kg-pane-kpi table th { padding:14px 8px; font-size:12px; }
     .store-name { min-width:60px; }
     .rate-bar-cell { min-width:60px; }
     .guide-group-title { font-size:13px; }
@@ -236,11 +238,18 @@ body { background: var(--bg-page); color: var(--text-primary); }
   .kg-pane-kpi table th:nth-child(12), .kg-pane-kpi table td:nth-child(12) { min-width:54px; }   /* 连带率 */
   .kg-pane-kpi table th:nth-child(13), .kg-pane-kpi table td:nth-child(13) { min-width:62px; }   /* 客单价 */
   @media(max-width:1199px) {
-    .kg-pane-kpi table th, .kg-pane-kpi table td { padding:6px 3px; font-size:11px; }
+    .kg-pane-kpi table th, .kg-pane-kpi table td { padding:10px 8px; font-size:12px; line-height:1.45; }
+    .kg-pane-kpi table th { font-size:12px; padding:12px 8px; }
   }
   @media(max-width:1023px) {
+    .kg-pane-kpi table th, .kg-pane-kpi table td { padding:12px 8px; font-size:12px; line-height:1.5; }
     .kg-pane-kpi table th:nth-child(11), .kg-pane-kpi table td:nth-child(11),
     .kg-pane-kpi table th:nth-child(12), .kg-pane-kpi table td:nth-child(12) { display:none; }
+  }
+  @media(max-width:767px) {
+    .kg-pane-kpi table th, .kg-pane-kpi table td { padding:14px 6px; font-size:11px; line-height:1.55; white-space:normal; word-break:break-word; }
+    .kg-pane-kpi table th { padding:14px 6px; font-size:11px; }
+    .kg-pane-kpi table .store-name { min-width:auto; font-size:12px; }
   }
 
 
