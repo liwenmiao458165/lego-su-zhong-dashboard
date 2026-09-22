@@ -155,6 +155,7 @@ body { background: var(--bg-page); color: var(--text-primary); }
   .section-title-channel { border-left-color:var(--dash-channel); color:var(--dash-channel); }
   .section-title-sample { border-left-color:var(--dash-sample); color:var(--dash-sample); }
   .table-wrap { background:var(--card); border-radius:10px; border:1px solid var(--border); overflow-x:auto; -webkit-overflow-scrolling:touch; }
+  .kg-pane-kpi .table-wrap > table { min-width:1000px; }
   table { width:100%; border-collapse:collapse; font-size:14px; }
   thead { background:#EEF2F7; }
   th { padding:12px 14px; text-align:center; font-weight:600; font-size:13px; color:var(--text-sub); white-space:nowrap; }
@@ -245,9 +246,11 @@ body { background: var(--bg-page); color: var(--text-primary); }
     .kg-pane-kpi table th:nth-child(12), .kg-pane-kpi table td:nth-child(12) { display:none; }
   }
   @media(max-width:767px) {
-    .kg-pane-kpi table th, .kg-pane-kpi table td { padding:14px 6px; font-size:11px; line-height:1.55; white-space:normal; word-break:break-word; }
-    .kg-pane-kpi table th { padding:14px 6px; font-size:11px; }
-    .kg-pane-kpi table .store-name { min-width:auto; font-size:12px; }
+    .kg-pane-kpi table th, .kg-pane-kpi table td { padding:14px 10px; font-size:11px; line-height:1.55; white-space:nowrap; }
+    .kg-pane-kpi table th { padding:14px 10px; font-size:11px; white-space:nowrap; }
+    .kg-pane-kpi table .store-name { min-width:auto; font-size:12px; white-space:nowrap; }
+    /* 单元格保持单行，横向溢出交由 .table-wrap 滚动 */
+    .table-wrap { -webkit-overflow-scrolling:touch; overflow-x:auto; }
   }
 
 
