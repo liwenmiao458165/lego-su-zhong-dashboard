@@ -14,8 +14,8 @@
         "kdj": 637.14,
         "target": 6400.0,
         "rate": 69.7,
-        "yoy_amt": 3311.0,
-        "yoy_pct": 34.7,
+        "yoy_amt": 38290.0,
+        "yoy_pct": -88.4,
         "lt_target": 256.0,
         "lt_rate": 0.0
       },
@@ -32,8 +32,8 @@
         "kdj": 307.4,
         "target": 6400.0,
         "rate": 48.0,
-        "yoy_amt": 9216.0,
-        "yoy_pct": -66.6,
+        "yoy_amt": 3311.0,
+        "yoy_pct": -7.2,
         "lt_target": 256.0,
         "lt_rate": 0.0
       },
@@ -50,8 +50,8 @@
         "kdj": 502.62,
         "target": 6400.0,
         "rate": 125.7,
-        "yoy_amt": 4503.0,
-        "yoy_pct": 78.6,
+        "yoy_amt": 9216.0,
+        "yoy_pct": -12.7,
         "lt_target": 256.0,
         "lt_rate": 0.0
       },
@@ -68,8 +68,8 @@
         "kdj": 404.27,
         "target": 11200.0,
         "rate": 119.1,
-        "yoy_amt": 5083.0,
-        "yoy_pct": 162.5,
+        "yoy_amt": 4503.0,
+        "yoy_pct": 196.3,
         "lt_target": 448.0,
         "lt_rate": 34.2
       },
@@ -86,8 +86,8 @@
         "kdj": 466.88,
         "target": 32000.0,
         "rate": 87.5,
-        "yoy_amt": 10437.88,
-        "yoy_pct": 168.4,
+        "yoy_amt": 5083.0,
+        "yoy_pct": 451.1,
         "lt_target": 1280.0,
         "lt_rate": 0.0
       },
@@ -104,8 +104,8 @@
         "kdj": 556.6,
         "target": 38000.0,
         "rate": 70.3,
-        "yoy_amt": 27029.0,
-        "yoy_pct": -1.2,
+        "yoy_amt": 10437.88,
+        "yoy_pct": 156.0,
         "lt_target": 1520.0,
         "lt_rate": 34.4
       },
@@ -122,8 +122,8 @@
         "kdj": 596.89,
         "target": 26000.0,
         "rate": 43.6,
-        "yoy_amt": 8196.0,
-        "yoy_pct": 38.4,
+        "yoy_amt": 27029.0,
+        "yoy_pct": -58.0,
         "lt_target": 1040.0,
         "lt_rate": 35.6
       }
@@ -162,8 +162,8 @@
         "kdj": 505.47,
         "target": 8960.0,
         "rate": 84.6,
-        "yoy_amt": 7321.0,
-        "yoy_pct": 3.6,
+        "yoy_amt": 31962.0,
+        "yoy_pct": -76.3,
         "lt_target": 358.4,
         "lt_rate": 0.0
       },
@@ -180,8 +180,8 @@
         "kdj": 469.35,
         "target": 8960.0,
         "rate": 104.8,
-        "yoy_amt": 12237.0,
-        "yoy_pct": -23.3,
+        "yoy_amt": 7321.0,
+        "yoy_pct": 28.2,
         "lt_target": 358.4,
         "lt_rate": 0.0
       },
@@ -198,8 +198,8 @@
         "kdj": 373.7,
         "target": 8960.0,
         "rate": 95.9,
-        "yoy_amt": 6071.0,
-        "yoy_pct": 41.6,
+        "yoy_amt": 12237.0,
+        "yoy_pct": -29.8,
         "lt_target": 358.4,
         "lt_rate": 0.0
       },
@@ -216,8 +216,8 @@
         "kdj": 336.88,
         "target": 15680.0,
         "rate": 85.9,
-        "yoy_amt": 7050.0,
-        "yoy_pct": 91.1,
+        "yoy_amt": 6071.0,
+        "yoy_pct": 122.0,
         "lt_target": 627.2,
         "lt_rate": 0.0
       },
@@ -234,8 +234,8 @@
         "kdj": 496.55,
         "target": 44800.0,
         "rate": 72.0,
-        "yoy_amt": 13970.3,
-        "yoy_pct": 131.0,
+        "yoy_amt": 7050.0,
+        "yoy_pct": 357.8,
         "lt_target": 1792.0,
         "lt_rate": 0.0
       },
@@ -252,8 +252,8 @@
         "kdj": 473.8,
         "target": 53200.0,
         "rate": 57.0,
-        "yoy_amt": 30331.0,
-        "yoy_pct": -0.0,
+        "yoy_amt": 13970.3,
+        "yoy_pct": 117.1,
         "lt_target": 2128.0,
         "lt_rate": 14.4
       },
@@ -270,8 +270,8 @@
         "kdj": 502.07,
         "target": 36400.0,
         "rate": 41.4,
-        "yoy_amt": 8075.0,
-        "yoy_pct": 86.5,
+        "yoy_amt": 30331.0,
+        "yoy_pct": -50.3,
         "lt_target": 1456.0,
         "lt_rate": 32.1
       }
@@ -310,8 +310,8 @@
         "kdj": 305.0,
         "target": 3520.0,
         "rate": 60.7,
-        "yoy_amt": 2831.0,
-        "yoy_pct": -24.6,
+        "yoy_amt": 11380.0,
+        "yoy_pct": -81.2,
         "lt_target": 140.8,
         "lt_rate": 0.0
       },
@@ -328,8 +328,8 @@
         "kdj": 322.88,
         "target": 3520.0,
         "rate": 73.4,
-        "yoy_amt": 3705.0,
-        "yoy_pct": -30.3,
+        "yoy_amt": 2831.0,
+        "yoy_pct": -8.8,
         "lt_target": 140.8,
         "lt_rate": 0.0
       },
@@ -346,8 +346,8 @@
         "kdj": 372.8,
         "target": 3520.0,
         "rate": 53.0,
-        "yoy_amt": 2557.0,
-        "yoy_pct": -27.1,
+        "yoy_amt": 3705.0,
+        "yoy_pct": -49.7,
         "lt_target": 140.8,
         "lt_rate": 0.0
       },
@@ -364,8 +364,8 @@
         "kdj": 502.24,
         "target": 6160.0,
         "rate": 138.6,
-        "yoy_amt": 3303.0,
-        "yoy_pct": 158.5,
+        "yoy_amt": 2557.0,
+        "yoy_pct": 233.9,
         "lt_target": 246.4,
         "lt_rate": 0.0
       },
@@ -382,8 +382,8 @@
         "kdj": 432.12,
         "target": 17600.0,
         "rate": 100.7,
-        "yoy_amt": 5158.0,
-        "yoy_pct": 243.5,
+        "yoy_amt": 3303.0,
+        "yoy_pct": 436.4,
         "lt_target": 704.0,
         "lt_rate": 138.9
       },
@@ -400,8 +400,8 @@
         "kdj": 345.85,
         "target": 20900.0,
         "rate": 43.0,
-        "yoy_amt": 11897.0,
-        "yoy_pct": -24.4,
+        "yoy_amt": 5158.0,
+        "yoy_pct": 74.3,
         "lt_target": 836.0,
         "lt_rate": 44.3
       },
@@ -418,8 +418,8 @@
         "kdj": 426.9,
         "target": 14300.0,
         "rate": 62.7,
-        "yoy_amt": 6010.0,
-        "yoy_pct": 49.2,
+        "yoy_amt": 11897.0,
+        "yoy_pct": -24.6,
         "lt_target": 572.0,
         "lt_rate": 0.0
       }
@@ -458,8 +458,8 @@
         "kdj": 372.67,
         "target": 8960.0,
         "rate": 62.4,
-        "yoy_amt": 3764.0,
-        "yoy_pct": 48.5,
+        "yoy_amt": 26196.0,
+        "yoy_pct": -78.7,
         "lt_target": 358.4,
         "lt_rate": 0.0
       },
@@ -476,8 +476,8 @@
         "kdj": 518.93,
         "target": 8960.0,
         "rate": 81.1,
-        "yoy_amt": 6498.0,
-        "yoy_pct": 11.8,
+        "yoy_amt": 3764.0,
+        "yoy_pct": 93.0,
         "lt_target": 358.4,
         "lt_rate": 103.2
       },
@@ -494,8 +494,8 @@
         "kdj": 397.77,
         "target": 8960.0,
         "rate": 115.4,
-        "yoy_amt": 6614.0,
-        "yoy_pct": 56.4,
+        "yoy_amt": 6498.0,
+        "yoy_pct": 59.2,
         "lt_target": 358.4,
         "lt_rate": 126.1
       },
@@ -512,8 +512,8 @@
         "kdj": 379.97,
         "target": 15680.0,
         "rate": 89.7,
-        "yoy_amt": 5015.0,
-        "yoy_pct": 180.3,
+        "yoy_amt": 6614.0,
+        "yoy_pct": 112.6,
         "lt_target": 627.2,
         "lt_rate": 24.4
       },
@@ -530,8 +530,8 @@
         "kdj": 449.46,
         "target": 44800.0,
         "rate": 123.4,
-        "yoy_amt": 7781.0,
-        "yoy_pct": 610.5,
+        "yoy_amt": 5015.0,
+        "yoy_pct": 1002.4,
         "lt_target": 1792.0,
         "lt_rate": 20.6
       },
@@ -548,8 +548,8 @@
         "kdj": 354.35,
         "target": 53200.0,
         "rate": 75.3,
-        "yoy_amt": 17641.0,
-        "yoy_pct": 127.0,
+        "yoy_amt": 7781.0,
+        "yoy_pct": 414.6,
         "lt_target": 2128.0,
         "lt_rate": 55.4
       },
@@ -566,8 +566,8 @@
         "kdj": 388.87,
         "target": 36400.0,
         "rate": 58.8,
-        "yoy_amt": 5389.0,
-        "yoy_pct": 296.9,
+        "yoy_amt": 17641.0,
+        "yoy_pct": 21.2,
         "lt_target": 1456.0,
         "lt_rate": 53.0
       }
@@ -606,8 +606,8 @@
         "kdj": 241.0,
         "target": 2080.0,
         "rate": 57.9,
-        "yoy_amt": 2948.0,
-        "yoy_pct": -59.1,
+        "yoy_amt": 4200.0,
+        "yoy_pct": -71.3,
         "lt_target": 83.2,
         "lt_rate": 0.0
       },
@@ -624,8 +624,8 @@
         "kdj": 182.0,
         "target": 2080.0,
         "rate": 35.0,
-        "yoy_amt": 2195.0,
-        "yoy_pct": -66.8,
+        "yoy_amt": 2948.0,
+        "yoy_pct": -75.3,
         "lt_target": 83.2,
         "lt_rate": 183.9
       },
@@ -642,8 +642,8 @@
         "kdj": 493.12,
         "target": 2080.0,
         "rate": 189.7,
-        "yoy_amt": 665.0,
-        "yoy_pct": 493.2,
+        "yoy_amt": 2195.0,
+        "yoy_pct": 79.7,
         "lt_target": 83.2,
         "lt_rate": 0.0
       },
@@ -660,8 +660,8 @@
         "kdj": 433.0,
         "target": 3640.0,
         "rate": 59.5,
-        "yoy_amt": 805.0,
-        "yoy_pct": 168.9,
+        "yoy_amt": 665.0,
+        "yoy_pct": 225.6,
         "lt_target": 145.6,
         "lt_rate": 105.1
       },
@@ -678,8 +678,8 @@
         "kdj": 272.55,
         "target": 10400.0,
         "rate": 52.4,
-        "yoy_amt": 2906.0,
-        "yoy_pct": 87.6,
+        "yoy_amt": 805.0,
+        "yoy_pct": 577.1,
         "lt_target": 416.0,
         "lt_rate": 0.0
       },
@@ -696,8 +696,8 @@
         "kdj": 356.0,
         "target": 12350.0,
         "rate": 63.4,
-        "yoy_amt": 1416.0,
-        "yoy_pct": 453.1,
+        "yoy_amt": 2906.0,
+        "yoy_pct": 169.5,
         "lt_target": 494.0,
         "lt_rate": 121.3
       },
@@ -714,8 +714,8 @@
         "kdj": 442.0,
         "target": 8450.0,
         "rate": 31.4,
-        "yoy_amt": 543.0,
-        "yoy_pct": 388.4,
+        "yoy_amt": 1416.0,
+        "yoy_pct": 87.3,
         "lt_target": 338.0,
         "lt_rate": 0.0
       }
@@ -754,8 +754,8 @@
         "kdj": 257.36,
         "target": 2560.0,
         "rate": 110.6,
-        "yoy_amt": 1921.0,
-        "yoy_pct": 47.4,
+        "yoy_amt": 20876.0,
+        "yoy_pct": -86.4,
         "lt_target": 102.4,
         "lt_rate": 0.0
       },
@@ -772,8 +772,8 @@
         "kdj": 500.25,
         "target": 2560.0,
         "rate": 78.2,
-        "yoy_amt": 4100.0,
-        "yoy_pct": -51.2,
+        "yoy_amt": 1921.0,
+        "yoy_pct": 4.2,
         "lt_target": 102.4,
         "lt_rate": 0.0
       },
@@ -790,8 +790,8 @@
         "kdj": 463.14,
         "target": 2560.0,
         "rate": 126.6,
-        "yoy_amt": 1439.0,
-        "yoy_pct": 125.3,
+        "yoy_amt": 4100.0,
+        "yoy_pct": -20.9,
         "lt_target": 102.4,
         "lt_rate": 0.0
       },
@@ -808,8 +808,8 @@
         "kdj": 409.6,
         "target": 4480.0,
         "rate": 91.4,
-        "yoy_amt": 2440.0,
-        "yoy_pct": 67.9,
+        "yoy_amt": 1439.0,
+        "yoy_pct": 184.6,
         "lt_target": 179.2,
         "lt_rate": 127.8
       },
@@ -826,8 +826,8 @@
         "kdj": 370.05,
         "target": 12800.0,
         "rate": 57.8,
-        "yoy_amt": 2709.0,
-        "yoy_pct": 173.2,
+        "yoy_amt": 2440.0,
+        "yoy_pct": 203.3,
         "lt_target": 512.0,
         "lt_rate": -44.7
       },
@@ -844,8 +844,8 @@
         "kdj": 239.62,
         "target": 15200.0,
         "rate": 25.2,
-        "yoy_amt": 7938.0,
-        "yoy_pct": -51.7,
+        "yoy_amt": 2709.0,
+        "yoy_pct": 41.5,
         "lt_target": 608.0,
         "lt_rate": 40.1
       },
@@ -862,8 +862,8 @@
         "kdj": 431.43,
         "target": 10400.0,
         "rate": 29.0,
-        "yoy_amt": 7854.3,
-        "yoy_pct": -61.5,
+        "yoy_amt": 7938.0,
+        "yoy_pct": -62.0,
         "lt_target": 416.0,
         "lt_rate": 0.0
       }
@@ -902,8 +902,8 @@
         "kdj": 393.44,
         "target": 7680.0,
         "rate": 46.1,
-        "yoy_amt": 0,
-        "yoy_pct": null,
+        "yoy_amt": 180598.15,
+        "yoy_pct": -98.0,
         "lt_target": 307.2,
         "lt_rate": 0.0
       },
@@ -920,8 +920,8 @@
         "kdj": 388.62,
         "target": 7680.0,
         "rate": 40.5,
-        "yoy_amt": 0,
-        "yoy_pct": null,
+        "yoy_amt": 178184.3,
+        "yoy_pct": -98.3,
         "lt_target": 307.2,
         "lt_rate": 0.0
       },
@@ -938,8 +938,8 @@
         "kdj": 234.17,
         "target": 7680.0,
         "rate": 18.3,
-        "yoy_amt": 0,
-        "yoy_pct": null,
+        "yoy_amt": 4621.0,
+        "yoy_pct": -69.6,
         "lt_target": 307.2,
         "lt_rate": 0.0
       },
@@ -956,8 +956,8 @@
         "kdj": 423.97,
         "target": 13440.0,
         "rate": 94.6,
-        "yoy_amt": 0,
-        "yoy_pct": null,
+        "yoy_amt": 5082.0,
+        "yoy_pct": 150.3,
         "lt_target": 537.6,
         "lt_rate": 38.5
       },
@@ -974,8 +974,8 @@
         "kdj": 415.74,
         "target": 38400.0,
         "rate": 94.2,
-        "yoy_amt": 0,
-        "yoy_pct": null,
+        "yoy_amt": 5859.0,
+        "yoy_pct": 517.3,
         "lt_target": 1536.0,
         "lt_rate": 66.5
       },
@@ -992,8 +992,8 @@
         "kdj": 396.16,
         "target": 45600.0,
         "rate": 63.4,
-        "yoy_amt": 0,
-        "yoy_pct": null,
+        "yoy_amt": 10917.0,
+        "yoy_pct": 164.9,
         "lt_target": 1824.0,
         "lt_rate": 26.9
       },
@@ -1010,8 +1010,8 @@
         "kdj": 633.04,
         "target": 31200.0,
         "rate": 91.3,
-        "yoy_amt": 0,
-        "yoy_pct": null,
+        "yoy_amt": 22423.0,
+        "yoy_pct": 27.0,
         "lt_target": 1248.0,
         "lt_rate": 18.2
       }
@@ -1090,8 +1090,8 @@
         "tx_cnt": 69,
         "target": 40160.0,
         "rate": 68.1,
-        "yoy_amt": 200280.3,
-        "yoy_pct": -88.1
+        "yoy_amt": 313502.15,
+        "yoy_pct": -92.4
       },
       {
         "date": "9/22",
@@ -1105,8 +1105,8 @@
         "tx_cnt": 68,
         "target": 40160.0,
         "rate": 70.1,
-        "yoy_amt": 42572.0,
-        "yoy_pct": -41.2
+        "yoy_amt": 200280.3,
+        "yoy_pct": -87.5
       },
       {
         "date": "9/23",
@@ -1120,8 +1120,8 @@
         "tx_cnt": 91,
         "target": 40160.0,
         "rate": 93.2,
-        "yoy_amt": 26931.0,
-        "yoy_pct": 33.8
+        "yoy_amt": 42572.0,
+        "yoy_pct": -15.4
       },
       {
         "date": "9/24",
@@ -1135,8 +1135,8 @@
         "tx_cnt": 172,
         "target": 70280.0,
         "rate": 97.3,
-        "yoy_amt": 29555.0,
-        "yoy_pct": 88.4
+        "yoy_amt": 26931.0,
+        "yoy_pct": 106.7
       },
       {
         "date": "9/25",
@@ -1150,8 +1150,8 @@
         "tx_cnt": 416,
         "target": 200800.0,
         "rate": 90.8,
-        "yoy_amt": 53879.18,
-        "yoy_pct": 171.2
+        "yoy_amt": 29555.0,
+        "yoy_pct": 394.5
       },
       {
         "date": "9/26",
@@ -1165,8 +1165,8 @@
         "tx_cnt": 362,
         "target": 238450.0,
         "rate": 61.5,
-        "yoy_amt": 118675.0,
-        "yoy_pct": -0.8
+        "yoy_amt": 53879.18,
+        "yoy_pct": 118.5
       },
       {
         "date": "9/27",
@@ -1180,8 +1180,8 @@
         "tx_cnt": 183,
         "target": 163150.0,
         "rate": 55.7,
-        "yoy_amt": 46176.3,
-        "yoy_pct": 35.2
+        "yoy_amt": 118675.0,
+        "yoy_pct": -47.4
       }
     ],
     "wk_atv": 427.04,
