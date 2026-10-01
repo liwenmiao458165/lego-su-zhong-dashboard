@@ -7,8 +7,8 @@
     "month_target": 2840500.0,
     "day_rate": 63.2,
     "month_rate": 7.52,
-    "day_yoy_pct": -35.15,
-    "month_yoy_pct": -35.15,
+    "day_yoy_pct": -38.81,
+    "month_yoy_pct": -38.81,
     "day_jd": 1.35,
     "day_kdj": 444.11,
     "np_day_amt": 34633.0,
@@ -263,8 +263,8 @@
       "month_target": 398000.0,
       "day_rate": 48.88,
       "month_rate": 6.14,
-      "day_yoy_pct": null,
-      "month_yoy_pct": null,
+      "day_yoy_pct": -57.4,
+      "month_yoy_pct": -57.4,
       "day_jd": 1.24,
       "day_kdj": 309.39,
       "day_cnt": 79,
@@ -1291,7 +1291,7 @@
     "泰州万象城": 67981.0,
     "宿迁宝龙": 11819.0,
     "淮安新亚": 24356.0,
-    "淮安万象城": 0
+    "淮安万象城": 57379.0
   },
   "store_yoy_month_cum": {
     "扬州万象汇": 59230.0,
@@ -1300,7 +1300,7 @@
     "泰州万象城": 67981.0,
     "宿迁宝龙": 11819.0,
     "淮安新亚": 24356.0,
-    "淮安万象城": 0
+    "淮安万象城": 57379.0
   },
   "np14_track": {
     "launch_date": "2026-08-29",
