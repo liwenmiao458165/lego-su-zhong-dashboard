@@ -1178,17 +1178,6 @@
       "day_cnt": 21,
       "day_qty": 31,
       "day_jd": 1.48
-    },
-    "泰州万象城-支援": {
-      "store": "泰州万象城",
-      "title": "支援(无指标)",
-      "target": 0,
-      "day": 0.0,
-      "wk28": 0.0,
-      "month": 0.0,
-      "day_cnt": 0,
-      "day_qty": 0,
-      "day_jd": 0
     }
   },
   "store_monthly_targets": {
