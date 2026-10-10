@@ -25,8 +25,6 @@
     "month_mx_qty": 24,
     "month_xc": 7042.0,
     "month_xc_qty": 31,
-    "month_lt_target": 20400.0,
-    "month_lt_rate": 38.5,
     "daily": [
       {
         "day": 1,
@@ -37,8 +35,6 @@
         "yoy_pct": -19.7,
         "lt": 3571.0,
         "lt_qty": 7,
-        "lt_target": 2360.0,
-        "lt_rate": 151.3,
         "wos": 2718.0,
         "jl": 2143.0,
         "tx_cnt": 90
@@ -52,8 +48,6 @@
         "yoy_pct": -57.4,
         "lt": 819.0,
         "lt_qty": 2,
-        "lt_target": 2120.0,
-        "lt_rate": 38.6,
         "wos": 699.0,
         "jl": 646.0,
         "tx_cnt": 58
@@ -67,8 +61,6 @@
         "yoy_pct": -61.9,
         "lt": 0.0,
         "lt_qty": 0,
-        "lt_target": 1880.0,
-        "lt_rate": 0.0,
         "wos": 0.0,
         "jl": 605.0,
         "tx_cnt": 61
@@ -82,8 +74,6 @@
         "yoy_pct": -37.9,
         "lt": 346.0,
         "lt_qty": 1,
-        "lt_target": 1600.0,
-        "lt_rate": 21.6,
         "wos": 2196.0,
         "jl": 2579.0,
         "tx_cnt": 62
@@ -97,8 +87,6 @@
         "yoy_pct": -56.9,
         "lt": 1558.0,
         "lt_qty": 3,
-        "lt_target": 1400.0,
-        "lt_rate": 111.3,
         "wos": 949.0,
         "jl": 1296.0,
         "tx_cnt": 50
@@ -112,8 +100,6 @@
         "yoy_pct": -49.7,
         "lt": 1052.0,
         "lt_qty": 2,
-        "lt_target": 1040.0,
-        "lt_rate": 101.2,
         "wos": 0.0,
         "jl": 1024.0,
         "tx_cnt": 38
@@ -127,8 +113,6 @@
         "yoy_pct": -61.3,
         "lt": 511.0,
         "lt_qty": 1,
-        "lt_target": 800.0,
-        "lt_rate": 63.9,
         "wos": 89.0,
         "jl": 1436.3,
         "tx_cnt": 24
@@ -142,8 +126,6 @@
         "yoy_pct": -83.0,
         "lt": 0.0,
         "lt_qty": 0,
-        "lt_target": 240.0,
-        "lt_rate": 0.0,
         "wos": 832.0,
         "jl": 336.0,
         "tx_cnt": 9
@@ -157,8 +139,6 @@
         "yoy_pct": -72.4,
         "lt": 0.0,
         "lt_qty": 0,
-        "lt_target": 280.0,
-        "lt_rate": 0.0,
         "wos": 549.0,
         "jl": 579.0,
         "tx_cnt": 6
@@ -172,8 +152,6 @@
         "yoy_pct": -97.9,
         "lt": 0.0,
         "lt_qty": 0,
-        "lt_target": 280.0,
-        "lt_rate": 0.0,
         "wos": 0.0,
         "jl": 0.0,
         "tx_cnt": 1
@@ -218,8 +196,6 @@
     "month_mx_qty": 26,
     "month_xc": 5911.0,
     "month_xc_qty": 31,
-    "month_lt_target": 27400.0,
-    "month_lt_rate": 42.4,
     "daily": [
       {
         "day": 1,
@@ -230,8 +206,6 @@
         "yoy_pct": -44.3,
         "lt": 1621.0,
         "lt_qty": 5,
-        "lt_target": 3520.0,
-        "lt_rate": 46.1,
         "wos": 2236.0,
         "jl": 438.0,
         "tx_cnt": 99
@@ -245,8 +219,6 @@
         "yoy_pct": -49.9,
         "lt": 3925.0,
         "lt_qty": 7,
-        "lt_target": 2680.0,
-        "lt_rate": 146.5,
         "wos": 89.0,
         "jl": 1097.0,
         "tx_cnt": 76
@@ -260,8 +232,6 @@
         "yoy_pct": -54.4,
         "lt": 1497.0,
         "lt_qty": 4,
-        "lt_target": 2320.0,
-        "lt_rate": 64.5,
         "wos": 2822.0,
         "jl": 327.0,
         "tx_cnt": 64
@@ -275,8 +245,6 @@
         "yoy_pct": -53.1,
         "lt": 527.0,
         "lt_qty": 4,
-        "lt_target": 2080.0,
-        "lt_rate": 25.3,
         "wos": 447.0,
         "jl": 0.0,
         "tx_cnt": 59
@@ -290,8 +258,6 @@
         "yoy_pct": -43.4,
         "lt": 740.0,
         "lt_qty": 2,
-        "lt_target": 1520.0,
-        "lt_rate": 48.7,
         "wos": 188.0,
         "jl": 173.0,
         "tx_cnt": 58
@@ -305,8 +271,6 @@
         "yoy_pct": -16.4,
         "lt": 1792.0,
         "lt_qty": 3,
-        "lt_target": 1360.0,
-        "lt_rate": 131.8,
         "wos": 1316.0,
         "jl": 820.0,
         "tx_cnt": 53
@@ -320,8 +284,6 @@
         "yoy_pct": -44.3,
         "lt": 1519.0,
         "lt_qty": 2,
-        "lt_target": 1080.0,
-        "lt_rate": 140.6,
         "wos": 1314.0,
         "jl": 1129.0,
         "tx_cnt": 48
@@ -335,8 +297,6 @@
         "yoy_pct": -77.6,
         "lt": 0.0,
         "lt_qty": 0,
-        "lt_target": 320.0,
-        "lt_rate": 0.0,
         "wos": 1367.0,
         "jl": 0.0,
         "tx_cnt": 14
@@ -350,8 +310,6 @@
         "yoy_pct": 19.7,
         "lt": 0.0,
         "lt_qty": 0,
-        "lt_target": 360.0,
-        "lt_rate": 0.0,
         "wos": 529.0,
         "jl": 231.0,
         "tx_cnt": 19
@@ -365,8 +323,6 @@
         "yoy_pct": -82.9,
         "lt": 0.0,
         "lt_qty": 0,
-        "lt_target": 440.0,
-        "lt_rate": 0.0,
         "wos": 0.0,
         "jl": 0.0,
         "tx_cnt": 4
@@ -411,8 +367,6 @@
     "month_mx_qty": 6,
     "month_xc": 2367.0,
     "month_xc_qty": 9,
-    "month_lt_target": 12080.0,
-    "month_lt_rate": 95.5,
     "daily": [
       {
         "day": 1,
@@ -423,8 +377,6 @@
         "yoy_pct": -52.7,
         "lt": 489.0,
         "lt_qty": 1,
-        "lt_target": 1440.0,
-        "lt_rate": 34.0,
         "wos": 899.0,
         "jl": 0.0,
         "tx_cnt": 46
@@ -438,8 +390,6 @@
         "yoy_pct": -34.4,
         "lt": 3219.0,
         "lt_qty": 6,
-        "lt_target": 1120.0,
-        "lt_rate": 287.4,
         "wos": 2054.0,
         "jl": 0.0,
         "tx_cnt": 43
@@ -453,8 +403,6 @@
         "yoy_pct": -40.9,
         "lt": 1748.0,
         "lt_qty": 2,
-        "lt_target": 960.0,
-        "lt_rate": 182.1,
         "wos": 0.0,
         "jl": 269.0,
         "tx_cnt": 48
@@ -468,8 +416,6 @@
         "yoy_pct": -35.1,
         "lt": 1694.0,
         "lt_qty": 4,
-        "lt_target": 720.0,
-        "lt_rate": 235.3,
         "wos": 0.0,
         "jl": 0.0,
         "tx_cnt": 29
@@ -483,8 +429,6 @@
         "yoy_pct": -38.6,
         "lt": 2599.0,
         "lt_qty": 3,
-        "lt_target": 680.0,
-        "lt_rate": 382.2,
         "wos": 1137.0,
         "jl": 682.0,
         "tx_cnt": 37
@@ -498,8 +442,6 @@
         "yoy_pct": -75.7,
         "lt": 1299.0,
         "lt_qty": 1,
-        "lt_target": 600.0,
-        "lt_rate": 216.5,
         "wos": 0.0,
         "jl": 0.0,
         "tx_cnt": 19
@@ -513,8 +455,6 @@
         "yoy_pct": -48.6,
         "lt": 0.0,
         "lt_qty": 0,
-        "lt_target": 480.0,
-        "lt_rate": 0.0,
         "wos": 1105.0,
         "jl": 166.0,
         "tx_cnt": 25
@@ -528,8 +468,6 @@
         "yoy_pct": -84.8,
         "lt": 489.0,
         "lt_qty": 1,
-        "lt_target": 160.0,
-        "lt_rate": 305.6,
         "wos": 489.0,
         "jl": 0.0,
         "tx_cnt": 6
@@ -543,8 +481,6 @@
         "yoy_pct": 73.1,
         "lt": 0.0,
         "lt_qty": 0,
-        "lt_target": 160.0,
-        "lt_rate": 0.0,
         "wos": 0.0,
         "jl": 487.0,
         "tx_cnt": 7
@@ -558,8 +494,6 @@
         "yoy_pct": -88.6,
         "lt": 0.0,
         "lt_qty": 0,
-        "lt_target": 200.0,
-        "lt_rate": 0.0,
         "wos": 0.0,
         "jl": 0.0,
         "tx_cnt": 1
@@ -604,8 +538,6 @@
     "month_mx_qty": 45,
     "month_xc": 9913.0,
     "month_xc_qty": 55,
-    "month_lt_target": 23820.0,
-    "month_lt_rate": 60.8,
     "daily": [
       {
         "day": 1,
@@ -616,8 +548,6 @@
         "yoy_pct": -10.8,
         "lt": 1616.0,
         "lt_qty": 4,
-        "lt_target": 2600.0,
-        "lt_rate": 62.2,
         "wos": 169.0,
         "jl": 658.0,
         "tx_cnt": 145
@@ -631,8 +561,6 @@
         "yoy_pct": 8.7,
         "lt": 3494.0,
         "lt_qty": 6,
-        "lt_target": 2400.0,
-        "lt_rate": 145.6,
         "wos": 5503.0,
         "jl": 1169.0,
         "tx_cnt": 114
@@ -646,8 +574,6 @@
         "yoy_pct": -5.6,
         "lt": 1770.0,
         "lt_qty": 6,
-        "lt_target": 2080.0,
-        "lt_rate": 85.1,
         "wos": 3020.0,
         "jl": 798.0,
         "tx_cnt": 138
@@ -661,8 +587,6 @@
         "yoy_pct": -17.2,
         "lt": 2406.0,
         "lt_qty": 4,
-        "lt_target": 1800.0,
-        "lt_rate": 133.7,
         "wos": 269.0,
         "jl": 2087.0,
         "tx_cnt": 103
@@ -676,8 +600,6 @@
         "yoy_pct": -24.2,
         "lt": 3198.0,
         "lt_qty": 3,
-        "lt_target": 1600.0,
-        "lt_rate": 199.9,
         "wos": 597.0,
         "jl": 1749.0,
         "tx_cnt": 86
@@ -691,8 +613,6 @@
         "yoy_pct": -45.1,
         "lt": 1307.0,
         "lt_qty": 3,
-        "lt_target": 1360.0,
-        "lt_rate": 96.1,
         "wos": 179.0,
         "jl": 471.0,
         "tx_cnt": 62
@@ -706,8 +626,6 @@
         "yoy_pct": -46.8,
         "lt": 211.0,
         "lt_qty": 2,
-        "lt_target": 1000.0,
-        "lt_rate": 21.1,
         "wos": 626.0,
         "jl": 598.0,
         "tx_cnt": 52
@@ -721,8 +639,6 @@
         "yoy_pct": -80.6,
         "lt": 482.0,
         "lt_qty": 2,
-        "lt_target": 280.0,
-        "lt_rate": 172.1,
         "wos": 153.0,
         "jl": 379.0,
         "tx_cnt": 18
@@ -736,8 +652,6 @@
         "yoy_pct": 3.2,
         "lt": 0.0,
         "lt_qty": 0,
-        "lt_target": 360.0,
-        "lt_rate": 0.0,
         "wos": 528.0,
         "jl": 599.0,
         "tx_cnt": 13
@@ -751,8 +665,6 @@
         "yoy_pct": -93.8,
         "lt": 0.0,
         "lt_qty": 0,
-        "lt_target": 360.0,
-        "lt_rate": 0.0,
         "wos": 0.0,
         "jl": 0.0,
         "tx_cnt": 3
@@ -797,8 +709,6 @@
     "month_mx_qty": 3,
     "month_xc": 89.0,
     "month_xc_qty": 1,
-    "month_lt_target": 6000.0,
-    "month_lt_rate": 49.8,
     "daily": [
       {
         "day": 1,
@@ -809,8 +719,6 @@
         "yoy_pct": -22.7,
         "lt": 0.0,
         "lt_qty": 0,
-        "lt_target": 640.0,
-        "lt_rate": 0.0,
         "wos": 89.0,
         "jl": 494.0,
         "tx_cnt": 23
@@ -824,8 +732,6 @@
         "yoy_pct": 124.2,
         "lt": 1617.0,
         "lt_qty": 3,
-        "lt_target": 480.0,
-        "lt_rate": 336.9,
         "wos": 0.0,
         "jl": 570.0,
         "tx_cnt": 34
@@ -839,8 +745,6 @@
         "yoy_pct": -63.4,
         "lt": 0.0,
         "lt_qty": 0,
-        "lt_target": 440.0,
-        "lt_rate": 0.0,
         "wos": 0.0,
         "jl": 325.0,
         "tx_cnt": 20
@@ -854,8 +758,6 @@
         "yoy_pct": -40.4,
         "lt": 1101.0,
         "lt_qty": 2,
-        "lt_target": 400.0,
-        "lt_rate": 275.2,
         "wos": 449.0,
         "jl": 471.0,
         "tx_cnt": 22
@@ -869,8 +771,6 @@
         "yoy_pct": -57.8,
         "lt": 0.0,
         "lt_qty": 0,
-        "lt_target": 360.0,
-        "lt_rate": 0.0,
         "wos": 0.0,
         "jl": 0.0,
         "tx_cnt": 21
@@ -884,8 +784,6 @@
         "yoy_pct": -54.8,
         "lt": 269.0,
         "lt_qty": 1,
-        "lt_target": 320.0,
-        "lt_rate": 84.1,
         "wos": 229.0,
         "jl": 0.0,
         "tx_cnt": 18
@@ -899,8 +797,6 @@
         "yoy_pct": -42.5,
         "lt": 0.0,
         "lt_qty": 0,
-        "lt_target": 240.0,
-        "lt_rate": 0.0,
         "wos": 637.0,
         "jl": 0.0,
         "tx_cnt": 13
@@ -914,8 +810,6 @@
         "yoy_pct": -89.1,
         "lt": 0.0,
         "lt_qty": 0,
-        "lt_target": 80.0,
-        "lt_rate": 0.0,
         "wos": 0.0,
         "jl": 0.0,
         "tx_cnt": 2
@@ -929,8 +823,6 @@
         "yoy_pct": -96.9,
         "lt": 0.0,
         "lt_qty": 0,
-        "lt_target": 80.0,
-        "lt_rate": 0.0,
         "wos": 0.0,
         "jl": 0.0,
         "tx_cnt": 1
@@ -944,8 +836,6 @@
         "yoy_pct": -100.0,
         "lt": 0.0,
         "lt_qty": 0,
-        "lt_target": 120.0,
-        "lt_rate": 0.0,
         "wos": 0.0,
         "jl": 0.0,
         "tx_cnt": 0
@@ -990,8 +880,6 @@
     "month_mx_qty": 7,
     "month_xc": 1825.0,
     "month_xc_qty": 7,
-    "month_lt_target": 8000.0,
-    "month_lt_rate": 24.5,
     "daily": [
       {
         "day": 1,
@@ -1002,8 +890,6 @@
         "yoy_pct": -36.6,
         "lt": 528.0,
         "lt_qty": 2,
-        "lt_target": 960.0,
-        "lt_rate": 55.0,
         "wos": 5375.0,
         "jl": 665.0,
         "tx_cnt": 34
@@ -1017,8 +903,6 @@
         "yoy_pct": -38.2,
         "lt": 104.0,
         "lt_qty": 2,
-        "lt_target": 880.0,
-        "lt_rate": 11.8,
         "wos": 0.0,
         "jl": 249.0,
         "tx_cnt": 18
@@ -1032,8 +916,6 @@
         "yoy_pct": -59.8,
         "lt": 849.0,
         "lt_qty": 1,
-        "lt_target": 600.0,
-        "lt_rate": 141.5,
         "wos": 0.0,
         "jl": 447.0,
         "tx_cnt": 20
@@ -1047,8 +929,6 @@
         "yoy_pct": -56.3,
         "lt": 0.0,
         "lt_qty": 0,
-        "lt_target": 520.0,
-        "lt_rate": 0.0,
         "wos": 19.0,
         "jl": 1153.0,
         "tx_cnt": 23
@@ -1062,8 +942,6 @@
         "yoy_pct": -14.9,
         "lt": 0.0,
         "lt_qty": 0,
-        "lt_target": 480.0,
-        "lt_rate": 0.0,
         "wos": -2461.0,
         "jl": 236.0,
         "tx_cnt": 27
@@ -1077,8 +955,6 @@
         "yoy_pct": -15.2,
         "lt": 0.0,
         "lt_qty": 0,
-        "lt_target": 400.0,
-        "lt_rate": 0.0,
         "wos": 419.0,
         "jl": 229.0,
         "tx_cnt": 19
@@ -1092,8 +968,6 @@
         "yoy_pct": -23.6,
         "lt": 479.0,
         "lt_qty": 1,
-        "lt_target": 320.0,
-        "lt_rate": 149.7,
         "wos": 777.0,
         "jl": 89.0,
         "tx_cnt": 13
@@ -1107,8 +981,6 @@
         "yoy_pct": -79.4,
         "lt": 0.0,
         "lt_qty": 0,
-        "lt_target": 80.0,
-        "lt_rate": 0.0,
         "wos": 0.0,
         "jl": 152.0,
         "tx_cnt": 6
@@ -1122,8 +994,6 @@
         "yoy_pct": -37.7,
         "lt": 0.0,
         "lt_qty": 0,
-        "lt_target": 120.0,
-        "lt_rate": 0.0,
         "wos": 0.0,
         "jl": 170.0,
         "tx_cnt": 5
@@ -1137,8 +1007,6 @@
         "yoy_pct": -91.6,
         "lt": 0.0,
         "lt_qty": 0,
-        "lt_target": 120.0,
-        "lt_rate": 0.0,
         "wos": 0.0,
         "jl": 0.0,
         "tx_cnt": 2
@@ -1183,8 +1051,6 @@
     "month_mx_qty": 24,
     "month_xc": 5539.0,
     "month_xc_qty": 28,
-    "month_lt_target": 15920.0,
-    "month_lt_rate": 45.0,
     "daily": [
       {
         "day": 1,
@@ -1195,8 +1061,6 @@
         "yoy_pct": -55.7,
         "lt": 153.0,
         "lt_qty": 1,
-        "lt_target": 2000.0,
-        "lt_rate": 7.6,
         "wos": 678.0,
         "jl": 376.0,
         "tx_cnt": 83
@@ -1210,8 +1074,6 @@
         "yoy_pct": -20.0,
         "lt": 1559.0,
         "lt_qty": 5,
-        "lt_target": 1600.0,
-        "lt_rate": 97.4,
         "wos": 1916.0,
         "jl": 413.0,
         "tx_cnt": 85
@@ -1225,8 +1087,6 @@
         "yoy_pct": -39.5,
         "lt": 1946.0,
         "lt_qty": 5,
-        "lt_target": 1440.0,
-        "lt_rate": 135.1,
         "wos": 0.0,
         "jl": 238.0,
         "tx_cnt": 91
@@ -1240,8 +1100,6 @@
         "yoy_pct": -33.1,
         "lt": 1302.0,
         "lt_qty": 4,
-        "lt_target": 1280.0,
-        "lt_rate": 101.7,
         "wos": 0.0,
         "jl": 627.0,
         "tx_cnt": 67
@@ -1255,8 +1113,6 @@
         "yoy_pct": -35.6,
         "lt": 499.0,
         "lt_qty": 1,
-        "lt_target": 1120.0,
-        "lt_rate": 44.6,
         "wos": 3395.0,
         "jl": 114.0,
         "tx_cnt": 62
@@ -1270,8 +1126,6 @@
         "yoy_pct": -36.1,
         "lt": 623.0,
         "lt_qty": 1,
-        "lt_target": 880.0,
-        "lt_rate": 70.8,
         "wos": 469.0,
         "jl": 560.0,
         "tx_cnt": 46
@@ -1285,8 +1139,6 @@
         "yoy_pct": -59.7,
         "lt": 1089.0,
         "lt_qty": 4,
-        "lt_target": 640.0,
-        "lt_rate": 170.2,
         "wos": 0.0,
         "jl": 1365.0,
         "tx_cnt": 53
@@ -1300,8 +1152,6 @@
         "yoy_pct": -88.4,
         "lt": 0.0,
         "lt_qty": 0,
-        "lt_target": 200.0,
-        "lt_rate": 0.0,
         "wos": 0.0,
         "jl": 0.0,
         "tx_cnt": 7
@@ -1315,8 +1165,6 @@
         "yoy_pct": -64.6,
         "lt": 0.0,
         "lt_qty": 0,
-        "lt_target": 200.0,
-        "lt_rate": 0.0,
         "wos": 0.0,
         "jl": 769.0,
         "tx_cnt": 9
@@ -1330,8 +1178,6 @@
         "yoy_pct": -100.0,
         "lt": 0.0,
         "lt_qty": 0,
-        "lt_target": 200.0,
-        "lt_rate": 0.0,
         "wos": 0.0,
         "jl": 0.0,
         "tx_cnt": 0
@@ -1372,8 +1218,6 @@
     "month_rate": 37.8,
     "month_atv": 395.89,
     "month_jd": 1.37,
-    "month_lt_target": 113620.0,
-    "month_lt_rate": 50.7,
     "new_amt": 78808.96,
     "new_qty": 395,
     "new_cnt": 329,
@@ -1387,9 +1231,7 @@
         "yoy_amt": 349106.3,
         "yoy_pct": -42.5,
         "lt": 7978.0,
-        "lt_qty": 20,
-        "lt_target": 13520.0,
-        "lt_rate": 59.0
+        "lt_qty": 20
       },
       {
         "day": 2,
@@ -1399,9 +1241,7 @@
         "yoy_amt": 275411.19,
         "yoy_pct": -41.7,
         "lt": 14737.0,
-        "lt_qty": 31,
-        "lt_target": 11280.0,
-        "lt_rate": 130.6
+        "lt_qty": 31
       },
       {
         "day": 3,
@@ -1411,9 +1251,7 @@
         "yoy_amt": 268163.64,
         "yoy_pct": -52.8,
         "lt": 7810.0,
-        "lt_qty": 18,
-        "lt_target": 9720.0,
-        "lt_rate": 80.3
+        "lt_qty": 18
       },
       {
         "day": 4,
@@ -1423,9 +1261,7 @@
         "yoy_amt": 228701.5,
         "yoy_pct": -48.3,
         "lt": 7376.0,
-        "lt_qty": 19,
-        "lt_target": 8400.0,
-        "lt_rate": 87.8
+        "lt_qty": 19
       },
       {
         "day": 5,
@@ -1435,9 +1271,7 @@
         "yoy_amt": 221833.0,
         "yoy_pct": -50.8,
         "lt": 8594.0,
-        "lt_qty": 12,
-        "lt_target": 7160.0,
-        "lt_rate": 120.0
+        "lt_qty": 12
       },
       {
         "day": 6,
@@ -1447,9 +1281,7 @@
         "yoy_amt": 176912.4,
         "yoy_pct": -51.3,
         "lt": 6342.0,
-        "lt_qty": 11,
-        "lt_target": 5960.0,
-        "lt_rate": 106.4
+        "lt_qty": 11
       },
       {
         "day": 7,
@@ -1459,9 +1291,7 @@
         "yoy_amt": 159262.71,
         "yoy_pct": -58.3,
         "lt": 3809.0,
-        "lt_qty": 10,
-        "lt_target": 4560.0,
-        "lt_rate": 83.5
+        "lt_qty": 10
       },
       {
         "day": 8,
@@ -1471,9 +1301,7 @@
         "yoy_amt": 114774.0,
         "yoy_pct": -84.4,
         "lt": 971.0,
-        "lt_qty": 3,
-        "lt_target": 1360.0,
-        "lt_rate": 71.4
+        "lt_qty": 3
       },
       {
         "day": 9,
@@ -1483,9 +1311,7 @@
         "yoy_amt": 28051.25,
         "yoy_pct": -36.2,
         "lt": 0.0,
-        "lt_qty": 0,
-        "lt_target": 1560.0,
-        "lt_rate": 0.0
+        "lt_qty": 0
       },
       {
         "day": 10,
@@ -1495,9 +1321,7 @@
         "yoy_amt": 35547.0,
         "yoy_pct": -92.3,
         "lt": 0.0,
-        "lt_qty": 0,
-        "lt_target": 1720.0,
-        "lt_rate": 0.0
+        "lt_qty": 0
       }
     ]
   },
@@ -9433,7 +9257,6 @@
       "淮安新亚",
       "淮安万象城"
     ],
-    "lt_target_rate": 0.04,
     "new_product_since": "2026-08-29"
   }
 }

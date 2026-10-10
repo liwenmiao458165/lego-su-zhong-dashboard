@@ -83,10 +83,6 @@
       "day_lt78_qty": 0,
       "month_lt78_qty": 16,
       "lt78_sold_count": 11,
-      "lt_rate": 38.51,
-      "lt_day_rate": 0.0,
-      "lt_daily_target": 280.0,
-      "lt_month_target": 20400.0,
       "day_np_amt": 0.0,
       "day_np_qty": 0,
       "month_np_amt": 12389.0,
@@ -126,10 +122,6 @@
       "day_lt78_qty": 0,
       "month_lt78_qty": 27,
       "lt78_sold_count": 16,
-      "lt_rate": 42.41,
-      "lt_day_rate": 0.0,
-      "lt_daily_target": 440.0,
-      "lt_month_target": 27400.0,
       "day_np_amt": 0.0,
       "day_np_qty": 0,
       "month_np_amt": 23178.0,
@@ -169,10 +161,6 @@
       "day_lt78_qty": 0,
       "month_lt78_qty": 18,
       "lt78_sold_count": 10,
-      "lt_rate": 95.5,
-      "lt_day_rate": 0.0,
-      "lt_daily_target": 200.0,
-      "lt_month_target": 12080.0,
       "day_np_amt": 0.0,
       "day_np_qty": 0,
       "month_np_amt": 4692.0,
@@ -212,10 +200,6 @@
       "day_lt78_qty": 0,
       "month_lt78_qty": 30,
       "lt78_sold_count": 15,
-      "lt_rate": 60.81,
-      "lt_day_rate": 0.0,
-      "lt_daily_target": 360.0,
-      "lt_month_target": 23820.0,
       "day_np_amt": 0.0,
       "day_np_qty": 0,
       "month_np_amt": 16650.0,
@@ -255,10 +239,6 @@
       "day_lt78_qty": 0,
       "month_lt78_qty": 6,
       "lt78_sold_count": 5,
-      "lt_rate": 49.78,
-      "lt_day_rate": 0.0,
-      "lt_daily_target": 120.0,
-      "lt_month_target": 6000.0,
       "day_np_amt": 0.0,
       "day_np_qty": 0,
       "month_np_amt": 2846.0,
@@ -298,10 +278,6 @@
       "day_lt78_qty": 0,
       "month_lt78_qty": 6,
       "lt78_sold_count": 6,
-      "lt_rate": 24.5,
-      "lt_day_rate": 0.0,
-      "lt_daily_target": 120.0,
-      "lt_month_target": 8000.0,
       "day_np_amt": 78.0,
       "day_np_qty": 2,
       "month_np_amt": 13570.96,
@@ -341,10 +317,6 @@
       "day_lt78_qty": 0,
       "month_lt78_qty": 21,
       "lt78_sold_count": 12,
-      "lt_rate": 45.04,
-      "lt_day_rate": 0.0,
-      "lt_daily_target": 200.0,
-      "lt_month_target": 15920.0,
       "day_np_amt": 0.0,
       "day_np_qty": 0,
       "month_np_amt": 5483.0,
@@ -1285,36 +1257,6 @@
     "宿迁宝龙": 3000.0,
     "淮安新亚": 3000.0,
     "淮安万象城": 5000.0
-  },
-  "store_lt_monthly_targets": {
-    "扬州万象汇": {
-      "month": 20400.0,
-      "daily": 280.0
-    },
-    "扬州京华城": {
-      "month": 27400.0,
-      "daily": 440.0
-    },
-    "扬州江都金鹰": {
-      "month": 12080.0,
-      "daily": 200.0
-    },
-    "泰州万象城": {
-      "month": 23820.0,
-      "daily": 360.0
-    },
-    "宿迁宝龙": {
-      "month": 6000.0,
-      "daily": 120.0
-    },
-    "淮安新亚": {
-      "month": 8000.0,
-      "daily": 120.0
-    },
-    "淮安万象城": {
-      "month": 15920.0,
-      "daily": 200.0
-    }
   },
   "store_yoy_day": {
     "扬州万象汇": 4290.0,
