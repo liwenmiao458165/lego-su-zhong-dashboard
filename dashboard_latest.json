@@ -43,18 +43,18 @@
     "lt78_month_qty": 226,
     "lt78_day_pct": 9.67,
     "lt78_month_pct": 6.31,
-    "day_flow": 241,
-    "day_conv": 11.6,
+    "day_flow": 300,
+    "day_conv": 9.3,
     "day_cnt_pos": 28
   },
   "store_flow": {
     "扬州万象汇": 39,
     "扬州京华城": 58,
-    "扬州江都金鹰": null,
+    "扬州江都金鹰": 21,
     "泰州万象城": 103,
     "宿迁宝龙": 0,
     "淮安新亚": 41,
-    "淮安万象城": null
+    "淮安万象城": 38
   },
   "stores": {
     "扬州万象汇": {
@@ -148,8 +148,8 @@
       "day_jd": 1.0,
       "day_kdj": 159.0,
       "day_cnt": 2,
-      "day_flow": null,
-      "day_conv": null,
+      "day_flow": 21,
+      "day_conv": 9.5,
       "day_lt_amt": 229.0,
       "day_lt_qty": 1,
       "month_lt_amt": 17381.0,
@@ -304,8 +304,8 @@
       "day_jd": 3.75,
       "day_kdj": 898.5,
       "day_cnt": 4,
-      "day_flow": null,
-      "day_conv": null,
+      "day_flow": 38,
+      "day_conv": 10.5,
       "day_lt_amt": 0.0,
       "day_lt_qty": 0,
       "month_lt_amt": 12849.0,
