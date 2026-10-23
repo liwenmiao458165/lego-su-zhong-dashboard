@@ -149,7 +149,7 @@
       "day_kdj": 0,
       "day_cnt": 0,
       "day_flow": 7,
-      "day_conv": null,
+      "day_conv": 0.0,
       "day_lt_amt": 0.0,
       "day_lt_qty": 0,
       "month_lt_amt": 17700.0,
