@@ -870,7 +870,10 @@
     "month_retail": 0,
     "month_amt": 0.0
   },
-  "_new_products": [],
+  "_new_products": [
+    "治愈盆栽",
+    "龙珠：神龙 & 悟空"
+  ],
   "_new_products_detail": {
     "扬州万象汇": [],
     "扬州京华城": [
