@@ -77,6 +77,9 @@
   --dash-d11:#DC2626;            /* 线下双11折扣款 — 中国红，2026-10-31 用户新增 */
   --dash-d11-soft:rgba(220,38,38,0.10);
   --dash-d11-edge:rgba(220,38,38,0.25);
+  --dash-yj:#7C3AED;             /* 一口价活动款 — 紫，2026-11-14 用户新增 */
+  --dash-yj-soft:rgba(124,58,237,0.10);
+  --dash-yj-edge:rgba(124,58,237,0.25);
   --dash-lt78-soft:rgba(147,51,234,0.10);
   --dash-lt78-edge:rgba(147,51,234,0.25);
 }
@@ -247,22 +250,23 @@ body { background: var(--bg-page); color: var(--text-primary); }
   .kg-pane-kpi table th:nth-child(5), .kg-pane-kpi table td:nth-child(5) { min-width:88px; }      /* 长尾款(78)（2026-10-11 用户定，挪到明星同款前） */
   .kg-pane-kpi table th:nth-child(6), .kg-pane-kpi table td:nth-child(6) { min-width:78px; }      /* 明星同款 */
   .kg-pane-kpi table th:nth-child(7), .kg-pane-kpi table td:nth-child(7) { min-width:78px; }      /* 新客主推款 */
-  .kg-pane-kpi table th:nth-child(8), .kg-pane-kpi table td:nth-child(8) { min-width:78px; }      /* 新品销售 */
-  .kg-pane-kpi table th:nth-child(9), .kg-pane-kpi table td:nth-child(9) { min-width:78px; }      /* WOS */
-  .kg-pane-kpi table th:nth-child(10), .kg-pane-kpi table td:nth-child(10) { min-width:68px; }   /* 即时零售 */
-  .kg-pane-kpi table th:nth-child(11), .kg-pane-kpi table td:nth-child(11) { min-width:68px; }   /* 连带率 */
-  .kg-pane-kpi table th:nth-child(12), .kg-pane-kpi table td:nth-child(12) { min-width:54px; }   /* 客单价 */
-  .kg-pane-kpi table th:nth-child(13), .kg-pane-kpi table td:nth-child(13) { min-width:72px; }   /* 客流（人次） */
-  .kg-pane-kpi table th:nth-child(14), .kg-pane-kpi table td:nth-child(14) { min-width:64px; }   /* 成交率 */
+  .kg-pane-kpi table th:nth-child(8), .kg-pane-kpi table td:nth-child(8) { min-width:78px; }      /* 一口价（2026-11-14 用户新增，插在新客主推款后） */
+  .kg-pane-kpi table th:nth-child(9), .kg-pane-kpi table td:nth-child(9) { min-width:78px; }      /* 新品销售 */
+  .kg-pane-kpi table th:nth-child(10), .kg-pane-kpi table td:nth-child(10) { min-width:78px; }    /* WOS */
+  .kg-pane-kpi table th:nth-child(11), .kg-pane-kpi table td:nth-child(11) { min-width:68px; }   /* 即时零售 */
+  .kg-pane-kpi table th:nth-child(12), .kg-pane-kpi table td:nth-child(12) { min-width:68px; }   /* 连带率 */
+  .kg-pane-kpi table th:nth-child(13), .kg-pane-kpi table td:nth-child(13) { min-width:54px; }   /* 客单价 */
+  .kg-pane-kpi table th:nth-child(14), .kg-pane-kpi table td:nth-child(14) { min-width:72px; }   /* 客流（人次） */
+  .kg-pane-kpi table th:nth-child(15), .kg-pane-kpi table td:nth-child(15) { min-width:64px; }   /* 成交率 */
   @media(max-width:1199px) {
     .kg-pane-kpi table th, .kg-pane-kpi table td { padding:10px 8px; font-size:12px; line-height:1.45; }
     .kg-pane-kpi table th { font-size:12px; padding:12px 8px; }
   }
   @media(max-width:1023px) {
     .kg-pane-kpi table th, .kg-pane-kpi table td { padding:12px 8px; font-size:12px; line-height:1.5; }
-    .kg-pane-kpi table th:nth-child(11), .kg-pane-kpi table td:nth-child(11),
-    .kg-pane-kpi table th:nth-child(12), .kg-pane-kpi table td:nth-child(12) { display:none; }
-    /* 14列下隐藏连带率/客单价 */
+    .kg-pane-kpi table th:nth-child(12), .kg-pane-kpi table td:nth-child(12),
+    .kg-pane-kpi table th:nth-child(13), .kg-pane-kpi table td:nth-child(13) { display:none; }
+    /* 15列下隐藏连带率/客单价 */
   }
   @media(max-width:767px) {
     .kg-pane-kpi table th, .kg-pane-kpi table td { padding:14px 10px; font-size:11px; line-height:1.55; white-space:nowrap; }
@@ -289,7 +293,7 @@ body { background: var(--bg-page); color: var(--text-primary); }
 <div class="header">
   <div>
     <div class="region-label">🧱 苏中区域</div>
-    <h1>日销售看板<span style="font-size:14px;font-weight:400;color:var(--text-sub);margin-left:8px;">11月14日</span><span style="font-size:12px;font-weight:400;color:var(--text-sub);margin-left:6px;opacity:0.7;">更新于 11月14日</span><span style="font-size:11px;font-weight:400;color:var(--text-sub);margin-left:6px;opacity:0.5;">（数据截止 12:53 · 生成 13:01）</span></h1>
+    <h1>日销售看板<span style="font-size:14px;font-weight:400;color:var(--text-sub);margin-left:8px;">11月14日</span><span style="font-size:12px;font-weight:400;color:var(--text-sub);margin-left:6px;opacity:0.7;">更新于 11月14日</span><span style="font-size:11px;font-weight:400;color:var(--text-sub);margin-left:6px;opacity:0.5;">（数据截止 12:53 · 生成 13:10）</span></h1>
   </div>
 </div>
 
@@ -297,13 +301,18 @@ body { background: var(--bg-page); color: var(--text-primary); }
 
 
 <!-- 核心KPI -->
-<div class="kpi-row" style="grid-template-columns:repeat(5,1fr)">
+<div class="kpi-row" style="grid-template-columns:repeat(6,1fr)">
   <div class="kpi-card" style="background:var(--dash-store-soft);border-color:var(--dash-store-edge)">
     <div class="label" style="background:var(--dash-store);color:#FFFFFF;padding:6px 10px;border-radius:6px;margin-bottom:8px;display:inline-block">日销售</div>
     <div class="value" style="color:var(--dash-store)">¥25,301</div>
     <div class="sub" style="color:var(--dash-store)">日指标 ¥13.7万 | 完成率 <span style="font-weight:700;color:var(--red)">18.4%</span></div>
     <div class="rate-bar-mini" style="width:100%;margin-top:4px"><div class="fill fill-rate-red" style="width:18.4%"></div></div>
     <div class="tag tag-down">日同比 -65.7%</div>
+  </div>
+  <div class="kpi-card" style="background:var(--dash-yj-soft);border-color:var(--dash-yj-edge)">
+    <div class="label" style="background:var(--dash-yj);color:#FFFFFF;padding:6px 10px;border-radius:6px;margin-bottom:8px;display:inline-block">🎯 一口价</div>
+    <div class="value" style="color:var(--dash-yj)">¥248</div>
+    <div class="sub" style="color:var(--dash-yj)">3件 | 占日销 <span style="font-weight:700">1.0%</span> | 9款7折起</div>
   </div>
   <div class="kpi-card" style="background:var(--dash-lt78-soft);border-color:var(--dash-lt78-edge)">
     <div class="label" style="background:var(--dash-lt78);color:#FFFFFF;padding:6px 10px;border-radius:6px;margin-bottom:8px;display:inline-block">📦 长尾款</div>
@@ -347,6 +356,7 @@ body { background: var(--bg-page); color: var(--text-primary); }
         <th style="color:#FFFFFF;">长尾款</th>
         <th style="color:#FFFFFF;">明星同款</th>
         <th style="color:#FFFFFF;">新客主推款</th>
+        <th style="color:#FFFFFF;">🎯 一口价</th>
         <th style="color:#FFFFFF;">新品销售</th>
         <th style="color:#FFFFFF;">WOS销售</th>
         <th style="color:#FFFFFF;">即时零售销售</th>
@@ -367,6 +377,7 @@ body { background: var(--bg-page); color: var(--text-primary); }
         <td class="num" style="color:#9333ea;font-weight:600">¥169</td>
         <td class="num">¥160</td>
         <td class="num">¥160</td>
+        <td class="num" style="color:var(--dash-yj);font-weight:600">¥169</td>
         <td class="num">¥178</td>
         <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
         <td class="num">¥1,378</td>
@@ -384,6 +395,7 @@ body { background: var(--bg-page); color: var(--text-primary); }
         <td class="num" style="color:#9333ea;font-weight:600">¥169</td>
         <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
         <td class="num">¥523</td>
+        <td class="num" style="color:var(--dash-yj);font-weight:600">¥169</td>
         <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
         <td class="num">¥558</td>
         <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
@@ -401,6 +413,7 @@ body { background: var(--bg-page); color: var(--text-primary); }
         <td class="num" style="color:#9333ea;font-weight:600"><span style="color:var(--red);font-weight:700">¥0</span></td>
         <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
         <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
+        <td class="num" style="color:var(--dash-yj);font-weight:600"><span style="color:var(--red);font-weight:700">¥0</span></td>
         <td class="num">¥189</td>
         <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
         <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
@@ -418,6 +431,7 @@ body { background: var(--bg-page); color: var(--text-primary); }
         <td class="num" style="color:#9333ea;font-weight:600"><span style="color:var(--red);font-weight:700">¥-90</span></td>
         <td class="num">¥81</td>
         <td class="num">¥81</td>
+        <td class="num" style="color:var(--dash-yj);font-weight:600"><span style="color:var(--red);font-weight:700">¥-90</span></td>
         <td class="num">¥378</td>
         <td class="num">¥557</td>
         <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
@@ -435,6 +449,7 @@ body { background: var(--bg-page); color: var(--text-primary); }
         <td class="num" style="color:#9333ea;font-weight:600"><span style="color:var(--red);font-weight:700">¥0</span></td>
         <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
         <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
+        <td class="num" style="color:var(--dash-yj);font-weight:600"><span style="color:var(--red);font-weight:700">¥0</span></td>
         <td class="num">¥1,299</td>
         <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
         <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
@@ -452,6 +467,7 @@ body { background: var(--bg-page); color: var(--text-primary); }
         <td class="num" style="color:#9333ea;font-weight:600"><span style="color:var(--red);font-weight:700">¥0</span></td>
         <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
         <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
+        <td class="num" style="color:var(--dash-yj);font-weight:600"><span style="color:var(--red);font-weight:700">¥0</span></td>
         <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
         <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
         <td class="num"><span style="color:var(--red);font-weight:700">¥0</span></td>
@@ -470,6 +486,7 @@ body { background: var(--bg-page); color: var(--text-primary); }
         <td class="num" style="color:#9333ea;font-weight:600">¥248</td>
         <td class="num">¥241</td>
         <td class="num">¥764</td>
+        <td class="num" style="color:var(--dash-yj);font-weight:600">¥248</td>
         <td class="num">¥2,044</td>
         <td class="num">¥1,115</td>
         <td class="num">¥1,378</td>
