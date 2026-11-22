@@ -661,7 +661,7 @@ function renderComparison(){
   cmpNote=document.createElement('div');
   cmpNote.id='cmpTableNote';
   cmpNote.style='margin-top:10px;padding:8px 12px;background:#fef2f2;border:1px solid #fecaca;border-radius:8px;font-size:13px;color:#dc2626;font-weight:700';
-  cmpNote.textContent='🔴 周累计/笔数/客单价/连带率 低于区域均值已标红（周累计¥'+Math.round(regWkAmtAvg)+'、笔数'+Math.round(regWkCntAvg)+'、客单价¥'+Math.round(regWkATV)+'、连带率'+regWkJD.toFixed(2)+'）；明星同款：参考区域均值；样品未开单标红；长尾款自 2026-10-10 起仅统计销售额，无目标/完成率；2026-10-13 起秋季特惠活动已结束，模块移除';
+  cmpNote.textContent='🔴 周累计/笔数/客单价/连带率 低于区域均值已标红（周累计¥'+Math.round(regWkAmtAvg)+'、笔数'+Math.round(regWkCntAvg)+'、客单价¥'+Math.round(regWkATV)+'、连带率'+regWkJD.toFixed(2)+'）；明星同款：参考区域均值；样品未开单标红';
   document.getElementById('cmpTable').parentNode.appendChild(cmpNote);
   let _cmpConc=document.createElement('div');
   _cmpConc.style.cssText='margin-top:10px';
