@@ -1,0 +1,890 @@
+#!/usr/bin/env python3
+"""
+增强版周维度提取：WK28/WK29周环比 + 产品系列结构 + 导购个人周环比
+输出更新到 weekly_analysis.json
+"""
+import pandas as pd
+import json
+import os
+import glob
+from datetime import datetime
+
+import wos_attr  # WOS 导购归因（含订单备注 [SA_NAME] 补充归因）
+
+# ============================================================
+# 配置（与 generate_dashboard.py 一致）
+# ============================================================
+STORE_ORDER = ['扬州万象汇', '扬州京华城', '扬州江都金鹰', '泰州万象城', '宿迁宝龙', '淮安新亚', '淮安万象城']
+STORE_CODE_MAP = {
+    'LCS133-LW': '扬州万象汇', 'LCS275-LW': '扬州京华城', 'LCS364-LW': '扬州江都金鹰',
+    'LCS0632-LW': '泰州万象城', 'LCS249-LW': '宿迁宝龙', 'LCS305-LW': '淮安新亚',
+    'LCS0420-LW': '淮安万象城'
+}
+NEW_STORE = '淮安万象城'
+WK28_BASE = pd.Timestamp('2026-07-06')
+
+# 新品口径：2026-10-01 起改为「16款SKU白名单」（用户指定，与 extract_monthly.py / 日看板一致）
+# 历史口径（2026-08-29 ~ 2026-09-30）：上市日期 >= NEW_PRODUCT_SINCE
+NEW_PRODUCT_SINCE = pd.Timestamp(os.environ.get('NEW_PRODUCT_SINCE', '2026-11-01'))
+NEW_SKU_CODES = set(x.strip() for x in os.environ.get(
+    'NEW_SKU_CODES',
+    '72306,75457,76352,76347,76348,11379,11387,21373,21371,71053,40866,40862,40958,40875,40874,40880'
+).split(',') if x.strip())
+
+# Find latest files automatically — 动态路径，适配任意月份
+csvs = sorted(glob.glob('/Users/a123/Downloads/销售订单*.csv') + glob.glob('/Users/a123/WorkBuddy/Claw/inputs/销售订单*.csv'))
+desktop_xlsxs = sorted(glob.glob('/Users/a123/Desktop/销售订单明细查询*.xlsx'), key=os.path.getmtime)
+TODAY_XLSX = desktop_xlsxs[-1] if desktop_xlsxs else ''
+TARGET_XLSX = sorted(glob.glob('/Users/a123/Desktop/。/**/*月指标同期.xlsx', recursive=True), key=os.path.getmtime)
+TARGET_XLSX = TARGET_XLSX[-1] if TARGET_XLSX else ''
+_cands = []
+_cands += glob.glob('/Users/a123/Desktop/。/**/苏中区域*月员工指标*.xlsx', recursive=True)
+_cands += glob.glob('/Users/a123/Desktop/。/**/2026年*月员工个人指标*.xlsx', recursive=True)
+_cands += glob.glob('/Users/a123/Library/Containers/com.tencent.WeWorkMac/Data/Documents/Profiles/*/Caches/Files/2026-*/*/苏中区域*月员工指标*.xlsx')
+# 2026-11-02：员工指标文件改为按报告月匹配（见 REPORT_MONTH_WK 之后的选取逻辑）
+LT_SKU_XLSX = sorted(glob.glob('/Users/a123/Library/Containers/com.tencent.WeWorkMac/Data/Documents/Profiles/*/Caches/Files/2026-*/*/长尾款sku明细.xlsx'), key=os.path.getmtime)
+LT_SKU_XLSX = LT_SKU_XLSX[-1] if LT_SKU_XLSX else ''
+
+OUTPUT_JSON = '/Users/a123/WorkBuddy/Claw/outputs/weekly_analysis.json'
+OUTPUT_HTML = '/Users/a123/WorkBuddy/Claw/outputs/weekly_analysis.html'
+
+# 排除导购名单（字面严格匹配，用户 2026-09-01 18:27 定案，env EXCLUDED_GUIDES 可覆盖）
+import guide_filter as _gf
+EXCLUDE_NAMES = set(_gf.get_excluded_guides())
+
+print(f"历史CSV: {len(csvs)}个")
+print(f"今日文件: {os.path.basename(TODAY_XLSX) if TODAY_XLSX else '无(仅用CSV)'}")
+# 2026-11-02：GUIDE_XLSX 改为按报告月匹配，实际选取在 REPORT_MONTH_WK 之后（这里不能提前引用）
+print(f"排除人员: {', '.join(sorted(EXCLUDE_NAMES))}")
+
+# ============================================================
+# 1. 读取+清洗订单数据
+# ============================================================
+print("\n1. 读取订单数据...")
+hist_dfs = [pd.read_csv(f, low_memory=False) for f in csvs]
+hist_df = pd.concat(hist_dfs, ignore_index=True)
+if TODAY_XLSX and os.path.exists(TODAY_XLSX):
+    today_df = pd.read_excel(TODAY_XLSX)
+    all_df = pd.concat([hist_df, today_df], ignore_index=True)
+else:
+    all_df = hist_df
+    print("   (无今日xlsx，仅使用CSV数据)")
+
+# 先统一解析日期（混合格式容错：CSV 2026-07-20 13:22:00 / xlsx 2026/7/20 13:22）
+all_df['销售日期_dt'] = pd.to_datetime(all_df['销售日期'], format='mixed', errors='coerce')
+
+# 去重
+all_df['_dedup_key'] = (
+    all_df['单号'].astype(str) + '|' +
+    all_df['乐高编号'].apply(lambda x: str(int(float(x))) if pd.notna(x) and x != '' else '__nan__') + '|' +
+    all_df['商品名称'].fillna('').astype(str) + '|' +
+    all_df['数量'].astype(float).round(2).astype(str) + '|' +
+        all_df['结算金额'].astype(float).round(2).astype(str) + '|' +
+        all_df['导购姓名'].fillna('').astype(str)
+    )
+all_df = all_df.drop_duplicates(subset=['_dedup_key'])
+all_df = all_df.drop(columns=['_dedup_key'])
+
+# 排除4类人员
+before_exclude = len(all_df)
+all_df = all_df[~all_df['导购姓名'].astype(str).str.strip().isin(EXCLUDE_NAMES)]
+excluded_count = before_exclude - len(all_df)
+print(f"   合并去重后: {before_exclude}行, 排除4类人员: {excluded_count}行, 剩余: {len(all_df)}行")
+
+# 日期处理
+all_df['销售日期_dt'] = pd.to_datetime(all_df['销售日期'], format='mixed', errors='coerce')
+
+# 保存样品仓订单（用于样品销售模块），后续从主数据排除
+sample_df = all_df[all_df['下单店仓名称'].str.contains('样品', na=False)].copy()
+sample_df = sample_df[sample_df['是否赠品'] != '是']
+sample_df = sample_df[sample_df['结算金额'].astype(float) != 0]
+
+# 排除赠品、样品、零金额
+all_df = all_df[all_df['是否赠品'] != '是']
+all_df = all_df[~all_df['下单店仓名称'].str.contains('样品', na=False)]
+all_df = all_df[all_df['结算金额'].astype(float) != 0]
+
+# 样品门店映射 + 日期（2026-09-23 周分析样品模块修复）
+sample_df['门店名'] = sample_df['发货店仓编码'].map(STORE_CODE_MAP)
+sample_df = sample_df[sample_df['门店名'].notna()]
+sample_df['销售日期_dt'] = pd.to_datetime(sample_df['销售日期'], format='mixed', errors='coerce')
+sample_df['订单日期_dt'] = pd.to_datetime(sample_df['订单日期'], format='mixed', errors='coerce')
+sample_df['乐高编号_str'] = sample_df['乐高编号'].apply(lambda v: str(int(v)) if pd.notna(v) and v == int(v) else str(v) if pd.notna(v) else '')
+
+# 上市日期解析（新品口径：年/月 == 报告年/月）
+all_df['上市日期_dt'] = pd.to_datetime(all_df['上市日期'], errors='coerce')
+
+# 门店映射
+all_df['门店名'] = all_df['发货店仓编码'].map(STORE_CODE_MAP)
+all_df = all_df[all_df['门店名'].notna()]
+all_df['结算金额'] = all_df['结算金额'].astype(float)
+
+# 样品数据也做同样的门店映射
+sample_df['门店名'] = sample_df['发货店仓编码'].map(STORE_CODE_MAP)
+sample_df = sample_df[sample_df['门店名'].notna()]
+sample_df['结算金额'] = sample_df['结算金额'].astype(float)
+sample_df['牌价额'] = sample_df['牌价额'].astype(float)
+
+# 乐高编号统一
+all_df['乐高编号_str'] = all_df['乐高编号'].apply(
+    lambda v: str(int(v)) if pd.notna(v) and v == int(v) else str(v) if pd.notna(v) else ''
+)
+
+# WK周期 — 先算max_date和WK_START，再按日期范围过滤
+max_date = all_df['销售日期_dt'].max()
+# 2026-11-02：支持锁定报告日（REPORT_MAX_DATE），与 init_weekly_json.py 保持一致
+_lock = os.environ.get('REPORT_MAX_DATE', '').strip()
+if _lock:
+    _lock_ts = pd.Timestamp(_lock) + pd.Timedelta(hours=23, minutes=59, seconds=59)
+    if _lock_ts < max_date:
+        all_df = all_df[all_df['销售日期_dt'] <= _lock_ts]
+        max_date = all_df['销售日期_dt'].max()
+        print(f"   🔒 报告日锁定: {os.environ.get('REPORT_MAX_DATE')}")
+max_date_eod = pd.Timestamp(max_date.year, max_date.month, max_date.day, 23, 59, 59)
+
+# 2026-11-01 用户告知：宿迁宝龙 2026-11-10 闭店，报告日 ≥ 11/10 的周不再统计该店
+import store_status as _ss
+_closed_now = _ss.closed_stores(max_date)
+if _closed_now:
+    _before = len(STORE_ORDER)
+    STORE_ORDER = _ss.active_stores(STORE_ORDER, max_date)
+    print(f"   🚪 闭店门店已剔除: {', '.join(_closed_now)}（{_before}店 → {len(STORE_ORDER)}店）")
+
+weeks_since_wk28 = (max_date - WK28_BASE).days // 7
+WK_START = WK28_BASE + pd.Timedelta(weeks=weeks_since_wk28)
+WK_NUM_INT = 28 + weeks_since_wk28
+
+# 保留近4周数据（足够当前周+上周对比，跨月自动适配）
+_data_cutoff = WK_START - pd.Timedelta(weeks=3)
+all_df = all_df[all_df['销售日期_dt'] >= _data_cutoff]
+sample_df = sample_df[sample_df['销售日期_dt'] >= _data_cutoff]
+WK_PREV_START = WK_START - pd.Timedelta(days=7)
+WK_PREV_END = max_date_eod - pd.Timedelta(days=7)   # 上周同一时间段：本周WK_START~max_date对应上周同天数
+WK_PREV_NUM = WK_NUM_INT - 1
+print(f"   WK{WK_PREV_NUM}: {WK_PREV_START.strftime('%m.%d')}-{WK_PREV_END.strftime('%m.%d')}")
+print(f"   WK{WK_NUM_INT}: {WK_START.strftime('%m.%d')}-{max_date.strftime('%m.%d')}")
+
+all_df['is_wk28'] = (all_df['销售日期_dt'] >= WK_PREV_START) & (all_df['销售日期_dt'] <= WK_PREV_END)
+all_df['is_wk29'] = (all_df['销售日期_dt'] >= WK_START) & (all_df['销售日期_dt'] <= max_date_eod)
+
+# ============================================================
+# 2. 上周/本周 门店周销售（周环比用）
+# ============================================================
+print("\n2. 计算上周/本周门店周销售...")
+wk28_df = all_df[all_df['is_wk28']]
+wk29_df = all_df[all_df['is_wk29']]
+
+store_wk28 = {}
+store_wk29 = {}
+for s in STORE_ORDER:
+    store_wk28[s] = round(wk28_df[wk28_df['门店名'] == s]['结算金额'].sum(), 2)
+    store_wk29[s] = round(wk29_df[wk29_df['门店名'] == s]['结算金额'].sum(), 2)
+
+region_wk28 = sum(store_wk28.values())
+region_wk29 = sum(store_wk29.values())
+
+# WK 同比日期（后面 store_daily_yoy 加载完后才计算 store_wk_yoy）
+WK_PREV_YEAR_START = WK_START - pd.Timedelta(days=364)
+WK_PREV_YEAR_END = max_date_eod - pd.Timedelta(days=364)
+
+# ============================================================
+# 2.5 读取指标同期xlsx — 每日指标 + 去年同期每日数据
+#     跨月周(WK36=8/31-9/6)需同时取上月表与报告月表，按实际(月,日)索引，彻底修复错位
+#     月份动态取自 max_date，不再写死 7月+8月
+# ============================================================
+print("\n2.5 读取每日指标和同期数据（动态两月合并，支持跨月周）...")
+
+# ⚠️ 不再自己解析表结构：统一交给 target_loader（自动识别 A型单表 / B型双文件）
+#    并改为「报告月 + 上月」动态两月，9月起不会再读错成 7月+8月
+import target_loader as _tl
+
+_wk_month = max_date.month
+_prev_wk_month = (_wk_month - 1) if _wk_month > 1 else 12
+_tl_merged = _tl.load_multi([_prev_wk_month, _wk_month])
+print(f"   指标表来源: {_tl_merged['sources']}")
+
+store_daily_target = _tl_merged['store_daily_target']
+store_daily_yoy = _tl_merged['store_daily_yoy']
+region_daily_target = _tl_merged['region_daily_target']
+region_daily_yoy = _tl_merged['region_daily_yoy']
+
+# WK 同比实际计算（store_daily_yoy 加载完后）
+store_wk_yoy = {}
+for s in STORE_ORDER:
+    _yoy_daily = store_daily_yoy.get(s, {})
+    _total = 0.0
+    _wk_prev = pd.date_range(WK_PREV_YEAR_START, WK_PREV_YEAR_END, freq='D')
+    for _d in _wk_prev:
+        _mth = _d.month
+        _day = _d.day
+        _total += _yoy_daily.get((_mth, _day), 0)
+    store_wk_yoy[s] = round(_total, 2)
+region_wk_yoy = sum(store_wk_yoy.values())
+
+# WK 环比 + 同比打印
+for s in STORE_ORDER:
+    wow = round((store_wk29[s] - store_wk28[s]) / store_wk28[s] * 100, 1) if store_wk28[s] > 0 else None
+    yoy = round((store_wk29[s] - store_wk_yoy[s]) / store_wk_yoy[s] * 100, 1) if store_wk_yoy[s] > 0 else None
+    print(f"   {s}: WK{WK_PREV_NUM}=¥{store_wk28[s]:,.0f} → WK{WK_NUM_INT}=¥{store_wk29[s]:,.0f} | 环比 {wow if wow is not None else 'N/A'}% | 同比 {yoy if yoy is not None else 'N/A'}%")
+
+region_wow = round((region_wk29 - region_wk28) / region_wk28 * 100, 1) if region_wk28 > 0 else None
+region_yoy = round((region_wk29 - region_wk_yoy) / region_wk_yoy * 100, 1) if region_wk_yoy > 0 else None
+print(f"   区域: WK{WK_PREV_NUM}=¥{region_wk28:,.0f} → WK{WK_NUM_INT}=¥{region_wk29:,.0f} | 环比 {region_wow}% | 同比 {region_yoy}%")
+
+# 月指标(供其他逻辑/回退，无下游强依赖)
+store_month_target = {n: 0 for n in STORE_ORDER}
+region_month_target = 0
+
+print(f"   每日指标: {len(store_daily_target)}家门店 ({_prev_wk_month}月+{_wk_month}月表合并, 支持跨月周)")
+print(f"   同期每日: {len(store_daily_yoy)}家门店")
+
+# WK 同比实际计算（必须放到 store_daily_yoy 加载完后）
+store_wk_yoy = {}
+for s in STORE_ORDER:
+    _yoy_daily = store_daily_yoy.get(s, {})
+    _total = 0.0
+    _wk_prev = pd.date_range(WK_PREV_YEAR_START, WK_PREV_YEAR_END, freq='D')
+    for _d in _wk_prev:
+        _mth = _d.month
+        _day = _d.day
+        _total += _yoy_daily.get((_mth, _day), 0)
+    store_wk_yoy[s] = round(_total, 2)
+region_wk_yoy = sum(store_wk_yoy.values())
+
+# ============================================================
+# 3. 本周产品系列结构（产品大类）
+# ============================================================
+print("\n3. 计算本周产品系列结构...")
+series_by_store = {}
+for s in STORE_ORDER:
+    s_wk29 = wk29_df[wk29_df['门店名'] == s]
+    series_amt = s_wk29.groupby('产品大类')['结算金额'].sum().round(2).to_dict()
+    # Sort by amount descending
+    series_amt = dict(sorted(series_amt.items(), key=lambda x: x[1], reverse=True))
+    series_by_store[s] = series_amt
+    top3 = list(series_amt.items())[:3]
+    top3_str = ', '.join([f'{k}:¥{v:,.0f}' for k, v in top3])
+    print(f"   {s}: {len(series_amt)}个系列, TOP3: {top3_str}")
+
+# Region series
+r_wk29 = wk29_df
+region_series = r_wk29.groupby('产品大类')['结算金额'].sum().round(2).to_dict()
+region_series = dict(sorted(region_series.items(), key=lambda x: x[1], reverse=True))
+print(f"   区域: {len(region_series)}个系列, TOP3: {list(region_series.items())[:3]}")
+
+# ============================================================
+# 3.5 本周产品名称TOP10（商品名称，按结算金额，含件数）
+# ============================================================
+print("\n3.5 计算本周产品名称TOP10(含件数)...")
+products_by_store = {}
+for s in STORE_ORDER:
+    s_wk29 = wk29_df[wk29_df['门店名'] == s]
+    pos = s_wk29[s_wk29['结算金额'] > 0]
+    prod_amt = pos.groupby('商品名称')['结算金额'].sum()
+    prod_qty = pos.groupby('商品名称')['数量'].sum()
+    prod_dict = {}
+    for name in prod_amt.index:
+        prod_dict[name] = {'amt': round(float(prod_amt[name]), 2), 'qty': int(prod_qty[name])}
+    prod_dict = dict(sorted(prod_dict.items(), key=lambda x: x[1]['amt'], reverse=True))
+    products_by_store[s] = prod_dict
+    top3 = list(prod_dict.items())[:3]
+    top3_str = ', '.join([f'{k}:¥{v["amt"]:,.0f}/{v["qty"]}件' for k, v in top3])
+    print(f"   {s}: {len(prod_dict)}个商品, TOP3: {top3_str}")
+
+# Region products with qty
+r_pos = wk29_df[wk29_df['结算金额'] > 0]
+r_prod_amt = r_pos.groupby('商品名称')['结算金额'].sum()
+r_prod_qty = r_pos.groupby('商品名称')['数量'].sum()
+region_products = {}
+for name in r_prod_amt.index:
+    region_products[name] = {'amt': round(float(r_prod_amt[name]), 2), 'qty': int(r_prod_qty[name])}
+region_products = dict(sorted(region_products.items(), key=lambda x: x[1]['amt'], reverse=True))
+products_by_store['_region'] = region_products
+print(f"   区域: {len(region_products)}个商品, TOP3: {[(k, v['amt']) for k, v in list(region_products.items())[:3]]}")
+
+# ============================================================
+# 4. 导购数据：本周 + 上周（个人周环比）
+# ============================================================
+print("\n4. 计算导购周数据（含上周环比）...")
+# 2026-11-02：员工表表头行不固定（11月=第5行）→ 用共用函数自动探测
+import guide_filter as _gf_x
+# 2026-11-02：员工指标文件按**报告月**匹配（max_date 已在锁定逻辑后确定）
+import guide_filter as _gf_pick
+GUIDE_XLSX = _gf_pick.pick_guide_xlsx(_cands, max_date.month)
+print(f"   导购指标文件: {os.path.basename(GUIDE_XLSX) if GUIDE_XLSX else '未找到'}")
+guide_df = _gf_x.read_guide_xlsx(GUIDE_XLSX)
+
+def normalize_guide_name(name):
+    if name is None or str(name).strip() == '':
+        return None
+    name = str(name).strip()
+    if name.startswith('长期兼职-'):
+        name = name[len('长期兼职-'):]
+    # 支援重命名（用户 2026-09-02 16:00 定案）
+    if name == '扬万支援销售' or name == '扬州万象汇支援销售':
+        name = '李婷1'
+    if name == '泰州万象城-支援2' or name == '泰州万象城支援2':
+        name = '黄小莉1'
+    # 本体合并（李婷/黄小莉 在指标分配文件里叫本体，但销售数据上合并到1）
+    if name == '李婷':
+        name = '李婷1'
+    if name == '黄小莉':
+        name = '黄小莉1'
+    return name
+
+def normalize_store_name(name):
+    if name is None:
+        return None
+    name = str(name).strip()
+    variants = {
+        '扬州万象汇店': '扬州万象汇', '扬州京华城店': '扬州京华城',
+        '扬州江都金鹰店': '扬州江都金鹰', '泰州万象城': '泰州万象城',
+        '宿迁宝龙店': '宿迁宝龙', '淮安新亚广场店': '淮安新亚',
+        '淮安万象城店': '淮安万象城',
+    }
+    return variants.get(name, name)
+
+guide_info = {}
+for _, row in guide_df.iterrows():
+    gname = normalize_guide_name(row.get('姓名', row.get('导购姓名', '')))
+    if gname is None:
+        continue
+    store = normalize_store_name(row.get('门店', row.get('门店名称', '')))
+    if store not in STORE_ORDER:
+        continue
+    title = str(row.get('职务', row.get('職务', ''))).strip()
+    target = float(row.get('员工个人指标', row.get('个人指标', 0)))
+    if gname in guide_info:
+        guide_info[gname]['target'] += target
+    else:
+        guide_info[gname] = {'store': store, 'title': title, 'target': target}
+
+# 李婷1、黄小莉1 是扬万支援销售/泰州支援2重命名后的独立导购
+# 导购指标表中只有李婷/黄小莉，需为李婷1/黄小莉1复制指标
+if '李婷' in guide_info and '李婷1' not in guide_info:
+    guide_info['李婷1'] = dict(guide_info['李婷'])
+if '黄小莉' in guide_info and '黄小莉1' not in guide_info:
+    guide_info['黄小莉1'] = dict(guide_info['黄小莉'])
+
+# 去掉李婷、黄小莉本体（保留李婷1、黄小莉1）
+guide_info.pop('李婷', None)
+guide_info.pop('黄小莉', None)
+
+# Read LT SKUs
+if LT_SKU_XLSX:
+    lt_sku_df = pd.read_excel(LT_SKU_XLSX)
+    # 文件有8列：序号/乐高编号/商品名称/系列/零售价/上市时间/下市时间/产品等级
+    # 必须用'乐高编号'列，不能用iloc[:,0]（那是序号1-79）
+    lt_skus = set(lt_sku_df['乐高编号'].apply(lambda x: str(int(x)) if pd.notna(x) else '').tolist())
+    # 提取近3个月新品（当月新品）
+    sku_dates = pd.to_datetime(lt_sku_df['上市时间'], errors='coerce')
+    recent_cutoff = pd.Timestamp('2026-05-01')
+    new_products = lt_sku_df[sku_dates >= recent_cutoff]['商品名称'].dropna().tolist()
+    print(f"   近3月新品: {len(new_products)}款")
+else:
+    lt_skus = set()
+    new_products = []
+
+# Read QJ (秋季特惠 65款) / MX (明星同款 7款) / XC (新客主推 5款) SKUs
+# 2026-09-19/21 用户新增周月分析模块
+def _load_sku_set(pattern_keyword, label):
+    """按 glob 模式加载 SKU xlsx 并返回 set（按修改时间最新）"""
+    import glob as _g
+    paths = sorted(_g.glob(
+        f'/Users/a123/Library/Containers/com.tencent.WeWorkMac/Data/Documents/Profiles/*/Caches/Files/2026-*/*/{pattern_keyword}'
+    ), key=os.path.getmtime)
+    if not paths:
+        return set()
+    df = pd.read_excel(paths[-1])
+    col = '乐高编号' if '乐高编号' in df.columns else '产品编号'
+    skus = set(df[col].apply(lambda x: str(int(x)) if pd.notna(x) else '').tolist())
+    print(f"   {label}: {os.path.basename(paths[-1])} {len(skus)}款")
+    return skus
+
+qj_skus = _load_sku_set('秋季特惠sku明细.xlsx', '秋季特惠SKU')
+mx_skus = _load_sku_set('明星同款sku明细.xlsx', '明星同款SKU')
+xc_skus = _load_sku_set('新客主推款sku明细.xlsx', '新客主推SKU')
+
+def get_match_names(gname):
+    """Get all possible name matches for a guide（用户 2026-09-02 16:34 定案）"""
+    match_names = [gname, f'长期兼职-{gname}']
+    if gname == '李婷1':
+        match_names += ['扬万支援销售', '扬州万象汇支援销售']
+    if gname == '黄小莉1':
+        match_names += ['泰州万象城-支援2', '泰州万象城支援2']
+    return match_names
+
+def calc_guide_weekly(wk_df, gname, info, wos_map):
+    """Calculate guide weekly metrics from a filtered dataframe"""
+    store = info['store']
+    match_names = get_match_names(gname)
+    g_wk = wk_df[(wk_df['门店名'] == store) & (wk_df['导购姓名'].astype(str).str.strip().isin(match_names))]
+
+    if len(g_wk) == 0:
+        return {
+            'wk_sales': 0, 'wk_qty': 0, 'wk_cnt': 0,
+            'wk_atv': 0, 'wk_jd': 0, 'wk_wos': 0, 'wk_lt': 0, 'wk_lt_qty': 0,
+            'wk_qj': 0, 'wk_qj_qty': 0, 'wk_mx': 0, 'wk_mx_qty': 0, 'wk_xc': 0, 'wk_xc_qty': 0,
+            'wk_np': 0,
+        }
+
+    pos = g_wk[g_wk['结算金额'] > 0]
+    wk_sales = g_wk['结算金额'].sum()
+    wk_qty = int(pos['数量'].sum()) if len(pos) > 0 else 0
+    wk_cnt = pos['单号'].nunique() if len(pos) > 0 else 0
+    wk_atv = round(wk_sales / wk_cnt, 2) if wk_cnt > 0 else 0
+    wk_jd = round(wk_qty / wk_cnt, 2) if wk_cnt > 0 else 0
+    # WOS（备注补充归因：导购姓名空 → 取订单备注 [SA_NAME]）
+    wk_wos = wos_attr.wos_lookup(wos_map, store, gname)
+    g_lt = g_wk[g_wk['乐高编号_str'].isin(lt_skus)]
+    wk_lt = g_lt['结算金额'].sum()
+    wk_lt_qty = int(g_lt[g_lt['结算金额'] > 0]['数量'].sum()) if len(g_lt[g_lt['结算金额'] > 0]) > 0 else 0
+    # 秋季特惠 65款 (2026-09-19 新增)
+    g_qj = g_wk[g_wk['乐高编号_str'].isin(qj_skus)]
+    wk_qj = g_qj['结算金额'].sum()
+    wk_qj_qty = int(g_qj[g_qj['结算金额'] > 0]['数量'].sum()) if len(g_qj[g_qj['结算金额'] > 0]) > 0 else 0
+    # 明星同款 7款 (2026-09-21 新增)
+    g_mx = g_wk[g_wk['乐高编号_str'].isin(mx_skus)]
+    wk_mx = g_mx['结算金额'].sum()
+    wk_mx_qty = int(g_mx[g_mx['结算金额'] > 0]['数量'].sum()) if len(g_mx[g_mx['结算金额'] > 0]) > 0 else 0
+    # 新客主推款 5款 (2026-09-19 新增)
+    g_xc = g_wk[g_wk['乐高编号_str'].isin(xc_skus)]
+    wk_xc = g_xc['结算金额'].sum()
+    wk_xc_qty = int(g_xc[g_xc['结算金额'] > 0]['数量'].sum()) if len(g_xc[g_xc['结算金额'] > 0]) > 0 else 0
+    # 新品（2026-11-01 起：上市日期年/月 == 报告年/月，即报告月上市的产品）
+    np_mask = ((g_wk['上市日期_dt'].dt.year == max_date.year)
+               & (g_wk['上市日期_dt'].dt.month == max_date.month))
+    wk_np = g_wk[np_mask]['结算金额'].sum()
+    return {
+        'wk_sales': round(wk_sales, 2),
+        'wk_qty': wk_qty,
+        'wk_cnt': wk_cnt,
+        'wk_atv': wk_atv,
+        'wk_jd': wk_jd,
+        'wk_wos': round(wk_wos, 2),
+        'wk_lt': round(wk_lt, 2),
+        'wk_lt_qty': wk_lt_qty,
+        # ⚠️ 2026-10-13 用户定：秋季特惠活动已结束，wk_qj 字段不再输出（数据层 g_qj 计算保留备回退）
+        'wk_mx': round(wk_mx, 2),
+        'wk_mx_qty': wk_mx_qty,
+        'wk_xc': round(wk_xc, 2),
+        'wk_xc_qty': wk_xc_qty,
+        'wk_np': round(wk_np, 2),
+    }
+
+guide_weekly = {}
+
+# WOS 导购归因（含订单备注 [SA_NAME] 补充归因）—— 与导购WOS重算报表口径一致
+wk29_wos_map = wos_attr.build_wos_map(
+    wk29_df, store_col='门店名', guide_col='导购姓名', note_col='备注',
+    amt_col='结算金额', wos_col='支付方式名称', normalizer=normalize_guide_name)
+wk28_wos_map = wos_attr.build_wos_map(
+    wk28_df, store_col='门店名', guide_col='导购姓名', note_col='备注',
+    amt_col='结算金额', wos_col='支付方式名称', normalizer=normalize_guide_name)
+
+for gname, info in guide_info.items():
+    wk29_data = calc_guide_weekly(wk29_df, gname, info, wk29_wos_map)
+    wk28_data = calc_guide_weekly(wk28_df, gname, info, wk28_wos_map)
+    
+    wk_rate = round(wk29_data['wk_sales'] / info['target'] * 100, 1) if info['target'] > 0 else 0
+    wk28_sales = wk28_data['wk_sales']
+    wow = round((wk29_data['wk_sales'] - wk28_sales) / wk28_sales * 100, 1) if wk28_sales > 0 else None
+
+    guide_weekly[gname] = {
+        'name': gname, 'store': info['store'], 'title': info['title'],
+        'target': info['target'],
+        'wk_sales': wk29_data['wk_sales'],
+        'wk_qty': wk29_data['wk_qty'],
+        'wk_cnt': wk29_data['wk_cnt'],
+        'wk_atv': wk29_data['wk_atv'],
+        'wk_jd': wk29_data['wk_jd'],
+        'wk_wos': wk29_data['wk_wos'],
+        'wk_lt': wk29_data['wk_lt'],
+        'wk_lt_qty': wk29_data['wk_lt_qty'],
+        # ⚠️ 2026-10-13 用户定：秋季特惠活动已结束，wk_qj 字段不再输出
+        'wk_mx': wk29_data['wk_mx'],
+        'wk_mx_qty': wk29_data['wk_mx_qty'],
+        'wk_xc': wk29_data['wk_xc'],
+        'wk_xc_qty': wk29_data['wk_xc_qty'],
+        'wk_np': wk29_data['wk_np'],
+        'wk_rate': wk_rate,
+        'wk28_sales': round(wk28_sales, 2),
+        'wow': wow,
+    }
+    wow_str = f"{wow:+.1f}%" if wow is not None else 'N/A'
+    print(f"   {gname} ({info['store']}): 本周=¥{wk29_data['wk_sales']:,.0f} | 上周=¥{wk28_sales:,.0f} | 环比{wow_str}")
+
+# 按门店分组
+guide_by_store = {}
+for gname, data in guide_weekly.items():
+    store = data['store']
+    if store not in guide_by_store:
+        guide_by_store[store] = []
+    guide_by_store[store].append(data)
+for store in guide_by_store:
+    guide_by_store[store].sort(key=lambda x: x['wk_sales'], reverse=True)
+
+# ============================================================
+# 4.5 样品销售数据
+# ============================================================
+print("\n4.5 计算样品销售数据...")
+month_start = pd.Timestamp(max_date.year, max_date.month, 1)
+sample_data = {}
+for store in STORE_ORDER:
+    s_wk = sample_df[(sample_df['门店名'] == store) & (sample_df['销售日期_dt'] >= WK_START) & (sample_df['销售日期_dt'] <= max_date_eod)]
+    s_month = sample_df[(sample_df['门店名'] == store) & (sample_df['销售日期_dt'] >= month_start) & (sample_df['销售日期_dt'] <= max_date_eod)]
+    wk_pos = s_wk[s_wk['结算金额'] > 0]
+    month_pos = s_month[s_month['结算金额'] > 0]
+    sample_data[store] = {
+        'wk_qty': int(wk_pos['数量'].sum()) if len(wk_pos) > 0 else 0,
+        'wk_retail': round(float(wk_pos['牌价额'].sum()), 2) if len(wk_pos) > 0 else 0,
+        'wk_amt': round(float(s_wk['结算金额'].sum()), 2),
+        'month_qty': int(month_pos['数量'].sum()) if len(month_pos) > 0 else 0,
+        'month_retail': round(float(month_pos['牌价额'].sum()), 2) if len(month_pos) > 0 else 0,
+        'month_amt': round(float(s_month['结算金额'].sum()), 2),
+    }
+sample_region = {
+    'wk_qty': sum(v['wk_qty'] for v in sample_data.values()),
+    'wk_retail': round(sum(v['wk_retail'] for v in sample_data.values()), 2),
+    'wk_amt': round(sum(v['wk_amt'] for v in sample_data.values()), 2),
+    'month_qty': sum(v['month_qty'] for v in sample_data.values()),
+    'month_retail': round(sum(v['month_retail'] for v in sample_data.values()), 2),
+    'month_amt': round(sum(v['month_amt'] for v in sample_data.values()), 2),
+}
+print(f"   区域: 周样品¥{sample_region['wk_amt']}({sample_region['wk_qty']}件), 月样品¥{sample_region['month_amt']}({sample_region['month_qty']}件)")
+
+# ============================================================
+# 4.6 门店周新品累计（新品口径：上市日期 >= NEW_PRODUCT_SINCE，与导购 wk_np / 月度分析一致）
+# ============================================================
+print("\n4.6 计算门店周新品累计...")
+np_store = {}
+for store in STORE_ORDER:
+    s_wk = wk29_df[(wk29_df['门店名'] == store) & (wk29_df['销售日期_dt'] >= WK_START) & (wk29_df['销售日期_dt'] <= max_date_eod)]
+    np_mask = ((s_wk['上市日期_dt'].dt.year == max_date.year)
+               & (s_wk['上市日期_dt'].dt.month == max_date.month))
+    np_store[store] = round(float(s_wk[np_mask]['结算金额'].sum()), 2)
+np_region = round(sum(np_store.values()), 2)
+region_wk_total = round(sum(store_wk29.values()), 2) if store_wk29 else 0
+np_region_pct = round(np_region / region_wk_total * 100, 1) if region_wk_total > 0 else 0
+print(f"   区域: 周新品累计¥{np_region}（占周销售{np_region_pct}%）")
+
+# ============================================================
+# 4.8 门店月成交率（成交率 = 月成交笔数 / 月客流，月累计）
+# ============================================================
+print("\n4.8 计算门店月成交率（笔数/客流，月累计）...")
+# ⚠️ 月成交率分母 = 用户每月提供的全月累计客流文件(含7店|门店/客流两列)。
+#    该文件已是全月累计(含本周WK), 直接采用, 不再叠加周客流(否则WK被重复计算)。
+#    文件名按"M月客流.xlsx"惯例, 每月初更新。
+# 月客流文件按「报告月」动态查找（原写死 8月客流截止17日.xlsx，换月即失效）
+# 与 extract_monthly.py 同逻辑：搜 Desktop/Desktop/。/{M}月/Downloads/项目目录，排除含「周」的文件
+import re as _re
+
+
+def _find_flow_file(month):
+    _dirs = ['/Users/a123/Desktop', '/Users/a123/Desktop/。', f'/Users/a123/Desktop/。/{month}月',
+             '/Users/a123/Downloads', os.path.dirname(os.path.abspath(__file__))]
+    _exact, _fuzzy, _plain = [], [], []
+    for _d in _dirs:
+        if not os.path.isdir(_d):
+            continue
+        for _p in glob.glob(os.path.join(_d, '*客流*.xlsx')):
+            _b = os.path.basename(_p)
+            if _b.startswith('~$') or '周' in _b:
+                continue
+            if _re.match(rf'^{month}月客流', _b):
+                _exact.append(_p)
+            elif _re.search(rf'{month}月', _b):
+                _fuzzy.append(_p)
+            elif _b == '月客流.xlsx':  # 2026-09-13：用户改用无月份前缀的「月客流.xlsx」
+                _plain.append(_p)
+    return _exact[0] if _exact else (_fuzzy[0] if _fuzzy else (_plain[0] if _plain else None))
+
+
+FLOW_MONTH_FILE = _find_flow_file(max_date.month)
+FLOW_WK_FILE = None  # 已废弃: 历史逻辑=早期累计+本周客流拼接; 现改为单份全月文件, 不再使用
+FLOW_MAP = {
+    '扬州万象汇新店': '扬州万象汇', '扬州京华城': '扬州京华城', '扬州江都金鹰': '扬州江都金鹰',
+    '泰州万象城': '泰州万象城', '宿迁宝龙': '宿迁宝龙', '淮安新亚广场': '淮安新亚',
+    '淮安万象城': '淮安万象城'
+}
+# 2026-11-01：客流后台导出的店名是编码格式（如「LCS0632-LW～泰州万象城乐高」），
+# 精确匹配全部落空 → 7 店成交率全空。补两级兜底（与 extract_monthly.py 同思路）：
+#   ① LCS 编码前缀匹配（编码带前导零时先 lstrip('0')）
+#   ② 店名子串匹配（长名优先，避免「扬州万象汇」抢占「扬州万象汇新店」）
+FLOW_CODE_MAP = {
+    '133': '扬州万象汇', '275': '扬州京华城', '364': '扬州江都金鹰',
+    '632': '泰州万象城', '249': '宿迁宝龙', '305': '淮安新亚', '420': '淮安万象城',
+}
+_FLOW_KEYS_BY_LEN = sorted(FLOW_MAP.keys(), key=len, reverse=True)
+
+
+def _match_flow_store(sn, flow_map):
+    """客流文件店名 → 标准门店名（精确 → 编码 → 子串）"""
+    _sn = str(sn).strip()
+    std = flow_map.get(_sn)
+    if std:
+        return std
+    _code = _re.match(r'LCS(\d+)', _sn, _re.I)
+    if _code:
+        _c = _code.group(1).lstrip('0') or '0'
+        if _c in FLOW_CODE_MAP:
+            return FLOW_CODE_MAP[_c]
+    for _k in _FLOW_KEYS_BY_LEN:
+        if _k in _sn:
+            return flow_map[_k]
+    return None
+
+
+REPORT_MONTH_WK = max_date.month
+# 2026-11-02：按报告月匹配员工指标文件（不按 mtime 取最新）
+import guide_filter as _gf_pick
+GUIDE_XLSX = _gf_pick.pick_guide_xlsx(_cands, REPORT_MONTH_WK)
+# ⚠️必须含年份过滤：本脚本glob了Downloads全部CSV(含2025年No.233906)，仅按month过滤会把去年同月混入当月累计
+cur_month_df = all_df[(all_df['销售日期_dt'].dt.year == max_date.year) & (all_df['销售日期_dt'].dt.month == REPORT_MONTH_WK)]
+flow_map = {}
+if not FLOW_MONTH_FILE:
+    print(f"   ⚠️ 未找到 {max_date.month}月客流文件（期望「{max_date.month}月客流.xlsx」），月成交率留空")
+try:
+    # 月客流.xlsx: 有表头(门店|客流)，全月累计客流(月初起~截止上周末, 已含本周WK)
+    # ⚠️ 该文件已是全月累计, 直接作为月成交率分母, 不再叠加周客流(避免WK重复计算)
+    month_raw = pd.read_excel(FLOW_MONTH_FILE, sheet_name='Sheet1', header=0)
+    month_raw = month_raw.rename(columns={month_raw.columns[0]: 'flow_store', month_raw.columns[1]: '客流'})
+    month_raw['门店名'] = month_raw['flow_store'].map(lambda s: _match_flow_store(s, FLOW_MAP))
+    month_flow_map = month_raw.dropna(subset=['门店名']).set_index('门店名')['客流'].to_dict()
+    flow_map = {s: int(month_flow_map.get(s, 0)) for s in STORE_ORDER}
+    print(f"   月客流(全月累计)读取: 合计 {int(sum(month_flow_map.values()))} 人次, 覆盖 {len(month_flow_map)} 家店")
+    print(f"   月累计客流(直接采用全月文件): 合计 {int(sum(flow_map.values()))} 人次")
+    missing = [s for s in STORE_ORDER if flow_map.get(s, 0) == 0]
+    if missing:
+        print(f"   ⚠️ 以下门店客流无数据→月成交率显示'缺客流': {missing}")
+except Exception as e:
+    print(f"   ⚠️ 客流文件读取失败: {e}")
+    flow_map = {}
+print(f"   月客流合计: {int(sum(flow_map.values()))} 人次")
+conversion = {}
+for s in STORE_ORDER:
+    s_m = cur_month_df[cur_month_df['门店名'] == s]
+    pos = s_m[s_m['结算金额'] > 0]
+    cnt = pos['单号'].nunique() if len(pos) > 0 else 0
+    fl = flow_map.get(s, 0)
+    rate = round(cnt / fl * 100, 2) if fl > 0 else None  # 月客流缺失时置None，页面显示"缺客流"而非误导的0%
+    conversion[s] = {'flow': int(fl), 'cnt': int(cnt), 'rate': rate}
+rf = sum(conversion[s]['flow'] for s in STORE_ORDER)
+rc = sum(conversion[s]['cnt'] for s in STORE_ORDER)
+conversion['_region'] = {'flow': int(rf), 'cnt': int(rc), 'rate': round(rc / rf * 100, 2) if rf > 0 else None}  # 缺客流→None(页面显示"缺客流")，不能给0%误导
+print("   门店月成交率: " + " | ".join(f"{s} {conversion[s]['rate']}%" for s in STORE_ORDER) + f" | 区域 {conversion['_region']['rate']}%")
+
+# ============================================================
+# 4.9 门店WK周成交率（成交率 = 本周成交笔数 / 本周客流，周累计）
+#    窗口跟随报告周动态计算（WK_START ~ max_date_eod），不再硬编码WK31
+# ============================================================
+print(f"\n4.9 计算门店WK{WK_NUM_INT}周成交率（笔数/客流，WK{WK_NUM_INT}周累计）...")
+# 客流文件优先级（2026-09-13 动态化，不再写死 WK36）：
+#   1. {WK_NUM_INT}周客流.xlsx（如 37周客流.xlsx，最精确）
+#   2. 周客流.xlsx（用户当前惯例，通用兜底）
+WK_FLOW_FILE = f'/Users/a123/Desktop/{WK_NUM_INT}周客流.xlsx'
+if not os.path.exists(WK_FLOW_FILE):
+    WK_FLOW_FILE = '/Users/a123/Desktop/周客流.xlsx'
+FLOW_MAP_WK = {
+    '扬州万象汇新店': '扬州万象汇', '扬州京华城': '扬州京华城', '扬州江都金鹰': '扬州江都金鹰',
+    '泰州万象城': '泰州万象城', '宿迁宝龙': '宿迁宝龙', '淮安新亚广场': '淮安新亚',
+    '淮安万象城': '淮安万象城'
+}
+# 当周实际天数（保留变量，9月客流口径下不再使用，但保留便于未来动态窗口）
+_wk_days = (max_date_eod - WK_START).days + 1
+wk_flow_df = all_df[(all_df['销售日期_dt'] >= WK_START) & (all_df['销售日期_dt'] <= max_date_eod)]
+try:
+    # 新文件 schema: Sheet1 列0='门店' / 列1='客流'（用户口径：WK36整周累计客流，不乘天数）
+    wk_flow_raw = pd.read_excel(WK_FLOW_FILE, sheet_name='Sheet1', header=0)
+    col0, col1 = wk_flow_raw.columns[0], wk_flow_raw.columns[1]
+    wk_flow_map = {}
+    for _, r in wk_flow_raw.iterrows():
+        sn = r.get(col0); val = r.get(col1)
+        if pd.isna(sn) or pd.isna(val) or float(val) == 0: continue
+        std = _match_flow_store(sn, FLOW_MAP_WK)
+        if not std: continue
+        # 2026-09-07：用户口径，WK36客流 = WK36整周累计，不乘天数
+        wk_flow_map[std] = float(val)
+    print(f"   WK{WK_NUM_INT}客流文件读取(Sheet1): 苏中7店WK{WK_NUM_INT}累计合计 {int(sum(wk_flow_map.values()))} 人次")
+except Exception as e:
+    print(f"   ⚠️ WK{WK_NUM_INT}客流文件读取失败: {e}")
+    wk_flow_map = {}
+weekly_conversion = {}
+for s in STORE_ORDER:
+    s_w = wk_flow_df[wk_flow_df['门店名'] == s]
+    pos = s_w[s_w['结算金额'] > 0]
+    cnt = pos['单号'].nunique() if len(pos) > 0 else 0
+    fl = wk_flow_map.get(s, 0)
+    rate = round(cnt / fl * 100, 2) if fl > 0 else None  # 客流缺失时置None，页面显示"缺客流"而非误导的0%
+    weekly_conversion[s] = {'flow': int(fl), 'cnt': int(cnt), 'rate': rate}
+rf = sum(weekly_conversion[s]['flow'] for s in STORE_ORDER)
+rc = sum(weekly_conversion[s]['cnt'] for s in STORE_ORDER)
+weekly_conversion['_region'] = {'flow': int(rf), 'cnt': int(rc), 'rate': round(rc / rf * 100, 2) if rf > 0 else None}
+print("   WK%d门店周成交率: " % WK_NUM_INT + " | ".join(f"{s} {weekly_conversion[s]['rate']}%" for s in STORE_ORDER) + f" | 区域 {weekly_conversion['_region']['rate']}%")
+
+# ============================================================
+# 5. 更新 weekly_analysis.json
+# ============================================================
+print("\n5. 更新 weekly_analysis.json...")
+with open(OUTPUT_JSON, 'r', encoding='utf-8') as f:
+    weekly = json.load(f)
+
+# 更新门店周环比和WK28 + 每日同比/完成率
+for store in STORE_ORDER:
+    if store in weekly:
+        weekly[store]['wk28_amt'] = store_wk28.get(store, 0)
+        weekly[store]['wk_np_amt'] = np_store.get(store, 0)
+        weekly[store]['wk_yoy_amt'] = store_wk_yoy.get(store, 0)  # 2026-09-28：去年同期WK累计
+        wow = round((store_wk29[store] - store_wk28[store]) / store_wk28[store] * 100, 1) if store_wk28.get(store, 0) > 0 else None
+        weekly[store]['wow'] = wow
+        wk_yoy = round((store_wk29[store] - store_wk_yoy.get(store, 0)) / store_wk_yoy.get(store, 0) * 100, 1) if store_wk_yoy.get(store, 0) > 0 else None
+        weekly[store]['wk_yoy'] = wk_yoy
+        # 更新daily数组 — 添加target/rate/yoy_amt/yoy_pct
+        daily_arr = weekly[store].get('daily', [])
+        s_td = store_daily_target.get(store, {})
+        s_yd = store_daily_yoy.get(store, {})
+        for d_entry in daily_arr:
+            # date="7/27" -> month=7, day=27；按实际月份到对应指标同期表取数（修复跨月错位）
+            parts = d_entry['date'].split('/')
+            mth = int(parts[0]); day = int(parts[1])
+            t = s_td.get((mth, day), 0)
+            y = s_yd.get((mth, day), 0)
+            d_entry['target'] = round(t, 2)
+            d_entry['rate'] = round(d_entry['total'] / t * 100, 1) if t > 0 else 0
+            d_entry['yoy_amt'] = round(y, 2)
+            d_entry['yoy_pct'] = round((d_entry['total'] - y) / y * 100, 1) if y > 0 else None
+            # 长尾款自 2026-10-10 起仅统计销售额，不计算目标/完成率
+        # 周长尾款口径变更（2026-10-10 起仅销售额，无指标）
+        # 周秋特/明星同款/新客主推款销售按日累计（2026-09-19/21 用户新增）
+        # ⚠️ bugfix：原代码仅在 line 437 写到了导购字典，门店字典从未赋值，导致 wk_qj_amt/wk_mx_amt/wk_xc_amt 全部为 0
+        # 修复：直接在门店层级按 WK 窗口 + SKU 集合求和
+        _s_wk = wk29_df[wk29_df['门店名'] == store]
+        # ⚠️ 2026-10-13 用户定：秋季特惠活动已结束，wk_qj / wk_qj_amt 不再输出
+        weekly[store]['wk_mx'] = round(_s_wk[_s_wk['乐高编号_str'].isin(mx_skus)]['结算金额'].sum(), 2)
+        weekly[store]['wk_xc'] = round(_s_wk[_s_wk['乐高编号_str'].isin(xc_skus)]['结算金额'].sum(), 2)
+        weekly[store]['wk_mx_amt'] = float(weekly[store]['wk_mx'])
+        weekly[store]['wk_xc_amt'] = float(weekly[store]['wk_xc'])
+
+# 构建区域daily数组
+# ⚠️ 跨月周(WK36=8/31-9/6)踩坑：原逻辑拿第一家店的 daily 当模板逐日找同名条目，
+#    某店某天没销售时该条目不存在 → 列表索引越界直接崩，整页空白。
+#    改为：日期取全部门店并集 + 缺日按 0 计（安全取值），既不会崩也不会丢天。
+def _day_val(store, date, key, default=0):
+    for e in weekly.get(store, {}).get('daily', []):
+        if e['date'] == date:
+            return e.get(key, default)
+    return default
+
+
+_all_dates, _wd_map = [], {}
+for s in STORE_ORDER:
+    for e in weekly.get(s, {}).get('daily', []):
+        if e['date'] not in _all_dates:
+            _all_dates.append(e['date'])
+        _wd_map.setdefault(e['date'], e.get('weekday', ''))
+_all_dates.sort(key=lambda d: (int(d.split('/')[0]), int(d.split('/')[1])))
+
+region_daily = []
+for d in _all_dates:
+    parts = d.split('/')
+    mth = int(parts[0]); day = int(parts[1])
+    t = region_daily_target.get((mth, day), 0)
+    y = region_daily_yoy.get((mth, day), 0)
+    # 汇总所有门店当天数据（缺日按0）
+    r_total = sum(_day_val(s, d, 'total') for s in STORE_ORDER if s in weekly)
+    r_lt = sum(_day_val(s, d, 'lt') for s in STORE_ORDER if s in weekly)
+    r_wos = sum(_day_val(s, d, 'wos') for s in STORE_ORDER if s in weekly)
+    r_jl = sum(_day_val(s, d, 'jl') for s in STORE_ORDER if s in weekly)
+    r_tx = sum(_day_val(s, d, 'tx_cnt') for s in STORE_ORDER if s in weekly)
+    # 2026-10-01 调整：淮安万象城 2025-09-17 开业，但 10 月起的周窗口落在开业后；
+    # 全口径纳入淮万（不排除），让 yoy 分子分母口径一致
+    r_total_for_yoy = sum(_day_val(s, d, 'total') for s in STORE_ORDER if s in weekly)
+    region_daily.append({
+        'date': d,
+        'weekday': _wd_map.get(d, ''),
+        'total': round(r_total, 2),
+        'lt': round(r_lt, 2),
+        'wos': round(r_wos, 2),
+        'jl': round(r_jl, 2),
+        'tx_cnt': r_tx,
+        'target': round(t, 2),
+        'rate': round(r_total / t * 100, 1) if t > 0 else 0,
+        'yoy_amt': round(y, 2),
+        'yoy_pct': round((r_total_for_yoy - y) / y * 100, 1) if y > 0 else None,
+    })
+
+# 更新产品系列结构
+weekly['_series'] = series_by_store
+series_by_store['_region'] = region_series
+
+# 更新产品名称TOP10(含件数)
+weekly['_products'] = products_by_store
+
+# 更新导购数据
+weekly['_guides'] = guide_by_store
+
+# 更新样品销售数据（2026-09-23 修复：周分析前未定义 sample_data/sample_region）
+# 样品仓订单（"下单店仓名称"含"样品"）按当前周WK窗口聚合
+sample_data = {}
+for store in STORE_ORDER:
+    s_wk = sample_df[(sample_df['门店名'] == store) & (sample_df['销售日期_dt'] >= WK_START) & (sample_df['销售日期_dt'] <= max_date_eod)]
+    s_wk_pos = s_wk[s_wk['结算金额'] > 0]
+    sample_data[store] = {
+        'wk_amt': round(float(s_wk['结算金额'].sum()), 2),
+        'wk_qty': int(s_wk_pos['数量'].sum()) if len(s_wk_pos) > 0 else 0,
+    }
+sample_region = {
+    'wk_amt': round(sum(v['wk_amt'] for v in sample_data.values()), 2),
+    'wk_qty': sum(v['wk_qty'] for v in sample_data.values()),
+}
+print(f"   区域: WK样品¥{sample_region['wk_amt']}({sample_region['wk_qty']}件)")
+
+weekly['_sample'] = sample_data
+weekly['_sample_region'] = sample_region
+weekly['_region']['wk_np_amt'] = np_region
+
+# 新增：当月新品列表
+weekly['_new_products'] = new_products
+
+# 新增：门店月成交率（笔数/客流）
+weekly['_conversion'] = conversion
+
+# 新增：门店WK周成交率（笔数/客流，窗口跟随报告周动态）
+weekly['_weekly_conversion'] = weekly_conversion
+
+# 更新区域数据
+if '_region' in weekly:
+    weekly['_region']['wk28_amt'] = region_wk28
+    weekly['_region']['wk_amt'] = region_wk29
+    weekly['_region']['wow'] = region_wow
+    weekly['_region']['wk_yoy_amt'] = region_wk_yoy  # 2026-09-28：去年同期WK累计
+    weekly['_region']['wk_yoy'] = region_yoy
+    weekly['_region']['daily'] = region_daily
+    weekly['_region']['wk_atv'] = round(region_wk29 / max(sum(d['tx_cnt'] for d in region_daily), 1), 2)
+    # 区域周长尾款：原始 weekly JSON 的 _region 没有 wk_lt，需按门店汇总补齐
+    _r_wk_lt = sum(weekly[s].get('wk_lt', 0) for s in STORE_ORDER if s in weekly)
+    weekly['_region']['wk_lt'] = round(_r_wk_lt, 2)
+    weekly['_region']['wk_lt_qty'] = int(sum(weekly[s].get('wk_lt_qty', 0) for s in STORE_ORDER if s in weekly))
+    # 长尾款自 2026-10-10 起仅统计销售额，无目标/完成率
+    print(f"   区域周长尾款: ¥{_r_wk_lt:,.0f}")
+
+    # 区域周明星同款/新客主推款销售汇总（2026-09-19/21 用户新增）
+    # ⚠️ 2026-10-13 用户定：秋季特惠活动已结束，wk_qj_amt 不再输出（数据层计算保留备回退）
+    weekly['_region']['wk_mx_amt'] = round(sum(weekly[s].get('wk_mx_amt', 0) for s in STORE_ORDER if s in weekly), 2)
+    weekly['_region']['wk_xc_amt'] = round(sum(weekly[s].get('wk_xc_amt', 0) for s in STORE_ORDER if s in weekly), 2)
+
+# 口径可追溯：新品口径（长尾款指标自 2026-10-10 起已停用）
+weekly['_meta'] = {
+    'wk_num': WK_NUM_INT,
+    'wk_start': WK_START.strftime('%Y-%m-%d'),
+    'max_date': max_date.strftime('%Y-%m-%d'),
+    'new_product_since': NEW_PRODUCT_SINCE.strftime('%Y-%m-%d'),
+    'store_order': STORE_ORDER,
+}
+
+with open(OUTPUT_JSON, 'w', encoding='utf-8') as f:
+    json.dump(weekly, f, ensure_ascii=False, indent=2)
+
+print(f"\n✅ 完成!")
+print(f"   门店数: {len(STORE_ORDER)} | 导购数: {len(guide_weekly)} | 系列数: {len(region_series)}")
+print(f"   数据已写入: {OUTPUT_JSON}")
