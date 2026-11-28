@@ -1,22 +1,22 @@
 {
   "扬州万象汇": {
-    "month_amt": 245349.3,
-    "mom": -16.3,
-    "mom_prev": 293199.3,
-    "yoy": -23.7,
-    "yoy_prev": 321424.6,
+    "month_amt": 250321.3,
+    "mom": -15.6,
+    "mom_prev": 296427.3,
+    "yoy": -23.9,
+    "yoy_prev": 329084.6,
     "target": 310000.0,
-    "month_rate": 79.1,
-    "month_cnt": 518,
-    "month_qty": 738,
-    "month_atv": 473.65,
+    "month_rate": 80.7,
+    "month_cnt": 531,
+    "month_qty": 754,
+    "month_atv": 471.41,
     "month_jd": 1.42,
     "month_wos": 28478.4,
     "new_amt": 32451.53,
     "new_qty": 23,
     "new_cnt": 23,
-    "new_rate": 13.2,
-    "month_jl": 13831.7,
+    "new_rate": 13.0,
+    "month_jl": 15084.7,
     "month_lt": 24156.91,
     "month_lt_qty": 54,
     "month_qj": 119.0,
@@ -28,42 +28,42 @@
     "daily": [
       {
         "day": 1,
-        "amt": 12617.0,
+        "amt": 13260.0,
         "target": 10333.33,
-        "rate": 122.1,
+        "rate": 128.3,
         "yoy_amt": 22077.0,
-        "yoy_pct": -42.9,
+        "yoy_pct": -39.9,
         "lt": 183.0,
         "lt_qty": 1,
         "wos": 8017.0,
-        "jl": 724.0,
-        "tx_cnt": 21
+        "jl": 1129.0,
+        "tx_cnt": 24
       },
       {
         "day": 2,
-        "amt": 5846.0,
+        "amt": 5927.0,
         "target": 10333.33,
-        "rate": 56.6,
+        "rate": 57.4,
         "yoy_amt": 12536.0,
-        "yoy_pct": -53.4,
+        "yoy_pct": -52.7,
         "lt": 369.0,
         "lt_qty": 1,
         "wos": 0.0,
-        "jl": 0.0,
-        "tx_cnt": 12
+        "jl": 81.0,
+        "tx_cnt": 13
       },
       {
         "day": 3,
-        "amt": 7134.0,
+        "amt": 7901.0,
         "target": 10333.33,
-        "rate": 69.0,
+        "rate": 76.5,
         "yoy_amt": 5233.0,
-        "yoy_pct": 36.3,
+        "yoy_pct": 51.0,
         "lt": 183.0,
         "lt_qty": 1,
         "wos": 0.0,
-        "jl": 767.0,
-        "tx_cnt": 14
+        "jl": 1534.0,
+        "tx_cnt": 16
       },
       {
         "day": 4,
@@ -376,6 +376,19 @@
         "wos": 3868.0,
         "jl": 338.0,
         "tx_cnt": 28
+      },
+      {
+        "day": 28,
+        "amt": 3481.0,
+        "target": 10333.33,
+        "rate": 33.7,
+        "yoy_amt": 7660.0,
+        "yoy_pct": -54.6,
+        "lt": 0.0,
+        "lt_qty": 0,
+        "wos": 0.0,
+        "jl": 0.0,
+        "tx_cnt": 7
       }
     ],
     "daily_prev": [
@@ -405,27 +418,28 @@
       14274.0,
       9434.0,
       2114.0,
-      6064.0
+      6064.0,
+      3228.0
     ]
   },
   "扬州京华城": {
-    "month_amt": 291139.94,
-    "mom": -21.9,
-    "mom_prev": 372831.82,
-    "yoy": -33.5,
-    "yoy_prev": 437940.08,
+    "month_amt": 295221.94,
+    "mom": -21.7,
+    "mom_prev": 377016.82,
+    "yoy": -34.6,
+    "yoy_prev": 451372.38,
     "target": 500000.0,
-    "month_rate": 58.2,
-    "month_cnt": 655,
-    "month_qty": 924,
-    "month_atv": 444.49,
-    "month_jd": 1.41,
+    "month_rate": 59.0,
+    "month_cnt": 672,
+    "month_qty": 944,
+    "month_atv": 439.32,
+    "month_jd": 1.4,
     "month_wos": 25305.4,
     "new_amt": 34806.11,
     "new_qty": 31,
     "new_cnt": 30,
-    "new_rate": 12.0,
-    "month_jl": 11849.1,
+    "new_rate": 11.8,
+    "month_jl": 11427.1,
     "month_lt": 27449.2,
     "month_lt_qty": 76,
     "month_qj": 0.0,
@@ -450,16 +464,16 @@
       },
       {
         "day": 2,
-        "amt": 7101.0,
+        "amt": 7370.0,
         "target": 16666.67,
-        "rate": 42.6,
+        "rate": 44.2,
         "yoy_amt": 32487.0,
-        "yoy_pct": -78.1,
+        "yoy_pct": -77.3,
         "lt": 423.0,
         "lt_qty": 1,
         "wos": 3899.0,
-        "jl": 269.0,
-        "tx_cnt": 9
+        "jl": 0.0,
+        "tx_cnt": 10
       },
       {
         "day": 3,
@@ -472,20 +486,20 @@
         "lt_qty": 2,
         "wos": 189.0,
         "jl": 0.0,
-        "tx_cnt": 13
+        "tx_cnt": 14
       },
       {
         "day": 4,
-        "amt": 5648.0,
+        "amt": 6032.0,
         "target": 16666.67,
-        "rate": 33.9,
+        "rate": 36.2,
         "yoy_amt": 5490.0,
-        "yoy_pct": 2.9,
+        "yoy_pct": 9.9,
         "lt": 862.0,
         "lt_qty": 2,
         "wos": 0.0,
-        "jl": 384.0,
-        "tx_cnt": 11
+        "jl": 0.0,
+        "tx_cnt": 16
       },
       {
         "day": 5,
@@ -710,11 +724,11 @@
       },
       {
         "day": 22,
-        "amt": 21219.0,
+        "amt": 21338.0,
         "target": 16666.67,
-        "rate": 127.3,
+        "rate": 128.0,
         "yoy_amt": 35448.0,
-        "yoy_pct": -40.1,
+        "yoy_pct": -39.8,
         "lt": 754.0,
         "lt_qty": 3,
         "wos": 0.0,
@@ -785,6 +799,19 @@
         "wos": 0.0,
         "jl": 1495.0,
         "tx_cnt": 22
+      },
+      {
+        "day": 28,
+        "amt": 3310.0,
+        "target": 16666.67,
+        "rate": 19.9,
+        "yoy_amt": 13432.3,
+        "yoy_pct": -75.4,
+        "lt": 0.0,
+        "lt_qty": 0,
+        "wos": 0.0,
+        "jl": 231.0,
+        "tx_cnt": 10
       }
     ],
     "daily_prev": [
@@ -814,74 +841,75 @@
       16937.0,
       12960.0,
       3516.0,
-      3031.0
+      3031.0,
+      4185.0
     ]
   },
   "扬州江都金鹰": {
-    "month_amt": 111144.6,
-    "mom": -41.5,
-    "mom_prev": 189995.0,
-    "yoy": -53.8,
-    "yoy_prev": 240463.6,
+    "month_amt": 116555.6,
+    "mom": -39.6,
+    "mom_prev": 193058.0,
+    "yoy": -53.2,
+    "yoy_prev": 249264.8,
     "target": 210000.0,
-    "month_rate": 52.9,
-    "month_cnt": 304,
-    "month_qty": 387,
-    "month_atv": 365.61,
-    "month_jd": 1.27,
-    "month_wos": 14396.4,
-    "new_amt": 7994.17,
-    "new_qty": 10,
-    "new_cnt": 10,
-    "new_rate": 7.2,
-    "month_jl": 4058.8,
+    "month_rate": 55.5,
+    "month_cnt": 317,
+    "month_qty": 406,
+    "month_atv": 367.68,
+    "month_jd": 1.28,
+    "month_wos": 15892.4,
+    "new_amt": 8163.17,
+    "new_qty": 11,
+    "new_cnt": 11,
+    "new_rate": 7.0,
+    "month_jl": 4644.8,
     "month_lt": 8479.6,
     "month_lt_qty": 33,
     "month_qj": 0.0,
     "month_qj_qty": 0,
-    "month_mx": 1574.05,
-    "month_mx_qty": 14,
-    "month_xc": 1932.05,
-    "month_xc_qty": 16,
+    "month_mx": 1650.05,
+    "month_mx_qty": 15,
+    "month_xc": 2008.05,
+    "month_xc_qty": 17,
     "daily": [
       {
         "day": 1,
-        "amt": 4425.0,
+        "amt": 4683.0,
         "target": 7000.0,
-        "rate": 63.2,
+        "rate": 66.9,
         "yoy_amt": 21689.0,
-        "yoy_pct": -79.6,
+        "yoy_pct": -78.4,
         "lt": 183.0,
         "lt_qty": 1,
         "wos": 1528.0,
-        "jl": 258.0,
-        "tx_cnt": 15
+        "jl": 516.0,
+        "tx_cnt": 17
       },
       {
         "day": 2,
-        "amt": 4406.0,
+        "amt": 5169.0,
         "target": 7000.0,
-        "rate": 62.9,
+        "rate": 73.8,
         "yoy_amt": 10924.0,
-        "yoy_pct": -59.7,
+        "yoy_pct": -52.7,
         "lt": 0.0,
         "lt_qty": 0,
-        "wos": 499.0,
-        "jl": 264.0,
-        "tx_cnt": 9
+        "wos": 998.0,
+        "jl": 528.0,
+        "tx_cnt": 10
       },
       {
         "day": 3,
-        "amt": 1306.0,
+        "amt": 1370.0,
         "target": 7000.0,
-        "rate": 18.7,
+        "rate": 19.6,
         "yoy_amt": 2113.0,
-        "yoy_pct": -38.2,
+        "yoy_pct": -35.2,
         "lt": 183.0,
         "lt_qty": 1,
         "wos": 0.0,
-        "jl": 64.0,
-        "tx_cnt": 5
+        "jl": 128.0,
+        "tx_cnt": 6
       },
       {
         "day": 4,
@@ -1194,6 +1222,19 @@
         "wos": 327.0,
         "jl": 84.0,
         "tx_cnt": 13
+      },
+      {
+        "day": 28,
+        "amt": 4326.0,
+        "target": 7000.0,
+        "rate": 61.8,
+        "yoy_amt": 8801.2,
+        "yoy_pct": -50.8,
+        "lt": 0.0,
+        "lt_qty": 0,
+        "wos": 997.0,
+        "jl": 0.0,
+        "tx_cnt": 9
       }
     ],
     "daily_prev": [
@@ -1223,69 +1264,70 @@
       10870.0,
       4292.0,
       3654.0,
-      1177.0
+      1177.0,
+      3063.0
     ]
   },
   "泰州万象城": {
-    "month_amt": 343759.55,
-    "mom": -33.1,
-    "mom_prev": 513497.5,
-    "yoy": 12.8,
-    "yoy_prev": 304658.1,
+    "month_amt": 354159.55,
+    "mom": -31.7,
+    "mom_prev": 518634.5,
+    "yoy": 11.0,
+    "yoy_prev": 319031.1,
     "target": 380000.0,
-    "month_rate": 90.5,
-    "month_cnt": 927,
-    "month_qty": 1232,
-    "month_atv": 370.83,
+    "month_rate": 93.2,
+    "month_cnt": 948,
+    "month_qty": 1261,
+    "month_atv": 373.59,
     "month_jd": 1.33,
     "month_wos": 16770.7,
     "new_amt": 6768.99,
     "new_qty": 25,
     "new_cnt": 25,
-    "new_rate": 2.0,
-    "month_jl": 9255.0,
-    "month_lt": 33623.76,
-    "month_lt_qty": 96,
+    "new_rate": 1.9,
+    "month_jl": 10128.0,
+    "month_lt": 34330.76,
+    "month_lt_qty": 99,
     "month_qj": 199.0,
     "month_qj_qty": 2,
-    "month_mx": 11296.0,
-    "month_mx_qty": 74,
+    "month_mx": 12975.0,
+    "month_mx_qty": 76,
     "month_xc": 9994.79,
-    "month_xc_qty": 76,
+    "month_xc_qty": 77,
     "daily": [
       {
         "day": 1,
-        "amt": 14651.0,
+        "amt": 14886.0,
         "target": 12666.67,
-        "rate": 115.7,
+        "rate": 117.5,
         "yoy_amt": 27293.0,
-        "yoy_pct": -46.3,
+        "yoy_pct": -45.5,
         "lt": 1258.0,
         "lt_qty": 5,
         "wos": 0.0,
-        "jl": 235.0,
-        "tx_cnt": 49
+        "jl": 470.0,
+        "tx_cnt": 50
       },
       {
         "day": 2,
-        "amt": 5229.0,
+        "amt": 5343.0,
         "target": 12666.67,
-        "rate": 41.3,
+        "rate": 42.2,
         "yoy_amt": 21112.0,
-        "yoy_pct": -75.2,
+        "yoy_pct": -74.7,
         "lt": 243.0,
         "lt_qty": 1,
         "wos": 0.0,
-        "jl": 114.0,
-        "tx_cnt": 16
+        "jl": 228.0,
+        "tx_cnt": 18
       },
       {
         "day": 3,
-        "amt": 5478.0,
+        "amt": 5557.0,
         "target": 12666.67,
-        "rate": 43.2,
+        "rate": 43.9,
         "yoy_amt": 6983.3,
-        "yoy_pct": -21.6,
+        "yoy_pct": -20.4,
         "lt": 244.0,
         "lt_qty": 1,
         "wos": 698.0,
@@ -1294,16 +1336,16 @@
       },
       {
         "day": 4,
-        "amt": 9434.0,
+        "amt": 9957.0,
         "target": 12666.67,
-        "rate": 74.5,
+        "rate": 78.6,
         "yoy_amt": 7762.0,
-        "yoy_pct": 21.5,
+        "yoy_pct": 28.3,
         "lt": 779.0,
         "lt_qty": 1,
         "wos": 1977.0,
-        "jl": 523.0,
-        "tx_cnt": 21
+        "jl": 1046.0,
+        "tx_cnt": 22
       },
       {
         "day": 5,
@@ -1476,15 +1518,15 @@
       },
       {
         "day": 18,
-        "amt": 17487.3,
+        "amt": 17302.3,
         "target": 12666.67,
-        "rate": 138.1,
+        "rate": 136.6,
         "yoy_amt": 7730.2,
-        "yoy_pct": 126.2,
+        "yoy_pct": 123.8,
         "lt": 1515.0,
         "lt_qty": 5,
         "wos": 777.0,
-        "jl": 1060.3,
+        "jl": 875.3,
         "tx_cnt": 47
       },
       {
@@ -1603,6 +1645,19 @@
         "wos": 597.0,
         "jl": 0.0,
         "tx_cnt": 37
+      },
+      {
+        "day": 28,
+        "amt": 9634.0,
+        "target": 12666.67,
+        "rate": 76.1,
+        "yoy_amt": 14373.0,
+        "yoy_pct": -33.0,
+        "lt": 707.0,
+        "lt_qty": 3,
+        "wos": 0.0,
+        "jl": 186.0,
+        "tx_cnt": 17
       }
     ],
     "daily_prev": [
@@ -1632,27 +1687,28 @@
       28492.0,
       20899.0,
       5656.0,
-      6765.0
+      6765.0,
+      5137.0
     ]
   },
   "宿迁宝龙": {
-    "month_amt": 21996.4,
-    "mom": -72.7,
-    "mom_prev": 80597.0,
-    "yoy": -69.7,
-    "yoy_prev": 72617.68,
+    "month_amt": 22165.4,
+    "mom": -73.4,
+    "mom_prev": 83294.0,
+    "yoy": -70.1,
+    "yoy_prev": 74043.68,
     "target": 30000.0,
-    "month_rate": 73.3,
-    "month_cnt": 53,
-    "month_qty": 70,
-    "month_atv": 415.03,
-    "month_jd": 1.32,
+    "month_rate": 73.9,
+    "month_cnt": 54,
+    "month_qty": 71,
+    "month_atv": 410.47,
+    "month_jd": 1.31,
     "month_wos": 0.0,
     "new_amt": 7897.0,
     "new_qty": 3,
     "new_cnt": 3,
-    "new_rate": 35.9,
-    "month_jl": 290.0,
+    "new_rate": 35.6,
+    "month_jl": 459.0,
     "month_lt": 1326.2,
     "month_lt_qty": 3,
     "month_qj": 0.0,
@@ -1664,16 +1720,16 @@
     "daily": [
       {
         "day": 1,
-        "amt": 9527.0,
+        "amt": 9696.0,
         "target": 1000.0,
-        "rate": 952.7,
+        "rate": 969.6,
         "yoy_amt": 8079.0,
-        "yoy_pct": 17.9,
+        "yoy_pct": 20.0,
         "lt": 0.0,
         "lt_qty": 0,
         "wos": 0.0,
-        "jl": 169.0,
-        "tx_cnt": 10
+        "jl": 338.0,
+        "tx_cnt": 11
       },
       {
         "day": 2,
@@ -2012,6 +2068,19 @@
         "wos": 0.0,
         "jl": 0.0,
         "tx_cnt": 0
+      },
+      {
+        "day": 28,
+        "amt": 0.0,
+        "target": 1000.0,
+        "rate": 0.0,
+        "yoy_amt": 1426.0,
+        "yoy_pct": -100.0,
+        "lt": 0.0,
+        "lt_qty": 0,
+        "wos": 0.0,
+        "jl": 0.0,
+        "tx_cnt": 0
       }
     ],
     "daily_prev": [
@@ -2041,29 +2110,30 @@
       3312.0,
       2166.0,
       436.0,
-      2240.0
+      2240.0,
+      2697.0
     ]
   },
   "淮安新亚": {
-    "month_amt": 86858.35,
-    "mom": -27.2,
-    "mom_prev": 119276.0,
-    "yoy": -25.7,
-    "yoy_prev": 116847.7,
+    "month_amt": 89335.8,
+    "mom": -25.6,
+    "mom_prev": 120024.0,
+    "yoy": -25.8,
+    "yoy_prev": 120329.3,
     "target": 110000.0,
-    "month_rate": 79.0,
-    "month_cnt": 228,
-    "month_qty": 294,
-    "month_atv": 380.96,
+    "month_rate": 81.2,
+    "month_cnt": 237,
+    "month_qty": 306,
+    "month_atv": 376.94,
     "month_jd": 1.29,
-    "month_wos": 11414.55,
+    "month_wos": 11799.0,
     "new_amt": 19967.08,
     "new_qty": 8,
     "new_cnt": 8,
-    "new_rate": 23.0,
-    "month_jl": 6572.8,
-    "month_lt": 5380.43,
-    "month_lt_qty": 19,
+    "new_rate": 22.4,
+    "month_jl": 7440.8,
+    "month_lt": 5773.43,
+    "month_lt_qty": 20,
     "month_qj": 195.0,
     "month_qj_qty": 3,
     "month_mx": 3585.16,
@@ -2086,29 +2156,29 @@
       },
       {
         "day": 2,
-        "amt": 1465.0,
+        "amt": 1940.0,
         "target": 3666.67,
-        "rate": 40.0,
+        "rate": 52.9,
         "yoy_amt": 3211.5,
-        "yoy_pct": -54.4,
+        "yoy_pct": -39.6,
         "lt": 0.0,
         "lt_qty": 0,
         "wos": 0.0,
-        "jl": 475.0,
-        "tx_cnt": 7
+        "jl": 950.0,
+        "tx_cnt": 10
       },
       {
         "day": 3,
-        "amt": 5989.0,
+        "amt": 6382.0,
         "target": 3666.67,
-        "rate": 163.3,
+        "rate": 174.1,
         "yoy_amt": 1263.0,
-        "yoy_pct": 374.2,
-        "lt": 393.0,
-        "lt_qty": 1,
+        "yoy_pct": 405.3,
+        "lt": 786.0,
+        "lt_qty": 2,
         "wos": 4299.0,
-        "jl": 393.0,
-        "tx_cnt": 5
+        "jl": 786.0,
+        "tx_cnt": 6
       },
       {
         "day": 4,
@@ -2333,14 +2403,14 @@
       },
       {
         "day": 21,
-        "amt": 8195.55,
+        "amt": 8231.0,
         "target": 3666.67,
-        "rate": 223.5,
+        "rate": 224.5,
         "yoy_amt": 5268.0,
-        "yoy_pct": 55.6,
+        "yoy_pct": 56.2,
         "lt": 0.0,
         "lt_qty": 0,
-        "wos": 2362.55,
+        "wos": 2398.0,
         "jl": 430.0,
         "tx_cnt": 17
       },
@@ -2421,6 +2491,19 @@
         "wos": 0.0,
         "jl": 129.0,
         "tx_cnt": 6
+      },
+      {
+        "day": 28,
+        "amt": 1574.0,
+        "target": 3666.67,
+        "rate": 42.9,
+        "yoy_amt": 3481.6,
+        "yoy_pct": -54.8,
+        "lt": 0.0,
+        "lt_qty": 0,
+        "wos": 349.0,
+        "jl": 0.0,
+        "tx_cnt": 5
       }
     ],
     "daily_prev": [
@@ -2450,61 +2533,62 @@
       7190.0,
       2305.0,
       1276.0,
-      646.0
+      646.0,
+      748.0
     ]
   },
   "淮安万象城": {
-    "month_amt": 175462.3,
-    "mom": -35.6,
-    "mom_prev": 272588.0,
-    "yoy": -28.6,
-    "yoy_prev": 245802.2,
+    "month_amt": 183532.3,
+    "mom": -33.0,
+    "mom_prev": 273990.0,
+    "yoy": -27.2,
+    "yoy_prev": 252166.2,
     "target": 260000.0,
-    "month_rate": 67.5,
-    "month_cnt": 552,
-    "month_qty": 754,
-    "month_atv": 317.87,
+    "month_rate": 70.6,
+    "month_cnt": 570,
+    "month_qty": 779,
+    "month_atv": 321.99,
     "month_jd": 1.37,
-    "month_wos": 12611.1,
+    "month_wos": 12860.1,
     "new_amt": 1631.62,
     "new_qty": 9,
     "new_cnt": 9,
     "new_rate": 0.9,
-    "month_jl": 5104.4,
-    "month_lt": 11324.32,
-    "month_lt_qty": 42,
+    "month_jl": 6318.4,
+    "month_lt": 14783.32,
+    "month_lt_qty": 43,
     "month_qj": 107.24,
     "month_qj_qty": 1,
     "month_mx": 4101.92,
     "month_mx_qty": 19,
-    "month_xc": 2347.22,
-    "month_xc_qty": 19,
+    "month_xc": 2916.22,
+    "month_xc_qty": 20,
     "daily": [
       {
         "day": 1,
-        "amt": 6798.0,
+        "amt": 6518.0,
         "target": 8666.67,
-        "rate": 78.4,
+        "rate": 75.2,
         "yoy_amt": 23431.0,
-        "yoy_pct": -71.0,
+        "yoy_pct": -72.2,
         "lt": 269.0,
         "lt_qty": 1,
-        "wos": 1036.0,
-        "jl": -529.0,
+        "wos": 1285.0,
+        "jl": -1058.0,
         "tx_cnt": 32
       },
       {
         "day": 2,
-        "amt": 3624.0,
+        "amt": 4557.0,
         "target": 8666.67,
-        "rate": 41.8,
+        "rate": 52.6,
         "yoy_amt": 15447.0,
-        "yoy_pct": -76.5,
+        "yoy_pct": -70.5,
         "lt": 1219.0,
         "lt_qty": 1,
         "wos": 89.0,
-        "jl": 933.0,
-        "tx_cnt": 11
+        "jl": 1866.0,
+        "tx_cnt": 14
       },
       {
         "day": 3,
@@ -2521,16 +2605,16 @@
       },
       {
         "day": 4,
-        "amt": 3277.0,
+        "amt": 4087.0,
         "target": 8666.67,
-        "rate": 37.8,
+        "rate": 47.2,
         "yoy_amt": 3836.0,
-        "yoy_pct": -14.6,
+        "yoy_pct": 6.5,
         "lt": 183.0,
         "lt_qty": 1,
         "wos": 352.0,
-        "jl": 810.0,
-        "tx_cnt": 9
+        "jl": 1620.0,
+        "tx_cnt": 12
       },
       {
         "day": 5,
@@ -2664,16 +2748,16 @@
       },
       {
         "day": 15,
-        "amt": 14200.4,
+        "amt": 17659.4,
         "target": 8666.67,
-        "rate": 163.9,
+        "rate": 203.8,
         "yoy_amt": 18632.0,
-        "yoy_pct": -23.8,
-        "lt": 1989.56,
-        "lt_qty": 4,
+        "yoy_pct": -5.2,
+        "lt": 5448.56,
+        "lt_qty": 5,
         "wos": 99.0,
         "jl": 198.4,
-        "tx_cnt": 42
+        "tx_cnt": 43
       },
       {
         "day": 16,
@@ -2703,24 +2787,24 @@
       },
       {
         "day": 18,
-        "amt": 10043.0,
+        "amt": 11170.0,
         "target": 8666.67,
-        "rate": 115.9,
+        "rate": 128.9,
         "yoy_amt": 3429.0,
-        "yoy_pct": 192.9,
+        "yoy_pct": 225.8,
         "lt": 977.0,
         "lt_qty": 3,
         "wos": 1757.0,
         "jl": 0.0,
-        "tx_cnt": 30
+        "tx_cnt": 31
       },
       {
         "day": 19,
-        "amt": 7070.0,
+        "amt": 6331.0,
         "target": 8666.67,
-        "rate": 81.6,
+        "rate": 73.0,
         "yoy_amt": 1394.0,
-        "yoy_pct": 407.2,
+        "yoy_pct": 354.2,
         "lt": 263.15,
         "lt_qty": 1,
         "wos": 1146.0,
@@ -2830,6 +2914,19 @@
         "wos": 0.0,
         "jl": 59.0,
         "tx_cnt": 26
+      },
+      {
+        "day": 28,
+        "amt": 2760.0,
+        "target": 8666.67,
+        "rate": 31.8,
+        "yoy_amt": 6364.0,
+        "yoy_pct": -56.6,
+        "lt": 0.0,
+        "lt_qty": 0,
+        "wos": 0.0,
+        "jl": 0.0,
+        "tx_cnt": 10
       }
     ],
     "daily_prev": [
@@ -2859,73 +2956,74 @@
       11634.0,
       5041.0,
       2651.0,
-      2868.0
+      2868.0,
+      1402.0
     ]
   },
   "_region": {
-    "month_amt": 1275710.44,
-    "mom_prev": 1841984.62,
-    "yoy_prev": 1739753.96,
+    "month_amt": 1311291.89,
+    "mom_prev": 1862444.62,
+    "yoy_prev": 1795292.06,
     "target": 1800000.0,
-    "month_cnt": 3237,
-    "month_qty": 4399,
-    "month_wos": 108976.55,
-    "month_jl": 50961.80000000001,
-    "month_lt": 111740.42000000001,
-    "month_lt_qty": 323,
+    "month_cnt": 3329,
+    "month_qty": 4521,
+    "month_wos": 111106.0,
+    "month_jl": 55502.80000000001,
+    "month_lt": 116299.42000000001,
+    "month_lt_qty": 328,
     "month_qj": 620.24,
     "month_qj_qty": 7,
-    "month_mx": 32779.29,
-    "month_mx_qty": 170,
-    "month_xc": 25433.82,
-    "month_xc_qty": 178,
-    "mom": -30.7,
-    "yoy": -26.7,
-    "month_rate": 70.9,
-    "month_atv": 394.1,
+    "month_mx": 34534.29,
+    "month_mx_qty": 173,
+    "month_xc": 26078.82,
+    "month_xc_qty": 181,
+    "mom": -29.6,
+    "yoy": -27.0,
+    "month_rate": 72.8,
+    "month_atv": 393.9,
     "month_jd": 1.36,
-    "new_amt": 111516.5,
-    "new_qty": 109,
-    "new_cnt": 108,
-    "new_rate": 8.7,
+    "new_amt": 111685.5,
+    "new_qty": 110,
+    "new_cnt": 109,
+    "new_rate": 8.5,
     "daily": [
       {
         "day": 1,
-        "amt": 76542.0,
+        "amt": 77567.0,
         "target": 58064.52,
-        "rate": 131.8,
+        "rate": 133.6,
         "yoy_amt": 144662.0,
-        "yoy_pct": -51.8,
+        "yoy_pct": -50.9,
         "lt": 3516.0,
         "lt_qty": 15
       },
       {
         "day": 2,
-        "amt": 28208.0,
+        "amt": 30843.0,
         "target": 58064.52,
-        "rate": 48.6,
+        "rate": 53.1,
         "yoy_amt": 99372.5,
-        "yoy_pct": -75.3,
+        "yoy_pct": -73.5,
         "lt": 2254.0,
         "lt_qty": 4
       },
       {
         "day": 3,
-        "amt": 29057.0,
+        "amt": 30360.0,
         "target": 58064.52,
-        "rate": 50.0,
+        "rate": 52.3,
         "yoy_amt": 35020.3,
-        "yoy_pct": -25.2,
-        "lt": 1939.0,
-        "lt_qty": 7
+        "yoy_pct": -21.5,
+        "lt": 2332.0,
+        "lt_qty": 8
       },
       {
         "day": 4,
-        "amt": 25871.0,
+        "amt": 27588.0,
         "target": 58064.52,
-        "rate": 44.6,
+        "rate": 47.5,
         "yoy_amt": 31554.0,
-        "yoy_pct": -28.4,
+        "yoy_pct": -25.5,
         "lt": 2190.0,
         "lt_qty": 6
       },
@@ -3031,13 +3129,13 @@
       },
       {
         "day": 15,
-        "amt": 100768.7,
+        "amt": 104227.7,
         "target": 58064.52,
-        "rate": 173.5,
+        "rate": 179.5,
         "yoy_amt": 153173.7,
         "yoy_pct": -43.5,
-        "lt": 9698.14,
-        "lt_qty": 24
+        "lt": 13157.14,
+        "lt_qty": 25
       },
       {
         "day": 16,
@@ -3061,19 +3159,19 @@
       },
       {
         "day": 18,
-        "amt": 55035.3,
+        "amt": 55977.3,
         "target": 58064.52,
-        "rate": 94.8,
+        "rate": 96.4,
         "yoy_amt": 37492.4,
-        "yoy_pct": 20.0,
+        "yoy_pct": 19.5,
         "lt": 4759.15,
         "lt_qty": 16
       },
       {
         "day": 19,
-        "amt": 29011.0,
+        "amt": 28272.0,
         "target": 58064.52,
-        "rate": 50.0,
+        "rate": 48.7,
         "yoy_amt": 29791.0,
         "yoy_pct": -26.4,
         "lt": 3406.15,
@@ -3091,19 +3189,19 @@
       },
       {
         "day": 21,
-        "amt": 93086.55,
+        "amt": 93122.0,
         "target": 58064.52,
-        "rate": 160.3,
+        "rate": 160.4,
         "yoy_amt": 69055.4,
-        "yoy_pct": 19.8,
+        "yoy_pct": 19.9,
         "lt": 9678.49,
         "lt_qty": 26
       },
       {
         "day": 22,
-        "amt": 67947.0,
+        "amt": 68066.0,
         "target": 58064.52,
-        "rate": 117.0,
+        "rate": 117.2,
         "yoy_amt": 135749.4,
         "yoy_pct": -55.6,
         "lt": 3930.35,
@@ -3158,27 +3256,37 @@
         "yoy_pct": 16.9,
         "lt": 5364.88,
         "lt_qty": 16
+      },
+      {
+        "day": 28,
+        "amt": 25085.0,
+        "target": 58064.52,
+        "rate": 43.2,
+        "yoy_amt": 55538.1,
+        "yoy_pct": -59.8,
+        "lt": 707.0,
+        "lt_qty": 3
       }
     ]
   },
   "_series": {
     "扬州万象汇": {
       "ARCHITECTURE": 26278.37,
-      "NINJAGO": 25914.57,
+      "NINJAGO": 25995.85,
       "LEL": 23944.22,
-      "TECHNIC": 22920.06,
+      "TECHNIC": 23914.06,
       "ICONS": 21953.67,
-      "CITY": 20201.22,
-      "SPEED CHAMPIONS": 13992.46,
-      "DISNEY ANIMATION": 13607.42,
-      "DUPLO": 11384.42,
-      "BOTANICALS": 11238.64,
-      "MINECRAFT": 11214.08,
+      "CITY": 21220.22,
+      "DISNEY ANIMATION": 14446.42,
+      "SPEED CHAMPIONS": 14241.46,
+      "BOTANICALS": 11972.83,
+      "DUPLO": 11645.42,
+      "MINECRAFT": 11572.08,
       "FRIENDS": 9263.81,
       "SUPER MARIO": 6747.32,
-      "HARRY POTTER TM": 5885.32,
+      "HARRY POTTER TM": 6021.13,
       "EDITIONS": 5137.93,
-      "MONKIE KID": 4646.39,
+      "MONKIE KID": 4828.11,
       "CHINESE FESTIVALS": 3918.73,
       "CREATOR": 2941.25,
       "SUPER HEROES": 2077.0,
@@ -3187,78 +3295,78 @@
       "ONE PIECE": 1288.24,
       "JURASSIC WORLD": 1198.0,
       "MINIFIGURES": 1000.04,
-      "THE LEGEND OF ZELDA": 876.61,
-      "STAR WARS TM": 791.05
+      "STAR WARS TM": 910.05,
+      "THE LEGEND OF ZELDA": 876.61
     },
     "扬州京华城": {
-      "TECHNIC": 37245.31,
+      "TECHNIC": 37833.31,
       "ICONS": 35280.4,
-      "CITY": 34198.93,
-      "LEL": 28515.72,
+      "CITY": 34755.97,
+      "LEL": 29898.72,
       "NINJAGO": 18382.95,
       "MINECRAFT": 17336.75,
       "DUPLO": 17052.21,
-      "SPEED CHAMPIONS": 14787.3,
-      "BOTANICALS": 14642.83,
+      "SPEED CHAMPIONS": 15018.3,
+      "BOTANICALS": 14911.83,
       "ARCHITECTURE": 14126.0,
       "DISNEY ANIMATION": 12456.54,
       "SUPER HEROES": 11428.0,
       "FRIENDS": 10557.07,
       "SUPER MARIO": 6735.2,
-      "MONKIE KID": 5975.67,
-      "EDITIONS": 5229.16,
-      "HARRY POTTER TM": 4081.36,
+      "EDITIONS": 6188.12,
+      "MONKIE KID": 6174.67,
+      "HARRY POTTER TM": 4679.36,
+      "CREATOR": 2811.09,
       "STAR WARS TM": 2745.02,
-      "CREATOR": 2632.09,
       "JURASSIC WORLD": 1907.49,
       "MINIFIGURES": 1369.78,
       "LEGO IDEAS": 1349.2,
       "ONE PIECE": 252.34
     },
     "扬州江都金鹰": {
-      "CITY": 21174.6,
-      "TECHNIC": 18345.12,
+      "CITY": 22096.6,
+      "TECHNIC": 18421.12,
+      "NINJAGO": 14546.49,
       "LEL": 13651.99,
-      "NINJAGO": 12382.64,
-      "ICONS": 11381.5,
+      "ICONS": 11970.5,
       "MINECRAFT": 8371.43,
       "DISNEY ANIMATION": 7064.64,
       "DUPLO": 6643.16,
-      "SPEED CHAMPIONS": 5074.86,
-      "BOTANICALS": 4277.4,
+      "SPEED CHAMPIONS": 5323.86,
+      "BOTANICALS": 4945.4,
       "FRIENDS": 3626.46,
-      "MONKIE KID": 2557.0,
+      "MONKIE KID": 2756.0,
+      "CREATOR": 1708.01,
       "SUPER MARIO": 1419.0,
       "EDITIONS": 1279.2,
-      "CREATOR": 1163.86,
       "MINIFIGURES": 898.74,
       "ARCHITECTURE": 649.0,
       "SUPER HEROES": 269.0
     },
     "泰州万象城": {
-      "TECHNIC": 57428.58,
-      "CITY": 46858.52,
-      "ICONS": 37557.62,
-      "NINJAGO": 33799.83,
-      "LEL": 29056.77,
-      "MINECRAFT": 26715.17,
-      "DISNEY ANIMATION": 17351.55,
-      "SPEED CHAMPIONS": 16219.68,
-      "BOTANICALS": 14028.31,
+      "TECHNIC": 60140.93,
+      "CITY": 48012.39,
+      "ICONS": 39236.62,
+      "NINJAGO": 34042.96,
+      "LEL": 30407.22,
+      "MINECRAFT": 27073.17,
+      "DISNEY ANIMATION": 17876.1,
+      "SPEED CHAMPIONS": 17136.32,
+      "BOTANICALS": 14217.31,
       "DUPLO": 14000.23,
-      "FRIENDS": 13625.32,
+      "FRIENDS": 13990.68,
       "SUPER MARIO": 11439.44,
-      "EDITIONS": 9295.76,
+      "EDITIONS": 9934.76,
       "HARRY POTTER TM": 8345.94,
-      "MONKIE KID": 4127.01,
+      "MONKIE KID": 4310.66,
       "SUPER HEROES": 3109.19,
       "ONE PIECE": 2469.57,
       "STAR WARS TM": 2440.3,
       "LEGO IDEAS": 2234.2,
       "MINIFIGURES": 2133.16,
-      "CREATOR": 1851.25,
+      "CREATOR": 2120.25,
+      "JURASSIC WORLD": 1501.63,
       "PLAYSTATION": 1349.0,
-      "JURASSIC WORLD": 1232.63,
       "ARCHITECTURE": 639.0,
       "CHINESE FESTIVALS": 449.0
     },
@@ -3266,8 +3374,8 @@
       "ARCHITECTURE": 6499.0,
       "CITY": 3782.27,
       "ICONS": 2958.0,
+      "LEL": 1692.35,
       "DUPLO": 1525.27,
-      "LEL": 1444.35,
       "SPEED CHAMPIONS": 1406.2,
       "LEGO IDEAS": 899.0,
       "BOTANICALS": 847.0,
@@ -3282,70 +3390,70 @@
     "淮安新亚": {
       "ICONS": 17699.53,
       "NINJAGO": 14414.67,
-      "CITY": 10850.05,
-      "TECHNIC": 7443.9,
-      "LEL": 7354.65,
-      "MINECRAFT": 6959.8,
+      "CITY": 10925.14,
+      "TECHNIC": 8560.9,
+      "LEL": 7461.65,
+      "MINECRAFT": 7048.8,
       "ARCHITECTURE": 6499.0,
-      "DISNEY ANIMATION": 5476.24,
+      "DISNEY ANIMATION": 5825.24,
+      "BOTANICALS": 4717.96,
       "SPEED CHAMPIONS": 4601.91,
-      "BOTANICALS": 4324.96,
       "DUPLO": 3249.8,
-      "FRIENDS": 2530.59,
+      "FRIENDS": 2809.59,
       "HARRY POTTER TM": 1319.0,
-      "MINIFIGURES": 936.96,
+      "MINIFIGURES": 1005.32,
       "MONKIE KID": 564.67,
       "STAR WARS TM": 457.22,
       "CHINESE FESTIVALS": 419.0,
       "CREATOR": 359.4
     },
     "淮安万象城": {
-      "CITY": 36165.42,
-      "NINJAGO": 23485.88,
-      "TECHNIC": 20899.96,
-      "MINECRAFT": 19683.68,
-      "LEL": 15776.13,
-      "SPEED CHAMPIONS": 11837.42,
+      "CITY": 36960.61,
+      "TECHNIC": 25010.46,
+      "NINJAGO": 23817.88,
+      "MINECRAFT": 19951.68,
+      "LEL": 16335.49,
+      "SPEED CHAMPIONS": 12086.42,
       "ICONS": 9169.5,
       "DUPLO": 8580.82,
-      "DISNEY ANIMATION": 6188.21,
-      "FRIENDS": 5695.86,
+      "DISNEY ANIMATION": 6986.21,
+      "FRIENDS": 6237.67,
       "BOTANICALS": 4367.83,
       "EDITIONS": 3818.19,
+      "MINIFIGURES": 2591.69,
       "HARRY POTTER TM": 2566.85,
-      "MINIFIGURES": 2552.69,
       "JURASSIC WORLD": 2215.26,
+      "SUPER MARIO": 1811.19,
       "STAR WARS TM": 1574.0,
       "SUPER HEROES": 1568.11,
+      "LEGO IDEAS": 1560.14,
       "CREATOR": 1406.12,
-      "LEGO IDEAS": 849.0,
       "ONE PIECE": 807.32,
-      "SUPER MARIO": 482.19,
       "MONKIE KID": 358.12
     },
     "_region": {
-      "CITY": 173231.01,
-      "TECHNIC": 164811.93,
-      "ICONS": 136000.22,
-      "NINJAGO": 129173.54,
-      "LEL": 119743.83,
-      "MINECRAFT": 90528.91,
-      "SPEED CHAMPIONS": 67919.83,
-      "DISNEY ANIMATION": 62493.6,
-      "DUPLO": 62435.91,
+      "CITY": 177753.2,
+      "TECHNIC": 174409.78,
+      "ICONS": 138268.22,
+      "NINJAGO": 131993.8,
+      "LEL": 123391.64,
+      "MINECRAFT": 91601.91,
+      "SPEED CHAMPIONS": 69814.47,
+      "DISNEY ANIMATION": 65004.15,
+      "DUPLO": 62696.91,
+      "BOTANICALS": 55980.16,
       "ARCHITECTURE": 54690.37,
-      "BOTANICALS": 53726.97,
-      "FRIENDS": 45299.11,
-      "SUPER MARIO": 26823.15,
-      "EDITIONS": 24760.24,
-      "HARRY POTTER TM": 22347.47,
-      "MONKIE KID": 18597.86,
+      "FRIENDS": 46485.28,
+      "SUPER MARIO": 28152.15,
+      "EDITIONS": 26358.2,
+      "HARRY POTTER TM": 23081.28,
+      "MONKIE KID": 19361.23,
       "SUPER HEROES": 18451.3,
-      "CREATOR": 10353.97,
-      "MINIFIGURES": 9199.68,
-      "STAR WARS TM": 8007.59,
-      "LEGO IDEAS": 7099.4,
-      "JURASSIC WORLD": 6553.38,
+      "CREATOR": 11346.12,
+      "MINIFIGURES": 9307.04,
+      "STAR WARS TM": 8126.59,
+      "LEGO IDEAS": 7810.54,
+      "JURASSIC WORLD": 6822.38,
       "ONE PIECE": 4817.47,
       "CHINESE FESTIVALS": 4786.73,
       "ART": 1699.0,
@@ -3423,6 +3531,10 @@
         "amt": 2753.66,
         "qty": 2
       },
+      "法拉利 SF90 XX Stradale 跑车": {
+        "amt": 2666.9,
+        "qty": 11
+      },
       "摇钱树": {
         "amt": 2648.0,
         "qty": 15
@@ -3435,9 +3547,9 @@
         "amt": 2465.43,
         "qty": 2
       },
-      "法拉利 SF90 XX Stradale 跑车": {
-        "amt": 2417.9,
-        "qty": 10
+      "NASA Artemis 太空发射系统": {
+        "amt": 2465.4,
+        "qty": 5
       },
       "15周年纪念款 初代忍者村": {
         "amt": 2359.0,
@@ -3463,8 +3575,8 @@
         "amt": 2054.0,
         "qty": 2
       },
-      "NASA Artemis 太空发射系统": {
-        "amt": 1986.4,
+      "Ford Bronco® 福特烈马 SUV": {
+        "amt": 2008.0,
         "qty": 4
       },
       "二郎天神机甲": {
@@ -3503,6 +3615,10 @@
         "amt": 1805.72,
         "qty": 16
       },
+      "史蒂夫针叶林冒险": {
+        "amt": 1793.77,
+        "qty": 21
+      },
       "秋日枫林小屋": {
         "amt": 1778.0,
         "qty": 2
@@ -3523,9 +3639,9 @@
         "amt": 1719.0,
         "qty": 1
       },
-      "史蒂夫针叶林冒险": {
-        "amt": 1704.77,
-        "qty": 20
+      "长发公主的城堡": {
+        "amt": 1708.0,
+        "qty": 2
       },
       "文森特·梵高 —— 向日葵": {
         "amt": 1699.0,
@@ -3555,6 +3671,10 @@
         "amt": 1587.0,
         "qty": 3
       },
+      "消防车": {
+        "amt": 1545.77,
+        "qty": 6
+      },
       "齐尔瓦的猿龙猛兽": {
         "amt": 1520.73,
         "qty": 9
@@ -3562,10 +3682,6 @@
       "假日探险野营车": {
         "amt": 1504.14,
         "qty": 6
-      },
-      "Ford Bronco® 福特烈马 SUV": {
-        "amt": 1493.0,
-        "qty": 3
       },
       "粉黛花束": {
         "amt": 1478.06,
@@ -3601,10 +3717,6 @@
       },
       "凯和寇的组合式战车": {
         "amt": 1289.97,
-        "qty": 5
-      },
-      "消防车": {
-        "amt": 1284.77,
         "qty": 5
       },
       "心湖城度假大酒店": {
@@ -3663,6 +3775,10 @@
         "amt": 1065.53,
         "qty": 2
       },
+      "首夜防卫战": {
+        "amt": 1054.74,
+        "qty": 4
+      },
       "独角兽咖啡馆": {
         "amt": 1047.0,
         "qty": 3
@@ -3687,6 +3803,10 @@
         "amt": 1023.58,
         "qty": 1
       },
+      "阳光缤纷花束": {
+        "amt": 1015.8,
+        "qty": 4
+      },
       "圣诞老人的圣诞雪橇冒险": {
         "amt": 1015.06,
         "qty": 4
@@ -3698,6 +3818,10 @@
       "猫儿历险记萌萌玛丽猫": {
         "amt": 991.14,
         "qty": 3
+      },
+      "向日葵花束": {
+        "amt": 981.19,
+        "qty": 2
       },
       "坩锅：魔药课教室": {
         "amt": 977.09,
@@ -3715,9 +3839,17 @@
         "amt": 945.0,
         "qty": 5
       },
+      "劳埃德的神龙战斗机甲": {
+        "amt": 938.14,
+        "qty": 11
+      },
       "自动洗车店": {
         "amt": 938.0,
         "qty": 2
+      },
+      "悟空小侠变身机甲": {
+        "amt": 919.28,
+        "qty": 5
       },
       "薯条餐车": {
         "amt": 882.9,
@@ -3735,17 +3867,13 @@
         "amt": 869.83,
         "qty": 5
       },
-      "长发公主的城堡": {
-        "amt": 869.0,
-        "qty": 1
-      },
-      "劳埃德的神龙战斗机甲": {
-        "amt": 856.86,
-        "qty": 10
-      },
       "创意车辆集合": {
         "amt": 842.45,
         "qty": 5
+      },
+      "机场航站楼": {
+        "amt": 839.0,
+        "qty": 1
       },
       "米奇的妙妙屋与米奇和布鲁托": {
         "amt": 828.03,
@@ -3771,10 +3899,6 @@
         "amt": 786.68,
         "qty": 3
       },
-      "首夜防卫战": {
-        "amt": 785.74,
-        "qty": 3
-      },
       "凯的神龙战斗机甲": {
         "amt": 779.41,
         "qty": 9
@@ -3783,13 +3907,13 @@
         "amt": 777.35,
         "qty": 3
       },
-      "阳光缤纷花束": {
-        "amt": 763.8,
-        "qty": 3
-      },
       "鲜花装饰香水瓶": {
         "amt": 763.71,
         "qty": 3
+      },
+      "电动超跑": {
+        "amt": 762.51,
+        "qty": 9
       },
       "忍者飞龙阿尤战甲": {
         "amt": 758.0,
@@ -3799,9 +3923,9 @@
         "amt": 738.0,
         "qty": 2
       },
-      "悟空小侠变身机甲": {
-        "amt": 737.56,
-        "qty": 4
+      "克隆人震击士兵™机甲": {
+        "amt": 731.05,
+        "qty": 6
       },
       "布加迪 Vision GT 超级跑车": {
         "amt": 724.9,
@@ -3826,10 +3950,6 @@
       "闪电麦坤": {
         "amt": 702.8,
         "qty": 3
-      },
-      "电动超跑": {
-        "amt": 681.51,
-        "qty": 8
       },
       "警用摩托车大追击": {
         "amt": 680.94,
@@ -3866,10 +3986,6 @@
       "苦力怕": {
         "amt": 615.0,
         "qty": 2
-      },
-      "克隆人震击士兵™机甲": {
-        "amt": 612.05,
-        "qty": 5
       },
       "可爱的仓鼠": {
         "amt": 595.1,
@@ -3935,10 +4051,6 @@
         "amt": 509.0,
         "qty": 1
       },
-      "向日葵花束": {
-        "amt": 499.0,
-        "qty": 1
-      },
       "郁金香花束": {
         "amt": 499.0,
         "qty": 1
@@ -3954,6 +4066,10 @@
       "蝙蝠侠标志": {
         "amt": 489.0,
         "qty": 1
+      },
+      "消防直升机": {
+        "amt": 485.19,
+        "qty": 5
       },
       "玫瑰花束": {
         "amt": 478.16,
@@ -4002,10 +4118,6 @@
       "创意圣诞树": {
         "amt": 399.0,
         "qty": 1
-      },
-      "消防直升机": {
-        "amt": 386.19,
-        "qty": 4
       },
       "摇滚盆栽": {
         "amt": 378.0,
@@ -4074,6 +4186,10 @@
       "自由的小精灵多比": {
         "amt": 278.98,
         "qty": 1
+      },
+      "福特安格利亚飞车": {
+        "amt": 274.83,
+        "qty": 2
       },
       "可爱的动物：小熊猫": {
         "amt": 269.0,
@@ -4175,10 +4291,6 @@
         "amt": 162.19,
         "qty": 3
       },
-      "福特安格利亚飞车": {
-        "amt": 139.02,
-        "qty": 1
-      },
       "伦敦明信片": {
         "amt": 137.45,
         "qty": 1
@@ -4254,8 +4366,8 @@
         "qty": 2
       },
       "Ferrari FXX K 赛车": {
-        "amt": 6013.53,
-        "qty": 12
+        "amt": 6512.53,
+        "qty": 13
       },
       "法拉利 F2004 与迈克尔·舒马赫": {
         "amt": 5112.0,
@@ -4337,8 +4449,16 @@
         "amt": 3099.0,
         "qty": 1
       },
+      "迷你迪士尼城堡": {
+        "amt": 3098.71,
+        "qty": 8
+      },
       "小熊维尼": {
         "amt": 2937.0,
+        "qty": 3
+      },
+      "足球": {
+        "amt": 2923.67,
         "qty": 3
       },
       "机场消防车": {
@@ -4357,10 +4477,6 @@
         "amt": 2549.53,
         "qty": 10
       },
-      "迷你迪士尼城堡": {
-        "amt": 2332.71,
-        "qty": 6
-      },
       "法拉利 SF90 XX Stradale 跑车": {
         "amt": 2296.86,
         "qty": 10
@@ -4368,6 +4484,10 @@
       "法拉利 F1® 赛车维修站": {
         "amt": 2291.56,
         "qty": 9
+      },
+      "迷你霍格沃茨城堡": {
+        "amt": 2285.78,
+        "qty": 7
       },
       "15周年纪念款 忍者道场展示台": {
         "amt": 2265.02,
@@ -4387,14 +4507,6 @@
       },
       "《复仇者联盟：毁灭之日》新复仇者联盟大厦": {
         "amt": 2040.35,
-        "qty": 2
-      },
-      "迷你霍格沃茨城堡": {
-        "amt": 1970.66,
-        "qty": 6
-      },
-      "足球": {
-        "amt": 1964.71,
         "qty": 2
       },
       "粉黛花束": {
@@ -4589,6 +4701,10 @@
         "amt": 1193.27,
         "qty": 5
       },
+      "法拉利 499P 超跑": {
+        "amt": 1162.84,
+        "qty": 5
+      },
       "布加迪 Centodieci 超级跑车": {
         "amt": 1151.04,
         "qty": 5
@@ -4596,6 +4712,10 @@
       "棘龙逃生": {
         "amt": 1138.0,
         "qty": 2
+      },
+      "复古相机": {
+        "amt": 1136.0,
+        "qty": 6
       },
       "忍者飞龙阿尤战甲": {
         "amt": 1134.99,
@@ -4615,6 +4735,10 @@
       },
       "宠物水上乐园": {
         "amt": 1051.6,
+        "qty": 4
+      },
+      "典雅兰": {
+        "amt": 1051.0,
         "qty": 4
       },
       "布加迪Chiron Pur Sport超级跑车": {
@@ -4641,9 +4765,17 @@
         "amt": 998.0,
         "qty": 2
       },
+      "水泥搅拌车": {
+        "amt": 997.21,
+        "qty": 3
+      },
       "高速列车": {
         "amt": 983.8,
         "qty": 6
+      },
+      "悟空小侠变身机甲": {
+        "amt": 982.4,
+        "qty": 5
       },
       "黄色装载车与自卸卡车": {
         "amt": 978.72,
@@ -4653,10 +4785,6 @@
         "amt": 970.97,
         "qty": 8
       },
-      "复古相机": {
-        "amt": 957.0,
-        "qty": 5
-      },
       "圣诞特快列车": {
         "amt": 944.51,
         "qty": 1
@@ -4665,13 +4793,13 @@
         "amt": 944.23,
         "qty": 2
       },
-      "法拉利 499P 超跑": {
-        "amt": 931.84,
-        "qty": 4
-      },
       "F1学院赛车": {
         "amt": 929.83,
         "qty": 4
+      },
+      "BAM LW(小人仔组合)": {
+        "amt": 914.32,
+        "qty": 12
       },
       "自动洗车店": {
         "amt": 909.02,
@@ -4753,14 +4881,6 @@
         "amt": 790.79,
         "qty": 7
       },
-      "悟空小侠变身机甲": {
-        "amt": 783.4,
-        "qty": 4
-      },
-      "典雅兰": {
-        "amt": 782.0,
-        "qty": 3
-      },
       "乐高®运输面包车": {
         "amt": 781.0,
         "qty": 3
@@ -4788,10 +4908,6 @@
       "蝙蝠侠与罗宾™蝙蝠战车™": {
         "amt": 760.0,
         "qty": 3
-      },
-      "BAM LW(小人仔组合)": {
-        "amt": 756.32,
-        "qty": 10
       },
       "闪电麦坤": {
         "amt": 747.0,
@@ -4821,10 +4937,6 @@
         "amt": 678.38,
         "qty": 4
       },
-      "水泥搅拌车": {
-        "amt": 678.17,
-        "qty": 2
-      },
       "猫儿历险记萌萌玛丽猫": {
         "amt": 670.21,
         "qty": 2
@@ -4848,6 +4960,10 @@
       "史迪奇和小金": {
         "amt": 599.0,
         "qty": 1
+      },
+      "自由的小精灵多比": {
+        "amt": 598.0,
+        "qty": 2
       },
       "1966 福特 GT40 MKII 赛车": {
         "amt": 589.0,
@@ -4885,6 +5001,10 @@
         "amt": 527.5,
         "qty": 2
       },
+      "John Deere 1470H 轮式森林收割机": {
+        "amt": 517.07,
+        "qty": 6
+      },
       "梦幻糖果乐园": {
         "amt": 508.68,
         "qty": 1
@@ -4917,9 +5037,9 @@
         "amt": 469.72,
         "qty": 2
       },
-      "John Deere 1470H 轮式森林收割机": {
-        "amt": 428.07,
-        "qty": 5
+      "F1® 赛车手与迈凯伦赛车": {
+        "amt": 456.0,
+        "qty": 4
       },
       "迷你盆栽": {
         "amt": 423.96,
@@ -5021,6 +5141,10 @@
         "amt": 291.41,
         "qty": 2
       },
+      "蜘蛛侠钥匙扣": {
+        "amt": 290.75,
+        "qty": 5
+      },
       "《爱丽丝梦游仙境》": {
         "amt": 279.0,
         "qty": 1
@@ -5069,6 +5193,10 @@
         "amt": 242.88,
         "qty": 1
       },
+      "招财猫": {
+        "amt": 242.88,
+        "qty": 1
+      },
       "迈凯伦 F1® 车队 MCL38 赛车": {
         "amt": 239.0,
         "qty": 1
@@ -5080,10 +5208,6 @@
       "霸王龙装备迷发光钥匙扣": {
         "amt": 238.0,
         "qty": 2
-      },
-      "蜘蛛侠钥匙扣": {
-        "amt": 231.75,
-        "qty": 4
       },
       "迈尔斯·莫拉莱斯钥匙链": {
         "amt": 231.75,
@@ -5101,10 +5225,6 @@
         "amt": 225.52,
         "qty": 4
       },
-      "F1® 赛车手与迈凯伦赛车": {
-        "amt": 218.0,
-        "qty": 2
-      },
       "红龙裝男孩发光钥匙扣": {
         "amt": 216.92,
         "qty": 2
@@ -5112,6 +5232,10 @@
       "史瑞克、驴子和姜饼人玩偶": {
         "amt": 198.87,
         "qty": 1
+      },
+      "圣诞老人发光钥匙扣": {
+        "amt": 198.0,
+        "qty": 2
       },
       "拖拉机": {
         "amt": 179.0,
@@ -5185,10 +5309,6 @@
         "amt": 103.94,
         "qty": 1
       },
-      "圣诞老人发光钥匙扣": {
-        "amt": 99.0,
-        "qty": 1
-      },
       "旋风车队-鸣笛消防车": {
         "amt": 89.0,
         "qty": 1
@@ -5243,6 +5363,10 @@
         "amt": 3476.09,
         "qty": 3
       },
+      "怀尔德菲勒的变形神龙机甲": {
+        "amt": 3026.45,
+        "qty": 4
+      },
       "海岸警卫队救援船和直升机": {
         "amt": 2684.03,
         "qty": 3
@@ -5258,10 +5382,6 @@
       "齐天大圣终极变形机甲": {
         "amt": 2358.0,
         "qty": 2
-      },
-      "怀尔德菲勒的变形神龙机甲": {
-        "amt": 2307.0,
-        "qty": 3
       },
       "法拉利 488 Pista 跑车": {
         "amt": 2133.58,
@@ -5285,6 +5405,10 @@
       },
       "飞机，工程车和悬浮船组合套装": {
         "amt": 1737.0,
+        "qty": 3
+      },
+      "机场消防车": {
+        "amt": 1726.68,
         "qty": 3
       },
       "凋灵之战": {
@@ -5315,29 +5439,37 @@
         "amt": 1608.65,
         "qty": 5
       },
+      "警用巡逻艇大追击": {
+        "amt": 1594.0,
+        "qty": 6
+      },
+      "法拉利 SF90 XX Stradale 跑车": {
+        "amt": 1577.03,
+        "qty": 7
+      },
+      "凯和寇的组合式战车": {
+        "amt": 1544.89,
+        "qty": 6
+      },
       "Ferrari FXX K 赛车": {
         "amt": 1467.0,
         "qty": 3
+      },
+      "治愈盆栽": {
+        "amt": 1456.17,
+        "qty": 8
       },
       "咚奇刚 街机游戏": {
         "amt": 1419.0,
         "qty": 1
       },
-      "法拉利 SF90 XX Stradale 跑车": {
-        "amt": 1328.03,
-        "qty": 6
-      },
-      "警用巡逻艇大追击": {
-        "amt": 1325.0,
-        "qty": 5
+      "15周年纪念款 X-1 忍者战车": {
+        "amt": 1328.4,
+        "qty": 2
       },
       "3合1现代温馨房屋": {
         "amt": 1311.0,
         "qty": 2
-      },
-      "治愈盆栽": {
-        "amt": 1287.17,
-        "qty": 7
       },
       "梅西的庆祝时刻": {
         "amt": 1279.2,
@@ -5359,12 +5491,12 @@
         "amt": 1205.0,
         "qty": 5
       },
-      "史迪奇和小金": {
-        "amt": 1138.0,
+      "驯龙高手：没牙仔": {
+        "amt": 1158.0,
         "qty": 2
       },
-      "机场消防车": {
-        "amt": 1137.68,
+      "史迪奇和小金": {
+        "amt": 1138.0,
         "qty": 2
       },
       "15周年纪念款 劳埃德的泰坦机甲": {
@@ -5375,9 +5507,9 @@
         "amt": 1094.59,
         "qty": 1
       },
-      "凯和寇的组合式战车": {
-        "amt": 1054.98,
-        "qty": 4
+      "黄色摩托车": {
+        "amt": 1078.05,
+        "qty": 13
       },
       "宝马 M4 GT3 EVO 赛车": {
         "amt": 1051.79,
@@ -5403,9 +5535,9 @@
         "amt": 1005.18,
         "qty": 4
       },
-      "黄色摩托车": {
-        "amt": 1002.05,
-        "qty": 12
+      "粉玫瑰花束": {
+        "amt": 998.0,
+        "qty": 2
       },
       "圣诞老人的圣诞节倒计时": {
         "amt": 978.0,
@@ -5471,6 +5603,10 @@
         "amt": 760.8,
         "qty": 3
       },
+      "凯的神龙战斗机甲": {
+        "amt": 755.95,
+        "qty": 9
+      },
       "法拉利 F1® 赛车维修站": {
         "amt": 755.0,
         "qty": 3
@@ -5486,14 +5622,6 @@
       "布加迪 Centodieci 超级跑车": {
         "amt": 702.43,
         "qty": 3
-      },
-      "15周年纪念款 X-1 忍者战车": {
-        "amt": 699.0,
-        "qty": 1
-      },
-      "凯的神龙战斗机甲": {
-        "amt": 674.92,
-        "qty": 8
       },
       "消防直升机": {
         "amt": 673.0,
@@ -5531,10 +5659,6 @@
         "amt": 569.0,
         "qty": 1
       },
-      "驯龙高手：没牙仔": {
-        "amt": 569.0,
-        "qty": 1
-      },
       "布加迪Chiron Pur Sport超级跑车": {
         "amt": 539.0,
         "qty": 1
@@ -5555,6 +5679,10 @@
         "amt": 529.0,
         "qty": 1
       },
+      "可爱的动物：小熊猫": {
+        "amt": 528.0,
+        "qty": 2
+      },
       "鸡骑士": {
         "amt": 526.76,
         "qty": 2
@@ -5567,13 +5695,17 @@
         "amt": 513.69,
         "qty": 6
       },
-      "粉玫瑰花束": {
-        "amt": 499.0,
-        "qty": 1
+      "劳埃德的神龙战斗机甲": {
+        "amt": 506.04,
+        "qty": 6
       },
       "首夜防卫战": {
         "amt": 491.8,
         "qty": 2
+      },
+      "电动超跑": {
+        "amt": 484.0,
+        "qty": 6
       },
       "粉黛花束": {
         "amt": 479.0,
@@ -5591,14 +5723,6 @@
         "amt": 449.0,
         "qty": 1
       },
-      "劳埃德的神龙战斗机甲": {
-        "amt": 425.0,
-        "qty": 5
-      },
-      "电动超跑": {
-        "amt": 420.0,
-        "qty": 5
-      },
       "3合1建筑工程车": {
         "amt": 416.67,
         "qty": 2
@@ -5611,8 +5735,16 @@
         "amt": 409.0,
         "qty": 1
       },
+      "悟空小侠变身机甲": {
+        "amt": 398.0,
+        "qty": 2
+      },
       "冰雪奇缘创意拼搭": {
         "amt": 378.0,
+        "qty": 2
+      },
+      "复古相机": {
+        "amt": 364.0,
         "qty": 2
       },
       "礼盒庆典": {
@@ -5651,6 +5783,10 @@
         "amt": 343.0,
         "qty": 2
       },
+      "齐尔瓦的猿龙猛兽": {
+        "amt": 342.02,
+        "qty": 2
+      },
       "《玩具总动员》": {
         "amt": 319.0,
         "qty": 1
@@ -5671,10 +5807,6 @@
         "amt": 269.0,
         "qty": 1
       },
-      "可爱的动物：小熊猫": {
-        "amt": 264.0,
-        "qty": 1
-      },
       "傲骨梅": {
         "amt": 243.26,
         "qty": 1
@@ -5691,23 +5823,15 @@
         "amt": 218.0,
         "qty": 2
       },
-      "悟空小侠变身机甲": {
-        "amt": 199.0,
-        "qty": 1
-      },
-      "复古相机": {
-        "amt": 182.0,
-        "qty": 1
+      "神奇独角兽": {
+        "amt": 198.01,
+        "qty": 2
       },
       "伦敦巴士": {
         "amt": 179.0,
         "qty": 1
       },
       "快乐盆栽": {
-        "amt": 179.0,
-        "qty": 1
-      },
-      "齐尔瓦的猿龙猛兽": {
         "amt": 179.0,
         "qty": 1
       },
@@ -5759,10 +5883,6 @@
         "amt": 112.6,
         "qty": 2
       },
-      "神奇独角兽": {
-        "amt": 99.86,
-        "qty": 1
-      },
       "旋风车队-鸣笛消防车": {
         "amt": 89.0,
         "qty": 1
@@ -5786,8 +5906,8 @@
     },
     "泰州万象城": {
       "法拉利 488 Pista 跑车": {
-        "amt": 9286.33,
-        "qty": 17
+        "amt": 9820.68,
+        "qty": 18
       },
       "宝马 M4 GT3 EVO 赛车": {
         "amt": 8563.87,
@@ -5798,12 +5918,12 @@
         "qty": 33
       },
       "摇钱树": {
-        "amt": 6976.0,
-        "qty": 40
+        "amt": 7145.0,
+        "qty": 41
       },
       "凯和寇的组合式战车": {
-        "amt": 5858.85,
-        "qty": 23
+        "amt": 6101.98,
+        "qty": 24
       },
       "假日小屋": {
         "amt": 5761.5,
@@ -5837,25 +5957,25 @@
         "amt": 4907.82,
         "qty": 59
       },
+      "安琪": {
+        "amt": 4884.48,
+        "qty": 9
+      },
       "忍者双生泰坦机甲": {
         "amt": 4657.26,
         "qty": 4
+      },
+      "NASA Artemis 太空发射系统": {
+        "amt": 4479.3,
+        "qty": 9
       },
       "末影龙": {
         "amt": 4441.42,
         "qty": 9
       },
-      "安琪": {
-        "amt": 4359.93,
-        "qty": 8
-      },
       "法拉利 F2004 与迈克尔·舒马赫": {
         "amt": 4104.0,
         "qty": 6
-      },
-      "NASA Artemis 太空发射系统": {
-        "amt": 3980.3,
-        "qty": 8
       },
       "治愈盆栽": {
         "amt": 3896.99,
@@ -5873,33 +5993,41 @@
         "amt": 3659.0,
         "qty": 1
       },
+      "史蒂夫针叶林冒险": {
+        "amt": 3652.64,
+        "qty": 43
+      },
       "英伦街角": {
         "amt": 3638.0,
         "qty": 2
       },
-      "史蒂夫针叶林冒险": {
-        "amt": 3563.64,
-        "qty": 42
+      "海岸警卫队救援船和直升机": {
+        "amt": 3588.84,
+        "qty": 4
+      },
+      "法拉利 SF90 XX Stradale 跑车": {
+        "amt": 3515.71,
+        "qty": 15
       },
       "杜卡迪 Desmo450 MX 原厂摩托车": {
         "amt": 3495.48,
         "qty": 8
       },
+      "蝙蝠战车 Tumbler": {
+        "amt": 3478.0,
+        "qty": 2
+      },
       "迈凯伦P1": {
         "amt": 3459.0,
         "qty": 1
       },
+      "迷你霍格沃茨城堡": {
+        "amt": 3276.66,
+        "qty": 10
+      },
       "齐尔瓦的猿龙猛兽": {
         "amt": 3127.19,
         "qty": 18
-      },
-      "法拉利 SF90 XX Stradale 跑车": {
-        "amt": 3034.07,
-        "qty": 13
-      },
-      "迷你霍格沃茨城堡": {
-        "amt": 2957.66,
-        "qty": 9
       },
       "丽安的温馨小屋": {
         "amt": 2915.0,
@@ -5925,9 +6053,9 @@
         "amt": 2788.2,
         "qty": 2
       },
-      "海岸警卫队救援船和直升机": {
-        "amt": 2703.97,
-        "qty": 3
+      "布加迪 Vision GT 超级跑车": {
+        "amt": 2720.8,
+        "qty": 12
       },
       "杰克·史派罗船长的海盗船": {
         "amt": 2699.1,
@@ -5957,13 +6085,13 @@
         "amt": 2547.0,
         "qty": 3
       },
-      "布加迪 Vision GT 超级跑车": {
-        "amt": 2534.8,
-        "qty": 11
-      },
       "《哈利·波特与魔法石》电影 – 收藏版": {
         "amt": 2458.0,
         "qty": 2
+      },
+      "法拉利 499P 超跑": {
+        "amt": 2423.65,
+        "qty": 10
       },
       "迷你迪士尼城堡": {
         "amt": 2281.52,
@@ -5972,10 +6100,6 @@
       "15周年纪念款 忍者道场展示台": {
         "amt": 2267.47,
         "qty": 7
-      },
-      "法拉利 499P 超跑": {
-        "amt": 2174.65,
-        "qty": 9
       },
       "怪物史瑞克系列": {
         "amt": 2133.16,
@@ -5989,12 +6113,24 @@
         "amt": 2072.49,
         "qty": 2
       },
+      "僵尸地牢": {
+        "amt": 2071.17,
+        "qty": 8
+      },
+      "财神爷": {
+        "amt": 2053.54,
+        "qty": 8
+      },
       "首夜防卫战": {
         "amt": 2024.92,
         "qty": 8
       },
       "C罗 -足球传奇": {
         "amt": 2003.67,
+        "qty": 3
+      },
+      "梅西 – 足球传奇": {
+        "amt": 1947.0,
         "qty": 3
       },
       "布加迪 Centodieci 超级跑车": {
@@ -6037,18 +6173,6 @@
         "amt": 1819.0,
         "qty": 1
       },
-      "僵尸地牢": {
-        "amt": 1802.17,
-        "qty": 7
-      },
-      "蝙蝠战车 Tumbler": {
-        "amt": 1799.0,
-        "qty": 1
-      },
-      "财神爷": {
-        "amt": 1784.54,
-        "qty": 7
-      },
       "苍白之园": {
         "amt": 1756.64,
         "qty": 10
@@ -6056,6 +6180,10 @@
       "生命源龙": {
         "amt": 1752.94,
         "qty": 2
+      },
+      "街机弹珠机": {
+        "amt": 1679.0,
+        "qty": 1
       },
       "15周年纪念款 四武器铁匠铺": {
         "amt": 1678.0,
@@ -6096,6 +6224,10 @@
       "凋灵之战": {
         "amt": 1574.33,
         "qty": 3
+      },
+      "乐高®运输面包车": {
+        "amt": 1548.92,
+        "qty": 6
       },
       "橙色的猫": {
         "amt": 1545.2,
@@ -6145,6 +6277,10 @@
         "amt": 1383.64,
         "qty": 8
       },
+      "悟空小侠变身机甲": {
+        "amt": 1364.66,
+        "qty": 7
+      },
       "PS游戏机": {
         "amt": 1349.0,
         "qty": 1
@@ -6157,9 +6293,9 @@
         "amt": 1338.0,
         "qty": 2
       },
-      "梅西 – 足球传奇": {
-        "amt": 1308.0,
-        "qty": 2
+      "幼年霸王龙运输车": {
+        "amt": 1302.63,
+        "qty": 5
       },
       "齐天大圣终极变形机甲": {
         "amt": 1299.0,
@@ -6169,16 +6305,16 @@
         "amt": 1293.0,
         "qty": 6
       },
+      "摇滚盆栽": {
+        "amt": 1292.61,
+        "qty": 7
+      },
       "蝙蝠侠与罗宾™蝙蝠战车™": {
         "amt": 1291.94,
         "qty": 5
       },
       "可爱狗狗零食店": {
         "amt": 1286.2,
-        "qty": 5
-      },
-      "乐高®运输面包车": {
-        "amt": 1279.92,
         "qty": 5
       },
       "二郎天神机甲": {
@@ -6209,10 +6345,6 @@
         "amt": 1208.0,
         "qty": 2
       },
-      "悟空小侠变身机甲": {
-        "amt": 1181.01,
-        "qty": 6
-      },
       "瓦力与伊娃": {
         "amt": 1168.0,
         "qty": 2
@@ -6233,13 +6365,17 @@
         "amt": 1110.88,
         "qty": 2
       },
-      "摇滚盆栽": {
-        "amt": 1103.61,
-        "qty": 6
+      "创意花店": {
+        "amt": 1110.72,
+        "qty": 4
       },
       "史迪奇和小金": {
         "amt": 1102.39,
         "qty": 2
+      },
+      "BAM LW(小人仔组合)": {
+        "amt": 1102.12,
+        "qty": 14
       },
       "忍者飞龙阿尤战甲": {
         "amt": 1084.0,
@@ -6257,17 +6393,9 @@
         "amt": 1039.0,
         "qty": 1
       },
-      "幼年霸王龙运输车": {
-        "amt": 1033.63,
-        "qty": 4
-      },
       "假日探险野营车": {
         "amt": 1031.0,
         "qty": 4
-      },
-      "BAM LW(小人仔组合)": {
-        "amt": 1023.12,
-        "qty": 13
       },
       "足球": {
         "amt": 1021.35,
@@ -6352,10 +6480,6 @@
       "港口货运列车": {
         "amt": 839.0,
         "qty": 1
-      },
-      "创意花店": {
-        "amt": 834.36,
-        "qty": 3
       },
       "决战名场面：反浩克装甲大战浩克": {
         "amt": 818.25,
@@ -6513,6 +6637,10 @@
         "amt": 526.99,
         "qty": 1
       },
+      "鲜花装饰香水瓶": {
+        "amt": 518.0,
+        "qty": 2
+      },
       "兰花": {
         "amt": 499.0,
         "qty": 1
@@ -6524,6 +6652,10 @@
       "《回到未来》时光机": {
         "amt": 480.0,
         "qty": 2
+      },
+      "心形饰品": {
+        "amt": 474.24,
+        "qty": 4
       },
       "玫瑰": {
         "amt": 470.9,
@@ -6565,9 +6697,9 @@
         "amt": 369.0,
         "qty": 1
       },
-      "心形饰品": {
-        "amt": 360.24,
-        "qty": 3
+      "礼盒庆典": {
+        "amt": 361.49,
+        "qty": 2
       },
       "克隆人震击士兵™机甲": {
         "amt": 348.57,
@@ -6629,10 +6761,6 @@
         "amt": 261.12,
         "qty": 1
       },
-      "鲜花装饰香水瓶": {
-        "amt": 249.0,
-        "qty": 1
-      },
       "招财猫": {
         "amt": 244.4,
         "qty": 1
@@ -6653,9 +6781,13 @@
         "amt": 238.0,
         "qty": 2
       },
-      "小人仔组合（BaM packaging box classic）": {
+      "BaM packaging box classic": {
         "amt": 237.0,
         "qty": 3
+      },
+      "幽灵蜘蛛钥匙扣": {
+        "amt": 230.45,
+        "qty": 4
       },
       "金色小人仔钥匙扣": {
         "amt": 230.25,
@@ -6697,17 +6829,13 @@
         "amt": 179.0,
         "qty": 1
       },
-      "幽灵蜘蛛钥匙扣": {
-        "amt": 177.0,
-        "qty": 3
+      "独角兽蛋糕送货车": {
+        "amt": 178.0,
+        "qty": 2
       },
       "甲龙宝宝钥匙扣": {
         "amt": 177.0,
         "qty": 3
-      },
-      "礼盒庆典": {
-        "amt": 172.49,
-        "qty": 1
       },
       "鲨鱼人钥匙扣": {
         "amt": 171.6,
@@ -6745,8 +6873,8 @@
         "amt": 89.0,
         "qty": 1
       },
-      "独角兽蛋糕送货车": {
-        "amt": 89.0,
+      "小人仔组合（BaM packaging box classic）": {
+        "amt": 79.0,
         "qty": 1
       },
       "蘑菇女孩钥匙扣": {
@@ -6807,13 +6935,13 @@
         "amt": 899.0,
         "qty": 1
       },
+      "高速列车": {
+        "amt": 676.0,
+        "qty": 4
+      },
       "Ferrari FXX K 赛车": {
         "amt": 529.0,
         "qty": 1
-      },
-      "高速列车": {
-        "amt": 507.0,
-        "qty": 3
       },
       "自动洗车店": {
         "amt": 459.27,
@@ -6959,7 +7087,7 @@
         "amt": 89.0,
         "qty": 1
       },
-      "小人仔组合（BaM packaging box classic）": {
+      "BaM packaging box classic": {
         "amt": 79.0,
         "qty": 1
       },
@@ -7025,6 +7153,10 @@
         "amt": 1547.0,
         "qty": 3
       },
+      "NASA Artemis 太空发射系统": {
+        "amt": 1447.0,
+        "qty": 3
+      },
       "捷豹Project 7&路虎Defender": {
         "amt": 1447.0,
         "qty": 3
@@ -7061,6 +7193,10 @@
         "amt": 1088.0,
         "qty": 6
       },
+      "宠物水上乐园": {
+        "amt": 1065.54,
+        "qty": 4
+      },
       "三菱日蚀赛车（速度与激情同款）": {
         "amt": 1058.0,
         "qty": 2
@@ -7073,17 +7209,21 @@
         "amt": 1037.63,
         "qty": 1
       },
+      "草莓熊": {
+        "amt": 1020.02,
+        "qty": 3
+      },
       "凯和寇的组合式战车": {
         "amt": 1017.99,
         "qty": 4
       },
+      "怪物史瑞克系列": {
+        "amt": 1005.32,
+        "qty": 28
+      },
       "小猪的生日派对": {
         "amt": 978.6,
         "qty": 3
-      },
-      "NASA Artemis 太空发射系统": {
-        "amt": 958.0,
-        "qty": 2
       },
       "粉黛花束": {
         "amt": 950.0,
@@ -7092,10 +7232,6 @@
       "假日小屋": {
         "amt": 949.0,
         "qty": 1
-      },
-      "怪物史瑞克系列": {
-        "amt": 936.96,
-        "qty": 26
       },
       "法拉利 499P 超跑": {
         "amt": 921.0,
@@ -7113,9 +7249,9 @@
         "amt": 807.64,
         "qty": 10
       },
-      "宠物水上乐园": {
-        "amt": 786.54,
-        "qty": 3
+      "郁金香花束": {
+        "amt": 786.0,
+        "qty": 2
       },
       "创意花店": {
         "amt": 784.94,
@@ -7157,10 +7293,6 @@
         "amt": 705.83,
         "qty": 4
       },
-      "草莓熊": {
-        "amt": 671.02,
-        "qty": 2
-      },
       "迷你霍格沃茨城堡": {
         "amt": 668.0,
         "qty": 2
@@ -7168,6 +7300,10 @@
       "猫儿历险记萌萌玛丽猫": {
         "amt": 662.62,
         "qty": 2
+      },
+      "警用摩托车大追击": {
+        "amt": 656.72,
+        "qty": 8
       },
       "法拉利 F2004 与迈克尔·舒马赫": {
         "amt": 639.0,
@@ -7181,8 +7317,8 @@
         "amt": 605.97,
         "qty": 2
       },
-      "警用摩托车大追击": {
-        "amt": 581.63,
+      "史蒂夫针叶林冒险": {
+        "amt": 599.44,
         "qty": 7
       },
       "飞机，工程车和悬浮船组合套装": {
@@ -7195,6 +7331,10 @@
       },
       "道奇 Viper GTS-R 跑车": {
         "amt": 549.0,
+        "qty": 1
+      },
+      "法拉利 488 Pista 跑车": {
+        "amt": 539.0,
         "qty": 1
       },
       "梦幻糖果乐园": {
@@ -7216,10 +7356,6 @@
       "财神爷": {
         "amt": 511.88,
         "qty": 2
-      },
-      "史蒂夫针叶林冒险": {
-        "amt": 510.44,
-        "qty": 6
       },
       "拖拉机与市场": {
         "amt": 503.64,
@@ -7277,10 +7413,6 @@
         "amt": 398.0,
         "qty": 2
       },
-      "郁金香花束": {
-        "amt": 393.0,
-        "qty": 1
-      },
       "悟空小侠迷你机甲": {
         "amt": 379.0,
         "qty": 1
@@ -7308,6 +7440,10 @@
       "惊喜街机": {
         "amt": 349.0,
         "qty": 1
+      },
+      "John Deere 1470H 轮式森林收割机": {
+        "amt": 339.27,
+        "qty": 4
       },
       "小鸡农场": {
         "amt": 338.0,
@@ -7340,10 +7476,6 @@
       "披萨小车": {
         "amt": 250.31,
         "qty": 2
-      },
-      "John Deere 1470H 轮式森林收割机": {
-        "amt": 250.27,
-        "qty": 3
       },
       "僵尸地牢": {
         "amt": 249.0,
@@ -7441,6 +7573,14 @@
         "amt": 107.84,
         "qty": 2
       },
+      "迈尔斯·莫拉莱斯钥匙链": {
+        "amt": 107.0,
+        "qty": 2
+      },
+      "酷帅蝙蝠侠钥匙链": {
+        "amt": 107.0,
+        "qty": 2
+      },
       "凯的神龙战斗机甲": {
         "amt": 89.0,
         "qty": 1
@@ -7477,14 +7617,6 @@
         "amt": 53.68,
         "qty": 1
       },
-      "迈尔斯·莫拉莱斯钥匙链": {
-        "amt": 53.5,
-        "qty": 1
-      },
-      "酷帅蝙蝠侠钥匙链": {
-        "amt": 53.5,
-        "qty": 1
-      },
       "热狗小贩钥匙扣": {
         "amt": 53.49,
         "qty": 1
@@ -7507,21 +7639,25 @@
         "amt": 5226.98,
         "qty": 9
       },
+      "法拉利 SF90 XX Stradale 跑车": {
+        "amt": 3995.68,
+        "qty": 17
+      },
       "摇钱树": {
         "amt": 3802.8,
         "qty": 22
-      },
-      "法拉利 SF90 XX Stradale 跑车": {
-        "amt": 3746.68,
-        "qty": 16
       },
       "迈凯伦 MCL39 F1® 赛车": {
         "amt": 3638.0,
         "qty": 2
       },
       "警用巡逻艇大追击": {
-        "amt": 3335.82,
-        "qty": 13
+        "amt": 3604.82,
+        "qty": 14
+      },
+      "迈凯伦P1": {
+        "amt": 3459.0,
+        "qty": 1
       },
       "宝马 M4 GT3 EVO 赛车": {
         "amt": 3161.7,
@@ -7539,25 +7675,25 @@
         "amt": 2622.42,
         "qty": 8
       },
+      "怪物史瑞克系列": {
+        "amt": 2591.69,
+        "qty": 71
+      },
       "首夜防卫战": {
         "amt": 2574.14,
         "qty": 10
-      },
-      "怪物史瑞克系列": {
-        "amt": 2552.69,
-        "qty": 70
       },
       "凯和寇的组合式战车": {
         "amt": 2521.15,
         "qty": 10
       },
+      "史蒂夫针叶林冒险": {
+        "amt": 2486.7,
+        "qty": 29
+      },
       "齐尔瓦的猿龙猛兽": {
         "amt": 2446.0,
         "qty": 14
-      },
-      "史蒂夫针叶林冒险": {
-        "amt": 2397.7,
-        "qty": 28
       },
       "驯龙高手：没牙仔": {
         "amt": 2291.35,
@@ -7591,13 +7727,17 @@
         "amt": 1917.36,
         "qty": 4
       },
+      "警用摩托车大追击": {
+        "amt": 1911.73,
+        "qty": 22
+      },
+      "黄色出租车": {
+        "amt": 1903.7,
+        "qty": 16
+      },
       "喷气式客运飞机": {
         "amt": 1842.93,
         "qty": 7
-      },
-      "警用摩托车大追击": {
-        "amt": 1825.06,
-        "qty": 21
       },
       "幼年霸王龙运输车": {
         "amt": 1793.32,
@@ -7615,6 +7755,10 @@
         "amt": 1767.0,
         "qty": 3
       },
+      "艾莎的冰雪城堡和雪上冒险": {
+        "amt": 1740.96,
+        "qty": 4
+      },
       "客运飞机": {
         "amt": 1738.0,
         "qty": 2
@@ -7627,9 +7771,9 @@
         "amt": 1664.27,
         "qty": 4
       },
-      "黄色出租车": {
-        "amt": 1653.18,
-        "qty": 14
+      "绿色布加迪Chiron Pur Sport超级跑车": {
+        "amt": 1660.79,
+        "qty": 3
       },
       "15周年纪念款 四武器铁匠铺": {
         "amt": 1651.56,
@@ -7663,6 +7807,10 @@
         "amt": 1486.58,
         "qty": 3
       },
+      "高速列车": {
+        "amt": 1481.0,
+        "qty": 9
+      },
       "怀尔德菲勒的变形神龙机甲": {
         "amt": 1478.0,
         "qty": 2
@@ -7679,21 +7827,25 @@
         "amt": 1387.85,
         "qty": 8
       },
+      "凯的神龙战斗机甲": {
+        "amt": 1374.42,
+        "qty": 16
+      },
+      "创意花店": {
+        "amt": 1362.62,
+        "qty": 5
+      },
+      "马力欧卡丁车™：马力欧 ＆ 标准型卡丁车": {
+        "amt": 1329.0,
+        "qty": 1
+      },
       "黄色摩托车": {
         "amt": 1328.64,
         "qty": 16
       },
-      "高速列车": {
-        "amt": 1312.0,
-        "qty": 8
-      },
       "乐高®运输面包车": {
         "amt": 1294.31,
         "qty": 5
-      },
-      "艾莎的冰雪城堡和雪上冒险": {
-        "amt": 1291.96,
-        "qty": 3
       },
       "法拉利 F1® 赛车维修站": {
         "amt": 1286.51,
@@ -7723,6 +7875,10 @@
         "amt": 1219.0,
         "qty": 1
       },
+      "劳埃德的神龙战斗机甲": {
+        "amt": 1185.33,
+        "qty": 14
+      },
       "布加迪 Vision GT 超级跑车": {
         "amt": 1174.4,
         "qty": 5
@@ -7731,13 +7887,9 @@
         "amt": 1159.6,
         "qty": 2
       },
-      "凯的神龙战斗机甲": {
-        "amt": 1118.42,
-        "qty": 13
-      },
-      "劳埃德的神龙战斗机甲": {
-        "amt": 1109.33,
-        "qty": 13
+      "山地探险车": {
+        "amt": 1120.92,
+        "qty": 6
       },
       "史迪奇和小金": {
         "amt": 1106.88,
@@ -7746,10 +7898,6 @@
       "电动超跑": {
         "amt": 1095.41,
         "qty": 13
-      },
-      "绿色布加迪Chiron Pur Sport超级跑车": {
-        "amt": 1091.79,
-        "qty": 2
       },
       "哈勃太空望远镜": {
         "amt": 1082.78,
@@ -7795,6 +7943,14 @@
         "amt": 989.0,
         "qty": 1
       },
+      "草莓熊": {
+        "amt": 987.0,
+        "qty": 3
+      },
+      "迷你霍格沃茨城堡": {
+        "amt": 972.36,
+        "qty": 3
+      },
       "F1®大电影同款APXGP赛车": {
         "amt": 939.75,
         "qty": 4
@@ -7803,13 +7959,13 @@
         "amt": 939.34,
         "qty": 4
       },
-      "山地探险车": {
-        "amt": 931.92,
-        "qty": 5
-      },
       "布加迪 Centodieci 超级跑车": {
         "amt": 894.11,
         "qty": 4
+      },
+      "小鸡农场": {
+        "amt": 866.04,
+        "qty": 5
       },
       "Wallace & Gromit（超级无敌掌门狗）": {
         "amt": 849.0,
@@ -7822,10 +7978,6 @@
       "生命源龙": {
         "amt": 839.0,
         "qty": 1
-      },
-      "创意花店": {
-        "amt": 820.81,
-        "qty": 3
       },
       "黄色挖掘装载车": {
         "amt": 816.28,
@@ -7871,6 +8023,10 @@
         "amt": 714.0,
         "qty": 6
       },
+      "花生漫画：史努比的狗屋": {
+        "amt": 711.14,
+        "qty": 1
+      },
       "独角兽咖啡馆": {
         "amt": 698.0,
         "qty": 2
@@ -7879,9 +8035,9 @@
         "amt": 695.0,
         "qty": 2
       },
-      "小鸡农场": {
-        "amt": 687.04,
-        "qty": 4
+      "John Deere 1470H 轮式森林收割机": {
+        "amt": 668.4,
+        "qty": 8
       },
       "海滩观光火车": {
         "amt": 649.0,
@@ -7891,17 +8047,9 @@
         "amt": 645.78,
         "qty": 1
       },
-      "迷你霍格沃茨城堡": {
-        "amt": 641.0,
-        "qty": 2
-      },
       "法拉利车队HP刘易斯·汉密尔顿头盔": {
         "amt": 639.0,
         "qty": 1
-      },
-      "草莓熊": {
-        "amt": 638.0,
-        "qty": 2
       },
       "猫儿历险记萌萌玛丽猫": {
         "amt": 637.0,
@@ -7914,10 +8062,6 @@
       "水泥搅拌车": {
         "amt": 634.12,
         "qty": 2
-      },
-      "John Deere 1470H 轮式森林收割机": {
-        "amt": 585.9,
-        "qty": 7
       },
       "圣诞饰品精选 2": {
         "amt": 578.09,
@@ -8235,6 +8379,10 @@
         "amt": 59.0,
         "qty": 1
       },
+      "热狗小贩钥匙扣": {
+        "amt": 59.0,
+        "qty": 1
+      },
       "蘑菇女孩钥匙扣": {
         "amt": 59.0,
         "qty": 1
@@ -8282,20 +8430,20 @@
         "qty": 20
       },
       "摇钱树": {
-        "amt": 22884.4,
-        "qty": 131
-      },
-      "Ferrari FXX K 赛车": {
-        "amt": 21331.65,
-        "qty": 43
+        "amt": 23053.4,
+        "qty": 132
       },
       "法拉利 488 Pista 跑车": {
-        "amt": 21178.06,
-        "qty": 39
+        "amt": 22251.41,
+        "qty": 41
+      },
+      "Ferrari FXX K 赛车": {
+        "amt": 21830.65,
+        "qty": 44
       },
       "警用巡逻艇大追击": {
-        "amt": 20705.36,
-        "qty": 81
+        "amt": 21243.36,
+        "qty": 83
       },
       "宝马 M4 GT3 EVO 赛车": {
         "amt": 17624.97,
@@ -8306,24 +8454,28 @@
         "qty": 18
       },
       "驯龙高手：没牙仔": {
-        "amt": 15792.9,
-        "qty": 27
-      },
-      "法拉利 SF90 XX Stradale 跑车": {
-        "amt": 13958.9,
-        "qty": 60
-      },
-      "NASA Artemis 太空发射系统": {
-        "amt": 13809.75,
+        "amt": 16381.9,
         "qty": 28
       },
-      "治愈盆栽": {
-        "amt": 13671.5,
-        "qty": 74
+      "NASA Artemis 太空发射系统": {
+        "amt": 15276.75,
+        "qty": 31
+      },
+      "法拉利 SF90 XX Stradale 跑车": {
+        "amt": 15187.54,
+        "qty": 65
       },
       "凯和寇的组合式战车": {
-        "amt": 13582.55,
-        "qty": 53
+        "amt": 14315.59,
+        "qty": 56
+      },
+      "治愈盆栽": {
+        "amt": 13840.5,
+        "qty": 75
+      },
+      "迷你霍格沃茨城堡": {
+        "amt": 13150.0,
+        "qty": 40
       },
       "法拉利 F2004 与迈克尔·舒马赫": {
         "amt": 13097.76,
@@ -8341,29 +8493,37 @@
         "amt": 12364.24,
         "qty": 38
       },
-      "迷你霍格沃茨城堡": {
-        "amt": 12184.52,
-        "qty": 37
-      },
       "怀尔德菲勒的变形神龙机甲": {
-        "amt": 11392.54,
-        "qty": 15
+        "amt": 12111.99,
+        "qty": 16
       },
       "咚奇刚 街机游戏": {
         "amt": 10965.9,
         "qty": 8
       },
-      "黄色摩托车": {
-        "amt": 10455.17,
-        "qty": 126
+      "马力欧卡丁车™：马力欧 ＆ 标准型卡丁车": {
+        "amt": 10908.46,
+        "qty": 8
       },
-      "史蒂夫针叶林冒险": {
-        "amt": 10300.45,
-        "qty": 121
+      "海岸警卫队救援船和直升机": {
+        "amt": 10863.69,
+        "qty": 12
       },
       "安琪": {
-        "amt": 10168.07,
-        "qty": 19
+        "amt": 10692.62,
+        "qty": 20
+      },
+      "史蒂夫针叶林冒险": {
+        "amt": 10656.45,
+        "qty": 125
+      },
+      "黄色摩托车": {
+        "amt": 10531.17,
+        "qty": 127
+      },
+      "艾莎的冰雪城堡和雪上冒险": {
+        "amt": 10280.7,
+        "qty": 25
       },
       "杜卡迪 Desmo450 MX 原厂摩托车": {
         "amt": 10141.63,
@@ -8373,33 +8533,21 @@
         "amt": 10077.12,
         "qty": 33
       },
-      "海岸警卫队救援船和直升机": {
-        "amt": 9978.82,
-        "qty": 11
-      },
-      "艾莎的冰雪城堡和雪上冒险": {
-        "amt": 9831.7,
-        "qty": 24
-      },
       "齐尔瓦的猿龙猛兽": {
-        "amt": 9827.23,
-        "qty": 57
+        "amt": 9990.25,
+        "qty": 58
       },
       "15周年纪念款 劳埃德的泰坦机甲": {
         "amt": 9772.02,
         "qty": 9
       },
-      "马力欧卡丁车™：马力欧 ＆ 标准型卡丁车": {
-        "amt": 9579.46,
-        "qty": 7
+      "怪物史瑞克系列": {
+        "amt": 9307.04,
+        "qty": 253
       },
       "喷气式客运飞机": {
         "amt": 9299.94,
         "qty": 35
-      },
-      "怪物史瑞克系列": {
-        "amt": 9199.68,
-        "qty": 250
       },
       "海绵宝宝：比奇堡": {
         "amt": 8977.95,
@@ -8425,25 +8573,33 @@
         "amt": 8483.0,
         "qty": 17
       },
+      "迷你迪士尼城堡": {
+        "amt": 8332.59,
+        "qty": 22
+      },
+      "法拉利 499P 超跑": {
+        "amt": 8327.76,
+        "qty": 35
+      },
       "海岸警卫队直升机": {
         "amt": 8298.36,
         "qty": 17
+      },
+      "机场消防车": {
+        "amt": 8078.89,
+        "qty": 14
       },
       "法拉利 F1® 赛车维修站": {
         "amt": 8059.55,
         "qty": 32
       },
-      "法拉利 499P 超跑": {
-        "amt": 7847.76,
-        "qty": 33
-      },
       "粉黛花束": {
         "amt": 7758.22,
         "qty": 16
       },
-      "迷你迪士尼城堡": {
-        "amt": 7566.59,
-        "qty": 20
+      "首夜防卫战": {
+        "amt": 7712.06,
+        "qty": 30
       },
       "科尼赛克 Sadair Spear 超跑": {
         "amt": 7558.0,
@@ -8452,14 +8608,6 @@
       "《哈利·波特与魔法石》电影 – 收藏版": {
         "amt": 7541.43,
         "qty": 6
-      },
-      "机场消防车": {
-        "amt": 7489.89,
-        "qty": 13
-      },
-      "首夜防卫战": {
-        "amt": 7443.06,
-        "qty": 29
       },
       "齐天大圣终极变形机甲": {
         "amt": 7416.27,
@@ -8473,6 +8621,10 @@
         "amt": 7084.1,
         "qty": 3
       },
+      "高速列车": {
+        "amt": 7020.78,
+        "qty": 43
+      },
       "凋灵之战": {
         "amt": 7011.62,
         "qty": 13
@@ -8480,6 +8632,10 @@
       "欢聚友谊树屋": {
         "amt": 6991.23,
         "qty": 12
+      },
+      "足球": {
+        "amt": 6988.02,
+        "qty": 7
       },
       "苍白之园": {
         "amt": 6947.0,
@@ -8493,9 +8649,13 @@
         "amt": 6918.0,
         "qty": 2
       },
-      "高速列车": {
-        "amt": 6682.78,
-        "qty": 41
+      "迈凯伦P1": {
+        "amt": 6918.0,
+        "qty": 2
+      },
+      "街机弹珠机": {
+        "amt": 6711.02,
+        "qty": 4
       },
       "F1®大电影同款APXGP赛车": {
         "amt": 6651.76,
@@ -8505,25 +8665,37 @@
         "amt": 6468.0,
         "qty": 2
       },
+      "凯的神龙战斗机甲": {
+        "amt": 6454.42,
+        "qty": 75
+      },
+      "警用摩托车大追击": {
+        "amt": 6183.14,
+        "qty": 72
+      },
       "圣诞老人的圣诞雪橇冒险": {
         "amt": 6165.59,
         "qty": 24
       },
-      "凯的神龙战斗机甲": {
-        "amt": 6117.39,
-        "qty": 71
+      "乐高®运输面包车": {
+        "amt": 6148.33,
+        "qty": 24
       },
-      "足球": {
-        "amt": 6029.06,
-        "qty": 6
+      "劳埃德的神龙战斗机甲": {
+        "amt": 6115.83,
+        "qty": 72
       },
-      "警用摩托车大追击": {
-        "amt": 6021.38,
-        "qty": 70
+      "黄色出租车": {
+        "amt": 6035.72,
+        "qty": 50
       },
       "客运飞机": {
         "amt": 5942.97,
         "qty": 7
+      },
+      "布加迪 Vision GT 超级跑车": {
+        "amt": 5935.48,
+        "qty": 26
       },
       "道奇 Viper GTS-R 跑车": {
         "amt": 5927.93,
@@ -8532,14 +8704,6 @@
       "兰博基尼 Revuelto 与 Huracán STO": {
         "amt": 5908.61,
         "qty": 14
-      },
-      "乐高®运输面包车": {
-        "amt": 5879.33,
-        "qty": 23
-      },
-      "劳埃德的神龙战斗机甲": {
-        "amt": 5877.51,
-        "qty": 69
       },
       "丽安的温馨小屋": {
         "amt": 5874.4,
@@ -8553,25 +8717,33 @@
         "amt": 5871.6,
         "qty": 9
       },
+      "Ford Bronco® 福特烈马 SUV": {
+        "amt": 5858.64,
+        "qty": 12
+      },
+      "15周年纪念款 X-1 忍者战车": {
+        "amt": 5856.43,
+        "qty": 9
+      },
       "15周年纪念款 四武器铁匠铺": {
         "amt": 5799.61,
         "qty": 7
-      },
-      "黄色出租车": {
-        "amt": 5785.2,
-        "qty": 48
       },
       "布加迪 Centodieci 超级跑车": {
         "amt": 5784.97,
         "qty": 26
       },
-      "布加迪 Vision GT 超级跑车": {
-        "amt": 5749.48,
-        "qty": 25
+      "粉玫瑰花束": {
+        "amt": 5679.97,
+        "qty": 12
       },
       "假日探险野营车": {
         "amt": 5626.36,
         "qty": 22
+      },
+      "草莓熊": {
+        "amt": 5621.21,
+        "qty": 17
       },
       "自动洗车店": {
         "amt": 5588.45,
@@ -8589,9 +8761,9 @@
         "amt": 5344.12,
         "qty": 20
       },
-      "Ford Bronco® 福特烈马 SUV": {
-        "amt": 5343.64,
-        "qty": 11
+      "山地探险车": {
+        "amt": 5325.83,
+        "qty": 29
       },
       "骷髅": {
         "amt": 5284.32,
@@ -8605,13 +8777,9 @@
         "amt": 5233.0,
         "qty": 7
       },
-      "15周年纪念款 X-1 忍者战车": {
-        "amt": 5227.03,
-        "qty": 8
-      },
-      "粉玫瑰花束": {
-        "amt": 5180.97,
-        "qty": 11
+      "僵尸地牢": {
+        "amt": 5197.67,
+        "qty": 20
       },
       "梦幻糖果乐园": {
         "amt": 5172.94,
@@ -8625,17 +8793,17 @@
         "amt": 5157.0,
         "qty": 3
       },
-      "山地探险车": {
-        "amt": 5136.83,
-        "qty": 28
+      "电动超跑": {
+        "amt": 5153.75,
+        "qty": 61
       },
-      "街机弹珠机": {
-        "amt": 5032.02,
+      "蝙蝠战车 Tumbler": {
+        "amt": 5100.82,
         "qty": 3
       },
-      "电动超跑": {
-        "amt": 5008.75,
-        "qty": 59
+      "财神爷": {
+        "amt": 5003.21,
+        "qty": 20
       },
       "独角兽咖啡馆": {
         "amt": 4983.13,
@@ -8645,17 +8813,21 @@
         "amt": 4948.53,
         "qty": 15
       },
-      "僵尸地牢": {
-        "amt": 4928.67,
-        "qty": 19
+      "创意花店": {
+        "amt": 4908.88,
+        "qty": 18
       },
-      "草莓熊": {
-        "amt": 4923.21,
-        "qty": 15
+      "消防直升机": {
+        "amt": 4857.71,
+        "qty": 51
       },
       "悟空小侠迷你机甲": {
         "amt": 4837.12,
         "qty": 13
+      },
+      "消防车": {
+        "amt": 4820.46,
+        "qty": 19
       },
       "黄色装载车与自卸卡车": {
         "amt": 4790.1,
@@ -8664,14 +8836,6 @@
       "警匪大追击列车": {
         "amt": 4764.07,
         "qty": 3
-      },
-      "消防直升机": {
-        "amt": 4758.71,
-        "qty": 50
-      },
-      "财神爷": {
-        "amt": 4734.21,
-        "qty": 19
       },
       "瓦力与伊娃": {
         "amt": 4673.07,
@@ -8685,10 +8849,6 @@
         "amt": 4646.12,
         "qty": 27
       },
-      "消防车": {
-        "amt": 4559.46,
-        "qty": 18
-      },
       "史迪奇和小金": {
         "amt": 4495.27,
         "qty": 8
@@ -8696,6 +8856,10 @@
       "秋日枫林小屋": {
         "amt": 4445.0,
         "qty": 5
+      },
+      "小鸡农场": {
+        "amt": 4333.74,
+        "qty": 25
       },
       "生命源龙": {
         "amt": 4269.94,
@@ -8709,10 +8873,6 @@
         "amt": 4205.0,
         "qty": 5
       },
-      "小鸡农场": {
-        "amt": 4154.74,
-        "qty": 24
-      },
       "钢铁侠 Mark 3 收藏版": {
         "amt": 4151.23,
         "qty": 4
@@ -8721,13 +8881,13 @@
         "amt": 4147.75,
         "qty": 4
       },
-      "创意花店": {
-        "amt": 4090.71,
-        "qty": 15
-      },
       "Monster Jam™ Grave Digger™ 火冰回力车": {
         "amt": 4084.1,
         "qty": 16
+      },
+      "宠物水上乐园": {
+        "amt": 3973.5,
+        "qty": 15
       },
       "3合1现代温馨房屋": {
         "amt": 3927.0,
@@ -8736,6 +8896,14 @@
       "巴黎 - 爱之城": {
         "amt": 3868.37,
         "qty": 6
+      },
+      "幼年霸王龙运输车": {
+        "amt": 3865.44,
+        "qty": 15
+      },
+      "悟空小侠变身机甲": {
+        "amt": 3850.01,
+        "qty": 20
       },
       "鲤鱼跃龙门": {
         "amt": 3837.73,
@@ -8765,10 +8933,6 @@
         "amt": 3725.31,
         "qty": 5
       },
-      "宠物水上乐园": {
-        "amt": 3694.5,
-        "qty": 14
-      },
       "鸡骑士": {
         "amt": 3639.47,
         "qty": 14
@@ -8785,25 +8949,13 @@
         "amt": 3600.0,
         "qty": 2
       },
-      "幼年霸王龙运输车": {
-        "amt": 3596.44,
-        "qty": 14
-      },
       "保时捷911 GT3 REXY AO Racing赛车": {
         "amt": 3477.0,
         "qty": 3
       },
-      "迈凯伦P1": {
-        "amt": 3459.0,
-        "qty": 1
-      },
       "旋风车队-警用卡车": {
         "amt": 3441.47,
         "qty": 40
-      },
-      "蝙蝠战车 Tumbler": {
-        "amt": 3421.82,
-        "qty": 2
       },
       "忍者飞龙阿尤战甲": {
         "amt": 3375.99,
@@ -8813,9 +8965,17 @@
         "amt": 3294.38,
         "qty": 19
       },
+      "摇滚盆栽": {
+        "amt": 3291.02,
+        "qty": 18
+      },
       "二郎天神机甲": {
         "amt": 3257.83,
         "qty": 5
+      },
+      "绿色布加迪Chiron Pur Sport超级跑车": {
+        "amt": 3233.36,
+        "qty": 6
       },
       "黄色旅行箱": {
         "amt": 3197.27,
@@ -8829,17 +8989,9 @@
         "amt": 3158.0,
         "qty": 2
       },
-      "摇滚盆栽": {
-        "amt": 3102.02,
-        "qty": 17
-      },
       "冰雪奇缘创意拼搭": {
         "amt": 3097.05,
         "qty": 17
-      },
-      "悟空小侠变身机甲": {
-        "amt": 3086.64,
-        "qty": 16
       },
       "创意车辆集合": {
         "amt": 3082.39,
@@ -8857,6 +9009,10 @@
         "amt": 2844.0,
         "qty": 6
       },
+      "复古相机": {
+        "amt": 2818.82,
+        "qty": 15
+      },
       "杰克·史派罗船长的海盗船": {
         "amt": 2699.1,
         "qty": 1
@@ -8864,10 +9020,6 @@
       "维尼修斯 – 经典进球瞬间": {
         "amt": 2691.49,
         "qty": 11
-      },
-      "绿色布加迪Chiron Pur Sport超级跑车": {
-        "amt": 2664.36,
-        "qty": 5
       },
       "道奇 Charger R/T（速度与激情同款）赛车": {
         "amt": 2660.5,
@@ -8885,17 +9037,29 @@
         "amt": 2591.39,
         "qty": 14
       },
+      "梅西 – 足球传奇": {
+        "amt": 2582.84,
+        "qty": 4
+      },
+      "鲜花装饰香水瓶": {
+        "amt": 2571.54,
+        "qty": 10
+      },
       "富贵竹": {
         "amt": 2566.09,
         "qty": 10
+      },
+      "BAM LW(小人仔组合)": {
+        "amt": 2551.34,
+        "qty": 33
       },
       "水下探险": {
         "amt": 2540.87,
         "qty": 10
       },
-      "复古相机": {
-        "amt": 2457.82,
-        "qty": 13
+      "John Deere 1470H 轮式森林收割机": {
+        "amt": 2446.24,
+        "qty": 29
       },
       "拖拉机与市场": {
         "amt": 2437.05,
@@ -8909,41 +9073,37 @@
         "amt": 2396.31,
         "qty": 5
       },
+      "克隆人震击士兵™机甲": {
+        "amt": 2390.54,
+        "qty": 20
+      },
       "宝马 E30 M3": {
         "amt": 2365.01,
         "qty": 10
+      },
+      "郁金香花束": {
+        "amt": 2343.0,
+        "qty": 5
       },
       "棘龙逃生": {
         "amt": 2336.0,
         "qty": 4
       },
-      "BAM LW(小人仔组合)": {
-        "amt": 2314.34,
-        "qty": 30
+      "礼盒庆典": {
+        "amt": 2332.13,
+        "qty": 13
       },
       "家庭住宅": {
         "amt": 2306.0,
         "qty": 4
       },
-      "鲜花装饰香水瓶": {
-        "amt": 2302.54,
-        "qty": 9
-      },
       "钢琴与猫": {
         "amt": 2292.68,
         "qty": 7
       },
-      "克隆人震击士兵™机甲": {
-        "amt": 2271.54,
-        "qty": 19
-      },
       "豪华智能探险火车": {
         "amt": 2243.59,
         "qty": 2
-      },
-      "John Deere 1470H 轮式森林收割机": {
-        "amt": 2185.74,
-        "qty": 26
       },
       "仙蒂瑞拉和动物朋友的城堡": {
         "amt": 2163.48,
@@ -8957,10 +9117,6 @@
         "amt": 2157.65,
         "qty": 3
       },
-      "礼盒庆典": {
-        "amt": 2143.13,
-        "qty": 12
-      },
       "公路自行车": {
         "amt": 2138.0,
         "qty": 2
@@ -8973,17 +9129,13 @@
         "amt": 2051.94,
         "qty": 8
       },
+      "阳光缤纷花束": {
+        "amt": 2020.5,
+        "qty": 8
+      },
       "圣诞特快列车": {
         "amt": 1968.09,
         "qty": 2
-      },
-      "郁金香花束": {
-        "amt": 1950.0,
-        "qty": 4
-      },
-      "梅西 – 足球传奇": {
-        "amt": 1943.84,
-        "qty": 3
       },
       "劳埃德的威猛回力赛车": {
         "amt": 1928.0,
@@ -9005,8 +9157,8 @@
         "amt": 1847.48,
         "qty": 22
       },
-      "阳光缤纷花束": {
-        "amt": 1768.5,
+      "典雅兰": {
+        "amt": 1808.88,
         "qty": 7
       },
       "美人鱼过山车": {
@@ -9025,9 +9177,17 @@
         "amt": 1731.74,
         "qty": 15
       },
+      "自由的小精灵多比": {
+        "amt": 1723.46,
+        "qty": 6
+      },
       "道格拉斯™ DC-3™ PAN AM® 客机": {
         "amt": 1719.0,
         "qty": 1
+      },
+      "长发公主的城堡": {
+        "amt": 1708.0,
+        "qty": 2
       },
       "文森特·梵高 —— 向日葵": {
         "amt": 1699.0,
@@ -9036,6 +9196,10 @@
       "港口货运列车": {
         "amt": 1688.0,
         "qty": 2
+      },
+      "水泥搅拌车": {
+        "amt": 1631.33,
+        "qty": 5
       },
       "波斯菊": {
         "amt": 1615.41,
@@ -9061,10 +9225,6 @@
         "amt": 1547.02,
         "qty": 18
       },
-      "典雅兰": {
-        "amt": 1539.88,
-        "qty": 6
-      },
       "狐狸": {
         "amt": 1537.47,
         "qty": 4
@@ -9081,8 +9241,16 @@
         "amt": 1504.05,
         "qty": 13
       },
+      "F1® 赛车手与迈凯伦赛车": {
+        "amt": 1497.92,
+        "qty": 13
+      },
       "放大版乐高®小人仔": {
         "amt": 1481.2,
+        "qty": 3
+      },
+      "向日葵花束": {
+        "amt": 1480.19,
         "qty": 3
       },
       "披萨小车": {
@@ -9109,9 +9277,17 @@
         "amt": 1406.13,
         "qty": 3
       },
+      "花生漫画：史努比的狗屋": {
+        "amt": 1400.14,
+        "qty": 2
+      },
       "霍格沃茨™城堡和庭院": {
         "amt": 1369.0,
         "qty": 1
+      },
+      "独角兽蛋糕送货车": {
+        "amt": 1367.28,
+        "qty": 16
       },
       "PS游戏机": {
         "amt": 1349.0,
@@ -9128,10 +9304,6 @@
       "忍者战车树屋对决": {
         "amt": 1320.34,
         "qty": 2
-      },
-      "水泥搅拌车": {
-        "amt": 1312.29,
-        "qty": 4
       },
       "史迪奇": {
         "amt": 1305.88,
@@ -9157,17 +9329,13 @@
         "amt": 1279.0,
         "qty": 1
       },
-      "独角兽蛋糕送货车": {
-        "amt": 1278.28,
-        "qty": 15
+      "福特安格利亚飞车": {
+        "amt": 1273.63,
+        "qty": 9
       },
       "伦敦明信片": {
         "amt": 1271.87,
         "qty": 9
-      },
-      "F1® 赛车手与迈凯伦赛车": {
-        "amt": 1259.92,
-        "qty": 11
       },
       "拖拉机": {
         "amt": 1253.0,
@@ -9217,17 +9385,13 @@
         "amt": 1154.06,
         "qty": 2
       },
-      "福特安格利亚飞车": {
-        "amt": 1137.82,
-        "qty": 8
-      },
-      "自由的小精灵多比": {
-        "amt": 1125.46,
-        "qty": 4
-      },
       "梅赛德斯-奔驰乌尼莫克U 5023": {
         "amt": 1099.0,
         "qty": 1
+      },
+      "迈尔斯·莫拉莱斯钥匙链": {
+        "amt": 1092.02,
+        "qty": 19
       },
       "玫瑰": {
         "amt": 1075.9,
@@ -9241,13 +9405,13 @@
         "amt": 1058.0,
         "qty": 2
       },
+      "可爱的动物：小熊猫": {
+        "amt": 1051.0,
+        "qty": 4
+      },
       "玩具总动员弹簧狗的书挡": {
         "amt": 1039.0,
         "qty": 1
-      },
-      "迈尔斯·莫拉莱斯钥匙链": {
-        "amt": 1038.52,
-        "qty": 18
       },
       "乐高热狗人发光钥匙扣": {
         "amt": 1031.8,
@@ -9265,10 +9429,6 @@
         "amt": 1008.49,
         "qty": 1
       },
-      "向日葵花束": {
-        "amt": 998.0,
-        "qty": 2
-      },
       "木兰花枝": {
         "amt": 997.0,
         "qty": 3
@@ -9276,6 +9436,10 @@
       "坩锅：魔药课教室": {
         "amt": 977.09,
         "qty": 2
+      },
+      "酷帅蝙蝠侠钥匙链": {
+        "amt": 950.26,
+        "qty": 17
       },
       "东坡望月楼": {
         "amt": 949.0,
@@ -9297,10 +9461,6 @@
         "amt": 899.0,
         "qty": 1
       },
-      "酷帅蝙蝠侠钥匙链": {
-        "amt": 896.76,
-        "qty": 16
-      },
       "雏菊": {
         "amt": 880.31,
         "qty": 7
@@ -9316,10 +9476,6 @@
       "德国明信片": {
         "amt": 869.75,
         "qty": 7
-      },
-      "长发公主的城堡": {
-        "amt": 869.0,
-        "qty": 1
       },
       "霍格沃茨城堡：分院仪式": {
         "amt": 857.96,
@@ -9337,9 +9493,17 @@
         "amt": 846.0,
         "qty": 2
       },
+      "机场航站楼": {
+        "amt": 839.0,
+        "qty": 1
+      },
       "布雷兹的马场": {
         "amt": 838.0,
         "qty": 2
+      },
+      "心形饰品": {
+        "amt": 834.4,
+        "qty": 7
       },
       "决战名场面：反浩克装甲大战浩克": {
         "amt": 818.25,
@@ -9357,13 +9521,13 @@
         "amt": 796.5,
         "qty": 3
       },
+      "圣诞老人发光钥匙扣": {
+        "amt": 793.0,
+        "qty": 7
+      },
       "法拉利车队HP夏尔·勒克莱尔头盔": {
         "amt": 789.0,
         "qty": 1
-      },
-      "可爱的动物：小熊猫": {
-        "amt": 787.0,
-        "qty": 3
       },
       "威震天机器人与载具": {
         "amt": 768.0,
@@ -9381,9 +9545,9 @@
         "amt": 738.93,
         "qty": 13
       },
-      "心形饰品": {
-        "amt": 720.4,
-        "qty": 6
+      "招财猫": {
+        "amt": 736.28,
+        "qty": 3
       },
       "向日葵": {
         "amt": 715.39,
@@ -9391,14 +9555,6 @@
       },
       "Nike Air Max 95 x 乐高®套装": {
         "amt": 709.0,
-        "qty": 1
-      },
-      "圣诞老人发光钥匙扣": {
-        "amt": 694.0,
-        "qty": 6
-      },
-      "花生漫画：史努比的狗屋": {
-        "amt": 689.0,
         "qty": 1
       },
       "海滩观光火车": {
@@ -9417,9 +9573,17 @@
         "amt": 627.62,
         "qty": 3
       },
+      "蜘蛛侠钥匙扣": {
+        "amt": 624.76,
+        "qty": 11
+      },
       "恐龙宝宝：无齿翼龙": {
         "amt": 620.94,
         "qty": 3
+      },
+      "神奇独角兽": {
+        "amt": 603.39,
+        "qty": 6
       },
       "1966 福特 GT40 MKII 赛车": {
         "amt": 589.0,
@@ -9437,10 +9601,6 @@
         "amt": 574.45,
         "qty": 5
       },
-      "蜘蛛侠钥匙扣": {
-        "amt": 565.76,
-        "qty": 10
-      },
       "橡胶果实": {
         "amt": 549.0,
         "qty": 1
@@ -9453,9 +9613,9 @@
         "amt": 529.0,
         "qty": 1
       },
-      "神奇独角兽": {
-        "amt": 505.24,
-        "qty": 5
+      "幽灵蜘蛛钥匙扣": {
+        "amt": 517.98,
+        "qty": 9
       },
       "迪士尼皮克斯小台灯": {
         "amt": 503.2,
@@ -9469,10 +9629,6 @@
         "amt": 498.69,
         "qty": 2
       },
-      "招财猫": {
-        "amt": 493.4,
-        "qty": 2
-      },
       "蝙蝠侠标志": {
         "amt": 489.0,
         "qty": 1
@@ -9484,10 +9640,6 @@
       "三眼仔 披萨星球火箭之旅": {
         "amt": 477.64,
         "qty": 1
-      },
-      "幽灵蜘蛛钥匙扣": {
-        "amt": 464.53,
-        "qty": 8
       },
       "史迪奇钥匙扣": {
         "amt": 455.45,
@@ -9585,7 +9737,11 @@
         "amt": 318.57,
         "qty": 3
       },
-      "小人仔组合（BaM packaging box classic）": {
+      "热狗小贩钥匙扣": {
+        "amt": 316.8,
+        "qty": 6
+      },
+      "BaM packaging box classic": {
         "amt": 316.0,
         "qty": 4
       },
@@ -9620,10 +9776,6 @@
       "花卉艺术装饰画": {
         "amt": 269.0,
         "qty": 1
-      },
-      "热狗小贩钥匙扣": {
-        "amt": 257.8,
-        "qty": 5
       },
       "黄金菊": {
         "amt": 254.0,
@@ -9749,6 +9901,10 @@
         "amt": 89.0,
         "qty": 1
       },
+      "小人仔组合（BaM packaging box classic）": {
+        "amt": 79.0,
+        "qty": 1
+      },
       "黛丝鸭钥匙链": {
         "amt": 59.0,
         "qty": 1
@@ -9780,26 +9936,26 @@
         "m_lt_qty": 18,
         "m_np": 13548.42,
         "m_rate": 78.5,
-        "m_prev": 78661.0,
-        "mom": -11.7
+        "m_prev": 79787.0,
+        "mom": -12.9
       },
       {
         "name": "张荟奇",
         "store": "扬州万象汇",
         "title": "店员",
         "target": 88571.4285714286,
-        "m_sales": 66082.4,
-        "m_qty": 197,
-        "m_cnt": 140,
-        "m_atv": 472.02,
-        "m_jd": 1.41,
+        "m_sales": 69294.4,
+        "m_qty": 205,
+        "m_cnt": 146,
+        "m_atv": 474.62,
+        "m_jd": 1.4,
         "m_wos": 4113.0,
         "m_lt": 5932.21,
         "m_lt_qty": 13,
         "m_np": 1665.0,
-        "m_rate": 74.6,
-        "m_prev": 86091.0,
-        "mom": -23.2
+        "m_rate": 78.2,
+        "m_prev": 87554.0,
+        "mom": -20.9
       },
       {
         "name": "朱洪涛",
@@ -9824,18 +9980,18 @@
         "store": "扬州万象汇",
         "title": "中级店长",
         "target": 44285.7142857143,
-        "m_sales": 34303.0,
-        "m_qty": 72,
-        "m_cnt": 52,
-        "m_atv": 659.67,
+        "m_sales": 34572.0,
+        "m_qty": 73,
+        "m_cnt": 53,
+        "m_atv": 652.3,
         "m_jd": 1.38,
         "m_wos": 10878.0,
         "m_lt": 2278.64,
         "m_lt_qty": 4,
         "m_np": 10106.0,
-        "m_rate": 77.5,
+        "m_rate": 78.1,
         "m_prev": 34869.0,
-        "mom": -1.6
+        "mom": -0.9
       }
     ],
     "扬州京华城": [
@@ -9854,26 +10010,26 @@
         "m_lt_qty": 24,
         "m_np": 10139.81,
         "m_rate": 63.3,
-        "m_prev": 117836.0,
-        "mom": -23.2
+        "m_prev": 119911.0,
+        "mom": -24.5
       },
       {
         "name": "董文兵",
         "store": "扬州京华城",
         "title": "店员",
         "target": 142857.142857143,
-        "m_sales": 73178.64,
-        "m_qty": 201,
-        "m_cnt": 149,
-        "m_atv": 491.13,
-        "m_jd": 1.35,
+        "m_sales": 75513.64,
+        "m_qty": 206,
+        "m_cnt": 152,
+        "m_atv": 496.8,
+        "m_jd": 1.36,
         "m_wos": 1584.0,
         "m_lt": 4181.8,
         "m_lt_qty": 12,
         "m_np": 15062.0,
-        "m_rate": 51.2,
+        "m_rate": 52.9,
         "m_prev": 74138.0,
-        "mom": -1.3
+        "mom": 1.9
       },
       {
         "name": "丁茜",
@@ -9890,26 +10046,26 @@
         "m_lt_qty": 23,
         "m_np": 2374.59,
         "m_rate": 45.8,
-        "m_prev": 95758.0,
-        "mom": -31.7
+        "m_prev": 97070.0,
+        "mom": -32.7
       },
       {
         "name": "陆文一",
         "store": "扬州京华城",
         "title": "初级店长",
         "target": 71428.5714285714,
-        "m_sales": 46269.4,
-        "m_qty": 169,
-        "m_cnt": 113,
-        "m_atv": 409.46,
-        "m_jd": 1.5,
+        "m_sales": 47132.4,
+        "m_qty": 180,
+        "m_cnt": 123,
+        "m_atv": 383.19,
+        "m_jd": 1.46,
         "m_wos": 8645.4,
         "m_lt": 4090.65,
         "m_lt_qty": 13,
         "m_np": 7229.71,
-        "m_rate": 64.8,
-        "m_prev": 61098.0,
-        "mom": -24.3
+        "m_rate": 66.0,
+        "m_prev": 61647.0,
+        "mom": -23.5
       }
     ],
     "扬州江都金鹰": [
@@ -9918,36 +10074,36 @@
         "store": "扬州江都金鹰",
         "title": "初级店长",
         "target": 30000.0,
-        "m_sales": 35011.6,
-        "m_qty": 115,
-        "m_cnt": 80,
-        "m_atv": 437.65,
+        "m_sales": 36525.6,
+        "m_qty": 121,
+        "m_cnt": 84,
+        "m_atv": 434.83,
         "m_jd": 1.44,
         "m_wos": 8462.2,
         "m_lt": 4383.6,
         "m_lt_qty": 15,
         "m_np": 6896.0,
-        "m_rate": 116.7,
+        "m_rate": 121.8,
         "m_prev": 58692.0,
-        "mom": -40.3
+        "mom": -37.8
       },
       {
         "name": "朱奕然",
         "store": "扬州江都金鹰",
         "title": "店员",
         "target": 60000.0,
-        "m_sales": 29909.0,
-        "m_qty": 102,
-        "m_cnt": 78,
-        "m_atv": 383.45,
-        "m_jd": 1.31,
-        "m_wos": 2453.0,
+        "m_sales": 32721.0,
+        "m_qty": 110,
+        "m_cnt": 83,
+        "m_atv": 394.23,
+        "m_jd": 1.33,
+        "m_wos": 3450.0,
         "m_lt": 1647.0,
         "m_lt_qty": 7,
-        "m_np": 360.06,
-        "m_rate": 49.8,
+        "m_np": 529.06,
+        "m_rate": 54.5,
         "m_prev": 38092.0,
-        "mom": -21.5
+        "mom": -14.1
       },
       {
         "name": "邰宇",
@@ -9964,8 +10120,8 @@
         "m_lt_qty": 10,
         "m_np": 549.11,
         "m_rate": 49.5,
-        "m_prev": 40346.0,
-        "mom": -26.4
+        "m_prev": 42392.0,
+        "mom": -29.9
       },
       {
         "name": "谭欣蔚",
@@ -9982,8 +10138,8 @@
         "m_lt_qty": 0,
         "m_np": 189.0,
         "m_rate": 19.7,
-        "m_prev": 46664.0,
-        "mom": -74.6
+        "m_prev": 47510.0,
+        "mom": -75.1
       }
     ],
     "泰州万象城": [
@@ -10002,8 +10158,26 @@
         "m_lt_qty": 25,
         "m_np": 748.62,
         "m_rate": 89.6,
-        "m_prev": 111167.0,
-        "mom": -31.9
+        "m_prev": 112604.0,
+        "mom": -32.8
+      },
+      {
+        "name": "王璐",
+        "store": "泰州万象城",
+        "title": "店员",
+        "target": 84444.4444444444,
+        "m_sales": 73714.2,
+        "m_qty": 252,
+        "m_cnt": 181,
+        "m_atv": 407.26,
+        "m_jd": 1.39,
+        "m_wos": 2834.4,
+        "m_lt": 6152.43,
+        "m_lt_qty": 20,
+        "m_np": 1627.0,
+        "m_rate": 87.3,
+        "m_prev": 113826.0,
+        "mom": -35.2
       },
       {
         "name": "王丹",
@@ -10020,62 +10194,44 @@
         "m_lt_qty": 23,
         "m_np": 2537.91,
         "m_rate": 83.3,
-        "m_prev": 84038.0,
-        "mom": -16.3
-      },
-      {
-        "name": "王璐",
-        "store": "泰州万象城",
-        "title": "店员",
-        "target": 84444.4444444444,
-        "m_sales": 69766.2,
-        "m_qty": 240,
-        "m_cnt": 172,
-        "m_atv": 405.62,
-        "m_jd": 1.4,
-        "m_wos": 2834.4,
-        "m_lt": 6152.43,
-        "m_lt_qty": 20,
-        "m_np": 1627.0,
-        "m_rate": 82.6,
-        "m_prev": 111763.0,
-        "mom": -37.6
-      },
-      {
-        "name": "于小进",
-        "store": "泰州万象城",
-        "title": "店员",
-        "target": 84444.4444444444,
-        "m_sales": 57914.2,
-        "m_qty": 212,
-        "m_cnt": 168,
-        "m_atv": 344.73,
-        "m_jd": 1.26,
-        "m_wos": 2499.0,
-        "m_lt": 2694.79,
-        "m_lt_qty": 12,
-        "m_np": 378.0,
-        "m_rate": 68.6,
-        "m_prev": 97057.0,
-        "mom": -40.3
+        "m_prev": 85104.0,
+        "mom": -17.3
       },
       {
         "name": "黄小莉1",
         "store": "泰州万象城",
         "title": "初级店长",
         "target": 42222.2222222222,
-        "m_sales": 55676.5,
-        "m_qty": 184,
-        "m_cnt": 157,
-        "m_atv": 354.63,
-        "m_jd": 1.17,
+        "m_sales": 61176.5,
+        "m_qty": 194,
+        "m_cnt": 164,
+        "m_atv": 373.03,
+        "m_jd": 1.18,
         "m_wos": 6023.1,
-        "m_lt": 3365.4,
-        "m_lt_qty": 9,
+        "m_lt": 4072.4,
+        "m_lt_qty": 12,
         "m_np": 1477.46,
-        "m_rate": 131.9,
-        "m_prev": 85696.0,
-        "mom": -35.0
+        "m_rate": 144.9,
+        "m_prev": 86065.0,
+        "mom": -28.9
+      },
+      {
+        "name": "于小进",
+        "store": "泰州万象城",
+        "title": "店员",
+        "target": 84444.4444444444,
+        "m_sales": 57993.2,
+        "m_qty": 213,
+        "m_cnt": 168,
+        "m_atv": 345.2,
+        "m_jd": 1.27,
+        "m_wos": 2499.0,
+        "m_lt": 2694.79,
+        "m_lt_qty": 12,
+        "m_np": 378.0,
+        "m_rate": 68.7,
+        "m_prev": 97057.0,
+        "mom": -40.2
       }
     ],
     "宿迁宝龙": [
@@ -10130,8 +10286,8 @@
         "m_lt_qty": 0,
         "m_np": 1209.0,
         "m_rate": 39.0,
-        "m_prev": 16136.0,
-        "mom": -75.9
+        "m_prev": 18833.0,
+        "mom": -79.3
       }
     ],
     "淮安新亚": [
@@ -10140,54 +10296,54 @@
         "store": "淮安新亚",
         "title": "初级培训专家",
         "target": 27500.0,
-        "m_sales": 29271.0,
-        "m_qty": 74,
-        "m_cnt": 58,
-        "m_atv": 504.67,
-        "m_jd": 1.28,
+        "m_sales": 29760.0,
+        "m_qty": 75,
+        "m_cnt": 59,
+        "m_atv": 504.41,
+        "m_jd": 1.27,
         "m_wos": 4666.0,
         "m_lt": 1064.88,
         "m_lt_qty": 3,
         "m_np": 13096.0,
-        "m_rate": 106.4,
-        "m_prev": 44187.0,
-        "mom": -33.8
+        "m_rate": 108.2,
+        "m_prev": 44635.0,
+        "mom": -33.3
       },
       {
         "name": "汤绚尧",
         "store": "淮安新亚",
         "title": "店员（长期兼职）",
         "target": 27500.0,
-        "m_sales": 27980.0,
-        "m_qty": 94,
-        "m_cnt": 56,
-        "m_atv": 499.64,
-        "m_jd": 1.68,
+        "m_sales": 28716.0,
+        "m_qty": 98,
+        "m_cnt": 59,
+        "m_atv": 486.71,
+        "m_jd": 1.66,
         "m_wos": 3022.0,
         "m_lt": 1391.55,
         "m_lt_qty": 5,
         "m_np": 6688.0,
-        "m_rate": 101.7,
+        "m_rate": 104.4,
         "m_prev": 28239.0,
-        "mom": -0.9
+        "mom": 1.7
       },
       {
         "name": "王毅",
         "store": "淮安新亚",
         "title": "中级陈列专家",
         "target": 27500.0,
-        "m_sales": 22586.55,
-        "m_qty": 91,
-        "m_cnt": 83,
-        "m_atv": 272.13,
-        "m_jd": 1.1,
-        "m_wos": 3547.55,
+        "m_sales": 22971.0,
+        "m_qty": 93,
+        "m_cnt": 84,
+        "m_atv": 273.46,
+        "m_jd": 1.11,
+        "m_wos": 3932.0,
         "m_lt": 1584.0,
         "m_lt_qty": 7,
         "m_np": 183.08,
-        "m_rate": 82.1,
-        "m_prev": 36956.0,
-        "mom": -38.9
+        "m_rate": 83.5,
+        "m_prev": 36995.0,
+        "mom": -37.9
       },
       {
         "name": "雍善淼",
@@ -10214,72 +10370,72 @@
         "store": "淮安万象城",
         "title": "店员（长期兼职）",
         "target": 74285.7142857143,
-        "m_sales": 47807.0,
-        "m_qty": 219,
-        "m_cnt": 158,
-        "m_atv": 302.58,
-        "m_jd": 1.39,
+        "m_sales": 51605.0,
+        "m_qty": 231,
+        "m_cnt": 168,
+        "m_atv": 307.17,
+        "m_jd": 1.38,
         "m_wos": 1106.0,
         "m_lt": 1853.65,
         "m_lt_qty": 9,
         "m_np": 0.0,
-        "m_rate": 64.4,
-        "m_prev": 55846.0,
-        "mom": -14.4
+        "m_rate": 69.5,
+        "m_prev": 56124.0,
+        "mom": -8.1
       },
       {
         "name": "钱晓凡",
         "store": "淮安万象城",
         "title": "店员",
         "target": 74285.7142857143,
-        "m_sales": 47682.7,
-        "m_qty": 197,
-        "m_cnt": 146,
-        "m_atv": 326.59,
+        "m_sales": 47771.7,
+        "m_qty": 198,
+        "m_cnt": 147,
+        "m_atv": 324.98,
         "m_jd": 1.35,
         "m_wos": 5148.1,
         "m_lt": 4122.0,
         "m_lt_qty": 14,
         "m_np": 530.0,
-        "m_rate": 64.2,
-        "m_prev": 86138.0,
-        "mom": -44.6
+        "m_rate": 64.3,
+        "m_prev": 87262.0,
+        "mom": -45.3
       },
       {
         "name": "周小庆",
         "store": "淮安万象城",
         "title": "店员",
         "target": 74285.7142857143,
-        "m_sales": 43871.0,
-        "m_qty": 185,
-        "m_cnt": 134,
-        "m_atv": 327.4,
+        "m_sales": 47330.0,
+        "m_qty": 186,
+        "m_cnt": 135,
+        "m_atv": 350.59,
         "m_jd": 1.38,
         "m_wos": 3386.0,
-        "m_lt": 3419.09,
-        "m_lt_qty": 11,
+        "m_lt": 6878.09,
+        "m_lt_qty": 12,
         "m_np": 378.0,
-        "m_rate": 59.1,
+        "m_rate": 63.7,
         "m_prev": 81594.0,
-        "mom": -46.2
+        "mom": -42.0
       },
       {
         "name": "陈方",
         "store": "淮安万象城",
         "title": "中级店长",
         "target": 37142.8571428571,
-        "m_sales": 29901.2,
+        "m_sales": 29162.2,
         "m_qty": 119,
         "m_cnt": 84,
-        "m_atv": 355.97,
+        "m_atv": 347.17,
         "m_jd": 1.42,
         "m_wos": 2224.0,
         "m_lt": 1929.58,
         "m_lt_qty": 8,
         "m_np": 723.62,
-        "m_rate": 80.5,
+        "m_rate": 78.5,
         "m_prev": 39117.0,
-        "mom": -23.6
+        "mom": -25.4
       }
     ]
   },
@@ -10306,7 +10462,7 @@
     },
     "宿迁宝龙": {
       "month_qty": 39,
-      "month_retail": 24691.0,
+      "month_retail": 0.0,
       "month_amt": 4946.0
     },
     "淮安新亚": {
@@ -10322,13 +10478,13 @@
   },
   "_sample_region": {
     "month_qty": 39,
-    "month_retail": 24691.0,
+    "month_retail": 0.0,
     "month_amt": 4946.0
   },
   "_new_products": [
     "治愈盆栽",
-    "圣家族大教堂",
     "龙珠：神龙 & 悟空",
+    "圣家族大教堂",
     "威尼斯街区",
     "Godzilla（哥斯拉）"
   ],
@@ -10400,8 +10556,8 @@
       },
       {
         "name": "治愈盆栽",
-        "amt": 1287.17,
-        "qty": 7
+        "amt": 1456.17,
+        "qty": 8
       }
     ],
     "泰州万象城": [
@@ -10475,8 +10631,8 @@
       },
       {
         "name": "治愈盆栽",
-        "amt": 13671.5,
-        "qty": 74
+        "amt": 13840.5,
+        "qty": 75
       },
       {
         "name": "Godzilla（哥斯拉）",
@@ -10488,50 +10644,50 @@
   "_conversion": {
     "扬州万象汇": {
       "flow": 0,
-      "cnt": 518,
+      "cnt": 531,
       "rate": null
     },
     "扬州京华城": {
       "flow": 0,
-      "cnt": 655,
+      "cnt": 672,
       "rate": null
     },
     "扬州江都金鹰": {
       "flow": 0,
-      "cnt": 304,
+      "cnt": 317,
       "rate": null
     },
     "泰州万象城": {
       "flow": 0,
-      "cnt": 927,
+      "cnt": 948,
       "rate": null
     },
     "宿迁宝龙": {
       "flow": 0,
-      "cnt": 53,
+      "cnt": 54,
       "rate": null
     },
     "淮安新亚": {
       "flow": 0,
-      "cnt": 228,
+      "cnt": 237,
       "rate": null
     },
     "淮安万象城": {
       "flow": 0,
-      "cnt": 552,
+      "cnt": 570,
       "rate": null
     },
     "_region": {
       "flow": 0,
-      "cnt": 3237,
+      "cnt": 3329,
       "rate": null
     }
   },
   "_meta": {
-    "report_date": "11月27日",
-    "report_day": 27,
-    "report_day_index": 28,
-    "max_date": "2026-11-27",
+    "report_date": "11月28日",
+    "report_day": 28,
+    "report_day_index": 29,
+    "max_date": "2026-11-28",
     "store_order": [
       "扬州万象汇",
       "扬州京华城",
